@@ -15,7 +15,7 @@ and the simulation walkthrough are at https://tasks.robocurve.org.
    Upload videos as H.264 MP4 (`ffmpeg -i in.mp4 -c:v libx264 -pix_fmt yuv420p -movflags +faststart out.mp4`).
    The demo is required when the Dream-1 run doesn't reach full score.
 
-2. **Clone this repository, create a branch starting with your team code** (like `t-17/lamp-task`), and add one folder for the task:
+2. **Fork this repository and add one folder** for the task:
 
        tasks/<task-name>/
          task.json     the task's details, including your media ID
@@ -24,11 +24,11 @@ and the simulation walkthrough are at https://tasks.robocurve.org.
 
 3. **Open a pull request** into `main`:
 
-       git clone https://github.com/robocurve/benchmark-tasks && cd benchmark-tasks
-       git checkout -b t-17/lamp-task
+       gh repo fork robocurve/benchmark-tasks --clone && cd benchmark-tasks
+       git checkout -b lamp-task
        git add tasks/lamp-task && git commit -m "Add lamp task"
-       git push -u origin t-17/lamp-task
-       gh pr create --fill
+       git push -u origin lamp-task
+       gh pr create --repo robocurve/benchmark-tasks --fill
 
 Within a minute or two, a comment on your pull request says either that the task was received (with its
 ID) and is waiting for review, or what to fix. Push to the same branch to try again.
@@ -63,7 +63,7 @@ ID) and is waiting for review, or what to fix. Push to the same branch to try ag
   changes and reopen it at least 24 hours after the review.
 - **The first team to submit a task owns it** while it's pending, and through one revision if it isn't
   accepted. Near-duplicates from other teams during that time aren't accepted.
-- **Work only on your own team's branches,** and don't merge pull requests yourselves (`main` is protected). A task waiting for review doesn't change: to change it, close the
+- **Don't merge pull requests yourselves** (`main` is protected). A task waiting for review doesn't change: to change it, close the
   pull request (which withdraws it) and open a new one.
 - **Review is blind:** the task's text, screenshot and videos must not identify your team. Your code may.
 - Pull requests are matched to teams by their author, so open them from a GitHub account your team gave us.
