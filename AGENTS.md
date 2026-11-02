@@ -98,15 +98,14 @@ Reviewers accept a task when it meets all five criteria. Check each before submi
    instruction and any context.
 2. **Construct validity:** no clear discrepancies between the task and the real-world context it claims;
    no unintended strategy (modifying or destroying objects, say) can achieve a nonzero score.
-3. **Scoring:** all conditions are numeric ("within 10 cm", not "near"); scoring needs only simple tools
-   (a tape measure, a photo); partial credit where appropriate; every possible outcome is covered; the
-   score isn't sensitive to irrelevant differences in execution.
+3. **Scoring:** scoring needs only simple tools (a tape measure, a photo); partial credit where
+   appropriate; all conditions are numeric ("within 10 cm", not "near") or otherwise unambiguous; every
+   possible outcome is covered; the score isn't sensitive to irrelevant differences in execution.
 4. **Clarity and reproducibility:** the setup lists every object (type, size, material); the starting
    configuration can be reproduced from the submission and the setup image; ambiguities (about the
    instruction or reset, say) are clarified.
 5. **Feasibility:** a full score is demonstrated within the run limit, by Dream-1 or a scripted or
-   teleoperated demo (for approximate simulations, the highest achievable score); every object needed is
-   within reach at the start; real-world trials can be run safely.
+   teleoperated demo; real-world trials can be run safely.
 
 **Blind review:** the task's text, screenshot and videos must not identify the team (names, institutions,
 logos, usernames, file paths or a recognizable lab).
