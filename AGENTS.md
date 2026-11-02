@@ -92,20 +92,21 @@ duplicating other teams' work.
 
 Reviewers accept a task when it meets all five criteria. Check each before submitting.
 
-1. **Importance:** it differs in what it measures from accepted tasks and from common suites
-   (LIBERO, RoboCasa, SimplerEnv, BEHAVIOR, DataCenterBench, RoboDojo), beyond object colors and starting layout, and its
-   real-world relevance is clear from the instruction, setup screenshot and context.
-2. **Construct validity:** a full score in the real world demonstrates the claimed capability;
-   no shortcut (skipping the task, knocking objects away) scores full.
-3. **Scoring:** every condition is numeric and measurable with simple tools (a tape measure, a
-   photo); at least one subgoal earns partial credit; no outcome is left unscored or ambiguous; the
-   score depends only on what the task asks for.
-4. **Clarity:** the setup lists every object (type, size, material), and the layout can be rebuilt
-   from it plus the screenshot; the instruction has one reading, matching the scoring; the code runs
-   from the README; reset is repeatable.
-5. **Feasibility on YAM:** a full score is demonstrated within the run limit, and the run limit is
-   reasonable for the task; every object is within the YAM's reach, gripper opening and payload;
-   real-world trials are not obviously unsafe.
+1. **Importance:** the task differs meaningfully from those on the task board and in popular task sets
+   (LIBERO, RoboCasa, SimplerEnv, BEHAVIOR, DataCenterBench, RoboDojo), beyond object colors, starting
+   layout and other superficial details; its importance and real-world relevance are clear from the
+   instruction and any context.
+2. **Construct validity:** no clear discrepancies between the task and the real-world context it claims;
+   no unintended strategy (modifying or destroying objects, say) can achieve a nonzero score.
+3. **Scoring:** all conditions are numeric ("within 10 cm", not "near"); scoring needs only simple tools
+   (a tape measure, a photo); partial credit where appropriate; every possible outcome is covered; the
+   score isn't sensitive to irrelevant differences in execution.
+4. **Clarity and reproducibility:** the setup lists every object (type, size, material); the starting
+   configuration can be reproduced from the submission and the setup image; ambiguities (about the
+   instruction or reset, say) are clarified.
+5. **Feasibility:** a full score is demonstrated within the run limit, by Dream-1 or a scripted or
+   teleoperated demo (for approximate simulations, the highest achievable score); every object needed is
+   within reach at the start; real-world trials can be run safely.
 
-**Anonymity:** review is blind, so the task's text, screenshot and videos must not identify the team (names,
-institutions, logos, usernames, file paths, emails or a recognizable lab). The code may.
+**Blind review:** the task's text, screenshot and videos must not identify the team (names, institutions,
+logos, usernames, file paths or a recognizable lab).
