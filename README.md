@@ -63,13 +63,17 @@ tagged with the task's folder name.)
 
 ## Rules
 
-- **One task per pull request,** one folder under `tasks/`. Up to 5 submissions in any 24 hours.
-- **Accepted:** we merge your pull request. **Not accepted:** we close it with feedback; to revise, push your
-  changes and reopen it at least 24 hours after the review.
-- **The first team to submit a task owns it** while it's pending, and, if it isn't accepted, for 3 more
-  days while the team revises it (shown on the board as "Being revised"). Near-duplicates from other
-  teams during that time aren't accepted.
+- **One task per pull request,** one folder under `tasks/`. Up to 20 submissions in any 24 hours.
+- **Accepted:** we merge your pull request. **Not accepted:** you get feedback and the pull request stays
+  open, labeled "Not accepted"; push your changes to it to submit a revision; don't open a new
+  pull request.
+- **The first team to submit a task owns it** while it's pending, and, if it isn't accepted, for 48 hours
+  after the review while the team revises it (shown on the board as "Being revised"), unless the review
+  finds it was a low-effort placeholder. If no revision arrives within 48 hours, the hold lapses and
+  another team can claim the idea. Near-duplicates from other teams aren't accepted while a team holds
+  an idea.
 - **Don't merge pull requests yourselves** (`main` is protected). A task waiting for review doesn't change: to change it, close the
+- **Repeated low-quality submissions may result in disqualification.**
   pull request (which withdraws it) and open a new one.
 - **Review is blind:** the task's text, screenshot and videos must not identify your team. Your code may.
 - Pull requests are matched to teams by their author, so open them from a GitHub account your team gave us.
