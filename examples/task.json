@@ -1,0 +1,12 @@
+{
+  "title": "Extend a telescoping lamp",
+  "category": "Societal relevance",
+  "keywords": ["bimanual", "telescoping"],
+  "instruction": "Extend the lamp to its full height.",
+  "context": "Everyday two-handed coordination: one hand steadies the base while the other pulls.",
+  "setup": "A collapsed telescoping desk lamp stands on a dark workbench, 22 cm in front of the arm bases: a weighted plastic base (12 cm diameter, 1.5 cm thick, 0.5 kg) with an 8 cm plastic outer tube (2.2 cm diameter), and a metal inner stem (1.6 cm diameter) carrying a plastic shade (8 cm diameter), which slides up to 7 cm.",
+  "scoring": "0.25 at 2 cm of extension; 0.5 at 4 cm; 1.0 at 6 cm or more with the base within 1 cm of its starting height and tilted less than 15 degrees. Capped at 0.5 if the base lifts more than 3 cm at any point.",
+  "run_limit": "3,600 steps (3 minutes at 20 Hz)",
+  "fidelity": "Approximate: the stem's friction is modeled as damping, and the stem doesn't sag under gravity.",
+  "scores": "Dream-1 run: 0.0; demo: 1.0"
+}
