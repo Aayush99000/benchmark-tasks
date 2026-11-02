@@ -3,19 +3,21 @@
 Every team submits its tasks to this repository as pull requests. Program details, the review checklist
 and the simulation walkthrough are at https://tasks.robocurve.org.
 
+**Using a coding agent?** Open it in your fork: [AGENTS.md](AGENTS.md) tells it how to build, upload and submit
+tasks, and most agents read it automatically (Claude Code reads it through [CLAUDE.md](CLAUDE.md)).
+
 ## Submitting a task
 
-1. **Upload your videos and screenshot** on the task board's [Submit a task](https://tasks.robocurve.org/submit)
-   page (or with the command below). You get a media ID, such as `M-7K2Q9F`.
+1. **Upload your videos and screenshot** with the script in this repository. It uploads them to the task
+   board and writes the media ID into your `task.json`:
 
-       curl -X POST https://tasks.robocurve.org/api/media \
-         -H "Authorization: Bearer $TEAM_CODE:$TEAM_TOKEN" \
-         -F video=@model_run.mp4 -F demo=@demo.mp4 -F screenshot=@setup.png
+       export ROBOCURVE_TEAM=T-17 ROBOCURVE_TOKEN=...    # your team code and token; never commit them
+       python tools/upload_media.py tasks/lamp-task --video model_run.mp4 --demo demo.mp4 --screenshot setup.png
 
-   Upload videos as H.264 MP4 (`ffmpeg -i in.mp4 -c:v libx264 -pix_fmt yuv420p -movflags +faststart out.mp4`).
-   The demo is required when the Dream-1 run doesn't reach full score.
+   Videos must be H.264 MP4 (`ffmpeg -i in.mp4 -c:v libx264 -pix_fmt yuv420p -movflags +faststart out.mp4`),
+   up to 50 MB each. The demo is required when the Dream-1 run doesn't reach full score.
 
-2. **Fork this repository and add one folder** for the task:
+2. **Fork this repository and add one folder** for the task (upload into it, as above):
 
        tasks/<task-name>/
          task.json     the task's details, including your media ID
@@ -50,6 +52,9 @@ ID) and is waiting for review, or what to fix. Push to the same branch to try ag
       "media": "M-7K2Q9F"
     }
 
+(`media` is filled in by the upload script. If it's missing, the task board uses your team's latest upload
+tagged with the task's folder name.)
+
 - **Required:** title, category, instruction, setup, scoring, run_limit, fidelity, scores and media.
 - **category:** `Impact on jobs`, `Impact on AI timelines`, `Safety and alignment`, `Societal relevance` or `Other`.
 - **run_limit:** the most actions a model gets: control steps for action policies like Dream-1 (20 a second),
@@ -61,8 +66,9 @@ ID) and is waiting for review, or what to fix. Push to the same branch to try ag
 - **One task per pull request,** one folder under `tasks/`. Up to 5 submissions in any 24 hours.
 - **Accepted:** we merge your pull request. **Not accepted:** we close it with feedback; to revise, push your
   changes and reopen it at least 24 hours after the review.
-- **The first team to submit a task owns it** while it's pending, and through one revision if it isn't
-  accepted. Near-duplicates from other teams during that time aren't accepted.
+- **The first team to submit a task owns it** while it's pending, and, if it isn't accepted, for 3 more
+  days while the team revises it (shown on the board as "Being revised"). Near-duplicates from other
+  teams during that time aren't accepted.
 - **Don't merge pull requests yourselves** (`main` is protected). A task waiting for review doesn't change: to change it, close the
   pull request (which withdraws it) and open a new one.
 - **Review is blind:** the task's text, screenshot and videos must not identify your team. Your code may.
