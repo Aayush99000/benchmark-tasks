@@ -72,8 +72,8 @@ tagged with the task's folder name.)
   finds it was a low-effort placeholder. If no revision arrives within 48 hours, the hold lapses and
   another team can claim the idea. Near-duplicates from other teams aren't accepted while a team holds
   an idea.
-- **Don't merge pull requests yourselves** (`main` is protected). A task waiting for review doesn't change: to change it, close the
+- **A task waiting for review doesn't change:** pushes made before the review aren't picked up. To change
+  it before then, close the pull request (which withdraws it) and open a new one.
 - **Repeated low-quality submissions may result in disqualification.**
-  pull request (which withdraws it) and open a new one.
 - **Review is blind:** the task's text, screenshot and videos must not identify your team. Your code may.
 - Pull requests are matched to teams by their author, so open them from a GitHub account your team gave us.
