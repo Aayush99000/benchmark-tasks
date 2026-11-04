@@ -15,5 +15,6 @@
   "run_limit": "2,400 steps (2 minutes at 20 Hz)",
   "reset_notes": "Stand the four cartons back at their marks, square to the table edge.",
   "fidelity": "No light is simulated: the beam is the straight line between the two posts, and the score checks it geometrically, with 1 cm to spare for the beam's width. The posts are fixed blocks with no lens or reflector face. The cartons are rigid boxes; every object has the same rubber-like friction (1.2 static, 1.0 dynamic), more than cardboard on a conveyor.",
-  "scores": "Dream-1 run: 0.0; demo: 1.0"
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-MG6ZTD"
 }
