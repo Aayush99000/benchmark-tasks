@@ -15,5 +15,6 @@
   "run_limit": "2,400 steps (2 minutes at 20 Hz)",
   "reset_notes": "Stand the two bearings back at their marks, turned 10 and 55 degrees.",
   "fidelity": "The bearings are solid blocks with no bore and no shaft is fitted: the score checks each block's centre line against the motor's axis. Height needs no setting, since the bores are at shaft height on a flat table. Real millwrights align to hundredths of a millimetre with shims and indicators; this asks for 3 mm and 2 degrees. Every object has the same rubber-like friction (1.2 static, 1.0 dynamic).",
-  "scores": "Dream-1 run: 0.0; demo: 1.0"
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-GHNRLP"
 }
