@@ -1,0 +1,23 @@
+{
+  "title": "Reseat the half-inserted plug",
+  "category": "Impact on jobs",
+  "keywords": [
+    "bimanual",
+    "cable",
+    "plug",
+    "patch cord",
+    "data centre",
+    "inspection",
+    "insertion",
+    "fault finding"
+  ],
+  "instruction": "One of the four patch cords plugged into the back of the switch is not fully seated. Find the loose plug and push it fully into its port without pulling or unseating any of the other plugs, then let go.",
+  "context": "A half-seated cord is a classic cause of flapping links in a server rack; data-centre technicians (O*NET 49-2011.00, 15-1231.00) find it among neighbours by eye and reseat it without disturbing live links next to it.",
+  "setup": "Table top is the reference (z = 0); x is measured forward from the line through the two arm bases, y to the left of the midline between them. Switch rear panel: white 3D-printed PLA block 60 mm (x) x 200 mm (y) x 44 mm tall (1U), occupying x 40.0-46.0 cm, y -10.0 to +10.0 cm, screwed to the table, its back face (x 40.0 cm) towards the robot. Four ports in that face, open at table level (floor = table), each 17.5 mm wide x 15.5 mm tall x 26 mm deep along +x, centred at y +6.75 (A), +2.25 (B), -2.25 (C), -6.75 cm (D). Four patch cords: 6 mm round PVC cord, 25 cm long, colours A blue, B yellow, C green, D red, each ending in a dark grey rigid plug body 55 (along the cord) x 16 x 14 mm tall, 15 g (3D-printed PLA, no latch: held in the port only by friction), lying on the table in line with its port. Seated plugs (A, C, D): tip 25 mm inside the port, plug rear end at x 37.0 cm, cord running straight back along x to its free end at x 12.0 cm. Loose plug (B, default; any port can be chosen): tip 8 mm inside, rear end at x 35.3 cm (sticks out 17 mm further), cord free end at x 10.3 cm. The cords' far ends are free on the table. All parts match the setup screenshot.",
+  "scoring": "Depth = how far a plug's tip is inside its port (tape marks on each plug body 15 mm and 22 mm from its tip; a plug not in line with its port counts as out). Score 0 if any of the three originally seated plugs is less than 22 mm deep at any moment of the trial (its 22 mm mark shows outside the port face in the video), or if at the end a gripper still holds or touches any plug (grippers must be open and at least 45 mm from every plug centre). Otherwise, by the loose plug's depth at the end: at least 22 mm -> 1.0; 15 to 22 mm -> 0.5; less than 15 mm -> 0. Pressing already seated plugs home is allowed. Real trial: also 0 if the panel is moved (it cannot move in simulation).",
+  "run_limit": "1,200 steps (60 seconds at 20 Hz)",
+  "reset_notes": "Set the three seated plugs 25 mm deep (30 mm of body outside, 1 mm short of the port bottom), pull the loose plug back until only 8 mm is inside (47 mm outside, mark on the body), and lay each cord straight back towards the robot along its port's line. The panel is screwed down and needs no reset.",
+  "fidelity": "Cords: chains of 2 cm rigid segments with bending springs (no twist, stretch or plasticity), far ends free. Plugs: rigid boxes welded to the cord ends, held in their ports only by the walls and friction (no latch, contacts or insertion force). Panel: fixed rigid boxes. Grippers rigid with PhysX friction.",
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-BXXUBW"
+}
