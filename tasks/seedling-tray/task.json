@@ -15,5 +15,6 @@
   "run_limit": "2,400 steps (2 minutes at 20 Hz)",
   "reset_notes": "Put the spare plugs back in their line beside the tray and leave the same 3 cells empty.",
   "fidelity": "The plugs are rigid cylinders, not soft root balls with leaves, and the tray is a rigid fixed grid with flat-bottomed cells, not a flexible tray with tapered cells. Every object has the same rubber-like friction (1.2 static, 1.0 dynamic). The sim can't tell a gripped plug from a released one: a spare held still up to 3 mm above a gap's floor counts, so on a real tray open the gripper before scoring.",
-  "scores": "Dream-1 run: 0.0; demo: 1.0"
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-8HYF29"
 }
