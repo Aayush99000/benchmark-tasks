@@ -1,0 +1,23 @@
+{
+  "title": "Press a power cord into a curved cable channel",
+  "category": "Impact on jobs",
+  "keywords": [
+    "bimanual",
+    "cable",
+    "deformable",
+    "cable management",
+    "raceway",
+    "press-fit",
+    "sequential manipulation",
+    "curved routing"
+  ],
+  "instruction": "Press the power cord into the white channel along its whole length, starting at the box.",
+  "context": "Seating cords and harness wires into raceways, wire ducts and cable channels is routine work for electricians and electrical/electronic equipment assemblers (O*NET 47-2111, 51-2028); the cord must follow a bend, so it has to be laid in progressively from the fixed end rather than dropped in one go.",
+  "setup": "Station table, positions in cm from the midpoint between the two arm bases projected onto the table (x forward away from the robot, y to the robot's left). Device box: grey 6 x 6 x 4 cm box (e.g. a small project enclosure), centred at x 13, y 20, fixed to the table; its far (+x) face is at x 16. Power cord: black 8 mm round PVC cord, 50 cm long, no plug, strain-relieved into the box's +x face at x 16.5, y 20, 4 mm above the table; it leaves the box pointing 50 degrees to the right of straight ahead (towards the right arm) and lies straight on the table in that direction, its free end at about x 48.6, y -18.3. Channel: white 3D-printed PLA J-shaped open-top channel fixed to the table, inner width 16 mm, inner depth 12 mm (walls 4 mm thick, 12 mm tall, no floor of its own: the table is the floor), 30.6 cm long along its centreline. Its centreline starts at x 22, y 16.5 (6 cm in front of the box face, 3.5 cm to the right of the cord exit), runs 8 cm straight in +x to x 30, turns right through a quarter circle of 8 cm radius (centre x 30, y 8.5) to x 38, y 8.5, and runs 10 cm straight in -y to x 38, y -1.5. The starting cord does not touch the channel (it passes about 2 cm in front of the entrance corner).",
+  "scoring": "The channel is divided into 8 equal sections along its centreline (3.8 cm each, marked on the channel). A section counts as seated when, all along it, the cord lies inside the channel (between the walls) and its top is no higher than 2 mm above the channel lip (check with a ruler laid across the lip, or a photo from the side). Score = number of seated sections / 8, judged at the end of the episode. 1.0 (success) = all 8 sections seated for 1 s. A cord lying on the wall tops, beside the channel, or across it scores 0 for those sections. Score 0 if the box or channel has been moved or the cord pulled out of the box.",
+  "run_limit": "2,400 steps (2 minutes at 20 Hz)",
+  "reset_notes": "Pull the cord out of the channel and lay it straight from the box exit at 50 degrees to the right of straight ahead (tape marks at the box exit and at x 48.6, y -18.3); check the box and channel are at their tape marks.",
+  "fidelity": "Cord is 25 rigid 2 cm capsule segments with bending springs, no twist, no plasticity; its box end is welded to the world. The channel is built from fixed rigid 2 cm wall boxes (the bend is approximated by short straight pieces). The channel has no retention lips: an 8 mm cord stays in a 16 mm channel by gravity and friction, while a real raceway with snap lips would also hold it once pressed past the lips.",
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-8XYYP6"
+}
