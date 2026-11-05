@@ -1,0 +1,23 @@
+{
+  "title": "Plug both ends of a patch cord into a cable tester",
+  "category": "Impact on jobs",
+  "keywords": [
+    "bimanual",
+    "cable",
+    "patch cord",
+    "connector insertion",
+    "two-end coordination",
+    "short slack",
+    "deformable",
+    "telecom"
+  ],
+  "instruction": "Connect the loose patch cord to the cable tester for certification: push one plug fully into the jack of the main unit (blue, left) and the other plug fully into the jack of the remote unit (orange, right), without pulling the first plug out, then let go of both plugs.",
+  "context": "Telecom and network cable installers (O*NET 49-9052, 49-2022) certify each patch cord by seating its two ends in a tester's main and remote units. The cord is short, so both ends must be brought over together and the second seated without unseating the first.",
+  "setup": "Positions in cm from the midpoint between the arm bases (x forward, y left); fixed parts taped down. Main unit: blue PLA box 8 (x) x 7 (y) x 4 cm tall, centre x 36, y +28. Its jack: dark grey PLA sleeve 28 mm wide x 20.5 mm tall x 40 mm long on the unit's right face, opening (20 x 16.5 mm, 26 mm deep, at table level, centre x 36) at y +20.5, facing right. Remote unit: same, orange, mirrored at y -28, jack opening at y -20.5 facing left. Cord: grey 6 mm round PVC cord, 40 cm, straight along x 22 from y +20 to -20; on each end a dark grey PLA plug body 55 x 16 x 14 mm, 15 g, lying flat, pointing at its unit.",
+  "scoring": "Score 0 if: at the end a gripper still holds or touches either plug (sim: a gripper centre within 4.5 cm of a plug centre); a tester unit was moved. Otherwise, at the end: 0.5 for each jack (main, remote) holding a plug whose front end is at least 15 mm inside the jack opening (mark on each plug 15 mm from its front end must be hidden in the jack). A plug on top of, beside or in front of a jack, or in less than 15 mm, earns nothing. Either plug may go in either unit. Both jacks = 1.0.",
+  "run_limit": "1,200 steps (60 seconds at 20 Hz)",
+  "reset_notes": "Pull both plugs out, lay the cord straight along the x 22 cm tape line from y +20 to y -20 cm with the plugs lying flat on their 16 mm side, each pointing at its unit. The units stay taped at their marks.",
+  "fidelity": "Cord: 20 rigid 2 cm segments with bending springs (no twist, stretch, plasticity). Plugs: rigid boxes with no latch or contacts, held in the jack only by its walls and friction, so the cord can tug a seated plug out with little force; the real trial uses the same latchless plug bodies, and seating is judged by insertion depth. Jack clearance is 2 mm per side (real RJ45/LC fit is tighter). Units are fixed (taped down in real trials).",
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-FS7AD7"
+}
