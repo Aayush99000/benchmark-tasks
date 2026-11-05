@@ -72,7 +72,7 @@ tagged with the task's folder name.)
 - **One task per pull request,** one folder under `tasks/`. Up to 20 submissions in any 24 hours.
 - **Accepted:** we merge your pull request. **Not accepted:** you get feedback and the pull request stays
   open, labeled "Not accepted"; push your changes to it to submit a revision; don't open a new
-  pull request.
+  pull request. Tasks that clearly don't meet the importance bar are closed instead, and can't be revised.
 - **The first team to submit a task owns it** while it's pending, and, if it isn't accepted, for 48 hours
   after the review while the team revises it (shown on the board as "Being revised"), unless the review
   finds it was a low-effort placeholder. If no revision arrives within 48 hours, the hold lapses and
