@@ -1,0 +1,23 @@
+{
+  "title": "Hang a cable between two hooks with a set sag",
+  "category": "Impact on jobs",
+  "keywords": [
+    "bimanual",
+    "cable",
+    "deformable",
+    "sag control",
+    "slack management",
+    "hanging",
+    "hooks",
+    "catenary"
+  ],
+  "instruction": "Hang the black cable across the two hooks: lay it in both cradles with each end hanging down on the outer side of its hook, so that the middle sags between the hooks with its lowest point between the two orange bands on the posts (4 to 6 cm below the hooks). Then let go of the cable.",
+  "context": "Line installers hang aerial and overhead cable between poles or hangers with a specified sag: too tight overloads the supports, too slack sags into clearances (O*NET 49-9052.00 Telecommunications Line Installers and Repairers; also cable-tray and festoon installation). The robot must control a global shape of a deformable object (how much cable lies between the supports) rather than only where its ends go.",
+  "setup": "Station table; positions in cm from the midpoint between the two arm bases projected onto the table (x forward away from the robot, y to the robot's left). Two hook posts, grey, fixed to the table at x 28, y +15 and x 28, y -15 (30 cm apart, one in front of each arm). Each post: 20 mm diameter aluminium or PLA rod, 14.2 cm tall, topped by a 3D-printed PLA open-top U cradle: floor 32 mm (x) by 25 mm (y) by 8 mm thick, its top face 15.0 cm above the table (the hook line); two side walls 4 mm thick, 25 mm long (along y) and 12 mm tall above the floor, inner gap 24 mm, so the slot runs left-right (along y) and is open at both ends and at the top. Each post carries two orange bands (tape, 4 mm wide) centred 4 cm and 6 cm below the hook line. Cable: black 8 mm round PVC cord, 50 cm long, with a black 3D-printed PLA plug epoxied on each end (35 x 16 x 12 mm box, long side along the cable, 10 g each). Start: the cable lies straight on the table along y at x 20 (8 cm in front of the posts, towards the robot), centred on y 0: cable ends at y +25 and y -25, plugs from y +25 to +28.5 and from -25 to -28.5, lying flat.",
+  "scoring": "Measured at the end of the episode with a ruler (or a side photo against the bands). Score 0 if a gripper still touches or holds the cable or a plug (the grippers must be open and at least 3 cm away), or if a post or cradle was moved or bent. A hook counts as hung when the cable lies in its cradle (between the walls, on the floor) and one cable end hangs on the hook's outer side with its plug centre at least 5 cm below the hook line. One hook hung = 0.2; both hooks hung = 0.4 plus a sag bonus, where sag = distance from the hook line down to the lowest point of the underside of the cable between the two cradles: sag 4-6 cm = +0.6 (1.0, success); 3-4 cm or 6-8 cm = +0.3 (0.7); more than 8 cm (including the middle resting on the table) = +0 (0.4). Both hooks hung but sag less than 3 cm (cable pulled taut or laid straight across the hooks) = 0. Nothing hung = 0. Success (1.0) when the full condition holds for 1 s with the cable at rest.",
+  "run_limit": "2,400 steps (2 minutes at 20 Hz)",
+  "reset_notes": "Lift the cable off the hooks and lay it straight on the table along the tape line at x 20 cm, with the cable ends at y +25 and -25 cm (tape marks), plugs lying flat. Check that both posts stand at their marks and the cradles are level.",
+  "fidelity": "Cable is 25 rigid 2 cm capsule segments with bending springs, no twist, no plasticity, friction 0.8; plugs are rigid boxes welded to the end segments; posts, cradles and bands are fixed rigid cylinders/boxes. The bands are visual only (1.5 mm proud of the post). Sag is computed from segment centres minus the cable radius.",
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-NYCGA4"
+}
