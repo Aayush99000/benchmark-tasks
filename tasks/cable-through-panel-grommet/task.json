@@ -1,0 +1,24 @@
+{
+  "title": "Pass a cable through a panel grommet",
+  "category": "Impact on jobs",
+  "keywords": [
+    "bimanual",
+    "cable",
+    "deformable",
+    "hand-over",
+    "threading",
+    "feed-through",
+    "grommet",
+    "panel",
+    "electrical wiring"
+  ],
+  "instruction": "Push the cable's plug through the black grommet in the grey upright panel, take it on the other side with the other arm, and pull the cable through until the red band on the cable sits at the grommet.",
+  "context": "Feeding cables through bulkhead grommets and panel cut-outs is a core step when electricians and panel builders wire enclosures, cabinets and machines (O*NET 47-2111.00 Electricians; 51-2022.00 Electrical and Electronic Equipment Assemblers). The panel keeps each arm on its own side, so the plug has to be handed over through the hole and drawn out over the duct wall on the far side.",
+  "setup": "Station table, positions in cm from the midpoint between the two arm bases projected onto the table (x forward away from the robot, y to the robot's left). Panel: grey 3D-printed PLA (or 6 mm plywood) wall 280 mm long, 100 mm tall, 6 mm thick, standing upright on the midline (its faces at y -0.3 and y +0.3, facing the two arms), running from x 16 to x 44, screwed to the table with two L-brackets on the far-side face near its ends. Grommet: black 3D-printed TPU square grommet, 38 x 38 mm outside, 26 x 26 mm square bore, 10 mm deep (sticks out 2 mm from each panel face), fitted in a 38 mm square window in the panel; bore centred at x 30, bore bottom 10 mm and bore top 36 mm above the table. Junction box: grey 40 x 40 x 30 mm 3D-printed PLA block, screwed to the table, centre at x 14.6, y 12.6, turned 45 deg so one face looks diagonally away from the robot to the left; the cable leaves the centre of that face at x 16, y 14, 6.5 mm above the table. Cable: black 6 mm round PVC-jacketed cable (e.g. LiYY 4 x 0.5 mm2), 40 cm from the junction box to the plug, glued/strain-relieved into the box, lying straight on the table at 45 deg (away from the robot and to the left), its end at x 44.3, y 42.3. Plug: black 3D-printed PLA box 60 x 16 x 12 mm (long side along the cable), epoxied on the cable end, 12 g. Red band: 20 mm wide red heat-shrink or tape on the cable, spanning 24-26 cm from the junction box (centre 25 cm). Duct wall: white 3D-printed PLA (or a strip of 10 mm plywood) bar 240 x 10 x 30 mm (x by y by height) on the far (right-arm) side, parallel to the panel, centred at x 30, spanning y -13 to -14, screwed to the table; it stands for the side wall of the wiring duct the cable continues into. Panel, grommet, junction box and duct wall are fixed; the cable starts on the left-arm (+y) side of the panel.",
+  "scoring": "Measured at the end with a tape measure. 0 unless all of: (a) the cable passes through the grommet bore and crosses the panel line nowhere else (not round either end of the panel, not over its top); (b) the whole plug is beyond the grommet's far (right-arm) face; (c) the plug has been carried over the duct wall: its centre at least 14.5 cm behind the panel's mid-plane (5 mm beyond the wall's far face). If those hold: red band centre within 2 cm of the panel's mid-plane, measured along the cable = 1.0 (success, must hold 1 s); otherwise 0.3 + 0.5 x max(0, (15 cm - band distance) / 13 cm), where band distance is measured along the cable from the band centre to the panel (either side; 15 cm is where the band is when the cable end has just come through). Score 0 if the panel, grommet, duct wall or junction box is moved or damaged, the grommet is pushed out of the panel, or the cable is pulled out of the junction box. Holding the plug at the end is allowed.",
+  "run_limit": "2,400 steps (2 minutes at 20 Hz)",
+  "reset_notes": "Pull the cable back out of the grommet to the left-arm side and lay it straight from the junction box at 45 deg (tape marks at the box face and at the plug end, x 44.3, y 42.3), plug lying flat with its long side along the cable. Check the band is at 24-26 cm and the grommet is seated flush in the panel.",
+  "fidelity": "Cable is 20 rigid 2 cm capsule segments with bending springs, no twist, no plasticity; plug is a rigid box welded to the last segment; the junction-box end is welded to the world. Panel, grommet and duct wall are fixed rigid boxes (the grommet is rigid in sim, rubber/TPU in the real kit; the bore is square, 5 mm clearance around the plug's width and 7 mm over its height). The red band is a colour on one 2 cm segment and is scored by arclength from the box.",
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-J59X8M"
+}
