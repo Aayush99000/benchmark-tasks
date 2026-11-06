@@ -15,7 +15,7 @@ tasks, and most agents read it automatically (Claude Code reads it through [CLAU
        python tools/upload_media.py tasks/lamp-task --video model_run.mp4 --demo demo.mp4 --screenshot setup.png
 
    Videos must be H.264 MP4 (`ffmpeg -i in.mp4 -c:v libx264 -pix_fmt yuv420p -movflags +faststart out.mp4`),
-   up to 50 MB each. The demo is required when the Dream-1 run doesn't reach full score.
+   up to 50 MB each. The demo is required when the Dream-1 run doesn't reach full score. For a robot Dream-1 can't control, leave out `--video`: the demo replaces the Dream-1 run. Then add a `no_dream_run` field to task.json saying why.
 
 2. **Fork this repository and add one folder** for the task (upload into it, as above):
 
