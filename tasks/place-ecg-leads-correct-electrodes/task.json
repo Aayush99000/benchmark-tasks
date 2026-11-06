@@ -1,0 +1,23 @@
+{
+  "title": "Place ECG leads on the correct electrodes",
+  "category": "Impact on jobs",
+  "keywords": [
+    "bimanual",
+    "cable",
+    "deformable",
+    "medical",
+    "ECG",
+    "colour code",
+    "spatial reasoning",
+    "handover"
+  ],
+  "instruction": "Attach the 3-lead ECG cable to the patient manikin, which lies on its back with its head away from you. Following the AHA colour code, drop each lead's clip into the white electrode cup at the correct body position for that lead; one cup stays empty. Then let go of the clips.",
+  "context": "Connecting monitoring leads to the right electrodes is routine nursing and technician work (O*NET 29-2031.00 Cardiovascular Technologists and Technicians; 31-1131.00 Nursing Assistants). Swapped arm leads invert the ECG and can mimic disease. The robot must apply a colour convention to the patient's own left and right, which are mirrored from its point of view.",
+  "setup": "Station table; cm from the midpoint between the arm bases on the table (x away from robot, y to robot's left). Manikin on its back, head away (patient's right = robot's left), all fixed, PLA, tan: torso board x 25.5-45.5, y -11..11, 1 cm thick; upper arms 18 x 4 x 1 cm beside it; neck; head disc 13 cm dia, 6 cm tall at x 54.5 with nose on top. Four white cups (40 mm inner square, 4 mm walls 6 mm tall) on the torso at x 40 / 29, y +/-6.5. Grey monitor 18 x 8 x 6 cm at x 17, y 34. White, black, red 5 mm leads, 50 cm, leave its right face at x 17, 23, 11 and lie straight towards -y, each ending in a 22 x 14 x 12 mm clip (8 g) of its colour at y -21.7.",
+  "scoring": "Score 0 if: a gripper is within 3 cm of any clip at the end; any clip lies in a wrong cup (including the empty one); the manikin, a cup or the monitor was moved; a lead is pulled out of the monitor. A clip lies in a cup when its centre is inside the cup's 40 mm inner square (top view) and at most 12 mm above the cup floor. Otherwise 1/3 per clip in its own cup (AHA: white = right arm, black = left arm, red = left leg): 0, 0.33, 0.67, 1.0. Success (1.0) when all three are placed, released and at rest for 1 s.",
+  "run_limit": "1,400 steps (70 s at 20 Hz)",
+  "reset_notes": "Take the clips out of the cups and lay the three leads straight from the monitor towards the robot's right along their tape lines (x 11, 17, 23 cm) with the clips flat at y -21.7 cm. Check the manikin, cups and monitor are at their marks.",
+  "fidelity": "Leads are 25 rigid 2 cm capsule segments with bending springs, no twist; clips are rigid boxes welded to the lead ends. Snap electrodes are simplified to open cups: a clip only has to lie in the cup (no snap force). Manikin, cups and monitor are fixed rigid boxes/cylinders; skin is flat. Real setup: 3D-printed cups glued to a board manikin.",
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-LLEMFC"
+}
