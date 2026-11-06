@@ -1,0 +1,24 @@
+{
+  "title": "Pull a cable out to a length mark",
+  "category": "Impact on jobs",
+  "keywords": [
+    "bimanual",
+    "cable",
+    "deformable",
+    "hand-over",
+    "measuring",
+    "cut-to-length",
+    "precision",
+    "visual feedback",
+    "wire harness"
+  ],
+  "instruction": "Pull the black cable out of the grey feed channel along the yellow ruler until the cable's end lies on the table at the red 30 cm line, then let go, leaving the pulled-out cable lying straight beside the ruler. Never pull the end more than 5 cm past the red line.",
+  "context": "Measuring cable off a feed against a ruler before cutting it to length is a daily step for wire-harness and panel assemblers and electricians (O*NET 51-2022.00 Electrical and Electronic Equipment Assemblers; 47-2111.00 Electricians): pulling too little makes the lead too short, pulling too far wastes cable. The red mark is beyond the left arm's reach and the cable end starts beyond the right arm's reach, so the end has to be handed over, and the last centimetres are set by watching the ruler.",
+  "setup": "Station table, positions in cm from the midpoint between the two arm bases projected onto the table (x forward away from the robot, y to the robot's left). Feed channel: grey closed straight duct (3D-printed PLA or bent sheet metal), 400 mm long, 30 mm wide and 18 mm tall outside, 14 mm wide and 12 mm tall inside (8 mm side walls, 6 mm roof, the table is its floor), closed at its back end by an 8 mm wall, screwed to the table along y on the line x 30, from its open exit face at y +10 to its back wall at y +50 (back wall outer face y +50.8); the exit faces the right arm. Cable: black 6 mm round PVC-jacketed cable (e.g. LiYY 4 x 0.5 mm2), 45 cm long, both ends bare, not fixed anywhere: it lies straight inside the channel on x 30 with its tail end at y +49 and its free end sticking 6 cm out of the exit (end at y +4). Ruler: yellow tape-measure strip (or printed paper ruler) 400 x 30 mm, 1 mm thick, taped flat to the table beside the cable on the far side (x 30.9 to 33.9), from y +10 (its zero, flush with the exit face) to y -30 (the 40 cm end); black tick lines 2 mm wide every 5 cm from the near edge of the ruler (16 mm long at 0, 10, 20 and 40 cm, 9 mm long at 5, 15, 25 and 35 cm). Red target line: 5 mm wide red tape across the whole ruler width at 30 cm (y -20), continued by a 25 x 5 mm red tape mark on the table on the near side of the cable (x 26.9 to 29.4, y -20). The 30 cm line is at y -20, out of the left arm's reach (left arm y > -2); the cable end starts at y +4, out of the right arm's reach (right arm y < +2). Channel and ruler are fixed.",
+  "scoring": "Ruler reading = distance from the exit face to the cable's end along the ruler, read at the end of the trial (tape measure or top photo). Score 0 if any of: (a) the cable is still held at the end (a gripper within 3 cm of it); (b) at any time during the trial the cable's end was pulled past the 35 cm line (5 cm past the red line; checked on video); (c) any part of the pulled-out cable lies more than 2 cm sideways from the cable line x 30 (the end dragged off the ruler, a loop or kink out of line) or more than 1.5 cm above the table (the end held up in the air); (d) less than 5 cm of the cable is still inside the channel. Otherwise: reading within 1 cm of 30 cm (29-31 cm) = 1.0 (success, must hold 1 s); within 3 cm = 0.6; within 5 cm = 0.3; further off = 0. Score 0 if the channel or ruler is moved.",
+  "run_limit": "1,200 steps (1 minute at 20 Hz)",
+  "reset_notes": "Push the cable back into the channel from the exit until 6 cm (to the 6 cm point of the ruler) sticks out, straight along x 30; the tail must lie inside the channel. Check the ruler's zero is flush with the exit face.",
+  "fidelity": "Cable: 22 rigid ~2 cm capsule segments with bending springs, no twist, no plasticity, friction 0.8; it slides freely in the channel (a real reel feed adds drag and inertia; the channel stands in for the dispenser). Channel and ruler are fixed rigid boxes; ticks and red lines are thin flat boxes. The over-pull rule is tracked every step in sim; 'let go' = both grippers at least 3 cm from the cable.",
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-SV49JZ"
+}
