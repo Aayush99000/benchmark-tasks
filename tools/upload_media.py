@@ -6,7 +6,7 @@
     python tools/upload_media.py tasks/lamp-task --video model_run.mp4 --demo demo.mp4 --screenshot setup.png
 
 Videos must be H.264 MP4 (convert with: ffmpeg -i in.mp4 -c:v libx264 -pix_fmt yuv420p -movflags +faststart out.mp4),
-up to 50 MB each; the screenshot up to 10 MB. The demo is required when the Dream-1 run doesn't reach full score, and in place of the Dream-1 run for robots Dream-1 can't control.
+up to 50 MB each; the screenshot up to 10 MB. The demo is required when the model run doesn't reach full score.
 Uses only the Python standard library.
 """
 
@@ -32,7 +32,7 @@ def multipart(fields, files):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("task_dir", help="the task folder, like tasks/lamp-task")
-    ap.add_argument("--video", help="the Dream-1 run (may be left out only for robots Dream-1 can't control, with --demo)")
+    ap.add_argument("--video", required=True, help="the model run: Dream-1, or for robots other than two parallel-gripper arms, an LLM through Inspect Robots")
     ap.add_argument("--screenshot", required=True, help="the setup screenshot")
     ap.add_argument("--demo", help="the full-score demo (required unless the Dream-1 run reaches full score)")
     a = ap.parse_args()
@@ -40,11 +40,7 @@ def main():
     if not team or not token:
         sys.exit("Set ROBOCURVE_TEAM (your team code) and ROBOCURVE_TOKEN (your team's access token) first.")
     task_dir = Path(a.task_dir)
-    if not a.video and not a.demo:
-        sys.exit("Give the Dream-1 run with --video, or, for a robot Dream-1 can't control, the full-score demo with --demo.")
-    files = {"screenshot": Path(a.screenshot)}
-    if a.video:
-        files["video"] = Path(a.video)
+    files = {"video": Path(a.video), "screenshot": Path(a.screenshot)}
     if a.demo:
         files["demo"] = Path(a.demo)
     for name, path in files.items():
