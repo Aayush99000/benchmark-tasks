@@ -1,0 +1,19 @@
+{
+  "title": "Shelve a carton that fits no single gap: move the boxes together first",
+  "category": "Impact on jobs",
+  "keywords": [
+    "shelf stocking",
+    "making room",
+    "planning a rearrangement",
+    "retail",
+    "tight packing"
+  ],
+  "instruction": "Put the brown carton on the shelf. The four boxes already on the shelf have to stay on it, standing up.",
+  "context": "Stockers put new merchandise on shelves that already hold stock, and the space is rarely free in one piece: they slide the products standing there together to open room for the new case. O*NET 53-7065.00 (Stockers and Order Fillers) lists the task: \"Stock shelves, racks, cases, bins, and tables with new or transferred merchandise.\" A case set on top of the stock or left on the floor blocks the aisle, and products pushed off the shelf get damaged. Done by: stockers and order fillers.",
+  "setup": "Positions in cm on the table, from the midpoint between the two arm bases: x forward (away from the arms), y to the robot's left. A low shelf is fixed on the table: a white board 2 cm thick, 13 cm deep (x 26.5 to 39.5), 45 cm long between two grey end walls (y -22.5 to 22.5), with a grey lip along its back; the walls and lip stand 6 cm above the board. Four product boxes stand on the board, loose, 6 cm deep and 8 cm tall, 120 g each, centred at x 33: red 5 cm wide at y 17, green 6 cm wide at y 6, yellow 5 cm wide at y -4.5, blue 6 cm wide at y -15.5. The gaps from the left end wall, between the boxes and to the right end wall are 3, 5.5, 5, 5.5 and 4 cm. A brown carton (7 cm deep, 18 cm long across the table, 10 cm tall, 250 g, loose) stands on the table at (18, 0). Every loose object has friction 1.2 static, 1.0 dynamic. Both grippers start open at the ready pose.",
+  "scoring": "On the shelf means resting on the board itself (its lowest corner within 3 mm of the board's top, so not on another box or on the carton) with every corner inside the board's front edge, back lip and end walls (to 2 mm). Each box must stay on the shelf and upright (within 10 degrees); the carton may rest on any of its faces (within 10 degrees of flat). 1.0: the carton on the shelf and all four boxes on the shelf upright, every object still (under 1 cm/s and 0.5 rad/s), held for 1 s (if time runs out before that has held, it scores 0.9). 0.25: all four boxes on the shelf upright, a stretch of the shelf at least 18 cm long that no box reaches into, the carton not on the shelf (but not off the table). 0 if any box is off the shelf, on another box or on the carton, or knocked over, so taking boxes off to make room earns nothing.",
+  "run_limit": "2,400 steps (2 minutes at 20 Hz)",
+  "reset_notes": "Stand each box back on its mark on the board and the carton on its mark on the table; tape marks help.",
+  "fidelity": "The shelf is a fixed board with end walls and a back lip, with no shelf above it. The boxes and the carton are rigid blocks with the same rubber-like friction (1.2 static, 1.0 dynamic); a real carton is heavier, and the arms are weak.",
+  "scores": "Dream-1 run: 0.0; demo: 1.0"
+}
