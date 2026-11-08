@@ -1,0 +1,20 @@
+{
+  "title": "Mark every piece of evidence for the scene photos without moving any of it",
+  "category": "Impact on jobs",
+  "keywords": [
+    "forensics",
+    "crime scene documentation",
+    "evidence integrity",
+    "placing near loose objects",
+    "do not disturb",
+    "coverage"
+  ],
+  "instruction": "Put one yellow evidence marker beside each piece of evidence on the grey floor mat, ready for the scene photographs.",
+  "context": "Investigators mark each item before the scene is photographed: \"Markers (e.g, business cards, chalk, spray paint or some other marker to place by noted evidence items)\" (NIJ, Equipment Needed for Crime Scene Investigation, 2009: https://nij.ojp.gov/topics/articles/equipment-needed-crime-scene-investigation), and photograph evidence in place before it is collected. A casing nudged or a phone turned while setting a marker no longer shows where it fell, and an unmarked item is missing from the record. Done by: forensic science technicians and crime scene investigators.",
+  "setup": "Positions in cm on the table, from the midpoint between the two arm bases: x forward (away from the arms), y to the robot's left; headings anticlockwise from +x seen from above. A grey concrete-coloured mat (40 x 56 x 0.4 cm) is fixed on the table, centred at (32, 0). On it, loose, where they fell: two spent 9 mm brass shell casings (0.99 cm across, 1.9 cm tall, 4 g) standing on their bases at (44, 8) and (27, -5); a black phone (14.7 x 7.1 x 0.8 cm, 170 g) at (40, -15), heading 20 degrees; a closed folding knife, grey (11 x 2.8 x 1.4 cm, 120 g), at (30, 20), heading -30 degrees. A dark wooden chair leg (3 cm across, 12 cm tall) is fixed at (27, -1.2), 1.8 cm from the second casing. Four yellow plastic evidence-marker tents (5 cm wide, 3 cm deep, 6 cm tall, 20 g) stand in a row at x 15, at y 15, 7, -7 and -15, their 5 cm faces toward the arms. Every loose object has friction 1.2 static, 1.0 dynamic. Both grippers start open at the ready pose.",
+  "scoring": "A marker counts for a piece of evidence when it stands upright (within 10 degrees) on the mat (its bottom within 3 mm of it), is still (under 1 cm/s and 0.5 rad/s), and the gap between its outline and the item's, seen from above, is 5 mm to 5 cm, not touching; each marker counts only for the item nearest it. Each of the 4 pieces of evidence with a marker counts 0.25; all four, held for 1 s: 1.0 (if time runs out before that has held for 1 s, it scores 0.9). The score is 0 if any piece of evidence ends more than 3 mm from where it lay, turned more than 3 degrees, knocked over, or still moving.",
+  "run_limit": "2,400 steps (2 minutes at 20 Hz)",
+  "reset_notes": "Set each piece of evidence back on its mark (tape outlines help) and the markers back in their row.",
+  "fidelity": "The casings stand on their bases (real ones usually lie on their side); the tents are solid blocks without numbers, and the phone and knife plain boxes. The floor is a fixed mat on a table. Every loose object has the same rubber-like friction (1.2 static, 1.0 dynamic).",
+  "scores": "Dream-1 run: 0.0; demo: 1.0"
+}
