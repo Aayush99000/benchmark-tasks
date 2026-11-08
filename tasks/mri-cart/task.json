@@ -16,5 +16,6 @@
   "run_limit": "2,400 steps (2 minutes at 20 Hz)",
   "reset_notes": "Set every item back on its mark on the cart; tape outlines on the shelf help.",
   "fidelity": "The cart is its top shelf only, fixed on the table; the items are rigid blocks and cylinders (the scissors a closed steel block, the chest piece a steel disc, the pads rigid foam blocks). No magnetic field is simulated: what counts is which items end up in the bin. Every loose object has the same rubber-like friction (1.2 static, 1.0 dynamic).",
-  "scores": "Dream-1 run: 0.0; demo: 1.0"
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-JMMLHZ"
 }
