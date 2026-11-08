@@ -15,5 +15,6 @@
   "run_limit": "2,400 steps (2 minutes at 20 Hz)",
   "reset_notes": "Pull the shaft out of the bearings and lay it flat at its mark, turned 20 degrees.",
   "fidelity": "The 1/2-inch hex shaft is a 12.7 mm square bar and each bearing's bore a 14.7 mm square, 1 mm each side; real ThunderHex bearings (13.75 mm ID) fit snug, and real shaft ends are chamfered. The bearings are square blocks with no flange, and the plates are cut down to 10 x 7 cm around them. Every object has the same rubber-like friction (1.2 static, 1.0 dynamic).",
-  "scores": "Dream-1 run: 0.0; demo: 1.0"
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-KXHH8Q"
 }
