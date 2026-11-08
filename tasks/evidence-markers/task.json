@@ -16,5 +16,6 @@
   "run_limit": "2,400 steps (2 minutes at 20 Hz)",
   "reset_notes": "Set each piece of evidence back on its mark (tape outlines help) and the markers back in their row.",
   "fidelity": "The casings stand on their bases (real ones usually lie on their side); the tents are solid blocks without numbers, and the phone and knife plain boxes. The floor is a fixed mat on a table. Every loose object has the same rubber-like friction (1.2 static, 1.0 dynamic).",
-  "scores": "Dream-1 run: 0.0; demo: 1.0"
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-4U9LQK"
 }
