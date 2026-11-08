@@ -17,5 +17,6 @@
   "run_limit": "2,400 steps (2 minutes at 20 Hz)",
   "reset_notes": "Lay each coupon back at its mark, flat, bevel up, facing as at the start.",
   "fidelity": "The coupons are rigid, perfectly flat steel prisms with the bevel and root face of a real prepared coupon; nothing is tacked or clamped, so they stay where they are let go. The welding table is a fixed steel plate. A custom body per coupon, from this task's plugin (embodiment yam_weld_fitup), since a bevel isn't a box. Coupon friction 0.6/0.5, table 1.2/1.0.",
-  "scores": "Dream-1 run: 0.0; demo: 1.0"
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-X383QD"
 }
