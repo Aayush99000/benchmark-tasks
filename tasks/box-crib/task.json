@@ -15,5 +15,6 @@
   "run_limit": "2,400 steps (2 minutes at 20 Hz)",
   "reset_notes": "Lay the six timbers back on their marks beside the load point.",
   "fidelity": "Half scale: a 4x4 x 20 in timber is 4.45 x 4.45 x 25.4 cm here, and the 4 in overlap rule becomes 50.8 mm; the timbers are lighter than real ones because the arms are weak. Three layers, not the guide's full heights, and no load is lowered onto the crib. Timbers are rigid blocks with rubber-like friction (1.2 static, 1.0 dynamic).",
-  "scores": "Dream-1 run: 0.0; demo: 1.0"
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-A7XVVE"
 }
