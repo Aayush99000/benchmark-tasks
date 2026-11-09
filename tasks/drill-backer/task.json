@@ -15,5 +15,6 @@
   "run_limit": "2,400 steps (2 minutes at 20 Hz)",
   "reset_notes": "Lay the board and the scrap back beside the press on their marks.",
   "fidelity": "The drill press is a fixed model (base, column, head, chuck, bit) that doesn't run or lower; no hole is drilled, only the set-up is scored. The board and scrap are rigid blocks with rubber-like friction (1.2 static, 1.0 dynamic), lighter than real wood because the arms are weak.",
-  "scores": "Dream-1 run: 0.0; demo: 1.0"
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-S74SGP"
 }
