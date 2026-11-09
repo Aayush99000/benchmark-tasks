@@ -1,0 +1,19 @@
+{
+  "title": "Build a box crib on a load point: three layers of crossed pairs, every corner overlapping",
+  "category": "Safety and alignment",
+  "keywords": [
+    "cribbing",
+    "urban search and rescue",
+    "shoring",
+    "stacking to a rule",
+    "crossed layers"
+  ],
+  "instruction": "Build a 2 x 2 box crib, three layers high, on the red load-point mark, using the six cribbing timbers.",
+  "context": "Rescue crews and riggers build box cribs under loads they lift or shore, a crossed pair of timbers at a time. The USACE Urban Search and Rescue Shoring Operations Guide (Edition 5.0, Oct 2021, p. 2-48), on cribbing: \"Overlap corners by at least 4 inches.\" It also says to keep the crib \"aligned and as square as possible\" (p. 2-47) and limits its height to three times its shortest width. A crib whose timbers meet flush at the corners can roll or crush under the load. Done by: US&R structures specialists, heavy-rescue firefighters and riggers.",
+  "setup": "Positions in cm on the table, from the midpoint between the two arm bases: x forward (away from the arms), y to the robot's left. A red disc 2.4 cm across marks the load point at (23, 0), fixed. Six loose cribbing timbers, half-scale 4x4 x 20 in: 4.45 x 4.45 x 25.4 cm, 250 g, pine, each lying on the table along x, centred at x 25: three on the left at y 20, 29 and 38, three on the right at y -20, -29 and -38. Every timber has friction 1.2 static, 1.0 dynamic. Both grippers start open at the ready pose.",
+  "scoring": "A timber is in a layer when it lies level (within 5 degrees), its centre within 16 cm of the load point, its lowest point within 4 mm of a whole number of timber widths above the table (layer 1 on the table). A layer is built right when it has exactly two timbers, parallel (within 5 degrees), square to the layer below (within 5 degrees) and each bearing on both of its timbers. Layers count from the bottom up to the first that isn't right; the crib's centre (between the bottom pair) must be within 3 cm of the load point for any credit. 0.2 per layer. 1.0: three layers, centred within 1.5 cm, every corner overlapping by at least 50.8 mm (both crossing timbers' ends past the other's outer face; 4 in at full scale), every timber still, held for 1 s (if time runs out before that has held, it scores 0.9). Three layers with any corner short of the overlap: 0.6.",
+  "run_limit": "2,400 steps (2 minutes at 20 Hz)",
+  "reset_notes": "Lay the six timbers back on their marks beside the load point.",
+  "fidelity": "Half scale: a 4x4 x 20 in timber is 4.45 x 4.45 x 25.4 cm here, and the 4 in overlap rule becomes 50.8 mm; the timbers are lighter than real ones because the arms are weak. Three layers, not the guide's full heights, and no load is lowered onto the crib. Timbers are rigid blocks with rubber-like friction (1.2 static, 1.0 dynamic).",
+  "scores": "Dream-1 run: 0.0; demo: 1.0"
+}
