@@ -1,0 +1,19 @@
+{
+  "title": "Set a board up on a drill press to drill through its middle, with scrap backing under the exit",
+  "category": "Impact on jobs",
+  "keywords": [
+    "drill press",
+    "woodworking",
+    "backup material",
+    "tear-out",
+    "working under a fixed tool"
+  ],
+  "instruction": "Set the oak board up on the drill press so that the bit will drill straight down through the middle of the board.",
+  "context": "Before drilling through a workpiece on a drill press, woodworkers and machinists put scrap under it where the bit will come out. The RIDGID DP15501 drill press operator's manual (Positioning Table and Workpiece, p. 31): \"Always place a piece of backup material (wood, plywood, etc.) on the table underneath the workpiece.\" Without it the bit splinters the underside as it breaks through, and runs into the table. Done by: cabinetmakers, carpenters and machine operators.",
+  "setup": "Positions in cm on the table, from the midpoint between the two arm bases: x forward (away from the arms), y to the robot's left. A bench drill press is fixed on the table: its grey table (26 x 26 cm, 3 cm thick) centred under the spindle at (26, 0), with a 3 cm square hole straight under it; a dark column (7 cm across) at (46, 0) rising behind it; a head reaching forward over the table; the chuck, and a drill bit 8 mm across whose tip is 10 cm above the table, on the spindle's axis. The press doesn't run. Loose on the table to the robot's left, each lying along x: an oak board (24 x 6 x 2 cm, 100 g) at (25, 30) and a piece of scrap pine (24 x 6 x 2 cm, 70 g) at (25, 21). Both have friction 1.2 static, 1.0 dynamic. Both grippers start open at the ready pose.",
+  "scoring": "Measured from the spindle's axis, across the table. The board must lie flat (within 3 degrees) with its middle within 1 cm of the axis for any credit. 1.0: the board flat on the scrap pine, its middle within 3 mm of the axis; the pine flat on the press table with the axis at least 2 cm inside every one of its edges, so the bit comes out into it; both still, held for 1 s (if time runs out before that has held, it scores 0.9). 0.5: the board on the pine under the bit, but its middle 3 mm to 1 cm off the axis, or the axis less than 2 cm inside the pine's edge. 0.25: the board under the bit straight on the press table, with nothing under it. 0 otherwise.",
+  "run_limit": "2,400 steps (2 minutes at 20 Hz)",
+  "reset_notes": "Lay the board and the scrap back beside the press on their marks.",
+  "fidelity": "The drill press is a fixed model (base, column, head, chuck, bit) that doesn't run or lower; no hole is drilled, only the set-up is scored. The board and scrap are rigid blocks with rubber-like friction (1.2 static, 1.0 dynamic), lighter than real wood because the arms are weak.",
+  "scores": "Dream-1 run: 0.0; demo: 1.0"
+}
