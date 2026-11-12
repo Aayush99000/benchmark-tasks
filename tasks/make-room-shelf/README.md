@@ -93,5 +93,8 @@ tips clear of every box top: an arm that moved off lower swept a box off the end
 - Official runs (2026-11-08): the demo 1.0, the boxes landing within 2 mm of their marks and the carton 0.4 mm from
   its aim, flat; with the carton aimed 1 cm to either side, also 1.0 (it landed 9.8 and 10.1 mm off centre); Dream-1
   0.0 over the full 2,400 steps (in its video it turns the carton about on the table; the four boxes end where they stood).
+  That Dream-1 run was given the first wording of the instruction ("…have to stay on it, standing up."); the revision
+  (2026-11-12) changed it to "…have to end up on it too" and scores the end state only. A rerun with the new wording
+  will replace it.
 - The scoring and reach checks run without the simulator: `python -m pytest -q test_make_room_shelf.py`.
 - One fixed layout: `-E object_jitter=0`, so the seed doesn't change the start.
