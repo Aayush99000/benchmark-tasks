@@ -105,6 +105,13 @@ def test_a_box_taken_off_the_shelf_scores_0_even_with_the_carton_on():
         assert M.score(done(**{n: state(n, (0.20, 0.25), M.TOP)})) == 0.0, n
 
 
+def test_only_the_end_state_counts_a_box_put_back_elsewhere_on_the_shelf_scores_full():
+    # the scorer sees only the end: a box lifted off while room was made and stood back on the board counts, wherever
+    # on the board it ends up, as long as the carton still fits beside the boxes
+    s = done(box_1=state("box_1", (M.ROW_X + 0.01, M.demo_targets()["box_1"]), M.SHELF, yaw=8.0))
+    assert M.success(s) and M.score(s) == 0.9
+
+
 def test_a_box_set_on_another_box_scores_0():
     t = M.demo_targets()
     assert M.score(done(box_2=state("box_2", (M.ROW_X, t["box_1"]), M.SHELF + M.BOX_H))) == 0.0

@@ -133,7 +133,7 @@ def widest_gap(objects) -> float:
 def _grade(objects) -> float:
     boxes_ok = all(_upright(objects[n]) and on_shelf(objects[n], SIZE[n]) for n in BOXES)
     if not boxes_ok:
-        return 0.0  # a box taken off the shelf, set on another, or knocked over
+        return 0.0  # at the end, a box off the shelf, on another, or lying over
     carton = objects["carton"]
     if _flat(carton) and on_shelf(carton, CARTON):
         return 1.0
@@ -152,7 +152,7 @@ def success(objects):
 def score(objects):
     """0.9 for the carton on the shelf with all four boxes still standing on it (1.0 only once success() has held 1 s);
     0.25 if the boxes are still standing on the shelf with an 18 cm stretch cleared but the carton not on it; 0 if any
-    box is off the shelf, on another box or knocked over."""
+    box is off the shelf, on another box or lying over at the end (only the end state counts)."""
     return min(_grade(objects), COMPLETE_SCORE)
 
 

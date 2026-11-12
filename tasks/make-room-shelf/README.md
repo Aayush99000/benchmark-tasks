@@ -1,8 +1,8 @@
 # Shelve a carton that fits no single gap: move the boxes together first
 
 A low shelf holds four product boxes, spread along it with a few centimetres between each other and the end walls.
-A brown carton waits on the table in front of it. The instruction only says to put the carton on the shelf and to
-keep the four boxes on it, standing. The carton is 18 cm long, and the shelf has 23 cm free in all, but no single gap
+A brown carton waits on the table in front of it. The instruction only says to put the carton on the shelf and that
+the four boxes have to end up on it too, standing. The carton is 18 cm long, and the shelf has 23 cm free in all, but no single gap
 is wider than 5.5 cm. So the robot has to work out that the boxes must be moved together first, and pack them
 tightly: with them packed, there are 5 cm to spare in all along the shelf.
 
@@ -13,7 +13,7 @@ Fillers): "Stock shelves, racks, cases, bins, and tables with new or transferred
 order fillers.
 
 What goes wrong in real life: a case set on top of the stock or left on the floor blocks the aisle, and products
-pushed off the shelf get damaged. A photo of the shelf shows the result.
+left off the shelf or lying on their side can't be sold from it. A photo of the shelf shows the result.
 
 What we simplified: the shelf is a fixed board with end walls and a back lip, with no shelf above it; the boxes and
 the carton are rigid blocks, lighter than real stock because the arms are weak.
@@ -26,13 +26,13 @@ a Dream API key in `~/.dreamlabs/credentials`, from this folder:
 # Dream-1
 inspect-robots run --embodiment yam_arena --policy dream \
   -E task=make_room_shelf.py -E object_jitter=0 -E control_hz=20 -E cam_width=320 -E cam_height=176 \
-  --instruction "Put the brown carton on the shelf. The four boxes already on the shelf have to stay on it, standing up." \
+  --instruction "Put the brown carton on the shelf. The four boxes already on the shelf have to end up on it too, standing up." \
   --scorer task_score --max-steps 2400 --store-frames --log-dir ~/yam-eval/make-room-shelf-dream
 
 # The scripted demo, which reaches full score
 inspect-robots run --embodiment yam_arena --policy yam_scripted \
   -E task=make_room_shelf.py -E object_jitter=0 -E control_hz=20 -E cam_width=320 -E cam_height=176 \
-  --instruction "Put the brown carton on the shelf. The four boxes already on the shelf have to stay on it, standing up." \
+  --instruction "Put the brown carton on the shelf. The four boxes already on the shelf have to end up on it too, standing up." \
   --scorer task_score --max-steps 2400 --store-frames --log-dir ~/yam-eval/make-room-shelf-demo
 
 # One MP4 per camera, next to each run's frames
@@ -48,12 +48,12 @@ robot's left.
 
 | Object | Description | Position |
 |---|---|---|
-| shelf | fixed: a white board 2 cm thick, 13 cm deep, 45 cm long between two grey end walls, a grey lip along its back; walls and lip 6 cm above the board | board x 26.5 to 39.5, y -22.5 to 22.5 |
-| box_1 | loose red product box, 6 cm deep, 5 cm wide, 8 cm tall, 120 g | (33, 17) |
-| box_2 | loose green product box, 6 x 6 x 8 cm, 120 g | (33, 6) |
-| box_3 | loose yellow product box, 6 cm deep, 5 cm wide, 8 cm tall, 120 g | (33, -4.5) |
-| box_4 | loose blue product box, 6 x 6 x 8 cm, 120 g | (33, -15.5) |
-| carton | loose brown carton, 7 cm deep, 18 cm long across the table, 10 cm tall, 250 g | (18, 0), on the table |
+| shelf | fixed, white melamine-faced particleboard: a board 2 cm thick, 13 cm deep, 45 cm long between two grey end walls, a grey lip along its back; walls and lip 6 cm above the board | board x 26.5 to 39.5, y -22.5 to 22.5 |
+| box_1 | loose red product box (printed paperboard), 6 cm deep, 5 cm wide, 8 cm tall, 120 g | (33, 17) |
+| box_2 | loose green product box (printed paperboard), 6 x 6 x 8 cm, 120 g | (33, 6) |
+| box_3 | loose yellow product box (printed paperboard), 6 cm deep, 5 cm wide, 8 cm tall, 120 g | (33, -4.5) |
+| box_4 | loose blue product box (printed paperboard), 6 x 6 x 8 cm, 120 g | (33, -15.5) |
+| carton | loose brown corrugated-cardboard carton, 7 cm deep, 18 cm long across the table, 10 cm tall, 250 g | (18, 0), on the table |
 
 The gaps from the left end wall, between the boxes and to the right end wall are 3, 5.5, 5, 5.5 and 4 cm. Every
 loose object has friction 1.2 static, 1.0 dynamic. Start: both grippers open at the ready pose. One fixed layout:
@@ -62,17 +62,18 @@ loose object has friction 1.2 static, 1.0 dynamic. Start: both grippers open at 
 ## Scoring
 On the shelf means resting on the board itself (the lowest corner within 3 mm of the board's top, so not on another
 box or on the carton) with every corner inside the board's front edge, back lip and end walls, to 2 mm. Each box must
-stay upright (within 10 degrees); the carton may rest on any face (within 10 degrees of flat). Still means moving
+end up upright (within 10 degrees); the carton may rest on any face (within 10 degrees of flat). Still means moving
 under 1 cm/s and turning under 0.5 rad/s.
 
 | Score | When, at the end |
 |---|---|
 | 1.0 | the carton on the shelf and all four boxes on it, upright, every object still, held for 1 s, which ends the trial (if time runs out first, this state scores 0.9) |
 | 0.25 | all four boxes on the shelf, upright, with a stretch of at least 18 cm that no box reaches into, but the carton not on the shelf (and not off the table) |
-| 0 | any box off the shelf, on another box or on the carton, or knocked over: taking boxes off to make room earns nothing |
+| 0 | any box off the shelf, on another box or on the carton, or lying over |
 
-A carton set on top of the boxes, or hanging over the board's front edge, isn't on the shelf. A look at the shelf
-checks it.
+Only the end of the trial counts: a box may be lifted off the board while room is made, as long as it is back on the
+shelf, upright, at the end. A carton set on top of the boxes, or hanging over the board's front edge, isn't on the
+shelf. A look at the shelf checks it.
 
 ## The scripted demo
 Every grip closes across the table, over a box's 6 cm depth or the carton's 7 cm, so no finger goes into a gap
