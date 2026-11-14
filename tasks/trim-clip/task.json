@@ -15,5 +15,6 @@
   "run_limit": "2,400 steps (2 minutes at 20 Hz)",
   "reset_notes": "Lay the panel back on its marks on the flange, out of line, and stand the clip head up in its tray; take a clip out of the catch by spreading its jaws.",
   "fidelity": "The flange is fixed. Real retainer barbs are on the clip and flex; here the clip is rigid and the barbs are two sprung jaws in the hole that the clip's collar pushes apart and then sits under. The holes are 11.4 mm square, not 8 mm round, so the rigid collar can pass both with up to 1.5 mm of misalignment. The clip is an octagonal prism made of boxes; it weighs 5 g (a real one about 2 g).",
-  "scores": "Dream-1 run: 0.0; demo: 1.0"
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-5UGRFH"
 }
