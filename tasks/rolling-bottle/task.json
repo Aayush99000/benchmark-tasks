@@ -15,5 +15,6 @@
   "run_limit": "2,400 steps (2 minutes at 20 Hz)",
   "reset_notes": "Lay the bottle back on its side on the drainboard's high end; it rolls as soon as it is let go.",
   "fidelity": "The worktop is a 6 cm block on the table, so going over the edge is a 6 cm drop here, not a real counter's; any fall scores 0. The bottle is a capsule (body and neck) at full size and weight; it rolls straight, where a real bottle's shoulder makes it curve a little. In this simulator a rolling capsule gains a little speed on a level surface once it moves, so a stopped bottle let go of can start rolling again; the task counts a bottle stopped and kept still, with or without a hand in front of it.",
-  "scores": "Dream-1 run: 0.0; demo: 1.0"
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-Y2SAPS"
 }
