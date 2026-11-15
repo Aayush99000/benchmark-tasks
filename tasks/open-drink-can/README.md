@@ -59,26 +59,36 @@ Both grippers start open at the ready pose. One fixed layout: `-E object_jitter=
 trial.
 
 ## Scoring
-Measured on the can at the end: how far the tab's tail is raised about its rivet, and how far the panel is pushed
-into the can about its hinge.
+Measured on the can: how far the tab's tail has been raised about its rivet (the most this trial, recorded as it
+happens and cleared at each reset), and how far the panel is pushed into the can about its hinge. **Hands off:** no
+point along either gripper's finger pads within 1.5 cm of the can's bounding box (rim included); the pads come from
+the simulator each step, read the same way as in the accepted flashlight tasks.
 
 | Score | When, at the end |
 |---|---|
-| 1.0 | the panel pushed in at least 45 degrees and the tab raised at least 10 degrees: opened with the tab. Held for 1 s, which ends the trial (if time runs out first, this state scores 0.9) |
+| 1.0 | the panel pushed in at least 45 degrees, the tab having been raised at least 10 degrees (opened with the tab; it may be folded back down after), and both hands off the can. Held for 1 s, which ends the trial (if time runs out first, this state scores 0.9) |
+| 0.75 | opened so, with a hand still on the can |
 | 0.5 | the seal broken (the panel in at least 10 degrees) with the tab raised at least 3 degrees |
 | 0.25 | the tab raised at least 10 degrees but the seal holding |
-| 0 | anything else, including a panel poked in with the tab still flat |
+| 0 | anything else, including a panel poked in with the tab never raised |
 
-The tab only has to be up 10 degrees because the panel turns about 4 degrees for each degree of tab: it is fully in
-with the tab at about 20 degrees. The panel and tab stay where they are left (the panel can't come back up), so the
-open can is open whether or not the fingers still hold the tail.
+The tab only has to have been up 10 degrees because the panel turns about 4 degrees for each degree of tab: it is
+fully in with the tab at about 20 degrees. The panel stays where it is pushed (it can't come back up), and the tab
+where it is left, so many people fold the tab back down over the open can; the score counts the most the tab was
+raised. The hands have to be off the can at the end, so the trial ends on an open can that nothing is holding.
 
 ## The scripted demo
 The left arm comes down over the tab's tail with its fingers 10 mm apart and turned to close along the can's x axis,
 inside the lid's recess and clear of the rim, pinches the round tail, and lifts it on its arc about the rivet in 8
 degree steps to 80 degrees, holding the last aim for 2 s. The tab and seal hold the arm back, so the tail lags the
-aim; the seal breaks, the panel folds in and the trial ends on success while the arm is still pulling. The right arm
-stays clear.
+aim; the seal breaks and the panel folds in. Then, still pinching the tail, it folds the tab back down flat on the same
+arc, so the open panel is uncovered, lets go and hovers 5 cm over the lid with its fingers open; its wrist camera looks
+down at the opened lid as the trial ends on success, 1 s after the hand is clear of the can. The right arm stays clear.
+
+**The demo video** is the run's top camera (left) and the left wrist camera (right) side by side, each at twice its
+320 x 176 size, from the same run. The opening is 17 x 14 mm, about 3 pixels in the top view, so the wrist camera is
+the one that shows the panel pushed in: the dark opening beside the folded tab in the last frames. The setup image is
+the top camera's first frame beside the wrist camera's last (the opened lid).
 
 ## Mechanism module
 `mechanism.py` is copied unchanged from robocurve/benchmark-tasks pull request #223 (`tasks/spring-plunger-panel`),
@@ -87,10 +97,12 @@ fixed mechanism with hinged and sliding links, springs and friction to a `yam_ar
 joint's position to the scorer.
 
 ## Runtime and seeds
-- The scripted demo's plan takes 16.8 s of simulated time (336 steps at 20 Hz), within the 600-step limit; it ends
-  on success at about 11 s, while the arm is still pulling.
-- Official runs (2026-11-13): the demo 1.0, ending on success at about 11 s (twice, before and after the rim was
-  smoothed); traced with the pinch aimed 1 mm off the tail either way (+x and +y, then -x and -y), also success, with
-  the tab up 15.1 and 18.6 degrees and the panel in 56 and 69 degrees; Dream-1 0.0 over the full 600 steps.
+- The scripted demo's plan takes 22.6 s of simulated time (452 steps at 20 Hz), within the 600-step limit; it ends
+  on success once the hand has been clear of the opened can for 1 s.
+- Official runs (2026-11-15, the revised demo and scoring): the demo 1.0 twice, ending on success at step 379
+  (19 s), the tab folded back flat, the panel in and the hand hovering clear; Dream-1 0.0 over the full 600 steps.
+- Earlier official runs (2026-11-13, before the revision: the trial ended while the arm still pulled the tail): the
+  demo 1.0 at about 11 s; traced with the pinch aimed 1 mm off the tail either way (+x and +y, then -x and -y), also
+  success, with the tab up 15.1 and 18.6 degrees and the panel in 56 and 69 degrees.
 - The scoring and reach checks run without the simulator: `python -m pytest -q test_open_drink_can.py`.
 - One fixed layout: `-E object_jitter=0`, so the seed doesn't change the start.

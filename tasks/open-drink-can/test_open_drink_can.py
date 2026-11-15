@@ -18,12 +18,25 @@ import open_drink_can as M
 HERE = Path(__file__).resolve().parent
 
 
-def can(tab_deg=0.0, panel_deg=0.0, catch_mm=0.0) -> dict:
-    """The can with the tab's tail raised and the panel pushed in by these angles (degrees, positive)."""
+def pads(x, y, tips_z) -> M.Pads:
+    """A gripper pointing straight down, its pad tips at ``tips_z``."""
+    return M.Pads(back=np.array([x, y, tips_z + M.PAD_TIP_PAST_TCP + M.PAD_BACK]), tips=np.array([x, y, tips_z]))
+
+
+AWAY = {"left_gripper": pads(0.22, 0.25, M.TOP + 0.15), "right_gripper": pads(0.22, -0.30, M.TOP + 0.15)}
+CAN_LOW = np.array([M.CAN_XY[0] - M.BODY_R / 1000, M.CAN_XY[1] - M.BODY_R / 1000, M.TOP])
+CAN_HIGH = np.array([M.CAN_XY[0] + M.BODY_R / 1000, M.CAN_XY[1] + M.BODY_R / 1000, M.TOP + M.RIM_TOP / 1000])
+
+
+def can(tab_deg=0.0, panel_deg=0.0, catch_mm=0.0, fresh=True, **grippers) -> dict:
+    """The can with the tab's tail raised and the panel pushed in by these angles (degrees, positive); a fresh trial
+    unless ``fresh`` is False."""
+    if fresh:
+        M._new_trial()
     joints = {"tab_hinge": -math.radians(tab_deg), "panel_hinge": -math.radians(panel_deg), "catch_slide": catch_mm / 1000}
     z = np.zeros(3)
     return {"can": MechanismState(pos=np.array([*M.CAN_XY, M.TOP]), quat_xyzw=np.array([0, 0, 0, 1.0]), lin_vel=z,
-                                  ang_vel=z, low=z, high=z, joints=joints)}
+                                  ang_vel=z, low=CAN_LOW, high=CAN_HIGH, joints=joints), **AWAY, **grippers}
 
 
 def test_the_task_file_loads():
@@ -49,6 +62,42 @@ def test_the_thresholds(tab, panel):
 
 def test_a_panel_poked_in_with_the_tab_flat_scores_0():
     assert M.score(can(tab_deg=0, panel_deg=80)) == 0.0
+
+
+def test_the_tab_folded_back_down_after_opening_still_counts():
+    assert M.score(can(tab_deg=22, panel_deg=60)) == 0.9
+    folded = can(tab_deg=0, panel_deg=82, fresh=False)
+    assert M.success(folded) and M.score(folded) == 0.9
+
+
+def test_a_reset_forgets_the_raised_tab():
+    can(tab_deg=22, panel_deg=60)
+    assert M.score(can(tab_deg=0, panel_deg=82)) == 0.0
+
+
+def test_opened_with_the_fingers_still_on_the_tail_scores_three_quarters():
+    tail = M.tail_tcp(-22)
+    s = can(tab_deg=22, panel_deg=82, left_gripper=pads(tail[0], tail[1], tail[2] - M.PAD_TIP_PAST_TCP))
+    assert not M.success(s) and M.score(s) == 0.75
+
+
+def test_without_the_grippers_state_it_is_not_full_credit():
+    s = can(tab_deg=22, panel_deg=82)
+    del s["left_gripper"], s["right_gripper"]
+    assert not M.success(s) and M.score(s) == 0.75
+
+
+def test_the_demo_ends_hovering_clear_of_the_can():
+    end = M.demo()["left"][-1].pos
+    assert end == pytest.approx(M.hover_tcp())
+    s = can(tab_deg=22, panel_deg=82, left_gripper=pads(end[0], end[1], end[2] - M.PAD_TIP_PAST_TCP))
+    assert M.success(s)
+
+
+def test_the_demo_folds_the_tab_back_flat_before_letting_go():
+    left = M.demo()["left"]
+    i = next(k for k, w in enumerate(left) if w.label == "let go")
+    assert left[i - 1].label.startswith("fold") and left[i - 1].pos == pytest.approx(M.tail_tcp(0))
 
 
 def test_the_seal_broken_but_not_open_scores_half():
