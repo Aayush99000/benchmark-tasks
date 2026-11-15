@@ -27,13 +27,13 @@ a Dream API key in `~/.dreamlabs/credentials`, from this folder:
 inspect-robots run --embodiment yam_arena --policy dream \
   -E task=rolling_bottle.py -E object_jitter=0 -E control_hz=20 -E cam_width=320 -E cam_height=176 \
   --instruction "Stop the bottle before it rolls off the edge." \
-  --scorer task_score --max-steps 2400 --store-frames --log-dir ~/yam-eval/rolling-bottle-dream
+  --scorer task_score --max-steps 1000 --store-frames --log-dir ~/yam-eval/rolling-bottle-dream
 
 # The scripted demo, which reaches full score
 inspect-robots run --embodiment yam_arena --policy yam_scripted \
   -E task=rolling_bottle.py -E object_jitter=0 -E control_hz=20 -E cam_width=320 -E cam_height=176 \
   --instruction "Stop the bottle before it rolls off the edge." \
-  --scorer task_score --max-steps 2400 --store-frames --log-dir ~/yam-eval/rolling-bottle-demo
+  --scorer task_score --max-steps 1000 --store-frames --log-dir ~/yam-eval/rolling-bottle-demo
 
 # One MP4 per camera, next to each run's frames
 for log in ~/yam-eval/rolling-bottle-dream/*.json; do inspect-robots video "$log"; done
@@ -86,9 +86,12 @@ header); it builds the fixed worktop and runs a hook at each reset that clears t
 
 ## Runtime and seeds
 - The scripted demo's plan takes 1.6 s to put its fingers in the bottle's path, then waits; it ends on success at
-  about 2.6 s (53 steps at 20 Hz), well within the 2,400-step limit.
-- Official runs (2026-11-14): the demo 1.0, the bottle stopped with its middle 7 cm short of the edge; traced with the fingers
-  1 cm earlier and 1 cm later in its path (and 1 cm across), also success at 2.55 and 2.6 s; Dream-1 0.0 over the
-  full 2,400 steps.
+  about 2.6 s (53 steps at 20 Hz); the 1,000-step limit (50 s) is about 19 times that.
+- Official runs (2026-11-15, at the 1,000-step limit): the demo 1.0, ending on success at step 53; Dream-1 0.0 over
+  the full 1,000 steps (the bottle went over the open end within the first 3 s and Dream-1 never got a hand in its
+  path; going over is recorded, so no later step could have changed the score).
+- Earlier official runs (2026-11-14, under the old 2,400-step limit): the demo 1.0, the bottle stopped with its middle
+  7 cm short of the edge; traced with the fingers 1 cm earlier and 1 cm later in its path (and 1 cm across), also
+  success at 2.55 and 2.6 s; Dream-1 0.0 over 2,400 steps.
 - The scoring and reach checks run without the simulator: `python -m pytest -q test_rolling_bottle.py`.
 - One fixed layout: `-E object_jitter=0`, so the seed doesn't change the start.
