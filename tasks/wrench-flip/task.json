@@ -15,5 +15,6 @@
   "run_limit": "2,400 steps (2 minutes at 20 Hz)",
   "reset_notes": "Turn the nut back half a turn to its start, its paint line pointing up, and stand the wrench head down in its rack the way it started: the 13 mm jaw's mouth tilted 15 degrees towards the robot's right.",
   "fidelity": "The bracket and rack are fixed. The jaw on the nut is a model, as in the accepted compression-joint task: it fits when the wrench lies in the nut's plane with its jaw within 7 degrees of a pair of flats; the nut then turns with it against 0.5 N m of drag and stops seated after half a turn. The nut collides as a round core inside its flats and its travel along the thread isn't modelled. The jaw opens 13.8 mm (real: about 13.2).",
-  "scores": "Dream-1 run: 0.0; demo: 1.0"
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-RWZTDQ"
 }
