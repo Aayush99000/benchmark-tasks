@@ -1,0 +1,21 @@
+{
+  "title": "Tighten a circular saw's blade bolt a quarter turn past hand-tight, holding the spindle lock in",
+  "category": "Impact on jobs",
+  "keywords": [
+    "carpentry",
+    "power tools",
+    "circular saw",
+    "blade change",
+    "spindle lock",
+    "two arms",
+    "hex key"
+  ],
+  "instruction": "The new blade is on the saw and its clamping bolt is hand-tight. Tighten the bolt a further quarter turn with the hex key, as the saw's maker says, then put the key down.",
+  "context": "Carpenters change a circular saw's blade when it dulls or the cut changes. The blade bolt turns on the spindle's own axis, so the key just spins the blade unless the spindle lock is held in. Bosch (PKS 16 Multi manual): \"Press and hold the spindle lock button\"; \"6-9 Nm, which corresponds to hand-tight plus 1/4 turn\". Done by: carpenters (BLS: about 959,000 jobs in 2024).",
+  "setup": "Positions in cm on the table, from the midpoint between the two arm bases: x forward (away from the arms), y to the robot's left. A cordless circular saw for 184 mm (7-1/4 in) blades (fixed), lying on its side with the blade facing up, its spindle axis at (26, 14): the blade (9.5 cm above the table) is held by a clamping flange and bolt (a round head 13 mm across with a 6 mm hex socket, its top 10.8 cm above the table); the teeth are covered all round by the guards (a ring 7.6-10.1 cm from the axis, 1.4 cm above and below the blade). A white paint line runs across the bolt's head and the flange, lined up: the bolt is hand-tight. Under the blade the spindle's gear has two notches half a turn apart; at the start the spindle is 25 degrees (clockwise from above) short of one. The spindle lock button (red, 24 mm across, 4.5 mm of travel, sprung) is on a pad of the gear housing on the robot's right of the blade, at (26, -2.5), its top 8.2 cm above the table. A 6 mm hex key (L-shaped, 100 x 30 mm) stands short arm down in a fixed wooden holder, its short arm at (20, 30) and its long arm along +x. Both grippers start open at the ready pose.",
+  "scoring": "Measured on the bolt: how far it has been turned clockwise (tightening, seen from above) past hand-tight, in degrees (the angle between the paint line on its head and the one on the flange). 1.0: 72 to 108 degrees (a quarter turn, 6-9 N m by the maker's own equivalence), with the key off the bolt and put down on the table (lying still, no gripper within 1 cm of it) and the spindle lock released, held for 1 s, which ends the trial. 0.9: 72 to 108 degrees but not finished (the key still on the bolt or not put down, the lock still held in, or time ran out before the finished state had held 1 s). 0.5: 36 to 72 degrees (under-tight) or 108 to 144 (over-tight). 0.25: 15 to 36 degrees. 0 otherwise, including more than 144 degrees or any loosening. The bolt only turns against the blade with the spindle lock caught; otherwise the key turns the blade and bolt together.",
+  "run_limit": "1,200 steps (1 minute at 20 Hz)",
+  "reset_notes": "Turn the bolt back to hand-tight (paint lines lined up) and lay the key back on the table.",
+  "fidelity": "The saw is fixed. The blade, bolt and spindle lock are a model: the blade turns freely unless the lock button is pressed in at one of its two notch positions; with the lock caught, the key turns the bolt against a torque that rises with the angle, scaled down so the YAM can turn it; scoring is by angle, which is what the maker's hand-tight plus 1/4 turn checks.",
+  "scores": "Dream-1 run: 0.0; demo: 1.0"
+}
