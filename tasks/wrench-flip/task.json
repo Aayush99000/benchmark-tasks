@@ -1,0 +1,19 @@
+{
+  "title": "Tighten a locknut where the wrench swings only 44 degrees: turn the open-end wrench over for each new bite",
+  "category": "Impact on jobs",
+  "keywords": [
+    "automotive",
+    "maintenance",
+    "open-end wrench",
+    "turning a tool over",
+    "tight space"
+  ],
+  "instruction": "Tighten the nut with the wrench.",
+  "context": "Mechanics often meet a nut where the wrench can swing only a little. The open-end wrench's head is angled for it: turned over, its jaw fits the nut's flats again 30 degrees further round, so the nut can be turned 30 degrees a stroke. Tekton (24 mm Combination Wrench): the open end is angled 15 degrees \"so the wrench can be flipped over with each rotation\". The nut is a nylon-insert locknut, which can't be spun on by hand. Done by: automotive service technicians and mechanics (BLS: about 805,600 jobs in 2024).",
+  "setup": "Positions in cm on the table, from the midpoint between the two arm bases: x forward (away from the arms), y to the robot's left. Bracket (fixed, grey steel) at (28, 12): an M8 bolt sticks out of its back plate level, 4.5 cm above the table, pointing towards the left arm (along (-0.87, 0.5)). The bolt is at the bottom of an upright slot: two steel walls 1 cm thick, their inner faces 3.27 cm either side of the bolt's axis, from the slot's floor (2 cm above the table) to 11.5 cm, reaching 2 cm out past the nut; the back plate rises 4 cm above the bolt. On the bolt, against a steel washer (16 mm across, 1.6 mm thick): a zinc-plated steel M8 nylon-insert locknut (DIN 985), 13 mm across the flats and 8 mm long, half a turn short of seated, with a white paint line from its centre to one flat, pointing up; a red line on the plate below the nut marks where the paint line points once seated. The nut turns against 0.5 N m of drag. The walls leave a wrench's handle about 22 degrees of swing either side of straight up. Wrench (loose): a chrome steel double open-end wrench, 13 mm and 10 mm, both heads angled 15 degrees to the handle, 16 cm long, the handle 14 mm wide and 5 mm thick, 70 g. It stands head down in a wooden rack (5 x 7 cm, 4.2 cm tall) at (20, 26), its 13 mm head in the rack's pocket (7 x 37 mm, 3.2 cm deep, with a 6 mm step under one prong so it stands straight), its handle straight up and its faces square to the bolt. The wrench has friction 1.0. Both grippers start open at the ready pose.",
+  "scoring": "Measured on the nut: how far it has been turned clockwise (tightening, seen from the bolt's end) from its start, in degrees; turning it back counts against it. 1.0: the nut seated (turned at least 178 of the half turn to its stop), held for 1 s, which ends the trial (if time runs out before that has held, it scores 0.9). 0.75: turned at least 150 degrees. 0.5: at least 100 degrees. 0.25: at least 60 degrees (one stroke without turning the wrench over turns it at most about 51: the 44 degree swing and the jaw's 7 degree fit). 0 otherwise. The nut turns only with the wrench's 13 mm jaw on it.",
+  "run_limit": "2,400 steps (2 minutes at 20 Hz)",
+  "reset_notes": "Turn the nut back half a turn to its start, its paint line pointing up, and stand the wrench head down in its rack the way it started: the 13 mm jaw's mouth tilted 15 degrees towards the robot's right.",
+  "fidelity": "The bracket and rack are fixed. The jaw on the nut is a model, as in the accepted compression-joint task: it fits when the wrench lies in the nut's plane with its jaw within 7 degrees of a pair of flats; the nut then turns with it against 0.5 N m of drag and stops seated after half a turn. The nut collides as a round core inside its flats and its travel along the thread isn't modelled. The jaw opens 13.8 mm (real: about 13.2).",
+  "scores": "Dream-1 run: 0.0; demo: 1.0"
+}
