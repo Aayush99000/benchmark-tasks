@@ -17,5 +17,6 @@
   "run_limit": "1,200 steps (1 minute at 20 Hz)",
   "reset_notes": "Turn the bolt back to hand-tight (paint lines lined up) and lay the key back on the table.",
   "fidelity": "The saw is fixed. The blade, bolt and spindle lock are a model: the blade turns freely unless the lock button is pressed in at one of its two notch positions; with the lock caught, the key turns the bolt against a torque that rises with the angle, scaled down so the YAM can turn it; scoring is by angle, which is what the maker's hand-tight plus 1/4 turn checks.",
-  "scores": "Dream-1 run: 0.0; demo: 1.0"
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-VNXH3M"
 }
