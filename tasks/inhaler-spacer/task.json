@@ -1,0 +1,21 @@
+{
+  "title": "Give a child manikin one puff of an inhaler through a spacer: shake, fit, seal the mouthpiece in its mouth, press once, hold for its breaths",
+  "category": "Societal relatability",
+  "keywords": [
+    "asthma",
+    "inhaler",
+    "spacer",
+    "care",
+    "manikin",
+    "two arms",
+    "pinch force"
+  ],
+  "instruction": "Give the child manikin one puff of the inhaler through the spacer. Shake the inhaler, fit it into the back of the spacer, put the spacer's mouthpiece in the manikin's mouth, press the inhaler once, and keep the spacer in its mouth for its five breaths.",
+  "context": "Parents and carers give children their asthma reliever this way (Asthma + Lung UK: an estimated 1 in 8 children have asthma). Hull University Teaching Hospitals NHS Trust, Using your Inhaler with a Spacer: \"Shake the inhaler well\", \"Attach the inhaler onto the end of the spacer\", \"Ensure there is a good seal around the mask or mouthpiece\", \"Press the inhaler once and allow your child to take 5 slow breaths\", \"Only put one puff of medicine into the spacer at a time\".",
+  "setup": "Positions in cm on the table, from the midpoint between the two arm bases: x forward (away from the arms), y to the robot's left. A child care-training manikin's head (fixed, 15 cm wide, 18 cm tall, on a neck post) faces the arms; its open mouth (an opening 40 mm wide, 32 mm tall and 45 mm deep, lips round it) has its middle at (45, 0), 14 cm above the table, the lips' plane at x 45. A pressurised metered-dose inhaler, cap off, lies on its side, its base at (26, -16): a blue plastic actuator (an upright boot 73 mm tall, 28 x 30 mm, with its mouthpiece, 24 x 17 mm and 24 mm long, at the bottom, pointing towards the manikin) and an aluminium canister (21 mm across, 75 mm long) standing 15 mm proud of the boot, towards the robot's left; 88 mm end to end. The canister fires when pushed 2.5 mm into the actuator, which takes 25 N, and has 3 mm of travel. A spacer the size of an AeroChamber Plus (a clear barrel 145 mm long and 46 mm across, a rubber back with a socket 32 mm square and 20 mm deep, a mouthpiece 24 mm across) lies along x, its back at (28, 16) and its mouthpiece towards the manikin. Both grippers start open at the ready pose.",
+  "scoring": "From the inhaler's fire log and the parts' poses. A shake is a down-and-up stroke of the inhaler of at least 3 cm; a puff is the canister pushed past its firing point (2.5 mm). The inhaler is fitted when its mouthpiece's tip is at least 10 mm inside the spacer's socket and within 4 mm of the spacer's axis; the spacer is in the mouth when its tip is at least 8 mm past the lips, within 6 mm of the mouth's middle, and the spacer within 15 degrees of square to the face. 1.0: at least 4 shakes, then exactly one puff, fired with the inhaler fitted and the spacer in the mouth, and the spacer kept in the mouth for 5 s after it, held 1 s, which ends the trial (if time runs out first, this state scores 0.9). 0.5: exactly one puff with the inhaler fitted and the spacer in the mouth, but not shaken first or not kept in for 5 s. 0.25: the inhaler fitted and the spacer in the mouth, no puff. 0 otherwise, including two or more puffs, or a puff with the inhaler not fitted or the spacer not in the mouth.",
+  "run_limit": "1,200 steps (1 minute at 20 Hz)",
+  "reset_notes": "Nothing is used up: no spray is simulated. Lay the inhaler and the spacer back where they started.",
+  "fidelity": "The manikin head is fixed and rigid with a rigid mouth opening, so the seal is judged from where the spacer's tip is, not by contact. The canister is a sprung slider in the actuator (25 N at its firing point, as measured for pMDIs) that logs a puff; no spray is simulated. The spacer's soft back is a rigid square socket. The inhaler starts with its cap off.",
+  "scores": "Dream-1 run: 0.0; demo: 1.0"
+}
