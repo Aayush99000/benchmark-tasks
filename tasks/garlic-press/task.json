@@ -15,5 +15,6 @@
   "scoring": "From the press's crush log and the clove's position. The clove is in the chamber when its centre is inside the chamber's walls and below its rim. 1.0: crushed: the clove in the chamber and the top handle pushed down until the plunger's face is within 6 mm of the floor, which takes 10 N at the grip, 13 cm from the hinge, with the press still lying on the table (tilted under 20 degrees), held 1 s. 0.5: the clove in the chamber at the end with the plunger brought down onto it, not crushed. 0.25: the clove in the chamber at the end. 0 otherwise: the clove elsewhere, an empty press shut, the clove mashed on the rim (the handle shut past 30 degrees with the clove on the chamber's rim), or the press knocked over.",
   "run_limit": "1,200 steps (1 minute at 20 Hz)",
   "fidelity": "The clove is a rigid 2.6 x 1.6 x 1.4 cm block weighted 30 g (a real one is about 7 g; lighter, the simulated gripper closes through it). Its crush is modeled: once the plunger meets a clove lying in the chamber it pushes back like the clove, yielding at 10 N at the grip; with the plunger within 6 mm of the floor the clove is logged crushed, removed, and squeezed garlic is drawn under the floor.",
-  "scores": "Dream-1 run: 0.0; demo: 1.0"
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-YX9M3W"
 }
