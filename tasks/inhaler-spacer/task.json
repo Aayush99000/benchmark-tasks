@@ -17,5 +17,6 @@
   "run_limit": "1,200 steps (1 minute at 20 Hz)",
   "reset_notes": "Nothing is used up: no spray is simulated. Lay the inhaler and the spacer back where they started.",
   "fidelity": "The manikin head is fixed and rigid with a rigid mouth opening, so the seal is judged from where the spacer's tip is, not by contact. The canister is a sprung slider in the actuator (25 N at its firing point, as measured for pMDIs) that logs a puff; no spray is simulated. The spacer's soft back is a rigid square socket. The inhaler starts with its cap off.",
-  "scores": "Dream-1 run: 0.0; demo: 1.0"
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-BW9DSN"
 }
