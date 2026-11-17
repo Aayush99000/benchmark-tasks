@@ -119,9 +119,40 @@ def test_the_bounds_sitting_low_do_not_read_as_fallen():
 # -- the scene ------------------------------------------------------------------------------------------------------
 
 def test_the_drainboard_slopes_gently_down_to_the_worktop():
-    assert 0.5 <= M.DRAIN_DEG <= 2.0
+    assert 1.0 <= M.DRAIN_DEG <= 3.0
     assert M.drain_top(M.DRAIN_LOW_Y) == pytest.approx(M.WORKTOP_TOP + M.DRAIN_T / 1000, abs=1e-4)
     assert M.drain_top(M.DRAIN_HIGH_Y) > M.drain_top(M.DRAIN_LOW_Y)
+
+
+def test_the_release_is_13_cm_up_the_drainboard_a_5_mm_drop():
+    """The setup the review asked to be repeatable for real: from rest 13 cm up a 2.2 degree drainboard, a 5 mm drop,
+    which sends a full 330 ml bottle onto the worktop at about 0.24-0.27 m/s."""
+    run = M.BOTTLE_START[1] - M.DRAIN_LOW_Y
+    assert run == pytest.approx(0.13)
+    drop = M.drain_top(M.BOTTLE_START[1]) - M.drain_top(M.DRAIN_LOW_Y)
+    assert drop == pytest.approx(0.005, abs=0.0002)
+    assert M.BOTTLE_START[1] < M.DRAIN_HIGH_Y  # it lies on the drainboard
+    # energy: the 200 g of glass rolls (I = m r^2), the 330 g of beer mostly slides with it, so v = sqrt(2 g h M / (M +
+    # 0.2)); with the beer turning too, a little less
+    g, kg = 9.81, M.BOTTLE_KG
+    v_sliding_beer = math.sqrt(2 * g * drop * kg / (kg + 0.2))
+    v_solid = math.sqrt(4 * g * drop / 3)
+    assert 0.24 < v_solid < v_sliding_beer < 0.28
+
+
+def test_the_rolling_resistance_slows_it_like_a_real_bottle():
+    """0.02-0.05 m/s each second on the level: the push is mass x the resistance, and a rolling solid cylinder takes
+    1.5 times its mass to slow (the sim measured 0.038 m/s per s for 0.05)."""
+    assert 0.02 < M.BOTTLE_ROLLING_RESISTANCE / 1.5 < 0.05
+    assert M.BOTTLE.rolling_resistance == M.BOTTLE_ROLLING_RESISTANCE
+
+
+def test_the_worktop_top_is_a_fixed_box_over_the_mechanism():
+    top = M.WORKTOP_SURFACE
+    assert top.mass is None
+    assert top.pos[2] + top.size[2] / 2 == pytest.approx(M.WORKTOP_TOP)
+    assert (top.size[0], top.size[1]) == pytest.approx((M.WORKTOP[0] / 1000, M.WORKTOP[1] / 1000))
+    assert top in M.OBJECTS
 
 
 def test_the_bottle_is_a_real_330_ml_bottle():

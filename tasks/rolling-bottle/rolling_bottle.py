@@ -16,7 +16,7 @@ from mechanism import Joint, Link, Shape, mechanism  # noqa: E402
 from parts import Part, Piece  # noqa: E402
 from yam_arena.constants import PAD_TIP_PAST_TCP  # noqa: E402
 from yam_arena.demo import Waypoint  # noqa: E402
-from yam_arena.task_file import TABLE_TOP  # noqa: E402
+from yam_arena.task_file import TABLE_TOP, Box  # noqa: E402
 
 SCENE = "station"
 TOP = TABLE_TOP[SCENE]
@@ -38,11 +38,16 @@ OPEN_END_Y = WORKTOP_XY[1] - WORKTOP[1] / 2000
 
 # WHY the edge trim on a stiff joint: a Mechanism with no joints fails to build in Isaac Lab ("resolve joint names",
 # official sim, 2026-11-14), and the reset hook that clears the "fell" record needs a Mechanism.
+# WHY the top 6 mm as a fixed box over the mechanism's slab: a capsule rolling on an articulation link here gained
+# speed on the level, about 0.06 m/s per second (a stopped bottle rolled off again); on a fixed box it keeps its speed
+# (0.297 to 0.292 m/s over the worktop with no rolling resistance; official sim, 2026-11-17)
+SLAB_BELOW = 6.0  # mm
 TRIM = (300.0, 4.0, 59.5)  # 0.5 mm below the worktop's top, so it is no lip
 COUNTER = mechanism(
     "worktop", (*WORKTOP_XY, TOP),
     base=Link("worktop_slab", 20.0, (
-        Shape("box", (0.0, 0.0, WORKTOP[2] / 2000), _m(WORKTOP), WORKTOP_GREY, contact_offset=0.002),
+        Shape("box", (0.0, 0.0, (WORKTOP[2] - SLAB_BELOW) / 2000),
+              _m((WORKTOP[0], WORKTOP[1], WORKTOP[2] - SLAB_BELOW)), WORKTOP_GREY, contact_offset=0.002),
     )),
     links=(Link("edge_trim", 0.05, (
         Shape("box", (0.0, -WORKTOP[1] / 2000 + TRIM[1] / 2000, TRIM[2] / 2000), _m(TRIM), EDGE_GREY,
@@ -50,11 +55,17 @@ COUNTER = mechanism(
     joints=(Joint("trim_mount", "prismatic", "edge_trim", (0.0, -WORKTOP[1] / 2000, 0.0), "Z", 0.0, 0.0001,
                   stiffness=1e5, damping=100.0),),
     materials=MATERIALS)
+# the worktop's top 6 mm, which everything rests and rolls on: a fixed box
+WORKTOP_SURFACE = Box("worktop_top", pos=(WORKTOP_XY[0], WORKTOP_XY[1], WORKTOP_TOP - SLAB_BELOW / 2000),
+                      size=(WORKTOP[0] / 1000, WORKTOP[1] / 1000, SLAB_BELOW / 1000), color=WORKTOP_GREY)
 
 # -- the drainboard: a heavy steel tray resting on the worktop's left end, sloping down towards the right ------------
-# WHY 1.2 degrees: at 3 the bottle rolled at 0.36 m/s and, after the 1 s the reset spends settling the scene, was over
-# the edge at 1.0 s, before an arm could get there (official sim, 2026-11-14). Real drainboards slope a degree or two.
-DRAIN_DEG = 1.2
+# WHY 2.2 degrees, the bottle let go 13 cm up it: a 5 mm drop, which sends a real full 330 ml bottle onto the worktop
+# at about 0.24-0.27 m/s (from its energy: glass rolling, beer mostly sliding). At 1.2 degrees from 12 cm (2.5 mm) a
+# real bottle reaches at most about 0.20 m/s, so the earlier setup could not be repeated for real (review of TK-BM9BK5).
+# At 3 degrees the bottle was over the edge 1.0 s into the trial, before an arm could get there (official sim,
+# 2026-11-14).
+DRAIN_DEG = 2.2
 DRAIN_LOW_Y, DRAIN_HIGH_Y = 0.18, 0.32  # where it meets the worktop, and its high end
 DRAIN_T = 3.0  # mm
 DRAIN_KG = 15.0  # heavy enough that nothing in the task shifts it
@@ -89,12 +100,16 @@ def drain_top(y: float) -> float:
 BOTTLE_R, BODY_LEN = 0.0305, 0.140  # a capsule: 61 mm across, 201 mm long with its rounded ends
 NECK_R, NECK_LEN = 0.012, 0.040
 BOTTLE_KG = 0.53  # about 200 g of glass and 330 g of beer
-# No added damping. In PhysX a rolling capsule gains speed on the level worktop once it moves (a stopped bottle nudged
-# at 0.06 m/s was at 0.25 m/s 1.5 s later), but one held against the fingers stays still: so the task counts a bottle
-# stopped and kept still, and the demo keeps its fingers in place (official sim, 2026-11-14). Angular damping 0.3
-# made the stopped bottle bounce off the fingers instead.
+# WHY a rolling resistance: PhysX has none, and a real bottle on a worktop slows by about 0.02-0.05 m/s each second.
+# 0.05 m/s^2 (a 0.026 N push against its motion) slows it by about 0.038 m/s each second on the worktop (official sim,
+# 2026-11-17: 0.04 gave 0.031, 0.06 gave 0.045). No PhysX damping: angular damping 0.3 made the stopped bottle bounce
+# off the fingers (official sim, 2026-11-14).
 BOTTLE_DAMPING = None
-BOTTLE_START = (0.29, 0.300)
+BOTTLE_ROLLING_RESISTANCE = 0.05
+# Let go at rest 13 cm up the drainboard (its middle over y 0.31): in a real trial it is held against a straightedge
+# laid across the drainboard just below it, and the straightedge is lifted away.
+RELEASE_RUN = 0.13
+BOTTLE_START = (0.29, DRAIN_LOW_Y + RELEASE_RUN)
 
 
 def _bottle():
@@ -104,11 +119,12 @@ def _bottle():
     x, y = BOTTLE_START
     return Part("bottle", pos=(x, y, drain_top(y) + BOTTLE_R + 0.001),
                 size=(BODY_LEN + 2 * BOTTLE_R + NECK_LEN, 2 * BOTTLE_R, 2 * BOTTLE_R), mass=BOTTLE_KG,
-                color=BROWN_GLASS, pieces=(body, neck), angular_damping=BOTTLE_DAMPING)
+                color=BROWN_GLASS, pieces=(body, neck), angular_damping=BOTTLE_DAMPING,
+                rolling_resistance=BOTTLE_ROLLING_RESISTANCE)
 
 
 BOTTLE = _bottle()
-OBJECTS = [COUNTER, DRAINBOARD, BOTTLE]
+OBJECTS = [COUNTER, DRAINBOARD, BOTTLE, WORKTOP_SURFACE]
 
 # -- scoring ----------------------------------------------------------------------------------------------------------
 # The bottle may end lying, standing (stood up by the robot) or anywhere in between, on the worktop or still on the
@@ -190,7 +206,8 @@ def success(objects):
 # Open loop, from the fixed start: the right arm comes down with its fingers closed (their 26 mm width across the
 # bottle's path) and stands them on the worktop ahead of the bottle; it rolls into them and stops, and the fingers stay
 # there until the trial ends on success.
-BLOCK_Y = -0.17  # where the fingers' near face stands (the bottle's middle stops a radius short of it)
+# where the fingers' near face stands (the bottle's middle stops a radius short of it); 4 cm from the open end
+BLOCK_Y = -0.185
 FINGERS_HALF_T = 0.0063  # closed fingertips: 12.6 mm thick along y
 TIPS_ABOVE = 0.004  # the fingertips this far above the worktop
 DEMO_AIM_SHIFT_MM = 0.0  # the block this far off (+x and +y), for margin runs

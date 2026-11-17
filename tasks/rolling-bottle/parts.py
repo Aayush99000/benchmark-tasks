@@ -1,5 +1,6 @@
 """Loose parts built from several boxes, capsules and cylinders for a yam_arena task file. (From the accepted
-install-processor task's parts.py, which built a processor with notches in its edge; round pieces added here.)
+install-processor task's parts.py, which built a processor with notches in its edge; round pieces and a
+rolling resistance added here.)
 
 yam_arena's task files list single primitives. A loose part here is a ``Part``: one rigid body whose colliders are
 several boxes, written to a USD file when the scene is built and spawned in place of a primitive. It subclasses
@@ -48,6 +49,9 @@ class Part(Box):
     pieces: tuple[Piece, ...] = ()
     contact_offset: float = 0.001
     angular_damping: float | None = None  # PhysX's, for rolling losses (None: its default)
+    # rolling resistance (m/s^2): a force of mass x this against the part's horizontal motion, applied before every
+    # physics substep (see _install_rolling_resistance); None for none
+    rolling_resistance: float | None = None
 
     def _check(self) -> None:
         super()._check()
@@ -108,8 +112,13 @@ def _write_usd(spec: Part) -> str:
     return str(path)
 
 
+_ROLLING: dict = {}  # name -> Part, for the parts with a rolling resistance
+
+
 def _arena_object(spec: Part):
     """The part as an Isaac Lab-Arena rigid object, with the objects' grippy friction and a tight contact offset."""
+    if spec.rolling_resistance:
+        _ROLLING[spec.name] = spec
     import isaaclab.sim as sim_utils
     from isaaclab_arena.assets.object import Object
     from isaaclab_arena.assets.object_type import ObjectType
@@ -148,8 +157,74 @@ def _patch_scene(scene) -> None:
     scene._parts_patched = True
 
 
+def _install_rolling_resistance(environment) -> bool:
+    """Before every physics substep (Isaac Lab calls the object's ``write_data_to_sim`` then), push each part with a
+    rolling resistance against its horizontal motion: mass x the resistance, faded in over the first 1 cm/s so a part
+    at rest isn't pushed about. Real rolling resistance is about constant with speed; PhysX has none."""
+    import numpy as np
+    import warp as wp
+
+    base = environment.unwrapped
+    added = False
+    for name, spec in _ROLLING.items():
+        obj = base.scene.rigid_objects[name]
+        if getattr(obj, "_parts_rolling_hooked", False):
+            continue
+        orig, dev = obj.write_data_to_sim, base.device
+
+        def write(obj=obj, orig=orig, spec=spec, dev=dev):
+            orig()
+            vel = getattr(obj.data.root_lin_vel_w, "torch", obj.data.root_lin_vel_w)  # as mechanism.py's _numpy
+            v = np.array(vel.detach().cpu().numpy() if hasattr(vel, "detach") else vel.numpy(), float)[0]
+            v[2] = 0.0
+            speed = float(np.linalg.norm(v))
+            if speed < 1e-6:
+                return
+            f = (-spec.mass * spec.rolling_resistance * min(1.0, speed / 0.01) / speed) * v
+            # WHY warp arrays: the PhysX tensor frontend here takes flat float32 warp arrays (a torch tensor fails
+            # inside warp's type_ctype), as in the accepted compression-joint task's fittingkit
+            obj.root_view.apply_forces_and_torques_at_position(
+                force_data=wp.array(f.astype(np.float32), dtype=wp.float32, device=dev),
+                torque_data=wp.array(np.zeros(3, np.float32), dtype=wp.float32, device=dev),
+                position_data=None, indices=obj._ALL_INDICES, is_global=True)
+
+        obj.write_data_to_sim = write
+        obj._parts_rolling_hooked = True
+        added = True
+    return added
+
+
+def _patch_embodiment(module) -> None:
+    """Hook the rolling resistance in at the first reset, then reset again so the reset's settling steps have it."""
+    cls = module.YamArenaEmbodiment
+    if getattr(cls, "_parts_patched", False):
+        return
+    reset = cls.reset
+
+    def patched_reset(self, *a, **k):
+        obs = reset(self, *a, **k)
+        if _ROLLING and _install_rolling_resistance(self._env):
+            obs = reset(self, *a, **k)  # newly hooked (a new environment): the reset's settling steps missed it
+        return obs
+
+    cls.reset = patched_reset
+    cls._parts_patched = True
+
+
 def install() -> None:
     """Patch yam_arena.scene after mechanism.py's own patch, now if it is imported, else when it is."""
+    emb = mech._PATCHES["yam_arena.inspect_embodiment"]
+    if not getattr(emb, "_parts_chain", False):
+
+        def chained_emb(module, before=emb):
+            before(module)
+            _patch_embodiment(module)
+
+        chained_emb._parts_chain = True
+        mech._PATCHES["yam_arena.inspect_embodiment"] = chained_emb
+    if "yam_arena.inspect_embodiment" in sys.modules:
+        mech._patch_embodiment(sys.modules["yam_arena.inspect_embodiment"])
+        _patch_embodiment(sys.modules["yam_arena.inspect_embodiment"])
     before = mech._PATCHES["yam_arena.scene"]
     if not getattr(before, "_parts_chain", False):
 
