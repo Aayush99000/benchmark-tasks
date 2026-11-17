@@ -1,0 +1,20 @@
+{
+  "title": "Change a jigsaw's blade in its tool-free clamp: hold the cap, push the blade in teeth forward until it clicks",
+  "category": "Impact on jobs",
+  "keywords": [
+    "power tools",
+    "jigsaw",
+    "blade change",
+    "carpentry",
+    "two arms",
+    "tool-free clamp"
+  ],
+  "instruction": "Fit the new blade in the jigsaw. Hold the clamp's cap pushed in, push the blade's shank into the clamp with its teeth towards the saw's nose until it clicks, then let go of the cap and the blade.",
+  "context": "Carpenters and DIYers change jigsaw blades for each material. Bosch, Changing the jigsaw blade: \"Pull the red cap of the SDS quick-change system up again with two fingers\", \"push the saw blade from below into the slot provided\", \"As soon as it clicks, it is engaged and firmly seated\", \"Release the red cap\". Done by: carpenters (BLS: about 959,000 jobs in 2024) and DIYers.",
+  "setup": "Positions in cm on the table, from the midpoint between the two arm bases: x forward (away from the arms), y to the robot's left. A corded jigsaw, unplugged, lies on its right side on its open case's foam insert (5.5 cm thick), fixed, its plunger pointing at the arms and its nose to the robot's left; its blade clamp's slot (10 x 3.5 mm, 14 mm deep) opens towards the arms at (34, 0), 9 cm above the table. Beside the slot on the nose side, the clamp's red spring-loaded cap: pushed 3.5 mm in (towards the saw, about 4.4 N), it unlocks the clamp. The saw's shoe stands on edge 2 cm in front of the clamp, 3 cm to the slot's other side. A new T-shank wood blade (100 mm long, 7.5 mm wide, 1.5 mm thick) stands shank down in a holder at (20, -16), its teeth facing the arms. Both grippers start open at the ready pose.",
+  "scoring": "From the clamp's model and the parts' poses. The blade is in the slot when its shank's end is within 2.5 mm of the slot's middle and it lies within 15 degrees of the slot's line. With the cap not pushed in, the clamp's catch stops the blade 3 mm in; with the cap pushed 3.5 mm in, the blade goes on and clicks 10 mm in; once the cap comes back past its unlock point, a clicked blade is locked. 1.0: the blade locked with its teeth towards the saw's nose, the cap let go, and both grippers more than 2 cm from the blade, held 1 s (0.9 if time runs out first). 0.5: the blade locked with its teeth backwards. 0.25: the blade 10 mm or more in the slot but not locked (the cap still pushed in). 0 otherwise.",
+  "run_limit": "1,200 steps (1 minute at 20 Hz)",
+  "reset_notes": "Push the cap in and pull the blade out; stand it back in its holder, teeth to the arms.",
+  "fidelity": "The jigsaw is fixed and unplugged; the clamp is a model: a catch that holds the blade out unless the cap is pushed, and a lock that holds it once the cap is let go with the blade fully in. The shoe's open front is wider than a real one's so the clamp can be reached from above.",
+  "scores": "Dream-1 run: 0.0; demo: 1.0"
+}
