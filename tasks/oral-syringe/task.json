@@ -1,0 +1,20 @@
+{
+  "title": "Give a child manikin 5 ml of liquid medicine with an oral syringe: tip in the cheek, small squirts",
+  "category": "Societal relatability",
+  "keywords": [
+    "medicine",
+    "oral syringe",
+    "care",
+    "manikin",
+    "two arms",
+    "rate control"
+  ],
+  "instruction": "Give the child manikin the 5 ml of medicine in the oral syringe. Put the syringe's tip inside its cheek, between the gums and the cheek, and push the plunger in small squirts, pausing between them for it to swallow, until the syringe is empty. Then take the syringe out of its mouth.",
+  "context": "Parents and carers give children liquid medicines this way. Great Ormond Street Hospital, How to give your child liquid medicines: \"Put the tip of the oral syringe inside your child's mouth between the gums and the inside surface of their cheek\", \"Gently push the plunger to squirt small amounts of medicine\", \"Allow your child to swallow before you carry on pushing the plunger\", \"Do not squirt the entire dose into your child's mouth in one go\".",
+  "setup": "Positions in cm on the table, from the midpoint between the two arm bases: x forward (away from the arms), y to the robot's left. A child care-training manikin's head (fixed) faces the arms, its open mouth (40 mm wide, 32 mm tall, 45 mm deep) with its middle at (45, 0), 14 cm above the table. A 5 ml oral syringe, filled, lies in a fixed plastic tray's groove: a clear barrel (12 mm inside, 14.5 mm outside) with its tip towards the manikin, finger flange, and a plunger drawn back 44 mm (5 ml). Pushing the plunger takes about 2.6 N at 1 ml/s. Both grippers start open at the ready pose.",
+  "scoring": "From the plunger's travel (1 ml = 8.75 mm) and the syringe's pose. The tip is in the cheek when it is 8 to 25 mm past the lips, 8 to 18 mm to one side of the mouth's middle, and the syringe points towards that cheek (at least 10 degrees off straight in). A squirt is plunger travel between pauses of at least 1 s. 1.0: the whole 5 ml given (at least 4.8 ml), every bit with the tip in the cheek, no squirt over 2 ml, then the syringe out of the mouth, held 1 s (0.9 if time runs out first). 0.5: the whole dose given in the cheek but a squirt over 2 ml. 0.25: at least 2 ml given, all in the cheek. 0 otherwise, including any medicine pushed out with the tip not in the cheek.",
+  "run_limit": "1,200 steps (1 minute at 20 Hz)",
+  "reset_notes": "Draw the plunger back to the 5 ml mark (no liquid is simulated) and lay the syringe back in its tray.",
+  "fidelity": "The manikin head is rigid and fixed; no liquid is simulated: the dose is the plunger's travel, and pushing it is damped as liquid through the tip would be. The tray holds the syringe so it can't roll.",
+  "scores": "Dream-1 run: 0.0; demo: 1.0"
+}
