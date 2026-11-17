@@ -1,0 +1,19 @@
+{
+  "title": "Crush a peeled garlic clove in a two-handle garlic press",
+  "category": "Societal relatability",
+  "keywords": [
+    "kitchen",
+    "cooking",
+    "garlic press",
+    "hinged tool",
+    "two arms",
+    "force"
+  ],
+  "instruction": "Crush the garlic clove in the garlic press. Put the clove in the press's chamber lengthways, swing the top handle back over and press it down until the garlic is squeezed through.",
+  "context": "Pressing garlic is one of the most common steps in home and restaurant cooking. America's Test Kitchen on the garlic press: \"You just put the clove in and press\" (americastestkitchen.com/articles/6126-how-to-use-a-garlic-press). The clove must go into a small chamber the right way round, and the handle must be pushed down hard enough to squeeze it through. Done by: home cooks and line cooks.",
+  "setup": "Positions in cm on the table, from the midpoint between the two arm bases: x forward (away from the arms), y to the robot's left. A cast garlic press (15.5 cm long, silver aluminium with black rubber grips, about 200 g; the length of a Zyliss Susi 3) lies open on the table along y at x 26: its lower handle flat on the table from y -6.3 to 9.5, its black grip towards the left arm; the chamber next to the hinge, inside 3.4 cm long along y, 2.4 cm wide and 2.4 cm deep, centre (26, -3.7), its perforated floor 1 cm above the table on two feet. The top handle (15.4 cm, with a 2.0 x 2.6 cm plunger on its underside) is hinged 3.9 cm above the table at y -6, just right of the chamber, and stands swung back 25 degrees past upright, resting on its stop, its end at (26, -12.6), 18 cm up. A peeled garlic clove, modeled as a yellow block 2.6 x 1.6 x 1.4 cm, lies flat on the table at (32, -21), its length along x. Both grippers start open at the ready pose.",
+  "scoring": "From the press's crush log and the clove's position. The clove is in the chamber when its centre is inside the chamber's walls and below its rim. 1.0: crushed: the clove in the chamber and the top handle pushed down until the plunger's face is within 6 mm of the floor, which takes 10 N at the grip, 13 cm from the hinge, with the press still lying on the table (tilted under 20 degrees), held 1 s. 0.5: the clove in the chamber at the end with the plunger brought down onto it, not crushed. 0.25: the clove in the chamber at the end. 0 otherwise: the clove elsewhere, an empty press shut, the clove mashed on the rim (the handle shut past 30 degrees with the clove on the chamber's rim), or the press knocked over.",
+  "run_limit": "1,200 steps (1 minute at 20 Hz)",
+  "fidelity": "The clove is a rigid 2.6 x 1.6 x 1.4 cm block weighted 30 g (a real one is about 7 g; lighter, the simulated gripper closes through it). Its crush is modeled: once the plunger meets a clove lying in the chamber it pushes back like the clove, yielding at 10 N at the grip; with the plunger within 6 mm of the floor the clove is logged crushed, removed, and squeezed garlic is drawn under the floor.",
+  "scores": "Dream-1 run: 0.0; demo: 1.0"
+}
