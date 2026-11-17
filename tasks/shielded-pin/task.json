@@ -1,0 +1,20 @@
+{
+  "title": "Pay by card: enter the PIN on a shop's PIN pad with the other hand cupped over the keys",
+  "category": "Societal relatability",
+  "keywords": [
+    "card payment",
+    "PIN pad",
+    "privacy",
+    "two arms",
+    "key press",
+    "occlusion"
+  ],
+  "instruction": "Enter the PIN 7 3 1 9 on the card terminal and press the green key to confirm. Cover the keypad with your other hand while you type, so the person across the counter can't see which keys you press.",
+  "context": "Paying by card at a shop counter is something nearly everyone does. Banks tell customers to hide the keys while typing the PIN; Bank of Ireland: \"Always cover your card PIN when entering it on the keypad in a shop or supermarket\". One hand hovers over the keypad as a shield while the other reaches under it to press small keys, one at a time.",
+  "setup": "Positions in cm on the table, from the midpoint between the two arm bases: x forward (away from the arms), y to the robot's left. A countertop PIN pad the size of an Ingenico Lane/3000 (18 x 8.3 cm, 2.4 cm tall, charcoal plastic, fixed) lies flat with its centre at (29, 0), its screen at the far end and its 15-key keypad at the near end: keys 18 x 11 mm, 3 columns 22 mm apart (y 2.2, 0, -2.2) and 5 rows 16 mm apart (x 27.8, 26.2, 24.6, 23.0, 21.4): 1 2 3 / 4 5 6 / 7 8 9 / * 0 # / red, yellow, green, the 1 2 3 row farthest from the customer and 1 on the customer's left, digits printed on the keys. Each key is sprung, 2 mm proud, with 1.2 mm of travel; it registers when pushed 0.8 mm (about 2.4 N). The onlooker's eyes are across the counter, 60 cm beyond the keypad's middle and 45 cm above the keys. Both grippers start open at the ready pose.",
+  "scoring": "From the terminal's key log and the grippers' collision shapes. A press is a key pushed past its click (0.8 mm). 1.0: the presses are exactly 7, 3, 1, 9, green, with no two keys down at once, and at each press every corner of the pressed key's top is hidden from the onlooker's eyes behind a gripper (the straight line from the eyes to it passes through a gripper's collision shape), with both grippers more than 3 cm from the terminal at the end, held 1 s (0.9 if time runs out first). 0.5: the same presses, but one or more was seen. 0.25: the four digits in order, not confirmed. 0 otherwise: a wrong key, an extra press, two keys at once, or a digit missing.",
+  "run_limit": "1,200 steps (1 minute at 20 Hz)",
+  "reset_notes": "Nothing to put back: the keys spring up on their own. Clear the terminal's entry before the next trial.",
+  "fidelity": "The terminal is fixed and its keys are sprung sliders that register a press past their click; its screen is not simulated. The onlooker is a fixed eye point; a key counts as seen if any corner of its top has a clear line to the eye past both grippers' collision shapes.",
+  "scores": "Dream-1 run: 0.0; demo: 1.0"
+}
