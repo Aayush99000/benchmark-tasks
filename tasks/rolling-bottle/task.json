@@ -16,5 +16,5 @@
   "reset_notes": "Turn the bottle back and lay it on its side across the drainboard (sloping 2.2 degrees: a 5.4 mm shim under the high end of a 14 cm board), its middle 13 cm up from the drainboard's foot, held by a straightedge laid across the drainboard just below it; lift the straightedge straight up to let it go. Check a real setup with a 60 fps phone video against a ruler along the worktop: the bottle should cross the drainboard's foot at about 0.24-0.27 m/s and slow by about 0.02-0.05 m/s each second along the worktop (the simulator: 0.23-0.25 m/s, 0.038 m/s each second, the open end 1.6 s after the foot).",
   "fidelity": "The worktop is a 6 cm block on the table, so going over the edge is a 6 cm drop, not a real counter's; any fall scores 0. The bottle is a capsule at full size and weight; it rolls straight, where a real bottle curves a little. PhysX has no rolling resistance, so the bottle is pushed against its motion by its mass times 0.05 m/s^2: it slows by 0.038 m/s each second, as a real one does (0.02-0.05). The trial starts as it reaches the worktop, about 1 s after it is let go.",
   "scores": "Dream-1 run: 0.0; demo: 1.0",
-  "media": "M-ULAAE4"
+  "media": "M-NBB3B9"
 }
