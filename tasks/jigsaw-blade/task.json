@@ -16,5 +16,6 @@
   "run_limit": "1,200 steps (1 minute at 20 Hz)",
   "reset_notes": "Push the cap in and pull the blade out; stand it back in its holder, teeth to the arms.",
   "fidelity": "The jigsaw is fixed and unplugged; the clamp is a model: a catch that holds the blade out unless the cap is pushed, and a lock that holds it once the cap is let go with the blade fully in. The shoe's open front is wider than a real one's so the clamp can be reached from above.",
-  "scores": "Dream-1 run: 0.0; demo: 1.0"
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-Q7DZ49"
 }
