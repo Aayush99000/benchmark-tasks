@@ -1,0 +1,86 @@
+solid bevel
+  facet normal 0 0 0
+    outer loop
+      vertex -12.615 -75.000 11.295
+      vertex -10.682 -75.000 13.589
+      vertex -10.682 75.000 13.589
+    endloop
+  endfacet
+  facet normal 0 0 0
+    outer loop
+      vertex -12.615 -75.000 11.295
+      vertex -10.682 75.000 13.589
+      vertex -12.615 75.000 11.295
+    endloop
+  endfacet
+  facet normal 0 0 0
+    outer loop
+      vertex 2.682 -75.000 -1.589
+      vertex 2.682 75.000 -1.589
+      vertex 4.615 75.000 0.705
+    endloop
+  endfacet
+  facet normal 0 0 0
+    outer loop
+      vertex 2.682 -75.000 -1.589
+      vertex 4.615 75.000 0.705
+      vertex 4.615 -75.000 0.705
+    endloop
+  endfacet
+  facet normal 0 0 0
+    outer loop
+      vertex -12.615 -75.000 11.295
+      vertex 2.682 -75.000 -1.589
+      vertex 4.615 -75.000 0.705
+    endloop
+  endfacet
+  facet normal 0 0 0
+    outer loop
+      vertex -12.615 -75.000 11.295
+      vertex 4.615 -75.000 0.705
+      vertex -10.682 -75.000 13.589
+    endloop
+  endfacet
+  facet normal 0 0 0
+    outer loop
+      vertex -12.615 75.000 11.295
+      vertex -10.682 75.000 13.589
+      vertex 4.615 75.000 0.705
+    endloop
+  endfacet
+  facet normal 0 0 0
+    outer loop
+      vertex -12.615 75.000 11.295
+      vertex 4.615 75.000 0.705
+      vertex 2.682 75.000 -1.589
+    endloop
+  endfacet
+  facet normal 0 0 0
+    outer loop
+      vertex -12.615 -75.000 11.295
+      vertex -12.615 75.000 11.295
+      vertex 2.682 75.000 -1.589
+    endloop
+  endfacet
+  facet normal 0 0 0
+    outer loop
+      vertex -12.615 -75.000 11.295
+      vertex 2.682 75.000 -1.589
+      vertex 2.682 -75.000 -1.589
+    endloop
+  endfacet
+  facet normal 0 0 0
+    outer loop
+      vertex -10.682 -75.000 13.589
+      vertex 4.615 -75.000 0.705
+      vertex 4.615 75.000 0.705
+    endloop
+  endfacet
+  facet normal 0 0 0
+    outer loop
+      vertex -10.682 -75.000 13.589
+      vertex 4.615 75.000 0.705
+      vertex -10.682 75.000 13.589
+    endloop
+  endfacet
+endsolid bevel
