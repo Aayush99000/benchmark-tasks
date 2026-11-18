@@ -1,0 +1,20 @@
+{
+  "title": "Change a wall soap dispenser's refill: hold the empty one, push the release latch, click the new one in, latch the cover",
+  "category": "Impact on jobs",
+  "keywords": [
+    "janitorial",
+    "restroom",
+    "soap dispenser",
+    "refill",
+    "two arms",
+    "hidden lock"
+  ],
+  "instruction": "Change the soap dispenser's refill. Hold the empty refill while you push the release latch on the front of the pump house, take the empty refill out and drop it in the recycling box. Take the new refill out of its case, push its pump into the pump house until it clicks, then swing the cover up until it latches.",
+  "context": "Janitors and building cleaners (2,432,600 jobs, BLS Occupational Outlook Handbook, 2025) \"Clean restrooms and stock them with supplies\"; O*NET 37-2011.00 lists \"Service, clean, or supply restrooms\" as a core task. GOJO's ADX-7 refill instructions (WebstaurantStore video): \"push the release lever to release the old refill\", \"push the refill into the pump house until its secure. Close the dispenser cover securely.\" Done by: janitors, custodians and housekeepers.",
+  "setup": "Positions in cm on the table, from the midpoint between the two arm bases: x forward (away from the arms), y to the robot's left. A wall panel (40 x 40 cm) stands on the table with its face at x 43.3, and on it a GOJO ADX-7 push-style soap dispenser (10 cm wide, 24.9 cm tall), fixed, its bottom 10 cm above the table, its pump house's front facing the arms at x 33.9, centred on y 0. Its front cover, hinged along its bottom edge, rests open on its stop, 70 degrees from shut. In the pump house at the dispenser's bottom, an empty 700 mL refill (a clear bottle 8.8 x 8.5 x 16.5 cm, pump down on a 5 cm collar; 60 g) is locked in. On the pump house's front, under the refill, is the blue release latch (2 x 2.4 cm; pushed 2.5 mm in, about 2.5 N, it lets the refill go). On the robot's right, the new refill (full, 0.30 kg) stands pump down in its open case (6 cm deep) on a closed case 5 cm tall at (34, -13.5), and beyond it is an open blue recycling box (15 x 15 cm inside, 15 cm tall) at (22, -28.5). Both grippers start open at the ready pose.",
+  "scoring": "From the pump house's model and the parts' poses. A refill's collar slides back into the pump house's groove; within 12 mm of its line the groove's mouth steers it in; the last 3 mm before the seat take a push (up to 3 N), and within 2 mm of the seat it clicks and is locked; a locked refill comes out only while the latch is pushed in. The cover latches when swung within 1.5 degrees of shut. 1.0: the new refill clicked in, the empty one in the recycling box and at rest, the cover latched, and both grippers more than 2 cm from both refills and the cover, held 1 s (0.9 if time runs out first). 0.6: the new refill clicked in and the empty one out of the dispenser, the cover not latched or the empty one not in the box. 0.35: the new refill's collar at least 25 mm into the pump house but not clicked, the empty one out. 0.15: the empty refill out. 0 otherwise.",
+  "run_limit": "1,200 steps (1 minute at 20 Hz)",
+  "reset_notes": "Push the latch and take the new refill out; stand it back in its case, pump down; push the empty refill into the pump house until it clicks; let the cover down onto its stop.",
+  "fidelity": "The dispenser is fixed, 10 cm up, and 102.5 mm deep (GOJO: 94) so a seated refill clears its back; the cover starts open, so its side latches aren't used, and stops 70 degrees open (a real one hangs down). The pump house, its latch and the cover's latch are a model, the click light (3 N). The full refill is 0.30 kg (a real one about 0.75): the sim's soft wrist can't carry 0.75 kg. The refills are rigid boxes on a collar, no nozzle or caps; no soap is dispensed.",
+  "scores": "Dream-1 run: 0.0; demo: 1.0"
+}
