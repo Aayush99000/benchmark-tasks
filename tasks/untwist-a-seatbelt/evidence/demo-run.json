@@ -1,0 +1,52 @@
+{
+  "status": "complete",
+  "mode": "demo",
+  "steps": 592,
+  "requested_steps": 592,
+  "source_sha256": {
+    "run.py": "d2e608057d054bb46b8076b57376afa530b7dc518e9c8fdc34c195769ad58dc4",
+    "LICENSE": "a71ddeb012ff1961bf252489309b565ffd0443632819aa9c88eef4377f9f9f7a",
+    "installation.py": "465bfdb2969899ac390eec183e395d2f683f5562b20d3a2203042bcc70df058c",
+    "model.py": "b49b51854755cf488739b5928fafdbe705d13214df2c26ad58a69b42e4ce84df",
+    "replay_evidence.py": "5fb4234f2ad8bc5ff8a2f267dcb7c10e400466359ef6a5e8632ddebe9c19e7a5",
+    "joint_tracking.py": "f22bb7c34c8c4ba51859844f77fef8b29337b5b6353e7cc0b85cf0247866c453",
+    "dream_policy.py": "c6727b995f2ec372d6e50a4d675a9b3e1dd12c0748f648708454a30f4e453091",
+    "INSTALLATION.md": "aed778487319f5de2df71a25f11e59de40aabac8bf902ff2bb1709cb6d776ce3",
+    "review_views.py": "fa50733ec005495c18ae4a2a7c9b291e3dd21f006f9f2bfbebfd42bfe40e7bed",
+    "planner.py": "3864446f577eee36fc5b85768218496c8026e84ec2bcf8d5605cc7776eed2b60",
+    "task.py": "33a27817df0a8598d2b53d96d9b45805e28985f12038e6e1c9295f3bbcf58518",
+    "rescore.py": "c8de0dc83a4693d875e1dd21cbd118fe7faa9253404284625def048679b2c420",
+    "task.json": "be10703110409c0ac9958629558ddef85fa1bb5dc288038b7145cc1887e074a8",
+    "make_plan.py": "4abff1038c5dbb83f86ddefb3c55e41722d112c7b73ef9b399fa10fc04aaa654",
+    "README.md": "a533947ef5e4db10422b0a295b08e158037fbb7d401ec452964cae2869d79d3a",
+    "common.py": "7bbf5f0999e9281af2d3f7bf8a09204076a5bd0a1144a1ad242df35915d6fa51",
+    "VALIDATION.json": "65ce453d6b63a51c61e95f56d00f17ea3438c361a6cb1cbb3f415e81e37ef02d",
+    "demo-plan.json": "7e0fea626174e014983d75cc2026d170b90e11a1fd5400d8c2fe0f7c904d4782",
+    "ENVIRONMENT.json": "0aa93181508a5eb173aa9d9251115c5af4c75484636ef436dfa40df344ba5ea6"
+  },
+  "control_hz": 20,
+  "score": 1.0,
+  "cpu_preview": false,
+  "submission_evidence": true,
+  "wall_seconds": 336.5673380945809,
+  "initial_measurements": {
+    "maximum_twist_degrees": 180.0,
+    "minimum_width_mm": 14.390481893712003,
+    "flat": false,
+    "tongue_retained": true,
+    "released_seconds": 0.0,
+    "failed": false
+  },
+  "measurements": {
+    "maximum_twist_degrees": 0.756922730572753,
+    "minimum_width_mm": 45.44739692518588,
+    "flat": true,
+    "tongue_retained": true,
+    "released_seconds": 6.499999999999985,
+    "failed": false
+  },
+  "events": [],
+  "requires_visual_review": true,
+  "dream_requests": 0,
+  "dream_sessions": {}
+}
