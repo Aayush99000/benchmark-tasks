@@ -1,0 +1,20 @@
+{
+  "title": "Unfold a child's folding step stool: lift each end, push its leg out until its own lock clicks, stand it on its feet",
+  "category": "Societal relevance",
+  "keywords": [
+    "household",
+    "step stool",
+    "folding",
+    "child safety",
+    "two arms",
+    "hidden lock"
+  ],
+  "instruction": "Unfold the step stool. Open each of its two legs fully, until its lock clicks, then stand the stool on its feet and let go of it.",
+  "context": "Parents set up a child's folding step stool at the sink every day; workers use folding step stools to reach shelves. Hailo, step stool instructions: \"When setting up the step stool pay attention to the entire secured opening of both step stool parts\". OSHA 1926.1053(a)(8): a stepladder needs a locking device \"to hold the front and back sections in an open position when the ladder is being used\". Done by: parents and carers; stock clerks.",
+  "setup": "Positions in cm on the table, from the midpoint between the two arm bases: x forward (away from the arms), y to the robot's left. A child's low plastic folding step stool (0.75 kg) lies folded flat at (31, 0): a blue top 24.6 cm long (along y) and 20 cm deep, with a raised grey grip rib (7 cm long) across each end; under it, two white legs, each folded in from a hinge 10.5 cm from the middle, 10 cm long, ending in a grey foot rail 34 cm long that sticks out 7 cm past the top's front and back edges. Each leg locks at 98 degrees, a little past straight down. Open and standing, the stool is 12.6 cm high. Both grippers start open at the ready pose.",
+  "scoring": "From the stool's lock model and its pose. A leg locks once it is opened 98 degrees from folded (8 past straight down); short of that, from 80 degrees on, a spring folds it back (about 0.15 N m). Once the stool stands level (within 5 degrees) at its height (within 1 cm) with both grippers more than 2 cm from it, it takes a 40 N push down on its top, and a leg that isn't locked gives way. 1.0: both legs locked and the stool standing under the push, held 1 s (0.9 if time runs out first). 0.5: both legs locked but not standing. 0.25: one leg locked. 0 otherwise: a leg that only looks open earns nothing.",
+  "run_limit": "1,200 steps (1 minute at 20 Hz)",
+  "reset_notes": "Press each lock's release and fold both legs flat under the top; lay the stool at (31, 0).",
+  "fidelity": "The locks, their springs and an unlocked leg giving way under the push are a model on the legs' hinges, with no release; the stool is lighter and smaller than most real ones so the arms can reach under it; the 40 N push stands in for a child stepping on it.",
+  "scores": "Dream-1 run: 0.0; demo: 1.0"
+}
