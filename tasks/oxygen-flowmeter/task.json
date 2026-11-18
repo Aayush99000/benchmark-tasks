@@ -1,0 +1,21 @@
+{
+  "title": "Set up a patient's oxygen at 2 L/min: push the cannula tubing onto the flowmeter's nipple, turn the knob to the line",
+  "category": "Impact on jobs",
+  "keywords": [
+    "nursing",
+    "oxygen therapy",
+    "medical device",
+    "reading a gauge",
+    "knob",
+    "two arms"
+  ],
+  "instruction": "Set up the patient's oxygen at 2 L/min. Push the nasal cannula's tubing fully onto the flowmeter's outlet nipple, then turn the flowmeter's knob until the middle of the float ball is on the 2 L/min line, and let go of both.",
+  "context": "Registered nurses set up oxygen for patients every shift. Open RN, Nursing Skills, 4.6 Checklist for Oxygen Therapy: \"Connect nasal cannula tubing to flow meter.\", \"Set oxygen flow at prescribed rate.\" Ohio Medical, Medical Gas Flowmeters IFU: \"To set the flow, align the center of the Float Ball to the indicator line on the Flow Tube.\" Done by: registered nurses (BLS: 3,465,400 jobs in 2025; duties include \"Administer patients' medicines and treatments\"), licensed practical nurses and respiratory therapists.",
+  "setup": "Positions in cm on the table, from the midpoint between the two arm bases: x forward (away from the arms), y to the robot's left. A 0-15 L/min wall oxygen flowmeter (152 mm tall, 56 mm wide, 58 mm deep) is plugged into the green oxygen outlet of a headwall panel (24 x 30 cm, its face at x 38.6), fixed, its front face at x 31, centred on y 0, from 7 to 22.2 cm above the table, turned off. On its front: a clear flow tube with a float ball 8 mm across (lines every 0.5 L/min from 1 to 5 and every 1 L/min from 5 to 15, numbered 1-5, 10, 15; the ball's middle rests 10.4 cm up, the 2 L/min line 2 cm higher), a green fluted flow-control knob 27 mm across at the top (its axis 21.2 cm up, its front at x 29; anticlockwise from the front opens it), and at the bottom a green barbed tubing nipple, 20 mm long, pointing towards the arms (its axis 8.4 cm up, its tip at x 27.5). The end of a nasal cannula's oxygen tubing (15 cm, clear green, 8 mm across) lies along x on the cannula's opened packet (10 x 7 x 2.5 cm, centred at (9.5, -10)), its open end towards the flowmeter at (20, -10), 2.9 cm up, 55 mm over the packet's edge. Both grippers start open at the ready pose.",
+  "scoring": "From the two models and the parts' poses, at the end. Seated: the tubing's open end 12 mm or more onto the nipple (past its last barb), within 2 mm of its axis and 10 degrees of its line. The flow follows the knob's angle (2 L/min at 36 degrees open). 1.0: seated, the flow within 0.25 L/min of 2 (the ball's middle within 2.5 mm of the 2 L/min line), and both grippers more than 2 cm from the tubing and the knob, held 1 s (0.9 if time runs out first). 0.5: seated, the flow on (0.1 to 4 L/min) but off the line. 0.25: seated with the flow off, or the flow on the line with the tubing not seated. 0 otherwise, and for any flow over 4 L/min.",
+  "run_limit": "1,200 steps (1 minute at 20 Hz)",
+  "reset_notes": "Turn the knob fully clockwise (off), pull the tubing off the nipple and lay it back on the packet, its open end 55 mm over the edge.",
+  "fidelity": "No oxygen flows: the knob's angle sets the flow (proportional to 15 L/min at 270 degrees, our estimate) and the float ball rides on the flow's line. The flowmeter is fixed on a panel at table height, its outlet pointing forward. The tubing's end is 15 cm, rigid, 8 mm across and 40 g so the fingers hold it; the rest of the tubing and the prongs are not modelled. The barbs are a model: the tubing is seated once 12 mm on; they don't resist the push.",
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": ""
+}
