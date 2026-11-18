@@ -1,0 +1,20 @@
+{
+  "title": "Fit a front-lock raised toilet seat: rear wings under the bowl's lip, then the front knob turned until tight",
+  "category": "Societal relevance",
+  "keywords": [
+    "home care",
+    "hip replacement",
+    "assistive equipment",
+    "knob",
+    "re-grip",
+    "two arms"
+  ],
+  "instruction": "Fit the raised toilet seat to the toilet. Push it back and straight so its rear wings go under the rear lip of the bowl, then hold it there and turn the knob on its front clockwise until the bracket is tight against the front of the bowl. Then let go of it.",
+  "context": "After a hip replacement, patients are told not to sit on anything that bends the hip past 90 degrees, and are given a raised toilet seat to fit at home. Guy's and St Thomas' NHS, Precautions after hip surgery: \"The occupational therapist will give you equipment to raise the height of your toilet, bed and chair, if needed.\" Invacare, raised toilet seat 1391P/1391AP manual: \"The rear seat wings MUST be positioned under the rear lip of the toilet bowl\"; \"turn the knob clockwise until the adjustment bracket is securely fastened to the front of the toilet bowl\"; \"Always check to make sure that the Raised Toilet Seat is properly and securely locked in place before using.\"",
+  "setup": "Positions in cm on the table, from the midpoint between the two arm bases: x forward (away from the arms), y to the robot's left. The top of a biscuit-coloured vitreous-china round-front toilet bowl (fixed): its rim 43 x 35.6 cm outside, its opening 29 x 24 cm, the rim 2.5 cm thick at its inner edge (the lip) with an 8 mm undercut beneath it; the rim's top 10 cm above the table, its middle at (43, 0), its front towards the arms. On it, a white molded-plastic front-lock raised toilet seat (43 x 42 cm, 11.4 cm tall, 1.8 kg), set on but not fitted: 8 mm forward of fitted and turned 3 degrees anticlockwise. Under its back, inside the opening where the lip's edge is 6 cm either side of the middle, two plastic rear wings (6 mm thick, 2 cm wide, 3.35 cm deep, each facing the lip's edge) with 6 mm hooks pointing out under it; under its front, inside the opening, a grey plastic bracket screwed all the way back; on its front face, 5 cm up, a grey fluted plastic knob (4 cm across, 2.2 cm long) that drives the bracket forwards 5 mm per clockwise turn. Both grippers start open at the ready pose.",
+  "scoring": "From the seat's pose and the knob's clamp model. Fitted: both rear wings' hooks at least 3 mm under the bowl's lip, the seat resting on the rim (within 2 mm), level (2 degrees), straight (3 degrees) and centred (5 mm). Tight: the bracket pressing the bowl's front wall with at least 50 N. Once both grippers are more than 2 cm from the seat and knob and the seat is fitted, a push rising to 40 N and back over 1 s is put on the seat, forwards, then to each side; it holds if the seat moves under 3 mm and turns under 1 degree. 1.0: fitted, tight and held under the push, hands clear, held 1 s (0.9 if time runs out first). 0.5: fitted and tight, not yet pushed (a hand on it) or moved by the push. 0.25: fitted, not tight. 0 otherwise.",
+  "run_limit": "1,800 steps (1.5 minutes at 20 Hz)",
+  "reset_notes": "Loosen the knob all the way, set the seat back 8 mm forward of fitted and 3 degrees turned.",
+  "fidelity": "Only the bowl's top 10 cm stands on the table, at its real size. The bracket is a model: a stiff spring against the bowl's front wall with static friction, driven by the knob through a self-locking screw (held still with no hand on it), drawn fixed under the seat. The seat's size and weight are those of Drive's 12014, the same front-lock kind (Invacare gives none for the 1391). The push stands in for someone leaning on the seat.",
+  "scores": "Dream-1 run: 0.0; demo: 1.0"
+}
