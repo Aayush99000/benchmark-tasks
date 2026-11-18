@@ -16,5 +16,6 @@
   "run_limit": "1,200 steps (1 minute at 20 Hz)",
   "reset_notes": "Push the latch and take the new refill out; stand it back in its case, pump down; push the empty refill into the pump house until it clicks; let the cover down onto its stop.",
   "fidelity": "The dispenser is fixed, 10 cm up, and 102.5 mm deep (GOJO: 94) so a seated refill clears its back; the cover starts open, so its side latches aren't used, and stops 70 degrees open (a real one hangs down). The pump house, its latch and the cover's latch are a model, the click light (3 N). The full refill is 0.30 kg (a real one about 0.75): the sim's soft wrist can't carry 0.75 kg. The refills are rigid boxes on a collar, no nozzle or caps; no soap is dispensed.",
-  "scores": "Dream-1 run: 0.0; demo: 1.0"
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-FLZS9T"
 }
