@@ -16,5 +16,6 @@
   "run_limit": "1,200 steps (1 minute at 20 Hz)",
   "reset_notes": "Nothing to put back: the keys spring up on their own. In real trials, start a new recording (record_trial.py) for each trial.",
   "fidelity": "The PIN pad is a buildable stand-in (printed case, low-profile keyboard switches, a key logger); in the sim the case is fixed and the keys are sprung sliders with the switch's travel, click point and force; the tactile bump isn't modelled and the screen isn't working. The onlooker is a fixed eye point; a key counts as seen if any corner of its top has a clear line to the eye past both grippers' collision shapes.",
-  "scores": "Dream-1 run: 0.0; demo: 1.0"
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-PXJKQW"
 }
