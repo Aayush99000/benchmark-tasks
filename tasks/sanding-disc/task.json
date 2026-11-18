@@ -16,5 +16,6 @@
   "run_limit": "1,200 steps (1 minute at 20 Hz)",
   "reset_notes": "Peel the disc off the pad and stand it back in the stand's slot, grit side away from the arms.",
   "fidelity": "The sander is fixed pad up and unplugged, its pad doesn't spin, and the old disc is already off. The hook face is a model: a disc landing flat, fuzzy side down, is held where it lands (no peeling off to refit). The disc is a rigid plate, 2 mm and 40 g (real: about 1 mm, 6 g) so the fingers can hold it; the hole pattern's sizes are estimated; the stand is a slotted block.",
-  "scores": "Dream-1 run: 0.0; demo: 1.0"
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-4UQMUA"
 }
