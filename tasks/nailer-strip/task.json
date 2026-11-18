@@ -16,5 +16,6 @@
   "run_limit": "1,200 steps (1 minute at 20 Hz)",
   "reset_notes": "Pull the pusher back and lift the strip out through the loading window; let the pusher back to the driver; lay the strip on the offcut, front away from the arms, heads to the robot's left.",
   "fidelity": "The nailer is fixed, unplugged and never fires; the magazine is a model: a strip with its heads on the wrong side is stopped at the rear end, one past the nail stop is held there, the pusher's finger drags a strip it rides back over and drops in behind its last nail, then pushes it to the driver. The window's pocket lets fingertips push the strip's back; the strip is rigid, on an offcut so fingers fit under its edges.",
-  "scores": "Dream-1 run: 0.0; demo: 1.0"
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-DB4HZR"
 }
