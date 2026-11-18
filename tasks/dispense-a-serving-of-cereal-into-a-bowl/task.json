@@ -1,0 +1,21 @@
+{
+  "title": "Dispense one serving of cereal from a twist-knob dispenser into a bowl",
+  "category": "Societal relatability",
+  "keywords": [
+    "bimanual",
+    "dispenser",
+    "metering",
+    "regrasp",
+    "granular",
+    "breakfast"
+  ],
+  "instruction": "Get one serving of cereal from the dispenser into the bowl, that is 1 1/2 cups or 39 grams, without spilling any on the counter.",
+  "context": "Twist-knob cereal dispensers hang on the wall at almost every hotel breakfast buffet and college dining hall, so most people have filled a bowl from one. The quantity comes only from how far the knob turns the paddle wheel inside, and a serving needs more than one turn of the knob, so the hand must let go and regrip on the way; the bowl must stand under a spout that overhangs it.",
+  "setup": "Counter (the station table). An upright mounting board (plywood, 24 cm wide, 50 cm tall, 2 cm thick) stands on the counter, braced. Screwed to it: a wall-mount twist-knob dry-food dispenser (plastic; 4.8 x 5.8 x 13 in overall; clear cylindrical canister 112 mm inside, lidded; six-vane paddle wheel 79 mm across and 68 mm long with soft vane tips; round 56 mm knob with a 50 x 12 x 18 mm grip bar facing the right arm; 41 x 71 mm spout whose mouth is 80 mm above the counter). The canister holds 78 g of Original Cheerios (toasted oat rings, about 11.5 mm across, 0.10 g each), filled with the knob left untouched. An empty polypropylene bowl (6 1/2 in across, 2 1/2 in tall, 80 g) stands upright on the counter with its centre 100 mm to the dispenser's right of the spout (seen from its front), not under it. Layout as in the screenshot; exact positions in task.py.",
+  "scoring": "Measured at the end: grams of cereal in the bowl (kitchen scale, empty bowl tared) and pieces outside both the bowl and the dispenser (count). 1.0: 31 to 47 g in the bowl (the box's 39 g serving within 20%), 5 or fewer pieces spilled, bowl upright (tilted under 20 degrees), both hands at least 5 cm outside the bowl's rim, bowl and cereal at rest for 1 s. 0.75: 31 to 47 g in the bowl but 6 to 15 pieces spilled, or a hand still at the bowl, or not at rest. 0.5: at least 20 g but under 31 g or over 47 g, bowl upright, 15 or fewer spilled. 0.25: at least one piece in the bowl but under 20 g, or any amount with more than 15 pieces spilled or the bowl tipped past 20 degrees. 0: nothing in the bowl. A piece is in the bowl when it lies inside it below the rim; in simulation the mass is the count times 0.103 g.",
+  "run_limit": "2,400 steps (2 minutes at 20 Hz)",
+  "reset_notes": "Cereal is consumed: discard every piece outside the canister, top the canister back up to 78 g by weight without turning the knob, and return the empty bowl to its mark. About 40 g per trial.",
+  "fidelity": "True-size dispenser, bowl and cereal. The wheel turns only through contact with the fingers, and cereal reaches the bowl only through the wheel. Pieces are rigid rounded discs (no hole, uniform, unbreakable); vane tips are rigid blades on spring hinges; seal friction (0.1 N m) is assumed; the wheel's inner sizes are estimated from the listed outer size; a board stands in for the wall.",
+  "scores": "Scripted demo: 1.0 in four runs (three cloud, one local; 40.8 g in the bowl, none spilled). Dream-1 run: 0.0.",
+  "media": "M-65VCEJ"
+}
