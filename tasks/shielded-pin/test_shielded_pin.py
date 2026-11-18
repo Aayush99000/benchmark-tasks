@@ -31,8 +31,9 @@ def box_planes(lo, hi) -> np.ndarray:
     return np.array(out)
 
 
-def press(model, *names, depth=1.0 * M.MM, together=()):
+def press(model, *names, depth=None, together=()):
     """Press each key in turn (and let it up), the keys in ``together`` held down meanwhile."""
+    depth = M.CLICK + 0.2 * M.MM if depth is None else depth
     for name in names:
         frames = {k.name: key_frame(k.name[4:], depth if (k.name[4:] == name or k.name[4:] in together) else 0.0)
                   for k in M.KEYS}
@@ -51,16 +52,17 @@ def model():
 # -- the press log ----------------------------------------------------------------------------------------------------
 
 def test_a_key_registers_past_its_click_once(model):
-    for d in (0.5, 0.7, 0.9, 1.1, 0.9, 0.5):
-        model.update({"key_7": key_frame("7", d * M.MM)}, {})
+    c, r = M.CLICK, M.RELEASE
+    for d in (r - 0.3 * M.MM, c - 0.1 * M.MM, c + 0.1 * M.MM, c + 0.3 * M.MM, c + 0.1 * M.MM, r + 0.1 * M.MM):
+        model.update({"key_7": key_frame("7", d)}, {})  # back up to just short of the release point: still one press
     assert model.keys() == ("7",)
-    for d in (0.3, 0.9):  # let up past the release point, then pressed again: a second press
-        model.update({"key_7": key_frame("7", d * M.MM)}, {})
+    for d in (r - 0.1 * M.MM, c + 0.1 * M.MM):  # let up past the release point, then pressed again: a second press
+        model.update({"key_7": key_frame("7", d)}, {})
     assert model.keys() == ("7", "7")
 
 
 def test_short_of_the_click_is_no_press(model):
-    model.update({"key_7": key_frame("7", 0.7 * M.MM)}, {})
+    model.update({"key_7": key_frame("7", M.CLICK - 0.1 * M.MM)}, {})
     assert model.keys() == ()
 
 
@@ -146,9 +148,11 @@ def test_the_case_keeps_clear_of_every_key_through_its_travel():
             assert np.linalg.norm(gap) >= M.KEY_CLEAR - 1e-9, (name, lo, hi)
 
 
-def test_a_key_takes_about_2_5_n_to_click():
+def test_a_key_clicks_at_the_switchs_60_gf_and_1_5_mm():
     force = M.KEY_K * (M.KEY_PRELOAD + M.CLICK)
-    assert 2.0 < force < 3.5
+    assert force == pytest.approx(0.060 * 9.81, rel=0.02)
+    assert M.CLICK == pytest.approx(1.5 * M.MM) and M.KEY_TRAVEL == pytest.approx(3.0 * M.MM)
+    assert M.RELEASE < M.CLICK
 
 
 def test_the_onlooker_looks_down_from_across_the_counter():

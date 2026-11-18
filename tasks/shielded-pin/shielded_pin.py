@@ -3,7 +3,7 @@
 PIN 7 3 1 9 and press the green key, covering the keypad with the other hand so the person across the counter can't
 see which keys are pressed.
 
-A key registers when it is pushed past its click (0.8 mm of its 1.2 mm travel). The person across the counter is a
+A key registers when it is pushed past its click (1.5 mm of its 3.0 mm travel, about 0.6 N). The person across the counter is a
 fixed eye point, 60 cm beyond the keypad and 45 cm above it; a press is hidden when every corner of the pressed key's
 top is out of that eye's sight behind a gripper, at the moment it registers.
 
@@ -34,6 +34,7 @@ MM = 0.001
 CASE = (0.13, 0.13, 0.14)  # charcoal plastic
 KEY_GREY = (0.78, 0.78, 0.76)
 INK = (0.08, 0.08, 0.09)
+DOT = (0.95, 0.95, 0.95)
 SCREEN = (0.05, 0.07, 0.10)
 RED, YELLOW, GREEN = (0.78, 0.12, 0.12), (0.92, 0.76, 0.12), (0.12, 0.62, 0.22)
 
@@ -47,11 +48,14 @@ NEAR_X = TERM_XY[0] - TERM_L / 2
 COL_Y = (22.0 * MM, 0.0, -22.0 * MM)
 ROW_X = tuple(NEAR_X + (78.0 - 16.0 * r) * MM for r in range(5))  # row 0 (1 2 3) ... row 4 (red yellow green)
 KEY_W, KEY_D, KEY_H = 18.0 * MM, 11.0 * MM, 6.0 * MM  # across (y), along (x), tall
-KEY_PROUD = 2.0 * MM  # a key's top above the case at rest
-KEY_TRAVEL = 1.2 * MM
-CLICK = 0.8 * MM  # pushed this far, the key registers (and releases once back above RELEASE)
-RELEASE = 0.4 * MM
-KEY_K, KEY_PRELOAD = 3000.0, 0.0  # N/m, no preload: 2.4 N at the click
+# The keys follow the buildable keypad in hardware/ (README, "Building it for real trials"): each printed keycap sits on a
+# Kailh Choc V1 Brown low-profile switch, listed at 1.5 mm pre-travel, 3.0 mm total travel and 60 gf at actuation
+# (kbd.news and reach.dog spec listings; no official Kailh sheet found).
+KEY_PROUD = 3.5 * MM  # a key's top above the case at rest: its full travel plus 0.5 mm, so a cap never bottoms on the case
+KEY_TRAVEL = 3.0 * MM
+CLICK = 1.5 * MM  # pushed this far, the key registers (and releases once back above RELEASE)
+RELEASE = 1.0 * MM  # model choice: the switch's reset point isn't in the listings
+KEY_K, KEY_PRELOAD = 392.0, 0.0  # N/m, no preload: 0.59 N (60 gf) at the click; the tactile bump isn't modelled
 KEY_CLEAR = 1.5 * MM  # the case keeps this far from every key, anywhere in its travel
 # WHY the clearance: the keys collide with the fixed case despite their joints (run pin2, 2026-11-17: a case block 1 mm
 # into each key held it 1.1 mm up, and no fingertip could push it down)
@@ -97,6 +101,12 @@ def _glyph(name: str) -> list:
         cy, cx = -u * w / 2 if kind == "h" else -u * w, v * s
         size = (t, w, 0.1 * MM) if kind == "h" else (s, t, 0.1 * MM)
         out.append(box((cx, cy, KEY_H / 2 + 0.05 * MM), size, INK))
+    # a white 2 mm dot in each corner of the key's top (visual only), as printed on the real keycaps: a rater scores a
+    # real trial by whether any of the pressed key's dots shows in the onlooker's camera (README, Scoring a real trial)
+    for sx in (-1, 1):
+        for sy in (-1, 1):
+            out.append(box((sx * (KEY_D / 2 - 1.5 * MM), sy * (KEY_W / 2 - 1.5 * MM), KEY_H / 2 + 0.05 * MM),
+                           (2.0 * MM, 2.0 * MM, 0.1 * MM), DOT))
     return out
 
 
@@ -350,7 +360,7 @@ Y_AXIS = np.array([0.0, 1.0, 0.0])
 # middle of each pressed key is behind the screen alone, the hands stay about 7 mm apart, and both arms reach every pose.
 PRESS_YAW, PRESS_LEAN = math.pi / 2, math.radians(35.0)
 SCREEN_YAW, SCREEN_LEAN = -math.pi / 2, math.radians(15.0)
-PRESS_BELOW = 7.0 * MM  # the pressing fingertips aimed this far below a key's top; the key's stop holds them at 1.2
+PRESS_BELOW = 7.0 * MM  # the pressing fingertips aimed this far below a key's top; the key's stop holds them at 3.0
 TOUCH_ABOVE = 6.0 * MM  # the fingertips first come to rest this far above it, settle, then push slowly
 # WHY: aimed 2 mm below, the arm gave way to the key's spring, keys reached only 0.6-0.7 mm and key 3 crossed its
 # click twice (run pin4); aimed 5 mm below in one 0.5 s move, the hand hit the key, bounced (7 clicked twice) and
