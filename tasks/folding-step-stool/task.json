@@ -16,5 +16,6 @@
   "run_limit": "1,200 steps (1 minute at 20 Hz)",
   "reset_notes": "Press each lock's release and fold both legs flat under the top; lay the stool at (31, 0).",
   "fidelity": "The locks, their springs and an unlocked leg giving way under the push are a model on the legs' hinges, with no release; the stool is lighter and smaller than most real ones so the arms can reach under it; the 40 N push stands in for a child stepping on it.",
-  "scores": "Dream-1 run: 0.0; demo: 1.0"
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-CQMA5X"
 }
