@@ -1,0 +1,146 @@
+{
+  "kind": "constructed_reset_native_mechanism_control",
+  "effective_native_adverse_control": true,
+  "valid_isolated_negative": false,
+  "same_initial_state_policy_control": false,
+  "harness_sha256": "a84df199854b0a7ad9849a863dc013a7161cc3372780b0d78949db20e5367a39",
+  "canonical_entry_sha256": "64848fea2f1be48445eee7c14fd09590af23da48bb486968707e3aad935a4649",
+  "canonical_source_unchanged": true,
+  "fixture_unchanged": true,
+  "terminal": {
+    "controls": 400,
+    "score": 0.8,
+    "normal_terminal": true,
+    "success": false,
+    "termination_reason": null,
+    "returncode": 0,
+    "started_at": "2026-11-16T20:14:38.271704+00:00",
+    "completed_at": "2026-11-16T20:18:29.637518+00:00",
+    "wall_seconds": 231.36614854005165
+  },
+  "late_observations": [
+    {
+      "control": 200,
+      "score": 0.8,
+      "other_hardware_and_release_gates_pass": true,
+      "actual_seats": {
+        "old_left": true,
+        "new_right": true
+      },
+      "actual_cover_locked": true,
+      "actual_left_open": true,
+      "actual_rigid_settled": true,
+      "actual_release_clear": true,
+      "actual_paper_hands_clear": true,
+      "topology_ok": true,
+      "root_attached": false,
+      "geometry_accessible": false,
+      "paper_settled": false,
+      "root_error_max_m": 0.011697653403631016,
+      "max_node_speed_m_s": 2.5151674536709483,
+      "reasons": [
+        "root_attachment_error",
+        "free_edge_too_narrow",
+        "terminal_patch_too_small",
+        "no_qualifying_exposed_terminal_subpatch",
+        "crossing_outside_outlet",
+        "nodes_moving"
+      ]
+    },
+    {
+      "control": 250,
+      "score": 0.8,
+      "other_hardware_and_release_gates_pass": true,
+      "actual_seats": {
+        "old_left": true,
+        "new_right": true
+      },
+      "actual_cover_locked": true,
+      "actual_left_open": true,
+      "actual_rigid_settled": true,
+      "actual_release_clear": true,
+      "actual_paper_hands_clear": true,
+      "topology_ok": true,
+      "root_attached": false,
+      "geometry_accessible": false,
+      "paper_settled": false,
+      "root_error_max_m": 0.011202817157850223,
+      "max_node_speed_m_s": 0.6595492045356851,
+      "reasons": [
+        "root_attachment_error",
+        "free_edge_too_narrow",
+        "terminal_patch_too_small",
+        "no_qualifying_exposed_terminal_subpatch",
+        "crossing_outside_outlet",
+        "nodes_moving"
+      ]
+    },
+    {
+      "control": 300,
+      "score": 0.8,
+      "other_hardware_and_release_gates_pass": true,
+      "actual_seats": {
+        "old_left": true,
+        "new_right": true
+      },
+      "actual_cover_locked": true,
+      "actual_left_open": true,
+      "actual_rigid_settled": true,
+      "actual_release_clear": true,
+      "actual_paper_hands_clear": true,
+      "topology_ok": true,
+      "root_attached": false,
+      "geometry_accessible": false,
+      "paper_settled": false,
+      "root_error_max_m": 0.01175434921402322,
+      "max_node_speed_m_s": 2.532439370721866,
+      "reasons": [
+        "root_attachment_error",
+        "free_edge_too_narrow",
+        "terminal_patch_too_small",
+        "no_qualifying_exposed_terminal_subpatch",
+        "crossing_outside_outlet",
+        "nodes_moving"
+      ]
+    },
+    {
+      "control": 400,
+      "score": 0.8,
+      "other_hardware_and_release_gates_pass": true,
+      "actual_seats": {
+        "old_left": true,
+        "new_right": true
+      },
+      "actual_cover_locked": true,
+      "actual_left_open": true,
+      "actual_rigid_settled": true,
+      "actual_release_clear": true,
+      "actual_paper_hands_clear": true,
+      "topology_ok": true,
+      "root_attached": false,
+      "geometry_accessible": false,
+      "paper_settled": false,
+      "root_error_max_m": 0.012313508314106204,
+      "max_node_speed_m_s": 0.7051306663519857,
+      "reasons": [
+        "root_attachment_error",
+        "free_edge_too_narrow",
+        "terminal_patch_too_small",
+        "no_qualifying_exposed_terminal_subpatch",
+        "crossing_outside_outlet",
+        "nodes_moving"
+      ]
+    }
+  ],
+  "causal_boundary": "All other hardware/release gates pass and live scorer rejects this actual native combination of inaccessible geometry, root attachment outside tolerance and moving nodes. It does not isolate geometric inaccessibility, does not establish native inside-only rejection or a same-initial-state robot error policy, and does not imply fracture or permanent detachment.",
+  "reset_boundary": {
+    "original_reset_calls": 1,
+    "rigid_reset_writes": 5,
+    "paper_reset_writes": 1,
+    "control_phase_writes": 0,
+    "default_or_rest_changes": 0,
+    "added_constraints": 0,
+    "root_anchor_initial_error_m": 0.0
+  },
+  "evidence_boundary": "Compact derived audit from the native400-control run; raw logs, trajectories andvideos are not bundled. CPU-RESULT.json is the original preparation audit and its native_pending label predates this run."
+}

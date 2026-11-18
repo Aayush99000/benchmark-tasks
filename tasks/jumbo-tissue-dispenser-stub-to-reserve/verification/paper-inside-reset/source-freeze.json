@@ -1,0 +1,155 @@
+{
+  "at": "2026-11-16T19:24:20.537093+00:00",
+  "status": "FROZEN_FINAL_NATIVE_LOOP_CANDIDATE",
+  "entry": "jumbo_tissue_dispenser_stub_to_reserve.py",
+  "entry_sha256": "64848fea2f1be48445eee7c14fd09590af23da48bb486968707e3aad935a4649",
+  "all_file_sha256": {
+    "MATERIALS.md": "8e0f14cae7e93b67e6bd5fdba0a7f975da9d7bbb12b73db9addff0bc7a2134bf",
+    "README.md": "8c70dc63bf60cdfd53ce7feb0a9758c3164980a97026da7dc874f37a650a14d5",
+    "clearance_scene.py": "b215c7feed1b5ad4be184536ccc4b3e888cdedd49ecf0c7d458d029d8ae94a72",
+    "closed_finger_initial.py": "d98e59c4c983ec008e39f452ab07636b258b40e866b2a724b1c6f7869be3cfd4",
+    "closure17.csv": "9f28e317cfce0241f55814875f7d2da3e46b0b5178cee068b3618686d9d0efc4",
+    "closure_tool.py": "d6b847bf438aba646c1183cc772dc821fae9db034436fa3c34e3a86b77de569e",
+    "dispenser_device.py": "67968c63b213a96a00f297f265528b8f5e6a68ce0e7f87f440c2fa584ad0f886",
+    "enclosed_hardware.py": "4a83ed43a70789020392bea93f05172863a97df999e440a2cc0a2f0688311569",
+    "fixed_case_hardware.py": "79001bf2100c790494ed09e016e4e4c71c961a3a8180a8396bad709551bcb438",
+    "front_enclosure_hardware.py": "94b000f34fba2e200576909a049cac42ccb9504e9bdcfcb12335a2a2bfe1db6a",
+    "jumbo_tissue_dispenser_stub_to_reserve.py": "64848fea2f1be48445eee7c14fd09590af23da48bb486968707e3aad935a4649",
+    "latch_cam_scene.py": "d61ccadf13a9c9866ddee644acc7c331f1bf6cf8ba099ac8b554c52bbbfd954e",
+    "manual_frame_hardware.py": "7462c6522186b2ab1253013586ab5667ea8f1e008db28ae8e3cca4c7bca83a68",
+    "material_readback.py": "3b865ab967df089c33bf33fd5af312c6b127c665f767a50f9235d63d2ac3fed7",
+    "mechkit.py": "1aeb99c1df7f96b80a39f6f15de3e271b65e7a4894543fb03f1aa01c44a2e4b5",
+    "open_gap_scene.py": "539d6fd4dde1522c701357abd51f4efa263eb0f8c0cb59830fb3f4a3eee90471",
+    "panel-plan.json": "cfdf0a26d16ae7e5bcdf9577657d79044163b93cb3795a02a103145a8ef3a9b5",
+    "panel_targets.csv": "d166fc36edf9b69c1c7f37c5facc110224b9937d7335439b0ae141cc5cb53d77",
+    "pom_material_scene.py": "b0ad80156225df4a100fe4b7d08454aac9ae2d0f83fae3018960aa85b6a221b1",
+    "raw_geometry.py": "02db678c2fdc6f17ebdebcde2116d4fe11f9ec1d36b1fcaa34796db4c6e73b2f",
+    "release_clearance.py": "e8bf16bcaf572801dd4aaa2c4eb940e0f85c5c7dad1f38423fe17608a83b714e",
+    "residual-feedback-plan.json": "3b0d52e4efacd97a1a869fde432d9a0a4fa0766966fafc738e7a60a7d8a2e144",
+    "service-plan.json": "515620dc65eba11064d2b42bb7d6f84a505b12fe1b484e3c9cf0ea7b0e29a03c",
+    "service_targets.csv": "0ddc18fac2ee14b6845d5438581fe6ab248cd2f580eaf18a262113595c757601",
+    "setup_manifest.json": "3253335e7b8a15a5c1c397850af926ac0dfcb8b195a2fec0806b5d2d28e42f22",
+    "side_hinge_hardware.py": "61b2c4c18955d25a83c35fcdbd8e2e223d62994877a5954c5ca51cf8f54176e1",
+    "surface_access_geometry.py": "605e6660f70b50fd34970cc39622f54c9911fbcf5a04c028bf57080ee164f0de",
+    "surface_paper.py": "8e398f5eb1dcdcb1054e18cda7389b93ee7faa2ae5800a826e31cccf760e2714",
+    "task.json": "d19c8e3876bb7b48d1048a7c0f32b4e8f7a5f8cdaa073aa431dff1d5a1eeba96"
+  },
+  "runtime_source_and_plan_sha256": {
+    "MATERIALS.md": "8e0f14cae7e93b67e6bd5fdba0a7f975da9d7bbb12b73db9addff0bc7a2134bf",
+    "clearance_scene.py": "b215c7feed1b5ad4be184536ccc4b3e888cdedd49ecf0c7d458d029d8ae94a72",
+    "closed_finger_initial.py": "d98e59c4c983ec008e39f452ab07636b258b40e866b2a724b1c6f7869be3cfd4",
+    "closure17.csv": "9f28e317cfce0241f55814875f7d2da3e46b0b5178cee068b3618686d9d0efc4",
+    "closure_tool.py": "d6b847bf438aba646c1183cc772dc821fae9db034436fa3c34e3a86b77de569e",
+    "dispenser_device.py": "67968c63b213a96a00f297f265528b8f5e6a68ce0e7f87f440c2fa584ad0f886",
+    "enclosed_hardware.py": "4a83ed43a70789020392bea93f05172863a97df999e440a2cc0a2f0688311569",
+    "fixed_case_hardware.py": "79001bf2100c790494ed09e016e4e4c71c961a3a8180a8396bad709551bcb438",
+    "front_enclosure_hardware.py": "94b000f34fba2e200576909a049cac42ccb9504e9bdcfcb12335a2a2bfe1db6a",
+    "jumbo_tissue_dispenser_stub_to_reserve.py": "64848fea2f1be48445eee7c14fd09590af23da48bb486968707e3aad935a4649",
+    "latch_cam_scene.py": "d61ccadf13a9c9866ddee644acc7c331f1bf6cf8ba099ac8b554c52bbbfd954e",
+    "manual_frame_hardware.py": "7462c6522186b2ab1253013586ab5667ea8f1e008db28ae8e3cca4c7bca83a68",
+    "material_readback.py": "3b865ab967df089c33bf33fd5af312c6b127c665f767a50f9235d63d2ac3fed7",
+    "mechkit.py": "1aeb99c1df7f96b80a39f6f15de3e271b65e7a4894543fb03f1aa01c44a2e4b5",
+    "open_gap_scene.py": "539d6fd4dde1522c701357abd51f4efa263eb0f8c0cb59830fb3f4a3eee90471",
+    "panel-plan.json": "cfdf0a26d16ae7e5bcdf9577657d79044163b93cb3795a02a103145a8ef3a9b5",
+    "panel_targets.csv": "d166fc36edf9b69c1c7f37c5facc110224b9937d7335439b0ae141cc5cb53d77",
+    "pom_material_scene.py": "b0ad80156225df4a100fe4b7d08454aac9ae2d0f83fae3018960aa85b6a221b1",
+    "raw_geometry.py": "02db678c2fdc6f17ebdebcde2116d4fe11f9ec1d36b1fcaa34796db4c6e73b2f",
+    "release_clearance.py": "e8bf16bcaf572801dd4aaa2c4eb940e0f85c5c7dad1f38423fe17608a83b714e",
+    "residual-feedback-plan.json": "3b0d52e4efacd97a1a869fde432d9a0a4fa0766966fafc738e7a60a7d8a2e144",
+    "service-plan.json": "515620dc65eba11064d2b42bb7d6f84a505b12fe1b484e3c9cf0ea7b0e29a03c",
+    "service_targets.csv": "0ddc18fac2ee14b6845d5438581fe6ab248cd2f580eaf18a262113595c757601",
+    "side_hinge_hardware.py": "61b2c4c18955d25a83c35fcdbd8e2e223d62994877a5954c5ca51cf8f54176e1",
+    "surface_access_geometry.py": "605e6660f70b50fd34970cc39622f54c9911fbcf5a04c028bf57080ee164f0de",
+    "surface_paper.py": "8e398f5eb1dcdcb1054e18cda7389b93ee7faa2ae5800a826e31cccf760e2714"
+  },
+  "all_file_count": 29,
+  "physical_configuration_sha256": "a4696f80c30751bac8346454918893ee3983a8acb255d6ea64fc5488c7f1d03f",
+  "physical_equal_held1": true,
+  "scorer_surface_sha256": "605e6660f70b50fd34970cc39622f54c9911fbcf5a04c028bf57080ee164f0de",
+  "task_grader_file_sha256": "67968c63b213a96a00f297f265528b8f5e6a68ce0e7f87f440c2fa584ad0f886",
+  "metadata_may_receive_scores_media_after_results": true,
+  "negative_policy_data_boundary": "Externalcounterexampleactiontablesarenotphysicsource. EachisSHArequiredatload,controlvalidated,andcopiedtoitsrunprovenancebycanonical-run.py. DefaultreferenceandDreamdonotreadexternaloverrides. Noobject/node/forcewrites.",
+  "cpu_validation": {
+    "status": "FINAL_CPU_GATES_PASS",
+    "objects": 35,
+    "task_grader_cases": 27,
+    "surface_geometry_tests": 27,
+    "negative_policy_input_validation": [
+      {
+        "case": "valid",
+        "accepted": true,
+        "returncode": 0
+      },
+      {
+        "case": "badsha",
+        "accepted": false,
+        "returncode": 1
+      },
+      {
+        "case": "duplicate",
+        "accepted": false,
+        "returncode": 1
+      },
+      {
+        "case": "descending",
+        "accepted": false,
+        "returncode": 1
+      },
+      {
+        "case": "jointlimit",
+        "accepted": false,
+        "returncode": 1
+      },
+      {
+        "case": "fingerlimit",
+        "accepted": false,
+        "returncode": 1
+      },
+      {
+        "case": "nonfinite",
+        "accepted": false,
+        "returncode": 1
+      },
+      {
+        "case": "wrongcolumns",
+        "accepted": false,
+        "returncode": 1
+      },
+      {
+        "case": "unknown",
+        "accepted": false,
+        "returncode": 1
+      }
+    ],
+    "reference_ignores_external_override": true,
+    "entry_sha256": "64848fea2f1be48445eee7c14fd09590af23da48bb486968707e3aad935a4649",
+    "metadata_ready": {
+      "metadata_ready": true,
+      "qualification_pending": true,
+      "object_count": 35,
+      "field_lengths": {
+        "title": 93,
+        "category": 21,
+        "instruction": 95,
+        "context": 238,
+        "setup": 3665,
+        "scoring": 1422,
+        "run_limit": 45,
+        "reset_notes": 858,
+        "fidelity": 495,
+        "scores": 88,
+        "media": 0
+      },
+      "physical_python_unchanged": true,
+      "metadata_sha256": {
+        "task.json": "d19c8e3876bb7b48d1048a7c0f32b4e8f7a5f8cdaa073aa431dff1d5a1eeba96",
+        "README.md": "8c70dc63bf60cdfd53ce7feb0a9758c3164980a97026da7dc874f37a650a14d5",
+        "setup_manifest.json": "3253335e7b8a15a5c1c397850af926ac0dfcb8b195a2fec0806b5d2d28e42f22"
+      },
+      "wording_boundary": "Exposedarea lies below outlet; qualifying continuous free edge separately has20mm drop."
+    },
+    "boundary": "PureCPU validation; full native demonstration still pending."
+  },
+  "run_limit_controls": 6004,
+  "qualification_status": "pending_complete_native_reference_repeat_controls_model_media"
+}

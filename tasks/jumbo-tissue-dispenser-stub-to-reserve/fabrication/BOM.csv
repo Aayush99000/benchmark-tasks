@@ -1,0 +1,35 @@
+ID,quantity,item,material_or_procurement,dimensions_mm_or_spec,assembly_and_acceptance,CAD_or_reference
+C01,1,Fixed ABS shell/frame,ABS routed sheet and printed brackets,Exact originals in cut-list.csv; source envelope490x300.5; fabricated hinge extendsY510,Machine ABS contact stock; join fixed overlaps in jig. Separate steel receiver and ABS axles install with bolts.,cut-list.csv;cabinet_with_joint_hardware.stl
+C02,1,Door and latch tongue/rib,4mm ABS sheet plus ABS machined/bonded features,490x300.5x4; exact4sourcepieces; hingeedgeR4.2reliefs,Do not round working door/cam contact faces; moving hinge knuckles bonded into edge.,cover_with_hinge_knuckles.stl
+C03,2,Axle and shoulder,ABS; M6brassinsert,"Axle65L,77acrossflats24gon; shoulder6.5L,96acrossflats","Two M6x30 rear fastenings; bearings atY125/365,Z150.25",support_*_with_insert_bore.stl;shoulder_*_with_M6_clearance.stl
+C04,1,Selector plate and thumbtab,ABS,110x224x3 plus originaltab/bridge,Exact connected profile; do not print fused to rails.,source_selector_contact_envelope.stl
+C05,1set,Original10piece outlet tracks/frame,ABS,All manual_frame.* rows in cut-list,One endstop fitted last for slider insertion.,source_manual_frame_contact_envelope.stl
+C06,1each,Front/back keeper strips,ABS orPOM fittedwithsuitableadhesive,1.8x474x2.8 each,X15..16.8 and127.2..129;20Hzsim idealconstraint physicallyreplaced.,selector_front_keeper.stl;selector_rear_keeper.stl
+L01,1,Single triangular bolt with containedsquareloadzone,CNC POM-C,19x14 triangle12thick; boresD1.98+/-0.005x3.1; rearpocketD7.6x.4,Keep originalworkingprofile; not45deg; use36.384deg derived incline.,bolt_with_mounting_bores.stl
+L02,1,Steel receiver/guide/spring-seat body with removable upper,Machined steel; original steel contacts retained,Body blank114x64x32; upper18x64x4; guide2mm atZ280.3..282.3,Machine body to CAD; upper fitted last with2xM2x10; do not print as mixed-material ABS shell.,receiver_steel_body.stl;receiver_upper_removable.stl
+L03,2,Shouldered boltguide pins,POM withM1.6stud,D2peg3L/D5flange1.6L/D3shoulder2.4L/M1.6stud1.7L,PegD2.00+/-0.005;diametralinterference0.01..0.03;0.10blindfloorclearance;uppernutsbeforesteelupper.,bolt_guide_pins_pair.stl
+L04,2,Guidecapwasher,Stainless shim,"OD5,ID1.7,t0.2",TopZ282.5..282.7; add M1.6thin nutsheight<=1.3.,bolt_guide_washers_pair.stl
+L05,2,Guidepin nut,M1.6stainless thin nut,MaxAF3.2;height1.3,Uppercompletehardware mustremain<=Z284.2.,purchased
+L06,4,Bolttravelstopshim,PTFE shim,0.10thick; fit slotendcaps,Gauge18.00+/-0.10mm travel; glue fixed shims only.,cut-to-fit at slotends
+L07,1,Compressionreturnspring,Ground-end springwire G79GPa,"wire.50,meanD7,OD7.5,Na4.5,Nt6.5,L023.80",k.400+/-5%N/mm; actual pocket bottomsY205.60/229.40; compressedL5.80>solid3.25; no preload.,drawing02/ASSEMBLY5
+L08,1set,Guideviscosityfilm,Siliconeguidegrease/oil,Boltstart~2Pa.s; selectorstart.05Pa.s at22C,"Startingvaluesonly; benchmeasure0.8/.3Ns/m slopes,stictionseparate.",ASSEMBLY5
+H01,1set,Hingeknuckles,ABS,OD8/ID3.2; Zmodules20and230,Fixedmiddle/movingouterknuckles; edgeclearanceR4.2.,hinge_fixed_knuckles.stl;hinge_moving_knuckles.stl
+H02,1,Rotatingshaft,Groundstainless steel,D3.00x297; Z15..312,Bond onlyto movingknucklesandrotor; fixedboresplainjournals.,hinge_shaft_D3_L297.stl
+H03,2,Hingethrustwasher,PTFE,OD7.8/ID3.2/t0.2,Z50.2..50.4and260.2..260.4 carrydoorweight.,purchased/cut
+H05,1each,0/180hardstops,ABS,ExactCAD; setwithanglejig,No returntorque.,hinge_closed_stop.stl;hinge_open_stop.stl
+D01,1each,PassiveCouettecup/lid/rotor/mount,ABS or machinedoilcompatiblepolymer,"CupOD62/ID51,rotorD50t2,twogaps.5",Print thenmachinegapfacesandseal glands; no activeactuator.,hinge_damper_*.stl
+D02,1fill,Dampingfluid,Siliconefluid,Dynamicviscosity244.5Pa.snominal at22C,"Approxnominalc.6Nms/rad; calibraterimshear,sealsandtemperature.",ASSEMBLY7
+D03,2,Rotatingshaftseal,Silicone orNBR O-ring,"ID3,CS1; glandID3.2/OD5.6/depth.8","Nominal20% axial squeeze; verify actual seal fit, leakage and measured drag.",purchased
+D04,4each,Lidscrews/inserts,M2x4 screw/M2brassinsertOD3.2x3,R28 at0/90/180/270deg,InsertZ305.7..308.7; screw2mm engagement;tipZ306.7 is3mm above mount.,purchased
+D05,1,Flushlidgasket,Oilcompatiblesilicone,0.2thick; recessedflush0.2,Machinegasketrecess afterprinting; do notincreasefluidgap.,cutfromsheet
+D06,2each,Dampermountscrew/inserts,M3x8+OD7x1washer/OD4.5x4brassinsert,"HolecentresX30,Y460/468; cupplanwasherclearance>=1.11",0.2stand-offs;3.8mm thread engagement;tipZ296.7 is0.2mm above insertbottom.,purchased
+A01,2each,Supportfastenings,M6x30hexbolt headheight<=4;1mmwasher;M6brassinsertOD8x12,"AxialbackclearanceD6.5,insertseatD8.2",Bond OD8insert intoD8.2 seat with ABS-compatible structuralepoxy;0.10radialbondline;<=1.5Nm;10Nfrontloadcheck.,purchased
+A02,2each,Receiverfastenings,M3x12 steel bolts with1mm washers,"AxisX,Y190,Z264/281; steelD2.5x8tapM3; ABSbackclearanceD3.2",5mm steel thread engagement;3mm pilotfloor clearance;<=0.5Nm.,purchased
+A03,4each,Backboardfastenings,M5x40countersunkbolt/1mmwasher/M5throughnut;6mmspacers,"Y60/430,Z35/265;D5.5hole/D10csk;spacerID5.5/OD12x6",Stackrearplate6+gap6+board20=32mm;flushheadX126;tipX166;washer/nutbehindboardX158.,assemblydrillingoperation
+T01,1,Loose closing tool,One-piece CNC aluminium preferred,"Blank60x102x85; localX-30..30,Y-32..70,Z-20..65","Machine closing_tool_with_weld final union; source sixstock rows describe constituents, not unmodified assembly.",closing_tool_with_weld.stl;ASSEMBLY8
+T02,1,Integral toolneck/bridgeweb or optional weld,Aluminium integralweb; qualified weld for stockroute,"LocalX+/-4,YZdiamond(54,4)(56,2)(58,4)(56,6)",Source edge-only join needs explicit web; envelope64mm3/netnew32mm3; stockroute requires riser notches352/624mm3.,closing_tool_neck_bridge_weld.stl;closing_tool_with_weld.stl
+F01,1set,Benchboards/legs/backboard/carton,Wood boards; steel legs; cardboard carton,Exactfixturepositionsandsizes in cut-list,410centralgap; bolt cabinet to fixedsupport.,drawing01;cut-list.csv
+P01,1each,Fullandresidualtissuerolls,Actualtissue/cardboardcore,"FullOD223.52,W86.36,ID83.82,743.891g;stubOD115/150g target",Measureandrecordactualproduct; freestandingrotatablecores.,tasksetup;ASSEMBLY9
+P02,1,Looseattachedtissuetail,Actualtissue,350x86.36; nominal28g/m2/100um,Clockroot30deginnerupper;prethreadleftoutlet;gravityactive/noextraattachment.,drawing05;ASSEMBLY9
+D07,1cap+2fasteners,Upper shaft O-ring retainer,ABS cap; M1.6x3 screws with0.5mm washers,"OD16/ID3.2/t1; twoholes(X-4,Y490),(X8,Y490)",Capture uppergland; blindtapD1.25x1.7; screwprojection1.5 leaves0.2 bottommargin; no cavitybreakthrough.,hinge_damper_shaft_seal_cap.stl
+A04,2,Removable steel receiver upper fastenings,M2x10 countersunk screws; headOD<=3.8,"AxisZ atX35,Y188/192; upperD2.2/countersinkD3.8; bodyD1.6x7tapM2",Install upper after guidepins/washers/nuts;6mm thread engagement;1mm pilotfloor margin.,receiver_upper_removable.stl;receiver_steel_body.stl

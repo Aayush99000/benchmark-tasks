@@ -1,0 +1,67 @@
+{
+  "status": "EXACT_EXECUTED_V3_VERIFICATION_FIXTURE_BUNDLED",
+  "harness_sha256": "a84df199854b0a7ad9849a863dc013a7161cc3372780b0d78949db20e5367a39",
+  "files": {
+    "robot_without_cameras_v2.py": {
+      "bytes": 4767,
+      "sha256": "e006846afbe4112be7fb24a825f5fe76efef6a4fd165dc0f897cc8b00abc43cf"
+    },
+    "prepare_reproduction.py": {
+      "bytes": 1786,
+      "sha256": "0793b00c6bbc99583f4af079ef7011f5682e3fefa7567b5380ac5b1763fd6c0c"
+    },
+    "reset-rigid-poses.json": {
+      "bytes": 2721,
+      "sha256": "f34df770b59147bafc3114d8b8ff2ebf251c41e44659f119a07e59295912008c"
+    },
+    "reset-nodes.npz": {
+      "bytes": 34290,
+      "sha256": "ede96fddb54d76a1fcc9e3f5ce11c16c810be750f5395c21dc4fbcded9217ca7"
+    },
+    "native-adverse-audit.json": {
+      "bytes": 4951,
+      "sha256": "683b210e08a855286eebdd4625fc023c85e37eed19fbad84aa246b974559e78d"
+    },
+    "reset_control.py": {
+      "bytes": 7491,
+      "sha256": "a84df199854b0a7ad9849a863dc013a7161cc3372780b0d78949db20e5367a39"
+    },
+    "source-freeze.json": {
+      "bytes": 8516,
+      "sha256": "0528d836dddbf6ec0ea4882595274bee00c4dae88cfa77d728434a9bf0998366"
+    },
+    "README.md": {
+      "bytes": 4580,
+      "sha256": "644531d926024233230ec3557c9f8d0261aed044350aa761665666de8be405fd"
+    },
+    "CPU-RESULT.json": {
+      "bytes": 388269,
+      "sha256": "c6e22c446036d3efcd4af8b7ea76c1c8511d0e4eabf71ec2bed46cdd4e9d4fb3"
+    },
+    "frozen-metadata/task.json": {
+      "bytes": 7391,
+      "sha256": "d19c8e3876bb7b48d1048a7c0f32b4e8f7a5f8cdaa073aa431dff1d5a1eeba96"
+    },
+    "frozen-metadata/MATERIALS.md": {
+      "bytes": 2802,
+      "sha256": "8e0f14cae7e93b67e6bd5fdba0a7f975da9d7bbb12b73db9addff0bc7a2134bf"
+    },
+    "frozen-metadata/README.md": {
+      "bytes": 5185,
+      "sha256": "8c70dc63bf60cdfd53ce7feb0a9758c3164980a97026da7dc874f37a650a14d5"
+    }
+  },
+  "total_bytes": 472749,
+  "exact_five_executed_inputs": true,
+  "runner_exact_bytes": true,
+  "scratch_reproduction_29_hashes": {
+    "status": "EXACT_FROZEN_COPY_READY",
+    "files": 29,
+    "source_unchanged": true
+  },
+  "no_absolute_personal_paths": true,
+  "canonical_runtime_source_unchanged": true,
+  "native_simulation_run_during_packaging": false,
+  "staged_or_committed_by_packager": false,
+  "evidence_boundary": "Native combined adverse reset0.8 with rootattachment outside tolerance; strictisolatedfalse. CPU audit is historical preparation. No traces/videos/private logs bundled."
+}

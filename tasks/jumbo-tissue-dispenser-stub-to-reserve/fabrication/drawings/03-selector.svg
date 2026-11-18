@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 1680 1188">
+<defs><marker id="arr" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse"><path d="M0 0L8 4L0 8" fill="none" stroke="#222"/></marker></defs>
+<rect x="16" y="16" width="1648" height="1156" fill="white" stroke="#222"/>
+<text x="45" y="57" font-family="sans-serif" font-size="26" fill="#111">03 | Captured selector and lower outlet frame</text>
+<text x="45" y="86" font-family="sans-serif" font-size="16" fill="#111">P0 prototype fabrication | dimensions in mm | not to scale | datum O = world (368,-245,787.5) mm</text>
+<rect x="95.0" y="394.0" width="900.5999999999999" height="11.399999999999999" fill="#aaa" fill-opacity=".7" stroke="#222"/>
+<rect x="95.0" y="196.4" width="900.5999999999999" height="11.399999999999999" fill="#aaa" fill-opacity=".7" stroke="#222"/>
+<rect x="95.0" y="394.0" width="22.799999999999997" height="209.0" fill="#aaa" fill-opacity=".7" stroke="#222"/>
+<rect x="972.8" y="394.0" width="22.799999999999997" height="209.0" fill="#aaa" fill-opacity=".7" stroke="#222"/>
+<rect x="516.8" y="394.0" width="57.0" height="209.0" fill="#aaa" fill-opacity=".7" stroke="#222"/>
+<rect x="104.5" y="403.5" width="425.59999999999997" height="209.0" fill="#df7068" fill-opacity=".7" stroke="#222"/>
+<path d="M95 145L995.5999999999999 145" stroke="#222" fill="none" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="549.3" y="138.0" font-family="sans-serif" font-size="15" fill="#111">474 fixed rails Y8..482</text>
+<path d="M104.5 455L530.0999999999999 455" stroke="#222" fill="none" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="321.29999999999995" y="448.0" font-family="sans-serif" font-size="15" fill="#111">224 plate width Y</text>
+<text x="100" y="495" font-family="sans-serif" font-size="18" fill="#111">BOTTOM VIEW: red selector startsY13..237; at+240 it spans253..477.</text>
+<text x="1050" y="175" font-family="sans-serif" font-size="16" fill="#111">Panel X17..127 (110),Z-7..-4 (3)</text>
+<text x="1050" y="200" font-family="sans-serif" font-size="16" fill="#111">Thumb tab X10..14,Y115..135,Z-25..-2</text>
+<text x="1050" y="225" font-family="sans-serif" font-size="16" fill="#111">Bridge X10..19,Y115..135,Z-4..-2</text>
+<text x="1050" y="250" font-family="sans-serif" font-size="16" fill="#111">Two clear openings:</text>
+<text x="1050" y="275" font-family="sans-serif" font-size="16" fill="#111">X28..126; Y20..230 and260..470</text>
+<text x="1050" y="300" font-family="sans-serif" font-size="16" fill="#111">Physical stops atY13 and477; travel240</text>
+<text x="1050" y="325" font-family="sans-serif" font-size="16" fill="#111">Initial q=0 covers the Y&lt;245 aperture.</text>
+<text x="1050" y="350" font-family="sans-serif" font-size="16" fill="#111">Do not add automatic spring or pawl.</text>
+<text x="90" y="595" font-family="sans-serif" font-size="19" fill="#111">SECTION AT Y125 (initial covered side), looking along +Y</text>
+<rect x="144" y="734" width="98" height="14" fill="#999" fill-opacity=".7" stroke="#222"/>
+<rect x="193" y="685" width="42" height="21" fill="#999" fill-opacity=".7" stroke="#222"/>
+<rect x="914" y="734" width="28" height="14" fill="#999" fill-opacity=".7" stroke="#222"/>
+<rect x="921" y="685" width="42" height="21" fill="#999" fill-opacity=".7" stroke="#222"/>
+<rect x="942" y="692" width="14" height="56" fill="#999" fill-opacity=".7" stroke="#222"/>
+<rect x="158" y="713" width="770" height="21" fill="#df7068" fill-opacity=".7" stroke="#222"/>
+<rect x="144" y="714.4" width="12.6" height="19.599999999999998" fill="#70a8be" fill-opacity=".7" stroke="#222"/>
+<rect x="929.4" y="714.4" width="12.6" height="19.599999999999998" fill="#70a8be" fill-opacity=".7" stroke="#222"/>
+<text x="100" y="925" font-family="sans-serif" font-size="16" fill="#111">NEW BLUE KEEPERS: front X15..16.8; rear X127.2..129; Y8..482; Z-7..-4.2.</text>
+<text x="100" y="950" font-family="sans-serif" font-size="16" fill="#111">They sit inside the original track envelope and below the thumbtab bridge; lateral gaps0.20+0.20.</text>
+<text x="100" y="975" font-family="sans-serif" font-size="16" fill="#111">The original lower tracks support Z=-7; upper rim begins Z=-3. The3mm plate has1.0mm vertical play.</text>
+<text x="100" y="1000" font-family="sans-serif" font-size="16" fill="#111">Bond keepers after fitting the plate. Bond one4mmY endstop last, so the plate can be inserted from the end.</text>
+<text x="100" y="1025" font-family="sans-serif" font-size="16" fill="#111">Original10frame piece sizes/positions are every manual_frame.* row of cut-list.csv; no dimensions are inferred from this drawing.</text>
+<text x="45" y="1120" font-family="sans-serif" font-size="16" fill="#111">General cut +/-0.10; cam, guide pins/slots and spring faces +/-0.05 unless stated. Ream fit holes after printing.</text>
+<text x="45" y="1148" font-family="sans-serif" font-size="16" fill="#111">STLs share closed assembly coordinates. cut-list.csv and parts-mm.json are the complete coordinate/stock schedules.</text>
+</svg>

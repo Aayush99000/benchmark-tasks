@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 1680 1188">
+<defs><marker id="arr" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse"><path d="M0 0L8 4L0 8" fill="none" stroke="#222"/></marker></defs>
+<rect x="16" y="16" width="1648" height="1156" fill="white" stroke="#222"/>
+<text x="45" y="57" font-family="sans-serif" font-size="26" fill="#111">04 | Real vertical pin hinge, edge reliefs and passive rotary damper</text>
+<text x="45" y="86" font-family="sans-serif" font-size="16" fill="#111">P0 prototype fabrication | dimensions in mm | not to scale | datum O = world (368,-245,787.5) mm</text>
+<line x1="170" y1="170" x2="170" y2="1011.4" stroke="#c33" stroke-width="2"/>
+<rect x="158" y="913.4" width="24" height="42.0" fill="#82a4b7" fill-opacity=".7" stroke="#222"/>
+<rect x="158" y="828.28" width="24" height="42.000000000000014" fill="#82a4b7" fill-opacity=".7" stroke="#222"/>
+<rect x="158" y="870.84" width="24" height="42.0" fill="#ddd" fill-opacity=".7" stroke="#222"/>
+<rect x="158" y="325.4" width="24" height="42.0" fill="#82a4b7" fill-opacity=".7" stroke="#222"/>
+<rect x="158" y="240.28000000000006" width="24" height="42.0" fill="#82a4b7" fill-opacity=".7" stroke="#222"/>
+<rect x="158" y="282.84000000000003" width="24" height="42.0" fill="#ddd" fill-opacity=".7" stroke="#222"/>
+<text x="70" y="145" font-family="sans-serif" font-size="18" fill="#111">Elevation: hinge axis X2,Y490; stainless D3 shaft Z15..312 (L297)</text>
+<text x="330" y="185" font-family="sans-serif" font-size="16" fill="#111">Two hinges, module starts Z20 and230:</text>
+<text x="330" y="210" font-family="sans-serif" font-size="16" fill="#111">moving knuckles Zs..s+15 ands+30.4..s+45.4;</text>
+<text x="330" y="235" font-family="sans-serif" font-size="16" fill="#111">fixed middle knuckle Zs+15.2..s+30.2.</text>
+<text x="330" y="260" font-family="sans-serif" font-size="16" fill="#111">All OD8.00,reamed boreD3.20; shaftD3.00.</text>
+<text x="330" y="285" font-family="sans-serif" font-size="16" fill="#111">PTFE thrustwashers D7.8/ID3.2/t0.20,</text>
+<text x="330" y="310" font-family="sans-serif" font-size="16" fill="#111">atZ50.2..50.4 and260.2..260.4 support door.</text>
+<text x="330" y="335" font-family="sans-serif" font-size="16" fill="#111">Bond shaft only into moving knuckles and rotor;</text>
+<text x="330" y="360" font-family="sans-serif" font-size="16" fill="#111">fixed middle bores remain lubricated journals.</text>
+<text x="330" y="385" font-family="sans-serif" font-size="16" fill="#111">Relief radius4.20 around axis: remove door-edge</text>
+<text x="330" y="410" font-family="sans-serif" font-size="16" fill="#111">material only at fixed knuckle heights(+/-0.20);</text>
+<text x="330" y="435" font-family="sans-serif" font-size="16" fill="#111">remove case-edge material only at moving heights.</text>
+<text x="330" y="460" font-family="sans-serif" font-size="16" fill="#111">This hinge margin is explicitly omitted by simulation.</text>
+<text x="330" y="485" font-family="sans-serif" font-size="16" fill="#111">Stop0: X4..6,Y0..4,Z80..100.</text>
+<text x="330" y="510" font-family="sans-serif" font-size="16" fill="#111">Stop180: X4..15,Y486..510,Z95..105.</text>
+<text x="330" y="535" font-family="sans-serif" font-size="16" fill="#111">Set with angle gauge before bonding stops.</text>
+<text x="900" y="155" font-family="sans-serif" font-size="19" fill="#111">Damper section through shaft; dimensions in Z</text>
+<rect x="1064" y="477.80000000000007" width="372" height="12" fill="#bbb" fill-opacity=".7" stroke="#222"/>
+<rect x="1064" y="465.80000000000007" width="33.0" height="18" fill="#bbb" fill-opacity=".7" stroke="#222"/>
+<rect x="1403.0" y="465.80000000000007" width="33.0" height="18" fill="#bbb" fill-opacity=".7" stroke="#222"/>
+<rect x="1100" y="462.80000000000007" width="300" height="12" fill="#79a8bc" fill-opacity=".7" stroke="#222"/>
+<rect x="1064" y="447.80000000000007" width="372" height="12" fill="#bbb" fill-opacity=".7" stroke="#222"/>
+<rect x="1241.0" y="500" width="18" height="72" fill="#666" fill-opacity=".7" stroke="#222"/>
+<text x="870" y="620" font-family="sans-serif" font-size="16" fill="#111">Cup OD62,innerD51,base2.0,totalheight5.0.</text>
+<text x="870" y="645" font-family="sans-serif" font-size="16" fill="#111">Cup Z303.7..308.7; lidt2,Z308.7..310.7.</text>
+<text x="870" y="670" font-family="sans-serif" font-size="16" fill="#111">Rotor D50,t2,Z306.2..308.2,shaft boreD3.0.</text>
+<text x="870" y="695" font-family="sans-serif" font-size="16" fill="#111">Actual fluid gaps:0.50 below,0.50 above,0.50 radial.</text>
+<text x="870" y="720" font-family="sans-serif" font-size="16" fill="#111">Four M2x4 lidbolts onR28,at0/90/180/270deg.</text>
+<text x="870" y="745" font-family="sans-serif" font-size="16" fill="#111">Cup insertboresD3.2,lidclearanceD2.2.</text>
+<text x="870" y="770" font-family="sans-serif" font-size="16" fill="#111">Two O-rings3IDx1CS; glandsID3.2/OD5.6,</text>
+<text x="870" y="795" font-family="sans-serif" font-size="16" fill="#111">depth0.80 atcupbottom/lidtop; shaft boreD3.2.</text>
+<text x="870" y="820" font-family="sans-serif" font-size="16" fill="#111">Mount66x70x3; M3x8+OD7x1washers/4mminserts,</text>
+<text x="870" y="845" font-family="sans-serif" font-size="16" fill="#111">Z300.7..303.7; M3 holes(X30,Y460),(X30,Y468).</text>
+<text x="870" y="870" font-family="sans-serif" font-size="16" fill="#111">Nominal silicone dynamic viscosity244.5Pa.s</text>
+<text x="870" y="895" font-family="sans-serif" font-size="16" fill="#111">at22C gives c~0.600Nms/rad from both faces.</text>
+<text x="870" y="920" font-family="sans-serif" font-size="16" fill="#111">Measure combined rim/seal drag; adjustfluid blend.</text>
+<text x="870" y="945" font-family="sans-serif" font-size="16" fill="#111">Upper O-ring: capOD16/ID3.2/t1,Z310.7..311.7;</text>
+<text x="870" y="970" font-family="sans-serif" font-size="16" fill="#111">M1.6x3+0.5washers:1.5engagement,.2bottommargin.</text>
+<text x="870" y="995" font-family="sans-serif" font-size="16" fill="#111">Two screwsX-4/8,Y490; blind taps1.7; passive shear.</text>
+<text x="45" y="1120" font-family="sans-serif" font-size="16" fill="#111">General cut +/-0.10; cam, guide pins/slots and spring faces +/-0.05 unless stated. Ream fit holes after printing.</text>
+<text x="45" y="1148" font-family="sans-serif" font-size="16" fill="#111">STLs share closed assembly coordinates. cut-list.csv and parts-mm.json are the complete coordinate/stock schedules.</text>
+</svg>

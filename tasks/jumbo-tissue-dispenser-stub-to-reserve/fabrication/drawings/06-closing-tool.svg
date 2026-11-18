@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 1680 1188">
+<defs><marker id="arr" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse"><path d="M0 0L8 4L0 8" fill="none" stroke="#222"/></marker></defs>
+<rect x="16" y="16" width="1648" height="1156" fill="white" stroke="#222"/>
+<text x="45" y="57" font-family="sans-serif" font-size="26" fill="#111">06 | Aluminium closing tool and explicit neck/bridge weld</text>
+<text x="45" y="86" font-family="sans-serif" font-size="16" fill="#111">P0 prototype fabrication | dimensions in mm | not to scale | datum O = world (368,-245,787.5) mm</text>
+<text x="80" y="145" font-family="sans-serif" font-size="18" fill="#111">SIDE VIEW in tool-local Y/Z. Prefer one-piece CNC from60x102x85 aluminium blank; do not scale this view.</text>
+<rect x="100" y="540" width="240" height="180" fill="#ccc" fill-opacity=".7" stroke="#222"/>
+<rect x="340" y="606" width="288" height="48" fill="#aab7c4" fill-opacity=".7" stroke="#222"/>
+<rect x="628" y="558" width="48" height="48" fill="#ccc" fill-opacity=".7" stroke="#222"/>
+<rect x="616" y="501.0" width="72" height="90" fill="#ccc" fill-opacity=".7" stroke="#222"/>
+<rect x="592" y="240" width="120" height="300" fill="#ccc" fill-opacity=".7" stroke="#222"/>
+<rect x="232" y="720" width="480" height="30" fill="#ccc" fill-opacity=".7" stroke="#222"/>
+<polygon points="616,606 628,618 640,606 628,594" fill="#e3a04c" fill-opacity=".6" stroke="#111" stroke-width="2"/>
+<path d="M100 795L712 795" stroke="#222" fill="none" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="410.0" y="788.0" font-family="sans-serif" font-size="15" fill="#111">102 overall Y</text>
+<path d="M750 750L750 240" stroke="#222" fill="none" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="754.0" y="488.0" font-family="sans-serif" font-size="15" fill="#111">85 overall Z</text>
+<text x="910" y="175" font-family="sans-serif" font-size="16" fill="#111">Tool-local origin = CAD(-208,745,-20).</text>
+<text x="910" y="200" font-family="sans-serif" font-size="16" fill="#111">Foot:60X x40Y x30Z at(0,-12,0).</text>
+<text x="910" y="225" font-family="sans-serif" font-size="16" fill="#111">Neck:8X x48Y x8Z at(0,32,0).</text>
+<text x="910" y="250" font-family="sans-serif" font-size="16" fill="#111">Bridge:28X x8Y x8Z at(10,60,8).</text>
+<text x="910" y="275" font-family="sans-serif" font-size="16" fill="#111">Riser:8X x12Y x15Z at(20,60,14).</text>
+<text x="910" y="300" font-family="sans-serif" font-size="16" fill="#111">Handle:18X x20Y x50Z at(20,60,40).</text>
+<text x="910" y="325" font-family="sans-serif" font-size="16" fill="#111">Base:50X x80Y x5Z at(0,30,-17.5).</text>
+<text x="910" y="350" font-family="sans-serif" font-size="16" fill="#111">Source constituents of CNC union.</text>
+<text x="910" y="460" font-family="sans-serif" font-size="20" fill="#111">ENLARGED ZERO-AREA JOIN</text>
+<polygon points="1000,630 1060,690 1120,630 1060,570" fill="#e3a04c" fill-opacity=".6" stroke="#111" stroke-width="2"/>
+<circle cx="1060" cy="630" r="4" fill="#c33" stroke="#222"/>
+<text x="910" y="745" font-family="sans-serif" font-size="16" fill="#111">Original neck endsY56/topZ4; bridge startsY56/bottomZ4.</text>
+<text x="910" y="770" font-family="sans-serif" font-size="16" fill="#111">Source contact is only an8mm X-edge, with no mating area.</text>
+<text x="910" y="795" font-family="sans-serif" font-size="16" fill="#111">New web: X-4..4, YZdiamond(54,4),(56,2),(58,4),(56,6).</text>
+<text x="910" y="820" font-family="sans-serif" font-size="16" fill="#111">2mm web integral to CNC part; weld if using stock route.</text>
+<text x="910" y="845" font-family="sans-serif" font-size="16" fill="#111">Envelope64mm3; netnew union32mm3; unmeasured mass.</text>
+<text x="910" y="870" font-family="sans-serif" font-size="16" fill="#111">Fabricated combined tool must have1connectedwatertight body.</text>
+<text x="910" y="895" font-family="sans-serif" font-size="16" fill="#111">Leave foot/handle exterior faces unchanged; proof-load20N.</text>
+<text x="80" y="990" font-family="sans-serif" font-size="16" fill="#111">Optional stockroute: mill riser notches before welding (tool-local coordinates):</text>
+<text x="80" y="1015" font-family="sans-serif" font-size="16" fill="#111">X16..24,Y56..64,Z6.5..12 removes352mm3 for bridge; X16..24,Y54..66,Z15..21.5 removes624mm3 for handle.</text>
+<text x="80" y="1040" font-family="sans-serif" font-size="16" fill="#111">Source toolSTL retains its2shells as evidence. Use closing_tool_with_weld.stl for one-piece machining,</text>
+<text x="80" y="1065" font-family="sans-serif" font-size="16" fill="#111">not slicer auto-repair. The small added web and machining/fastening details are omitted from simulation.</text>
+<text x="45" y="1120" font-family="sans-serif" font-size="16" fill="#111">General cut +/-0.10; cam, guide pins/slots and spring faces +/-0.05 unless stated. Ream fit holes after printing.</text>
+<text x="45" y="1148" font-family="sans-serif" font-size="16" fill="#111">STLs share closed assembly coordinates. cut-list.csv and parts-mm.json are the complete coordinate/stock schedules.</text>
+</svg>

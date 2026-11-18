@@ -1,0 +1,169 @@
+{
+  "status": "ONE_ORDINARY_HELD_FULL_INSERTION_NATIVE_PENDING",
+  "controls": 3900,
+  "service_before_READY_end": 3820,
+  "hz": 20,
+  "action_file": "service_targets.csv",
+  "sha256": "0ddc18fac2ee14b6845d5438581fe6ab248cd2f580eaf18a262113595c757601",
+  "source4_csv_sha256": "76ddd144d1137d464e57741ab87eac09fc7f882ea06e14bdd96b1188c17f707f",
+  "source4_rows": 3905,
+  "ordinary_interface_added": 80,
+  "ordinary_READYreturn_added": 80,
+  "maximum_IK_mm": 0.0008789611542742515,
+  "maximum_IK_rad": 3.277751191325141e-06,
+  "max_right_joint_target_step_rad": 0.11969886329421364,
+  "joint_step_over0p25_controls": [],
+  "changed_layout": true,
+  "oldnativegrade_not_inherited": true,
+  "ordinary_staged_carry_controls": [
+    2241,
+    2540
+  ],
+  "carry_stage_steps": [
+    100,
+    200
+  ],
+  "oldcarry_replaced_source2_controls": [
+    1801,
+    2200
+  ],
+  "runtime_encoder_servo_added": "ordinary_residual_pose_reference_only_controls641to900",
+  "ordinary_supply_clock_controls": [
+    300,
+    1580
+  ],
+  "supply_clock_full_weight_controls": [
+    340,
+    960
+  ],
+  "supply_clock_grasp_source": "native source10 control300",
+  "stub_in_hand": [
+    [
+      -0.00796268101704078,
+      -0.9999641223900474,
+      0.0028895750073684766,
+      0.04871722731636639
+    ],
+    [
+      -0.9999506981934603,
+      0.00794536357181686,
+      -0.005955869384305092,
+      0.0008759126274403561
+    ],
+    [
+      0.0059326969779448,
+      -0.002936857234186837,
+      -0.999978088748026,
+      0.08437506769279218
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "supply_clock_IK_max_mm": 0.0008789611542742515,
+  "replacement_controls": [
+    2541,
+    3900
+  ],
+  "payload_mass_kg": 0.743891,
+  "payload_COM_in_hand_m": [
+    -0.0011352458371470925,
+    0.002362989364289303,
+    0.030384943481844486
+  ],
+  "payload_K_Nm_per_rad": [
+    80.0,
+    80.0,
+    80.0,
+    10.0,
+    10.0,
+    10.0
+  ],
+  "payload_reference_limit_rad": 0.25,
+  "payload_model_bias_rad": [
+    -0.00017335019109867737,
+    -0.0002713408578136796,
+    -0.0007504734589067301,
+    0.01668661301925624,
+    -0.0030529213250527374,
+    -0.015033589445980431
+  ],
+  "payload_model_grasp_source": "native source11 control2560 before cabinet contact",
+  "payload_release_controls": [
+    3141,
+    3200
+  ],
+  "maximum_postcross_IK_mm": 0.0009426381539524842,
+  "annular_face_push_controls": [
+    3481,
+    3680
+  ],
+  "partial_supported_roll_nose_x_m": 0.4635,
+  "annular_push_position_lead_m": 0.03,
+  "residual_replaced_controls": [
+    641,
+    1580
+  ],
+  "residual_release_controls": [
+    901,
+    960
+  ],
+  "residual_annular_push_controls": [
+    1201,
+    1360
+  ],
+  "preserved_source12_suffix_controls": [
+    1542,
+    3781
+  ],
+  "preserved_suffix_new_start": 1661,
+  "preserved_suffix_shift": 119,
+  "residual_mass_kg": 0.15,
+  "residual_COM_in_hand_m": [
+    0.048817347105688656,
+    0.0006764090313576357,
+    0.04124525243922681
+  ],
+  "residual_payload_reference_limit_rad": 0.25,
+  "residual_payload_bias_rad": [
+    0.002629175363733402,
+    0.0005016622707002816,
+    0.0010612337522459686,
+    -0.002114568120589577,
+    0.0031039437512030976,
+    0.014486886553440905
+  ],
+  "maximum_residual_IK_mm": 0.0006457465670780346,
+  "residual_partial_nose_x_m": 0.46,
+  "residual_final_pusher_position_lead_m": 0.03,
+  "residual_feedback_plan_file": "residual-feedback-plan.json",
+  "residual_feedback_plan_sha256": "3b0d52e4efacd97a1a869fde432d9a0a4fa0766966fafc738e7a60a7d8a2e144",
+  "residual_external_grasp_release_finger": 0.5324813631522897,
+  "residual_release_direction_correction_controls": [
+    901,
+    1120
+  ],
+  "held_insertion_controls": [
+    721,
+    900
+  ],
+  "held_insertion_target_x_m": 0.489,
+  "held_insertion_axis_z_m": 0.93775,
+  "release_hold_controls": [
+    901,
+    960
+  ],
+  "actual_encoder_axis_retreat_controls": [
+    961,
+    1060
+  ],
+  "retreat_m": 0.07,
+  "safe_bridge_controls": [
+    1061,
+    1120
+  ],
+  "unchanged_suffix_from_control": 1121
+}

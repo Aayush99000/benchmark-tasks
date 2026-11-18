@@ -1,0 +1,222 @@
+{
+  "verified_at_utc": "2026-11-16T20:30:42.176262+00:00",
+  "physical_source_sha256": {
+    "clearance_scene.py": "b215c7feed1b5ad4be184536ccc4b3e888cdedd49ecf0c7d458d029d8ae94a72",
+    "closed_finger_initial.py": "d98e59c4c983ec008e39f452ab07636b258b40e866b2a724b1c6f7869be3cfd4",
+    "closure17.csv": "9f28e317cfce0241f55814875f7d2da3e46b0b5178cee068b3618686d9d0efc4",
+    "closure_tool.py": "d6b847bf438aba646c1183cc772dc821fae9db034436fa3c34e3a86b77de569e",
+    "dispenser_device.py": "67968c63b213a96a00f297f265528b8f5e6a68ce0e7f87f440c2fa584ad0f886",
+    "enclosed_hardware.py": "4a83ed43a70789020392bea93f05172863a97df999e440a2cc0a2f0688311569",
+    "fixed_case_hardware.py": "79001bf2100c790494ed09e016e4e4c71c961a3a8180a8396bad709551bcb438",
+    "front_enclosure_hardware.py": "94b000f34fba2e200576909a049cac42ccb9504e9bdcfcb12335a2a2bfe1db6a",
+    "jumbo_tissue_dispenser_stub_to_reserve.py": "64848fea2f1be48445eee7c14fd09590af23da48bb486968707e3aad935a4649",
+    "latch_cam_scene.py": "d61ccadf13a9c9866ddee644acc7c331f1bf6cf8ba099ac8b554c52bbbfd954e",
+    "manual_frame_hardware.py": "7462c6522186b2ab1253013586ab5667ea8f1e008db28ae8e3cca4c7bca83a68",
+    "material_readback.py": "3b865ab967df089c33bf33fd5af312c6b127c665f767a50f9235d63d2ac3fed7",
+    "mechkit.py": "1aeb99c1df7f96b80a39f6f15de3e271b65e7a4894543fb03f1aa01c44a2e4b5",
+    "open_gap_scene.py": "539d6fd4dde1522c701357abd51f4efa263eb0f8c0cb59830fb3f4a3eee90471",
+    "panel-plan.json": "cfdf0a26d16ae7e5bcdf9577657d79044163b93cb3795a02a103145a8ef3a9b5",
+    "panel_targets.csv": "d166fc36edf9b69c1c7f37c5facc110224b9937d7335439b0ae141cc5cb53d77",
+    "pom_material_scene.py": "b0ad80156225df4a100fe4b7d08454aac9ae2d0f83fae3018960aa85b6a221b1",
+    "raw_geometry.py": "02db678c2fdc6f17ebdebcde2116d4fe11f9ec1d36b1fcaa34796db4c6e73b2f",
+    "release_clearance.py": "e8bf16bcaf572801dd4aaa2c4eb940e0f85c5c7dad1f38423fe17608a83b714e",
+    "residual-feedback-plan.json": "3b0d52e4efacd97a1a869fde432d9a0a4fa0766966fafc738e7a60a7d8a2e144",
+    "service-plan.json": "515620dc65eba11064d2b42bb7d6f84a505b12fe1b484e3c9cf0ea7b0e29a03c",
+    "service_targets.csv": "0ddc18fac2ee14b6845d5438581fe6ab248cd2f580eaf18a262113595c757601",
+    "setup_manifest.json": "3253335e7b8a15a5c1c397850af926ac0dfcb8b195a2fec0806b5d2d28e42f22",
+    "side_hinge_hardware.py": "61b2c4c18955d25a83c35fcdbd8e2e223d62994877a5954c5ca51cf8f54176e1",
+    "surface_access_geometry.py": "605e6660f70b50fd34970cc39622f54c9911fbcf5a04c028bf57080ee164f0de",
+    "surface_paper.py": "8e398f5eb1dcdcb1054e18cda7389b93ee7faa2ae5800a826e31cccf760e2714"
+  },
+  "canonical_entry_sha256": "64848fea2f1be48445eee7c14fd09590af23da48bb486968707e3aad935a4649",
+  "references": [
+    {
+      "kind": "Complete rendered original reset/step reference",
+      "score": 1.0,
+      "controls": 4567,
+      "normal_terminal": true,
+      "source_unchanged": true,
+      "run_id": "adhoc_0c21ca08",
+      "wall_seconds": 1646.6987141531426
+    },
+    {
+      "kind": "Complete independent same-source reference, original callbacks with cameras omitted",
+      "score": 1.0,
+      "controls": 4567,
+      "normal_terminal": true,
+      "source_unchanged": true,
+      "wall_seconds": 1251.7240455619758,
+      "boundary": "Creator-reference evidence; no model/video evidence from image-free runner"
+    }
+  ],
+  "negative": {
+    "kind": "Native constructed adverse-paper reset control",
+    "scores": [
+      0.8
+    ],
+    "controls": 400,
+    "normal_terminal": true,
+    "source_unchanged": true,
+    "effective_native_adverse_control": true,
+    "valid_isolated_negative": false,
+    "root_attachment_error_mm": [
+      11.697653403631016,
+      11.202817157850223,
+      11.75434921402322,
+      12.313508314106203
+    ],
+    "boundary": "Different initial construction, not a same-start erroneous robot strategy. The same material, topology, authored33root anchors and scorer operate freely after reset; rigid/release prerequisites remain true while tissue is inaccessible. Actual root attachment also exceeds2mm tolerance, so this does not isolate paper accessibility alone. Isolated paper-inside rejection is covered separately by27 CPU scoring cases."
+  },
+  "offline_scoring": {
+    "cases": 27,
+    "result": "PASS",
+    "inside_only": 0.8,
+    "command": "python -c \"import sys; sys.path.insert(0, 'tasks/jumbo-tissue-dispenser-stub-to-reserve'); import dispenser_device; print(dispenser_device.self_test())\""
+  },
+  "runtime": {
+    "inspect_robots_version": "1.0.0",
+    "embodiment": "yam_arena",
+    "environment_revision": "64848fea2f1b",
+    "policy_checkpoint": "dreamlabs/dream-1-beta",
+    "seed": 0,
+    "max_steps": 6004
+  },
+  "model": {
+    "model": "Dream-1",
+    "score": 0.0,
+    "controls": 6004,
+    "normal_terminal": true,
+    "errored_trials": 0,
+    "run_id": "adhoc_66ad184f",
+    "wall_seconds": 2202.257064413978
+  },
+  "reference_paper_readback": {
+    "control": 4560,
+    "root_error_mm": 0.2751014125757689,
+    "connected_exposed_area_mm2": 944.5707084754481,
+    "continuous_freeedge_span_mm": 86.35161862530013,
+    "crossing_width_mm": 86.31668212756932,
+    "outside_crossing_endpoints": 0,
+    "geometry_accessible": true,
+    "hands_clear": true,
+    "node_velocity_is_diagnostic_only": true
+  },
+  "media": {
+    "demo.mp4": {
+      "bytes": 5288612,
+      "sha256": "53edd19cefd666d8799895ad6e05b68e54f8db458f89651dfc3b5574dd1d3704"
+    },
+    "model.mp4": {
+      "bytes": 10778801,
+      "sha256": "8673b5c302a2b54091adb9a5bdeb5035855e7dfb204bc8af698985f05aecc14d"
+    },
+    "setup.png": {
+      "bytes": 233557,
+      "sha256": "931bd1d046fadf6ebd6afaccef7ef8996299851e0ed31161e7943bc6c2d3224c"
+    }
+  },
+  "unverified_strategy_controls": [
+    "paper_inside ordinary robot trajectory",
+    "left_unavailable ordinary robot trajectory",
+    "held_final ordinary robot trajectory"
+  ],
+  "asset_provenance": "Original procedural scene and team helper; no downloaded OEM CAD, meshes, textures or photographs redistributed. Sources provide dimensions/material context only.",
+  "media_id": "M-CEWKJH",
+  "fabrication_revision": {
+    "verified_at_utc": "2026-11-16T22:39:00.612047+00:00",
+    "responds_to_review": "https://github.com/robocurve/benchmark-tasks/pull/1852#issuecomment-6929928012",
+    "category": "Impact on jobs",
+    "occupation_reference": "https://www.onetonline.org/link/summary/37-2011.00",
+    "scope": "Category, setup clarification and fabrication/assembly documentation only; existing simulation, scorer, controls and media unchanged.",
+    "unchanged_physical_source_files": 26,
+    "status": "CAD_GEOMETRY_PASS_PHYSICAL_BUILD_NOT_YET_PERFORMED",
+    "physical_build_performed": false,
+    "physical_dynamics_calibrated": false,
+    "artifact_sha256": {
+      "ASSEMBLY.md": "0ea7d5682c1e199116042ecc344bd7e309a7a43f4c61c9c441a4c3512d2e95d8",
+      "BOM.csv": "7db6866c6ffb5ba052709a2d09d9fb7a0eb1dea74bfcc31b475540184da0965d",
+      "README.md": "d6763755bb2e857e56695ce0236922eb60b73a33517ad95372bb5a1630f2dd0b",
+      "assembly.scad": "c6fb8f4d6ebecbd57facd44da75a4678538ce723f6206b074bec6fe9916618ac",
+      "closed_assembly.glb": "5de9204af3bbcdbbf27b87a0cd4dda59516499ff964b2ea0315f7f5799e5b96d",
+      "cut-list.csv": "333621269e4c7785c8acebcbf011a983d2697f90353752fa18eb5fb2a4b3b8bb",
+      "drawings/01-cabinet.svg": "7b895ecc38a9181bec0560319886acfdf58904e49ce9ea2506c25ead053e4155",
+      "drawings/02-latch.svg": "b177ce8d1e9c2dbaad6e38108937954dbdd4a739fdcfb15a7ea74494a572c7f2",
+      "drawings/03-selector.svg": "c5ff2a0c50ae4f65f2b8b62074a833aad0cc642523f102e991aa7023c4086b25",
+      "drawings/04-hinge-damper.svg": "6f39c4ae5d43824053cd415a22b63b59a1cf3bd3919621a95c0114ff30308947",
+      "drawings/05-assembly.svg": "c51b56fce817d68858cfb783c1bc886dab3f1811317edc905491d1096317010c",
+      "drawings/06-closing-tool.svg": "6fa3aa679fb48b8bc6a1da7fff878d5d00ff39073994c25f14559a0c8febee02",
+      "drawings/dimensions.pdf": "b8f5795e3616e09a4c42e74569d45a0303f23afc552fc02eafb9acd01e5bbae9",
+      "drawings.py": "b4f952a8b59af6eccee22894283eb08b9a5a6fda89b9b9f99a097d8f1ea765f1",
+      "generate.py": "6cf48c69eac54415e5dc117a111acdfbdb1a2555d1c606ca5af91501f2d53a66",
+      "parts-mm.json": "2c97012339a69408b111b4056d8a52ffd46bf192d24f9755f04d0b476bac83ac",
+      "source-and-scope.json": "d6e9430d354dbff630c54dbbd4a5d60429dff72fc1b7a8f4f90e2fb24bcc04d7",
+      "stl/bolt_guide_pins_pair.stl": "de867018b95730948c0ebe6c2bf4a628a096b0e272762042eee71265c40d969b",
+      "stl/bolt_guide_plate.stl": "92092d000894b953b7b6827c16ef17e36e3daacbe84f6c544a73e90c07953abd",
+      "stl/bolt_guide_washers_pair.stl": "971c5505aee21c05837e05cb80c61ff0cd4115c2b2c76945c9d5eda5723a0370",
+      "stl/bolt_with_mounting_bores.stl": "edf6e774c797426e4c9f77c18867c04a75f08e077d6fc8b8c709d6fc254716e3",
+      "stl/cabinet_with_joint_hardware.stl": "0e93dbd03037a39d174025bab37257cd791651f7fa37d502487d519084e26348",
+      "stl/closing_tool_neck_bridge_weld.stl": "19d459bc5ed8fe3b75841bb438afdcc3401fe12b88ae07210210e6fe31f26487",
+      "stl/closing_tool_with_weld.stl": "3e88bbdf3f96d9fba0f0801c587d687b87804c9060cfc73cfc3d628d0ca3db6d",
+      "stl/cover_with_hinge_knuckles.stl": "a13a5268cab0a8518b067788d1cefe29a13b5a5152d540a6de4b2dc9b8815e37",
+      "stl/hinge_closed_stop.stl": "15fce2abe0e5bbc2b8cbe5825da64f1ec192c3bc404649a678f19aa00e1fffd3",
+      "stl/hinge_damper_cup.stl": "56e37a819d4c092478e4c286302b85e5a2b3d2da1e37e85f21b89e0259316749",
+      "stl/hinge_damper_lid.stl": "80660d3d93bdbf4bff657dfdb950f0eeb37f4e68cc4fb318bc10c9fce49174d5",
+      "stl/hinge_damper_mount.stl": "d24262b9745f450cfe052015aea5bca8128bbb4648a0f7c7a281dc837c3980a5",
+      "stl/hinge_damper_rotor.stl": "8520fe2fcf43418158c2c21b49705a849a2577802a92fdc0f26c9a5cde35c369",
+      "stl/hinge_damper_shaft_seal_cap.stl": "567d99987738b5c7deebed5cd27c93b84201acbe12a3ef2246428010aa672f6d",
+      "stl/hinge_fixed_knuckles.stl": "a90f3258dab4e3edca9a365aeab2778185454bab759972f39f7cc0387e37b3a6",
+      "stl/hinge_moving_knuckles.stl": "26e6714477bb25ee3fd456d5c5433106eed73d13b1f3f377b68b05f8e9cfda8b",
+      "stl/hinge_open_stop.stl": "aa60b187df9b5502d8e1cd19ea82af952890fc524de003fcbc7a6af784071113",
+      "stl/hinge_shaft_D3_L297.stl": "61a5c15817b4f19a65f7db795c8c45a87ffa4a6bc4a36ec91ae7c86e83bdf969",
+      "stl/receiver_guide_spring_subassembly.stl": "06e39fdb1479b2fdab44f85e75eca7aff8384fad51cabd1b7dea6480b70f56a0",
+      "stl/receiver_steel_body.stl": "e41131e6587b99a75bc790285f824885003d00d555d45097066254c5e5a1f138",
+      "stl/receiver_upper_removable.stl": "b9ad493bd3a2b8d702e436a517c4dad326df74edb9ed903686f33ceb8b9bd8b0",
+      "stl/selector_front_keeper.stl": "ee454dbf78a88750d001d37d9ef3a068c300dd695a0d3643260ca8b503d83c0c",
+      "stl/selector_rear_keeper.stl": "fcd172b658d7a597f924d6976dbb921a94336eadbf23e843cc66d22cbe02c0a2",
+      "stl/shoulder_p_with_M6_clearance.stl": "48ef977fdc908ff72c57720d8460e4d818b7b663f0c30af60aed3981d77a9f62",
+      "stl/shoulder_r_with_M6_clearance.stl": "53b8ca9960cd33b1c3a6151b035d291bf9a6bf4b204d2525b6fe8a6e22fd2eed",
+      "stl/source_bolt_POM_contact_envelope.stl": "3e58b97cd7ca736e12aa3569a90a70d370eb74ecb142f7cccc58574d5801469d",
+      "stl/source_cabinet_contact_envelope.stl": "27a8d69759417e4c162e51a6583d732148e49964d23e82894787336c5cac454c",
+      "stl/source_closing_tool_contact_envelope.stl": "36a29d00eb874baa6b6dea98bef02648f03b6b66e21cc9d7b349bdf582d709cf",
+      "stl/source_cover_contact_envelope.stl": "dca0df82a9b04a8d769d96bdeceb1f239135d9933dc4404a499fba218388fd0c",
+      "stl/source_manual_frame_contact_envelope.stl": "7341e2a441a629548c502c2e62aa520b63a71b82dd94065607f257b6e15f8b42",
+      "stl/source_receiver_contact_envelope.stl": "20e37107949436ddadb43fb89a05cae11a684fb451d9f94fa406caade1340072",
+      "stl/source_selector_contact_envelope.stl": "1d200035b2e048806ce96c0d985033492fea0596f946bf0764de9074b78de2f7",
+      "stl/source_support_pair_contact_envelope.stl": "eef99787ee50ff7305fd273ea2afb7f33c93d8cc5de4c54f558ce1ad5657c6b1",
+      "stl/spring_reaction_seat.stl": "65357e26d201a86e5247a49cf3eafb07d2175860fefa0a102711a49de9cfefd9",
+      "stl/support_p_with_insert_bore.stl": "d5eace72e3a9d326cead7cbbe64c62ced79945e6b705d5426ee8edb40d42424a",
+      "stl/support_r_with_insert_bore.stl": "49743f3ef0cb2cecb075e781bdc55d10f0eeae84ef5cad637548f387bc8de671",
+      "verification.json": "3fea22ba1e416dc3d639260545c588b44ca0dce21314ddfeb752e61f18181ab3"
+    },
+    "stl_count": 36,
+    "drawing_pages": 6,
+    "units": {
+      "STL_SCAD_drawings": "millimetres",
+      "GLB": "metres"
+    },
+    "checks": {
+      "all_frozen_artifact_hashes_match": true,
+      "all_36_STL_watertight_positive_consistent_winding": true,
+      "binary_STL_bounds_error_mm_max": 0.001,
+      "independent_rebuild_STL_36_and_SVG_6_byte_identical": true,
+      "independent_PDF_rebuild_text_matches": true,
+      "CAD_sweep_samples": {
+        "door": 181,
+        "bolt": 73,
+        "selector": 241
+      },
+      "additional_hardware_interference_violations": 0,
+      "independent_sampled_mesh_intersections_checked": 18,
+      "offline_scoring_cases_rerun": 27,
+      "manufacturing_review": "Two independent bounded reviews found no remaining demonstrated manufacturing/assembly blocker; M6 screw-penetration wording clarified after geometry freeze."
+    },
+    "simulation_to_build_differences": [
+      "Physical hinge bearings, shaft retention, stops and fluid damper replace ideal joint hardware.",
+      "Spring reaction seat, bolt guide and selector keepers add physical mounting and guidance.",
+      "Steel receiver body and removable upper remain distinct from ABS shell.",
+      "Closing tool adds a positive-area web/weld and specified CNC or notched-stock fabrication route.",
+      "Added bores, fasteners, hardware masses, drag, compliance and durability require actual manufacturing and bench measurements."
+    ],
+    "evidence_boundary": "Finite CAD checks and independent rebuild establish inspectable fabrication documents, not physical load capacity, calibrated motion or completed real trials. Existing native scores and media apply to the unchanged simulation."
+  }
+}

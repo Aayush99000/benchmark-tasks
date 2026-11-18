@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 1680 1188">
+<defs><marker id="arr" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse"><path d="M0 0L8 4L0 8" fill="none" stroke="#222"/></marker></defs>
+<rect x="16" y="16" width="1648" height="1156" fill="white" stroke="#222"/>
+<text x="45" y="57" font-family="sans-serif" font-size="26" fill="#111">05 | Assembly order and non-working mounting details</text>
+<text x="45" y="86" font-family="sans-serif" font-size="16" fill="#111">P0 prototype fabrication | dimensions in mm | not to scale | datum O = world (368,-245,787.5) mm</text>
+<text x="65" y="150" font-family="sans-serif" font-size="16" fill="#111">1. Cut/machine the fixed ABS sheet pieces using cut-list.csv. Fixture at the closed datum; solvent-bond only fixed-to-fixed overlaps.</text>
+<text x="65" y="175" font-family="sans-serif" font-size="16" fill="#111">   Machine separate steelreceiverbody114x64x32; its original steelupper18x64x4 remains off until the pins and nuts are assembled.</text>
+<text x="65" y="200" font-family="sans-serif" font-size="16" fill="#111">2. Fit M6 brass inserts OD8x12 into both65mm axles atX109..121. Through-bore shoulders/backplateD6.5.</text>
+<text x="65" y="225" font-family="sans-serif" font-size="16" fill="#111">   Insert M6x30 bolts from rear before wallboard mounting. Tighten to1.5Nm maximum into inserts; check support axes240mm apart.</text>
+<text x="65" y="250" font-family="sans-serif" font-size="16" fill="#111">3. Assemble lower rails with blue keepers. Insert3mm selector from one Y end; bond the last endstop. Check240.0+/-0.2 stroke.</text>
+<text x="65" y="275" font-family="sans-serif" font-size="16" fill="#111">4. Machine single POM-C triangle/contained square; finish the two top mounting bores and rear shallow spring pocket.</text>
+<text x="65" y="300" font-family="sans-serif" font-size="16" fill="#111">   Install guidepins in bolt; bring bolt/pins up from below the D3.2slots; fit0.2washers/M1.6thin nuts before receiver upper final closure.</text>
+<text x="65" y="325" font-family="sans-serif" font-size="16" fill="#111">5. Steelguide/seat are continuous with steelbody. Fix body from rear with2xM3x12+1mmwashers intoM3tapped8mm pilots.</text>
+<text x="65" y="350" font-family="sans-serif" font-size="16" fill="#111">   Fit0.10mm end shims in slots and gauge18.0mm stroke; fit0.400N/mm springL23.80 between pocket bottomsY205.60/229.40.</text>
+<text x="65" y="375" font-family="sans-serif" font-size="16" fill="#111">   Fit steelupper last:2xM2x10 flushheadsD3.8 atX35,Y188/192; D2.2clearance,bodyD1.6x7tap;6mmengagement.</text>
+<text x="65" y="400" font-family="sans-serif" font-size="16" fill="#111">6. Machine the hinge reliefs in the narrow edge margin. Bond fixed and moving knuckles with a temporary D3 alignment shaft.</text>
+<text x="65" y="425" font-family="sans-serif" font-size="16" fill="#111">   Mask fixed journals against adhesive; add PTFE thrustwashers; bond real steel shaft to moving knuckles after the door turns freely.</text>
+<text x="65" y="450" font-family="sans-serif" font-size="16" fill="#111">7. Install the above-cabinet passive damper. Add two shaftO-rings,rotor keyed/bonded to shaft,0.5mm fluid gaps and a flush lidgasket.</text>
+<text x="65" y="475" font-family="sans-serif" font-size="16" fill="#111">   Fit four M2x4 lid screws into brass inserts. Mount with2xM3x8+1mmwashers into4mm inserts;0.2mm stand-offs.</text>
+<text x="65" y="500" font-family="sans-serif" font-size="16" fill="#111">8. Fill with silicone fluid; set damping and friction by the force/angle procedures in ASSEMBLY.md. Oil may not reach cam or tissue.</text>
+<text x="65" y="525" font-family="sans-serif" font-size="16" fill="#111">9. Set mechanical0/180stops with an angle fixture. Apply force only at existing door broadface; no spring may self-close the door.</text>
+<text x="65" y="550" font-family="sans-serif" font-size="16" fill="#111">10. Mount with4xM5x40csk,6mmspacers and1mmwashers/nuts:6mmplate+6mmgap+20mmboard. Prepare rolls/tail last.</text>
+<text x="65" y="575" font-family="sans-serif" font-size="16" fill="#111">11. Open to90degrees; selector at q0/right covered; old roll right,new roll oncarton. Thread real tail through the open left outlet.</text>
+<text x="65" y="600" font-family="sans-serif" font-size="16" fill="#111">    Root planeX34.64..121,Y175.6625,Z176.09; freeedgeY350.6625,Z-127.0189 at declared initial construction (gravity changes it).</text>
+<text x="65" y="625" font-family="sans-serif" font-size="16" fill="#111">12. Benchcheck all constraints and record measurements before a physical trial. The STL/drawing package has not been physically built.</text>
+<text x="65" y="670" font-family="sans-serif" font-size="23" fill="#111">Fasteners and joints that simulation omits</text>
+<text x="65" y="710" font-family="sans-serif" font-size="16" fill="#111">M6axle bores/fasteners lie inside the unused core centre; support outercontact polygon/shoulder face remain the provided profile.</text>
+<text x="65" y="735" font-family="sans-serif" font-size="16" fill="#111">Hinge reliefR4.2 is confined to the Y~490 edge, away from robot closing contact and latch. Knuckles have explicit real pin/bearing fits.</text>
+<text x="65" y="760" font-family="sans-serif" font-size="16" fill="#111">Bolt topbores/pins and rear springseat are outside the working cam; guide upperhardware stays below receiverZ284.5.</text>
+<text x="65" y="785" font-family="sans-serif" font-size="16" fill="#111">All external source contact CAD is supplied separately for comparison. Added parts/masses/friction are manufacturing approximations,</text>
+<text x="65" y="810" font-family="sans-serif" font-size="16" fill="#111">not secretly present in the native evaluation. No exact force/inertia equivalence or completed physical demonstration is claimed.</text>
+<text x="65" y="900" font-family="sans-serif" font-size="23" fill="#111">Manufacturing hand-off</text>
+<text x="65" y="940" font-family="sans-serif" font-size="16" fill="#111">Mill POM bolt and ream bearingfits; ABS shell may be routed sheet plus bonded printedbrackets or CNC/large-format printed.</text>
+<text x="65" y="965" font-family="sans-serif" font-size="16" fill="#111">Do not use an STL viewer preview as a tolerance check. Inspect dimensions in mm and the verification.json roundtrip results.</text>
+<text x="65" y="990" font-family="sans-serif" font-size="16" fill="#111">36closedSTLs,assembly.scad,closed_assembly.glb,parts-mm.json,cut-list.csv,BOM.csv and ASSEMBLY.md form this package.</text>
+<text x="45" y="1120" font-family="sans-serif" font-size="16" fill="#111">General cut +/-0.10; cam, guide pins/slots and spring faces +/-0.05 unless stated. Ream fit holes after printing.</text>
+<text x="45" y="1148" font-family="sans-serif" font-size="16" fill="#111">STLs share closed assembly coordinates. cut-list.csv and parts-mm.json are the complete coordinate/stock schedules.</text>
+</svg>
