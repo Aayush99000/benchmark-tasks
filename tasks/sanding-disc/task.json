@@ -1,0 +1,20 @@
+{
+  "title": "Fit a sanding disc to a random orbital sander: line its dust holes up with the pad's, then press it on flat",
+  "category": "Impact on jobs",
+  "keywords": [
+    "woodworking",
+    "auto body",
+    "power tool",
+    "hook and loop",
+    "alignment",
+    "two arms"
+  ],
+  "instruction": "Fit the new sanding disc to the sander's pad, grit side out. Line the disc's dust holes up with the holes in the pad, put it on, press it on firmly, then let go of it.",
+  "context": "Carpenters, cabinetmakers and auto body repairers sand surfaces every day, and change the disc on a random orbital sander for each grit and each time one wears out. Ryobi, RS290 random orbit sander operator's manual, Attaching Hook-and-Loop Sanding Discs: \"Align the holes in the hook-and-loop sanding disc with the holes in the backing pad\", \"Line up the holes in the sanding disc with the holes in the backing pad in order for the dustless feature to function properly\", \"Press the fuzzy side of the sanding disc against the backing pad as firmly as possible.\" Done by: carpenters, cabinetmakers, floor finishers, painters and auto body repairers (BLS: about 163,200 automotive body and related repairer jobs in 2025, who \"Sand, buff, and prime refurbished and repaired surfaces\").",
+  "setup": "Positions in cm on the table, from the midpoint between the two arm bases: x forward (away from the arms), y to the robot's left. A 5-inch random orbital sander lies upside down, fixed, its 125 mm hook-and-loop backing pad facing up, its middle at (28, 0) and its face 12 cm above the table; the pad's 8 dust holes (10 mm across, on a circle 78 mm across) are turned 20 degrees anticlockwise, seen from above, from square to the table. A wooden disc stand (5 x 9 cm, 2.5 cm tall, with a slot 4 mm wide and 15 mm deep) is at (20, -14). In its slot a new 5-inch, 8-hole hook-and-loop sanding disc stands on edge, its grit side facing away from the arms and its fuzzy side towards them, one hole at its top. Both grippers start open at the ready pose.",
+  "scoring": "From the hook-and-loop model and the disc's pose. The disc is caught by the pad when it comes down flat on it (its lowest point within 1 mm of the face, tilted under 4 degrees, its middle within 20 mm of the pad's), fuzzy side down; then it stays where it landed and can't slide or turn. Lined up: every disc hole within 2.5 mm of a pad hole (each hole at least two-thirds open). Pressed on: a fingertip on the caught disc, over the pad, for 0.3 s. 1.0: caught, lined up, pressed on, and both grippers more than 2 cm from the disc, held 1 s (0.9 if time runs out first). 0.5: caught but out of line, or not pressed on. 0.25: lying on the pad but not caught (tilted, or fuzzy side up). 0 otherwise.",
+  "run_limit": "1,200 steps (1 minute at 20 Hz)",
+  "reset_notes": "Peel the disc off the pad and stand it back in the stand's slot, grit side away from the arms.",
+  "fidelity": "The sander is fixed pad up and unplugged, its pad doesn't spin, and the old disc is already off. The hook face is a model: a disc landing flat, fuzzy side down, is held where it lands (no peeling off to refit). The disc is a rigid plate, 2 mm and 40 g (real: about 1 mm, 6 g) so the fingers can hold it; the hole pattern's sizes are estimated; the stand is a slotted block.",
+  "scores": "Dream-1 run: 0.0; demo: 1.0"
+}
