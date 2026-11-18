@@ -1,0 +1,21 @@
+{
+  "title": "Change a camera's lens: hold the release, turn the old lens off, line up the red dots, turn the new one until it clicks",
+  "category": "Societal relevance",
+  "keywords": [
+    "photography",
+    "camera",
+    "lens change",
+    "bayonet mount",
+    "two arms",
+    "hidden lock"
+  ],
+  "instruction": "Change the camera's lens for the new one. While pressing the lens release button, turn the zoom lens until it stops, lift it off and stand it on the cloth. Then line the new lens's red index up with the camera's red index, set it on the mount and turn it until it clicks.",
+  "context": "Photographers change lenses for each shot they plan, and every owner of an interchangeable-lens camera learns how. Canon, EOS 70D instruction manual, Attaching and Detaching a Lens: \"Align the lens' red or white mount index with the camera's mount index of the same color\", \"Turn the lens as shown by the arrow until it clicks in place\"; to detach it, \"While pressing the lens release button, turn the lens as shown by the arrows\", \"Turn the lens until it stops, then detach it.\" Done by: photographers, camera owners and camera shop staff.",
+  "setup": "Positions in cm on the table, from the midpoint between the two arm bases: x forward (away from the arms), y to the robot's left. A camera body lies on its back, fixed, its lens mount facing up, its middle at (27, 0) and its face 6.6 cm above the table; the camera's top points to the robot's right, so its red mount index is on that side of the mount. Its lens release button (11 mm across, 3 mm of travel; pressed 1.5 mm in, about 2.7 N, it frees the lock) is 5 cm from the mount's middle, on the side towards the arms. On the mount, locked, is a kit zoom lens (69 mm across, 75 mm long). A new 50 mm lens (69 mm across, 39 mm long) stands on its back end on a lens cloth at (19, -17.5), its red index towards the robot's right. Both grippers start open at the ready pose.",
+  "scoring": "From the mount's model and the parts' poses. A lens goes onto the mount only with its index within 6 degrees of the camera's (otherwise it rests on the mount's tabs, 2.5 mm up), the throat's chamfer steering its back in from up to 6 mm off the axis; seated, it turns clockwise seen from the front through 60 degrees to a stop, where it locks; a locked lens turns back only while the release button is pressed in, and comes off at the index. 1.0: the new lens locked, the zoom lens off the camera and set down (its centre of mass under 6 cm up, still), the release button let go, and both grippers more than 2 cm from both lenses, held 1 s (0.9 if time runs out first). 0.5: the new lens on the mount, not locked, or locked with the zoom lens not set down. 0.25: the zoom lens off the mount. 0 otherwise.",
+  "run_limit": "1,200 steps (1 minute at 20 Hz)",
+  "reset_notes": "Press the release button and turn the new lens off; stand it back on the cloth, index to the robot's right; put the zoom lens back on and turn it until it locks.",
+  "fidelity": "The camera is fixed (as if held flat on the table) and off; the bayonet is a model: tabs hold a lens up unless it is lined up, a chamfer steers it in, it turns to a stop where a pin locks it, and the pin lets go while the button is in. The caps are already off, the lenses are rigid cylinders, and the button sits 5 cm from the mount's middle, a little further out than on a real body, so a fingertip can reach it beside the lens.",
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": ""
+}
