@@ -17,5 +17,5 @@
   "reset_notes": "Turn the knob fully clockwise (off), pull the tubing off the nipple and lay it back on the packet, its open end 55 mm over the edge.",
   "fidelity": "No oxygen flows: the knob's angle sets the flow (proportional to 15 L/min at 270 degrees, our estimate) and the float ball rides on the flow's line. The flowmeter is fixed on a panel at table height, its outlet pointing forward. The tubing's end is 15 cm, rigid, 8 mm across and 40 g so the fingers hold it; the rest of the tubing and the prongs are not modelled. The barbs are a model: the tubing is seated once 12 mm on; they don't resist the push.",
   "scores": "Dream-1 run: 0.0; demo: 1.0",
-  "media": ""
+  "media": "M-Q6DC47"
 }
