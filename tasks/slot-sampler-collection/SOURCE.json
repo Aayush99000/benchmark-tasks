@@ -1,0 +1,32 @@
+{
+  "python": "3.12",
+  "packages": {
+    "inspect-robots": "1.0.0",
+    "inspect-robots-yam": "0.38.0",
+    "isaacsim": "6.1.0.0",
+    "isaaclab": "17.0.2",
+    "isaaclab-arena": "0.3.0",
+    "numpy": "2.3.1",
+    "torch": "2.11.0+cu128"
+  },
+  "adapter": {
+    "url": "https://github.com/kairosiann/yam-isaac-lab-arena",
+    "commit": "0059d02a1a91bc6834c1d0846022891df0c78730"
+  },
+  "custom_assets": "Original box/cylinder geometry and generated OpenSCAD reconstruction under MIT; no manufacturer CAD or meshes.",
+  "control_hz": 20,
+  "physics_hz": 240,
+  "seed": 1415158438,
+  "references": [
+    {
+      "url": "https://www.buerkle.de/en/powder-sampler-mini_p5346-3010",
+      "manufacturer": "Buerkle",
+      "product": "Powder sampler Mini,5346 family",
+      "usage": "Manufacturer describes a notched rod extended by a pushbutton,filled by gentle up/down motion,retracted into a sleeve to retain the sample,then extended to empty. This operating sequence,not OEM dimensions,is implemented."
+    }
+  ],
+  "mechanism": "Single passive SampleSlide prismatic bearing along-Z,0..25mm; constant20N/m spring with-60mm rest point,2Ns/m damping,0.03 jointfriction. Right closed gripper presses30mm topbutton and releases; left grips the ordinary barrel below its fingerrest. Pocket,floor,rod andbutton are one rigid moving body. The6mm chamfer at the sleeve mouth guides protruding coarse calibration beads inward during retraction. No transverse plate,suction,particle state writes or software latch.",
+  "grain_contact_resolution": "Native constant continuous collision detection,240Hz physics,20Hz control",
+  "reconstruction": "reconstruction/sampler.scad contains printable union modules generated from every native fixed/probe primitive; select Outer,Rod,Source,Jar,Stand,Containment orgranule. Render inOpenSCAD andexportSTL. Hardware/material assembly is documented inREADME.",
+  "category": "Other: laboratory research automation"
+}

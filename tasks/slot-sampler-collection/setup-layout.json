@@ -1,0 +1,339 @@
+{
+  "world_frame": "x away from robot bases, +y left arm side, z up; meters and radians",
+  "rig": {
+    "name": "station-calibrated",
+    "bases": {
+      "left": [
+        0.0,
+        0.305,
+        0.75
+      ],
+      "right": [
+        0.0,
+        -0.305,
+        0.75
+      ]
+    },
+    "top_cam": {
+      "pos": [
+        -0.16649487853050232,
+        -0.008999999612569809,
+        1.6918205499649046
+      ],
+      "rot_xyzw": [
+        0.18301085645621007,
+        -0.18301085645621007,
+        -0.6830131963726356,
+        0.6830131963726356
+      ],
+      "convention": "opengl",
+      "lens": {
+        "fx": 392.195617675781,
+        "fy": 391.722351074219,
+        "cx": 318.389434814453,
+        "cy": 177.876312255859,
+        "width": 640,
+        "height": 360
+      }
+    },
+    "wrist_cams": {
+      "left": {
+        "pos": [
+          0.0003999999999999915,
+          -0.069638,
+          0.07276200000000001
+        ],
+        "rot_xyzw": [
+          0.9756188502039811,
+          -0.002816999567479388,
+          0.003226999504528134,
+          0.21942996630883527
+        ],
+        "convention": "opengl",
+        "lens": {
+          "fx": 390.666,
+          "fy": 390.162,
+          "cx": 317.526,
+          "cy": 176.146,
+          "width": 640,
+          "height": 360
+        }
+      },
+      "right": {
+        "pos": [
+          -8.528195379902339e-18,
+          -0.069638,
+          0.071699
+        ],
+        "rot_xyzw": [
+          0.9756188502039811,
+          -0.002816999567479388,
+          0.003226999504528134,
+          0.21942996630883527
+        ],
+        "convention": "opengl",
+        "lens": {
+          "fx": 390.666,
+          "fy": 390.162,
+          "cx": 317.526,
+          "cy": 176.146,
+          "width": 640,
+          "height": 360
+        }
+      }
+    },
+    "dream_look": true
+  },
+  "table": {
+    "type": "fixed wooden bench",
+    "size_m": [
+      1.1,
+      1.3,
+      0.06
+    ],
+    "centre_m": [
+      0.36,
+      0.0,
+      0.7174999999999999
+    ],
+    "top_m": 0.7474999999999999
+  },
+  "robot": "Two standard I2RT YAM arms with parallel grippers, as supplied by the pinned official adapter.",
+  "KEY": "slot_sampler",
+  "TITLE": "Collect granules with a sleeve-and-notched-rod sampler",
+  "INSTRUCTION": "Use the closing sampling probe to collect at least 5 grams of granules from the tub into the sample jar. Leave the probe supported, the sample contained, and both hands released.",
+  "DESCRIPTION": "Inspired by Buerkle's powder sampler Mini (https://www.buerkle.de/en/powder-sampler-mini_p5346-3010). The right arm presses the blue top button downward to extend a notched collecting rod from its fixed outer sleeve. Granules enter the exposed side notch above its solid floor. Retracting the rod into the sleeve encloses the sample. Over the jar, tilt the closed sampler toward its side opening and extend the rod again to pour out the sample by gravity. The pocket floor moves with the rod; there is no horizontal discharge plate. The left hand grips the barrel. This original enlarged rectangular version uses coarse calibration granules.",
+  "MAX_STEPS": 2800,
+  "TOP": 0.7474999999999999,
+  "TUB": [
+    0.4,
+    0.02,
+    0.7474999999999999
+  ],
+  "JAR": [
+    0.22,
+    0.1,
+    0.7474999999999999
+  ],
+  "PROBE": [
+    0.28,
+    -0.06,
+    0.7535
+  ],
+  "RADIUS": 0.0034,
+  "MASS": 0.00018,
+  "WINDOW": [
+    0.004,
+    0.02
+  ],
+  "TUB_INNER": [
+    0.105,
+    0.105
+  ],
+  "TUB_H": 0.145,
+  "JAR_R": 0.055,
+  "JAR_H": 0.095,
+  "PROBE_LENGTH": 0.3,
+  "SUPPORT_GRASP": [
+    0.0,
+    0.0,
+    0.18
+  ],
+  "GATE_GRASP": [
+    0.0,
+    0.0,
+    0.326
+  ],
+  "GATE_TRAVEL": 0.025,
+  "GATE_CLOSED": 0.002,
+  "GATE_SPRING": 20.0,
+  "GATE_PRELOAD": 0.06,
+  "INNER_BACK": -0.017,
+  "INNER_FRONT": 0.0205,
+  "INNER_HALF_WIDTH": 0.017,
+  "CHAMBER_TOP": 0.02,
+  "FLOOR_SLOPE": 0.0,
+  "FLOOR_MID_HEIGHT": 0.004,
+  "SAMPLING_BASE_HEIGHT": 0.05,
+  "SAMPLING_MAX_BASE_HEIGHT": 0.055,
+  "DISCHARGE_HEIGHT": 0.05,
+  "DISCHARGE_TILT_DEG": 20.0,
+  "PORT_SIGN": -1.0,
+  "PORT_AXIS": 1,
+  "objects": [
+    {
+      "name": "fixed outer sampler",
+      "type": "62mm square sleeve and hollow18mm barrel,ordinary24mm rubber barrel grip,two square rod bushings",
+      "nominal_material": "aluminum,3mm polycarbonate inspection pane,rubber grip",
+      "mass_kg": 0.28,
+      "position_m": [
+        0.28,
+        -0.06,
+        0.7535
+      ],
+      "sleeve_outer_m": [
+        0.048,
+        0.048,
+        0.038
+      ],
+      "sleeve_inner_m": [
+        0.042,
+        0.042,
+        0.035
+      ],
+      "barrel_height_m": 0.27,
+      "grip_outer_m": [
+        0.024,
+        0.024,
+        0.08
+      ],
+      "grip_center_m": [
+        0.0,
+        0.0,
+        0.18
+      ],
+      "bushing_hole_m": 0.0065,
+      "finger_rest_m": [
+        0.036,
+        0.036,
+        0.004
+      ],
+      "finger_rest_center_m": [
+        0,
+        0,
+        0.194
+      ],
+      "notch_lip_chamfer_height_m": 0.006
+    },
+    {
+      "name": "collecting rod",
+      "type": "6mm square rod with integral notched sampling pocket and30mm top pushbutton",
+      "nominal_material": "aluminum,polymer button",
+      "mass_kg": 0.085,
+      "pocket_outer_m": [
+        0.04,
+        0.04,
+        0.023
+      ],
+      "notch_width_m": 0.034,
+      "notch_height_m": [
+        0.004,
+        0.02
+      ],
+      "notch_direction": "local-Y",
+      "solid_floor_thickness_m": 0.004,
+      "button_radius_m": 0.015,
+      "button_height_m": 0.01,
+      "button_center_local_m": [
+        0,
+        0,
+        0.31
+      ],
+      "joint": "SampleSlide",
+      "travel_m": 0.025,
+      "axis": "-Z",
+      "spring_N_per_m": 20,
+      "spring_rest_m": -0.06,
+      "damping_Ns_per_m": 2,
+      "joint_friction": 0.03
+    },
+    {
+      "name": "source tub",
+      "type": "fixed polymer tub",
+      "inner_size_m": [
+        0.105,
+        0.105,
+        0.145
+      ],
+      "wall_m": 0.003,
+      "position_m": [
+        0.4,
+        0.02,
+        0.7474999999999999
+      ]
+    },
+    {
+      "name": "sample jar",
+      "type": "fixed polymer cup",
+      "inner_size_m": [
+        0.11,
+        0.11,
+        0.095
+      ],
+      "wall_m": 0.003,
+      "position_m": [
+        0.22,
+        0.1,
+        0.7474999999999999
+      ]
+    },
+    {
+      "name": "granules",
+      "type": "repeatable dry polymer calibration spheres",
+      "quantity": 1960,
+      "diameter_m": 0.0068,
+      "mass_each_kg": 0.00018,
+      "initial_lattice": [
+        14,
+        14,
+        10
+      ],
+      "pitch_m": 0.0070999999999999995,
+      "static_friction": 0.3,
+      "dynamic_friction": 0.2,
+      "restitution": 0,
+      "ccd": true
+    },
+    {
+      "name": "cradle",
+      "type": "fixed polymer support",
+      "foot_m": [
+        0.116,
+        0.116,
+        0.006
+      ],
+      "clear_opening_m": [
+        0.1,
+        0.1
+      ],
+      "wall_height_m": 0.03,
+      "reference_origin_m": [
+        0.28,
+        -0.06,
+        0.7535
+      ]
+    },
+    {
+      "name": "secondary containment",
+      "type": "fixed polymer tray",
+      "inner_size_m": [
+        0.52,
+        0.62,
+        0.05
+      ],
+      "wall_m": 0.003,
+      "base_thickness_m": 0.008,
+      "reference_origin_m": [
+        0.4,
+        0.16,
+        0.7474999999999999
+      ]
+    }
+  ],
+  "native_demo_cameras": [
+    640,
+    360
+  ],
+  "demo_composite": [
+    1280,
+    1080
+  ],
+  "model_cameras": [
+    320,
+    176
+  ],
+  "model_composite": [
+    640,
+    528
+  ]
+}
