@@ -1,0 +1,21 @@
+{
+  "title": "Open a mini blind's slats by twirling its hanging tilt wand",
+  "category": "Societal relatability",
+  "keywords": [
+    "window blind",
+    "tilt wand",
+    "worm gear",
+    "regrasp",
+    "hanging rod",
+    "in-hand rotation"
+  ],
+  "instruction": "Open the blind: turn the wand until the slats are level.",
+  "context": "Almost every adult has twisted the clear wand of a mini blind to let light in; it is among the most common window coverings in homes, offices, schools and hotels. A hand does it with a twirl of the fingertips. For a robot it is a dangling 6 mm rod that swings when touched and has to be turned about its own axis nearly two full turns, in many small pinch, turn, let go and re-pinch strokes, without dragging the blind, then left hanging. Nothing shows when to stop but the slats themselves.",
+  "setup": "A made-to-measure 1 in aluminium mini blind in the smallest size its retailer sells (American Blinds Trademark 1 Inch Mini Blinds, wand tilt, cordless lift), 18 in wide x 12 in drop (457 x 305 mm): steel headrail 38 x 25 mm; twelve 25 mm aluminium slats (6 gauge) at 21.5 mm ladder spacing; steel bottom rail 25 x 10 mm, fully lowered; wand tilter (worm and gear with a clutch) on a hexagonal tilt rod. It hangs by its two brackets from the head piece of a table-top stand: plywood base 520 x 180 x 12 mm, two 20 mm square softwood posts behind the slats, softwood head piece 500 x 60 x 19 mm, top 350 mm above the table; blind and stand about 1.4 kg, loose on the table. The blind faces the robot; the middle of the slats is 350 mm in front of the midpoint between the arm bases. The blind's clear hexagonal acrylic wand (6.35 mm across flats, 10 g; supplied 24 in or longer and sawn to 250 mm so that it hangs clear of the table) hangs on its hook under the headrail's front edge, 52 mm from the headrail's left end (177 mm to the robot's left of centre) and 27 mm in front of the slats, its lower end 48 mm above the table, two flats facing left and right. Start: slats closed with the room-side edge down (70 degrees from level, against the tilter's stop), wand hanging still.",
+  "scoring": "Judged on the final state, after the robot has stopped with both grippers at least 4 cm from the wand and the slats for 1 s (otherwise 0). Measure the slats' angle from level with a phone inclinometer or protractor on a slat (the simulator takes the mean of the twelve). 1.0: within 10 degrees of level, the wand hanging within 10 degrees of plumb, and the stand's base within 20 mm of its taped outline. 0.5: within 25 degrees of level; also a blind within 10 degrees whose wand is not hanging plumb or whose stand is 20 to 100 mm off its outline. 0.25: within 50 degrees of level, that is 20 degrees or more from the closed start. 0: anything else, including slats turned on past level to within 20 degrees of closed the other way, a stand more than 100 mm off its outline or tipped more than 10 degrees. The bands are the same on both sides of level.",
+  "run_limit": "3,000 steps (150 seconds at 20 Hz)",
+  "reset_notes": "Turn the wand anticlockwise (seen from above) until the tilter's clutch slips, so the slats are closed room-side edge down; turn the wand so two flats face left and right; still it; set the stand back in its taped outline. Nothing is consumed.",
+  "fidelity": "PhysX, 240 Hz. Retail blind at true size, all twelve slats; wand sawn from 24 in to 250 mm. The wand is a rigid hexagonal rod on a two-axis hook joint and swings freely. Worm, gear, tilt rod and ladder cords are one kinematic relation: 10 wand turns per tilt-rod turn, clutch stops at 70 degrees, no back-drive. Ratio, stop angle, turning torque, ladder spacing and wand section are stand-ins (README: how to measure a unit). Slats are rigid; the cordless lift is not modelled.",
+  "scores": "Scripted demo: 1.0 (slats 2.0 degrees from level, stand not moved; three cloud runs and one local run of the 18 x 12 in blind). Dream-1 run: 0.0.",
+  "media": "M-2Z6CRR"
+}

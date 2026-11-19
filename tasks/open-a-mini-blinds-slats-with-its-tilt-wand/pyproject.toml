@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "robocurve-mini-blind"
+version = "0.0.1"
+
+[project.entry-points."inspect_robots.embodiments"]
+yam_mini_blind = "mini_blind.embodiment:make_embodiment"
+
+[tool.setuptools.packages.find]
+include = ["mini_blind*"]
