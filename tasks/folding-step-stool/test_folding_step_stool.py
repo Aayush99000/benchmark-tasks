@@ -9,7 +9,9 @@ import numpy as np
 import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent / "hardware"))
 import folding_step_stool as M  # noqa: E402
+import stool_dimensions as HW  # noqa: E402
 from fittingkit import Frame  # noqa: E402
 from yam_arena import station  # noqa: E402
 from yam_arena.demo import ArmPlan  # noqa: E402
@@ -67,7 +69,7 @@ def test_short_of_the_lock_the_spring_folds_it_back_and_past_98_it_locks():
 
 
 def test_the_push_to_lock_is_light_and_the_lock_outholds_the_load():
-    just_short = M.K_FOLD * math.radians(M.LATCH_DEG - M.SPRING_FROM_DEG)
+    just_short = HW.fold_back_torque_nm(M.LATCH_DEG - 0.01)
     assert 0.05 < just_short < 0.3  # N m: under 3 N at the foot
     load_on_a_leg = M.LOAD_N / 2 * M.LEG_L * math.sin(math.radians(M.OPEN_DEG - 90.0))
     assert M.HOLD_TORQUE > 4 * load_on_a_leg
@@ -160,3 +162,49 @@ def test_the_demo_touches_the_stool_only_where_it_means_to():
     out = plan_check.run(verbose=False)
     assert not out["hits"], out["hits"][:5]
     assert out["min_hand_gap_mm"] > 10.0
+
+
+def test_the_simulated_stool_is_the_buildable_one():
+    mm = M.MM
+    for sim, hw in ((M.TOP_D, HW.TOP_D), (M.TOP_L, HW.TOP_L), (M.TOP_T, HW.TOP_T), (M.HINGE_Y, HW.HINGE_Y),
+                    (M.KNUCKLE_R, HW.KNUCKLE_R), (M.LEG_L, HW.LEG_L), (M.LEG_W, HW.LEG_W), (M.LEG_T, HW.LEG_T),
+                    (M.FOOT_L, HW.FOOT_L), (M.FOOT_T, HW.FOOT_T), (M.GRIP_W, HW.RIB_W), (M.GRIP_T, HW.RIB_T),
+                    (M.GRIP_H, HW.RIB_H), (M.RIB_LOCAL[1][1], HW.RIB_Y), (M.HINGE_Z - M.TOP_Z, HW.HINGE_Z)):
+        assert sim == pytest.approx(hw * mm, abs=1e-9)
+    assert (M.OPEN_DEG, M.LATCH_DEG, M.SPRING_FROM_DEG) == (HW.OPEN_DEG, HW.LATCH_DEG, HW.SPRING_FROM_DEG)
+    assert M.STAND_H + M.TOP_T / 2 == pytest.approx(0.1259, abs=0.0005)  # 12.6 cm to the top's face, standing
+
+
+def test_the_latch_spring_from_its_catalogue_numbers():
+    # Lee Spring LC 026C 05 M: free 15.88 mm, 2.189 N/mm, solid 5.16 mm
+    assert HW.SPRING_PRELOAD_N == pytest.approx(2.189 * (15.88 - 11.5))
+    assert HW.SPRING_INSTALLED - HW.RELEASE_MM > HW.SPRING_SOLID + 1.0  # released, still well short of solid
+    assert HW.fold_back_torque_nm(79.9) == 0.0 and HW.fold_back_torque_nm(98.0) == 0.0
+    assert HW.fold_back_torque_nm(80.0) == pytest.approx(0.102, abs=0.001)
+    assert HW.fold_back_torque_nm(97.99) == pytest.approx(0.165, abs=0.001)
+    assert HW.S_AT_LATCH > 3.0  # the bolt drops 3.5 mm behind the wedge's high end
+
+
+def test_the_sim_pushes_the_leg_back_with_the_latch_springs_torque():
+    r = Rig()
+    acc = r.step(90.0, 0.0)
+    a = M.opening_axis(np.eye(3), "leg_a")
+    assert acc["leg_a"][1] @ a == pytest.approx(-HW.fold_back_torque_nm(90.0))
+
+
+def test_the_cad_parts_move_as_the_simulator_says():
+    pytest.importorskip("manifold3d")
+    import build_parts as B
+
+    top, leg, bolt = B.top(), B.leg(), B.bolt()
+    out = B.check(top, leg, bolt)
+    over = dict(out["top_overlap"])
+    assert max(v for d, v in over.items() if d <= 100.0) < 1e-3  # the leg turns clear of the top up to its stop
+    assert over[101.0] > 1.0  # and stops there, on the pocket's end wall
+    for d, push in out["push"]:
+        if d < 78.0 or d >= 98.0:
+            assert push == 0.0, d  # the bolt is out: short of the wedge, and dropped behind it from 98
+        elif d >= 80.0:
+            assert push == pytest.approx(HW.bolt_push_mm(d), abs=0.05), d
+    assert out["lowest_folded"] == pytest.approx(0.0, abs=1e-6)  # folded, it rests on its knuckles and ears
+    assert out["bolt_in_channel"] < 1e-3

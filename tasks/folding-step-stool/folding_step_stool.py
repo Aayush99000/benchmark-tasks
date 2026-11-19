@@ -1,9 +1,10 @@
 """On the station table: a child's low plastic folding step stool lies folded flat, its two legs folded under its top.
 Unfold it: open each leg until its lock clicks, then stand the stool on its feet.
 
-Each leg turns on a hinge under one end of the top and has its own spring lock, which catches only once the leg is
-pushed a little past straight down (100 degrees from folded). A leg that is short of its lock has a spring folding it
-back, so it looks open but folds again under a load. Standing on its feet with both hands off it, the stool takes a
+Each leg turns on a hinge under one end of the top and has its own spring latch, which catches only once the leg is
+pushed a little past straight down (98 degrees from folded; its stop is at 100). A leg that is short of its latch is
+pushed back by the latch's spring, so it looks open but folds again under a load. The stool is the buildable one in
+hardware/ (stool_dimensions.py; build_parts.py makes its printed parts and checks the latch's travel). Standing on its feet with both hands off it, the stool takes a
 40 N push down on its top (a stand-in for a child stepping on it).
 
 Run it:  inspect-robots run --embodiment yam_arena -E task=folding_step_stool.py -E object_jitter=0 -E control_hz=20 \\
@@ -20,7 +21,9 @@ from pathlib import Path
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent / "hardware"))
 import fittingkit  # noqa: E402
+import stool_dimensions as HW  # noqa: E402  the buildable stool's numbers (mm), shared with its CAD
 from fittingkit import Hinge, body, box, cyl  # noqa: E402
 from yam_arena import demo as _demo  # noqa: E402
 from yam_arena.demo import Waypoint, grip_rotation  # noqa: E402
@@ -37,6 +40,7 @@ SEAT_BLUE = (0.16, 0.50, 0.80)  # the top, a saturated plastic blue (seen from t
 LEG_WHITE = (0.90, 0.90, 0.88)
 GRIP_GREY = (0.30, 0.32, 0.35)
 TREAD = (0.10, 0.36, 0.62)
+KNOB_BLACK = (0.12, 0.12, 0.13)
 
 
 def rot_x(angle: float) -> np.ndarray:
@@ -48,8 +52,9 @@ def quat_xyzw(r: np.ndarray) -> tuple[float, float, float, float]:
 
 
 # -- the stool -------------------------------------------------------------------------------------------------------
-# Its long side along y (the legs at the -y and +y ends), the middle 34 cm out. [estimate: sizes of a low children's
-# folding step stool, scaled to the arms' reach; 0.75 kg in all]
+# Its long side along y (the legs at the -y and +y ends), the middle 31 cm out. The sizes are those of the buildable
+# stool (hardware/stool_dimensions.py, in mm; test_the_simulated_stool_is_the_buildable_one holds them equal), a low
+# children's folding step stool scaled to the arms' reach; 0.75 kg in all (the top is ballasted to 0.55 kg).
 STOOL_X = 0.31
 TOP_L, TOP_D, TOP_T = 0.246, 0.20, 0.018  # the top: along y, along x, thick
 HINGE_Y = 0.105  # each leg's hinge, this far from the middle, under the top
@@ -62,9 +67,10 @@ TOP_Z = HINGE_Z + KNUCKLE_R + TOP_T / 2  # the top's middle, folded
 TOP_AT = np.array([STOOL_X, 0.0, TOP_Z])
 TOP_MASS, LEG_MASS = 0.55, 0.10
 
-OPEN_DEG, LATCH_DEG = 100.0, 98.0  # a leg opens to 100 degrees (10 past straight down); its lock catches at 98
-SPRING_FROM_DEG = 80.0  # short of the lock, from 80 degrees on, a spring folds the leg back
-K_FOLD = 0.5  # N m/rad: about 0.15 N m (1.6 N at the foot) just short of the lock [estimate]
+OPEN_DEG, LATCH_DEG = HW.OPEN_DEG, HW.LATCH_DEG  # a leg opens to 100 degrees (10 past straight down); it latches at 98
+SPRING_FROM_DEG = HW.SPRING_FROM_DEG  # from 80 degrees the latch's bolt rides the leg's wedge and pushes it back
+# The push back: the latch spring's force (Lee Spring LC 026C 05 M, 2.189 N/mm, 9.6 N preload) times the wedge's rise
+# per radian, 0.10 N m at 80 degrees to 0.165 N m (1.6 N at the foot) just short of 98 (HW.fold_back_torque_nm).
 HOLD_TORQUE = 2.0  # N m: a locked leg is held open against its stop [estimate: well above what a 40 N load puts on it]
 LOAD_N = 40.0  # the push down on the top once the stool stands on its own [estimate: a stand-in for a step]
 GIVE_WAY_TORQUE = 6.0  # N m folding a leg that isn't locked once the stool has taken the load: it gives way
@@ -74,20 +80,36 @@ GIVE_WAY_TORQUE = 6.0  # N m folding a leg that isn't locked once the stool has 
 
 
 def _top_shapes() -> list:
-    """In the top's frame (origin at its middle): the top, the grip ribs at its ends, the treads drawn on it."""
+    """In the top's frame (origin at its middle): the top, the grip ribs at its ends, the hinges' ears under it, the
+    latches' bosses and release knobs on its +x side (away from the arms), the treads drawn on it. The latches' bolts
+    and the legs' wedges are inside the top's pockets and aren't drawn: the latch is modelled in Locks."""
     rib_y = TOP_L / 2 - GRIP_T / 2 - 1.0 * MM
     solid = [
         box((0.0, 0.0, 0.0), (TOP_D, TOP_L, TOP_T), SEAT_BLUE),
         box((0.0, rib_y, TOP_T / 2 + GRIP_H / 2), (GRIP_W, GRIP_T, GRIP_H), GRIP_GREY),
         box((0.0, -rib_y, TOP_T / 2 + GRIP_H / 2), (GRIP_W, GRIP_T, GRIP_H), GRIP_GREY),
     ]
+    hz = HW.HINGE_Z * MM
+    for s in (-1.0, 1.0):
+        hy = s * HW.HINGE_Y * MM
+        for x0, x1 in HW.EAR_X:
+            xc, w = (x0 + x1) / 2 * MM, (x1 - x0) * MM
+            solid.append(cyl((xc, hy, hz), KNUCKLE_R, w, SEAT_BLUE, axis="X"))
+            solid.append(box((xc, hy, (hz - TOP_T / 2) / 2), (w, 2 * KNUCKLE_R, -TOP_T / 2 - hz), SEAT_BLUE))
+        bx0, bx1 = HW.BOSS_X
+        by = hy + s * sum(HW.BOSS_Y) / 2 * MM
+        solid.append(box(((bx0 + bx1) / 2 * MM, by, 0.0), ((bx1 - bx0) * MM, (HW.BOSS_Y[1] - HW.BOSS_Y[0]) * MM, TOP_T),
+                         SEAT_BLUE))
+        kx0, kx1 = HW.KNOB_X
+        solid.append(cyl(((kx0 + kx1) / 2 * MM, hy + s * HW.BOLT_Y * MM, HW.BOLT_AXIS_Z * MM), HW.KNOB_D / 2 * MM,
+                         (kx1 - kx0) * MM, KNOB_BLACK, axis="X"))
     seen = [box((x, 0.0, TOP_T / 2 + 0.0005), (0.008, 0.15, 0.001), TREAD) for x in (-0.06, -0.03, 0.0, 0.03, 0.06)]
     return solid + seen
 
 
 _TS = _top_shapes()
 STOOL_TOP = body("stool_top", pos=tuple(TOP_AT), mass=TOP_MASS, friction=0.8, shapes=_TS,
-                 visual_only=tuple(range(3, len(_TS))), color=SEAT_BLUE)
+                 visual_only=tuple(range(len(_TS) - 5, len(_TS))), color=SEAT_BLUE)
 RIB_LOCAL = {s: np.array([0.0, s * (TOP_L / 2 - GRIP_T / 2 - 1.0 * MM), TOP_T / 2 + GRIP_H / 2]) for s in (-1, 1)}
 
 # A leg's frame: origin on its hinge axis; folded, it lies under the top pointing to the stool's middle, along its own
@@ -98,8 +120,9 @@ SIDE = {"leg_a": -1.0, "leg_b": 1.0}  # which end of the stool
 
 def _leg_shapes(s: float) -> list:
     """In the leg's frame; ``s`` is its inward direction (y)."""
+    k0, k1 = HW.KNUCKLE_X  # past the panel, at +x, the knuckle carries the latch's wedge (not drawn)
     return [
-        cyl((0.0, 0.0, 0.0), KNUCKLE_R, LEG_W, LEG_WHITE, axis="X"),
+        cyl(((k0 + k1) / 2 * MM, 0.0, 0.0), KNUCKLE_R, (k1 - k0) * MM, LEG_WHITE, axis="X"),
         box((0.0, s * (KNUCKLE_R + (LEG_L - FOOT_T - KNUCKLE_R) / 2), 1.0 * MM),
             (LEG_W, LEG_L - FOOT_T - KNUCKLE_R, LEG_T), LEG_WHITE),
         box((0.0, s * (LEG_L - FOOT_T / 2), 0.0), (FOOT_L, FOOT_T, FOOT_T), GRIP_GREY),
@@ -187,8 +210,8 @@ class Locks:
                 torque = HOLD_TORQUE
             elif self.gave_way[leg]:
                 torque = -GIVE_WAY_TORQUE
-            elif opening > SPRING_FROM_DEG:
-                torque = -K_FOLD * math.radians(opening - SPRING_FROM_DEG)
+            elif SPRING_FROM_DEG <= opening < LATCH_DEG:
+                torque = -HW.fold_back_torque_nm(opening)
             else:
                 continue
             axis = opening_axis(top.rot, leg)
@@ -258,6 +281,10 @@ def standing(top_pos, top_rot) -> bool:
 def _part_boxes(top_pos, top_rot, frames, origin):
     """(centre, rotation, half sizes) of the top and of each leg's panel and foot rail, in table coordinates."""
     out = [(top_pos, top_rot, np.array([TOP_D, TOP_L, TOP_T + 2 * GRIP_H]) / 2)]
+    for s in (-1.0, 1.0):  # the latches' bosses and knobs on the +x side
+        c = np.array([(HW.BOSS_X[0] + HW.KNOB_X[1]) / 2, s * (HW.HINGE_Y + sum(HW.BOSS_Y) / 2), 0.0]) * MM
+        half = np.array([HW.KNOB_X[1] - HW.BOSS_X[0], HW.BOSS_Y[1] - HW.BOSS_Y[0], HW.TOP_T]) * MM / 2
+        out.append((top_pos + top_rot @ c, top_rot, half))
     for leg in ("leg_a", "leg_b"):
         f = frames.get(leg)
         if f is None:
