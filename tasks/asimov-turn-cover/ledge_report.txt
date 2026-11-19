@@ -1,0 +1,8 @@
+Stand-in ledge blocks (cover frame = pelvis axes, origin at the cover's display centre; mm). Each block is the hull of the shell's rear-facing ledge faces
+within 2 mm of the cover's inner face (cells of 15 mm), 8 mm thick on the torso side. Print in PA12 or PETG, glue the back face to the plywood.
+block 1: 24 cells, y -110 to -27, z 95 to 276, x -138 to -107 (pelvis frame, mm)
+block 2: 5 cells, y -84 to -61, z 300 to 360, x -140 to -123 (pelvis frame, mm)
+block 3: 16 cells, y -57 to 86, z 300 to 360, x -148 to -123 (pelvis frame, mm)
+block 4: 1 cells, y -44 to -36, z 391 to 401, x -113 to -104 (pelvis frame, mm)
+block 5: 24 cells, y 28 to 112, z 96 to 276, x -139 to -106 (pelvis frame, mm)
+block 6: 1 cells, y 37 to 44, z 394 to 401, x -113 to -104 (pelvis frame, mm)
