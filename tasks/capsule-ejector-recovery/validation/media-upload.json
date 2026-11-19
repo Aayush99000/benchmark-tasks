@@ -1,0 +1,30 @@
+{
+  "status": "completed",
+  "source_sha256": "24d155c84bd8c9960ad7bbf0a1e211178860c40c5e21ef7496da5caa2fb68d31",
+  "task": "capsule-ejector-recovery",
+  "revision_of": "TK-QAH7UF",
+  "same_pr": 2147,
+  "started_at_utc": "2026-11-17T04:52:43.992171+00:00",
+  "uploader_sha256": "2271cab9a5f81992998623827536327e185035d17c439fe5175012330d29d95c",
+  "files": {
+    "demo": {
+      "name": "demo.mp4",
+      "bytes": 12347014,
+      "sha256": "99f31f2bb99f6125c3453a4c276fb74c2c5b0b7902308d5bc67e8bee19c331c1"
+    },
+    "video": {
+      "name": "dream-1.mp4",
+      "bytes": 6938927,
+      "sha256": "6f36738ed509f6f4670a94e829c2746a20aeeeb0f9eeb9c18851b7d400c6809c"
+    },
+    "screenshot": {
+      "name": "setup.png",
+      "bytes": 194230,
+      "sha256": "9214bf3f16cd39b4ff031fd4bc2d0bbdd454da1f661cf7eafca5917da392a427"
+    }
+  },
+  "exit_code": 0,
+  "uploader_output": "Uploaded. Media ID M-5LLKRT written to /media/nvme/palma/robocurve_challenge/benchmark-tasks-capsule-recovery/tasks/capsule-ejector-recovery/task.json. Commit it and open your pull request.\n",
+  "completed_at_utc": "2026-11-17T04:52:52.084807+00:00",
+  "media_id": "M-5LLKRT"
+}

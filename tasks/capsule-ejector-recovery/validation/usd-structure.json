@@ -1,0 +1,108 @@
+{
+  "scope": "Offline USD/schema structure only; no physics or feasibility claim",
+  "hostname": "tengu",
+  "assets": [
+    {
+      "file": "machine.usda",
+      "sha256": "e811becb4edda435e64b496ab4eea03b4b5bfa7997655cf72d6ddc46901dfdd1",
+      "errors": [],
+      "failed_checks": [],
+      "joints": [
+        {
+          "path": "/Asset/Base/WorldFix",
+          "bodies": [
+            "/Asset/Base"
+          ]
+        },
+        {
+          "path": "/Asset/HeadHinge",
+          "bodies": [
+            "/Asset/Base",
+            "/Asset/Head"
+          ]
+        }
+      ],
+      "structure_passed": true
+    },
+    {
+      "file": "bin.usda",
+      "sha256": "1094fc2ab2c32f5138228e9e96e2f3d3f4bb396ba505b16c34474cd65aa2b726",
+      "errors": [],
+      "failed_checks": [],
+      "joints": [],
+      "structure_passed": true
+    },
+    {
+      "file": "fresh.usda",
+      "sha256": "ae6d6fedbe7e02dfcd34015550b12c35b0ad93b47893262fc6e9b9336a6d982e",
+      "errors": [],
+      "failed_checks": [],
+      "joints": [],
+      "structure_passed": true
+    },
+    {
+      "file": "used0.usda",
+      "sha256": "88a923229faee42a4dd8330899d203567372f5fc13aa3aaade93c66e3dd3e865",
+      "errors": [],
+      "failed_checks": [],
+      "joints": [],
+      "structure_passed": true
+    },
+    {
+      "file": "used1.usda",
+      "sha256": "88a923229faee42a4dd8330899d203567372f5fc13aa3aaade93c66e3dd3e865",
+      "errors": [],
+      "failed_checks": [],
+      "joints": [],
+      "structure_passed": true
+    },
+    {
+      "file": "used2.usda",
+      "sha256": "88a923229faee42a4dd8330899d203567372f5fc13aa3aaade93c66e3dd3e865",
+      "errors": [],
+      "failed_checks": [],
+      "joints": [],
+      "structure_passed": true
+    },
+    {
+      "file": "used3.usda",
+      "sha256": "88a923229faee42a4dd8330899d203567372f5fc13aa3aaade93c66e3dd3e865",
+      "errors": [],
+      "failed_checks": [],
+      "joints": [],
+      "structure_passed": true
+    },
+    {
+      "file": "used4.usda",
+      "sha256": "88a923229faee42a4dd8330899d203567372f5fc13aa3aaade93c66e3dd3e865",
+      "errors": [],
+      "failed_checks": [],
+      "joints": [],
+      "structure_passed": true
+    },
+    {
+      "file": "used5.usda",
+      "sha256": "88a923229faee42a4dd8330899d203567372f5fc13aa3aaade93c66e3dd3e865",
+      "errors": [],
+      "failed_checks": [],
+      "joints": [],
+      "structure_passed": true
+    },
+    {
+      "file": "used6.usda",
+      "sha256": "88a923229faee42a4dd8330899d203567372f5fc13aa3aaade93c66e3dd3e865",
+      "errors": [],
+      "failed_checks": [],
+      "joints": [],
+      "structure_passed": true
+    },
+    {
+      "file": "fixtures.usda",
+      "sha256": "c9e7c2fcea016051696800ffeb1efb3552725fc9a55c0871553fcaa66157b0e6",
+      "errors": [],
+      "failed_checks": [],
+      "joints": [],
+      "structure_passed": true
+    }
+  ]
+}

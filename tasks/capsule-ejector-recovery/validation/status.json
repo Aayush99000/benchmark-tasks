@@ -1,0 +1,29 @@
+{
+  "status": "revision_validated_media_uploaded",
+  "source_sha256": "24d155c84bd8c9960ad7bbf0a1e211178860c40c5e21ef7496da5caa2fb68d31",
+  "native_score": 1.0,
+  "native_steps": 2332,
+  "max_steps": 2400,
+  "all_used_collected": 7,
+  "head_angle_deg": 3.51,
+  "hands_released": true,
+  "native_cameras": [
+    640,
+    360
+  ],
+  "demo_size": [
+    1280,
+    1080
+  ],
+  "fps": 20,
+  "unit_tests": 18,
+  "usd_assets": 11,
+  "dream_episodes": 1,
+  "parent_QC": "Passed native/source/drawings/actualmedia review; one Dream authorized.",
+  "dream_score": 0.0,
+  "dream_steps": 2400,
+  "dream_runtime_error": null,
+  "source_unchanged": true,
+  "media_id": "M-5LLKRT",
+  "media_uploads": 1
+}
