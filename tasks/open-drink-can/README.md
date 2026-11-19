@@ -1,4 +1,4 @@
-# Open a drink can by its stay-on tab: slide a fingertip's edge under the tab's thin tail inside the lid's recess and lever it up until the seal breaks
+# Open a drink can by its stay-on tab: lever its thin tail up with a fingertip's edge until the seal breaks
 
 A closed drink can stands on the table, held upright. The instruction is only "Open the can." Opening one is
 everyday, but physically fiddly for a robot: the tab's tail is a 1.5 mm curled edge lying 1.3 mm above a lid that is
