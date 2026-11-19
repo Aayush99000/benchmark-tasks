@@ -1,5 +1,6 @@
-"""Offline checks for oxygen_flowmeter.py (no simulator): the nipple model (seated past the last barb, then held;
-short of it, free), the flowmeter model (the knob's angle sets the flow, the ball rides on its line), the scoring, the
+"""Offline checks for oxygen_flowmeter.py (no simulator): the nipple model (on the nipple, centred and held by the
+barbs against a push weaker than their push-back, moved on by a stronger one; seated past the last barb, then held),
+the barbs' push-back estimate (barbfit.py), the flowmeter model (the knob's angle sets the flow, the ball rides on its line), the scoring, the
 sizes, and the scripted demo against the YAM's real reach, step guard and collision hulls."""
 
 import math
@@ -10,6 +11,7 @@ import numpy as np
 import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import barbfit  # noqa: E402
 import oxygen_flowmeter as M  # noqa: E402
 from fittingkit import Frame  # noqa: E402
 from yam_arena import station  # noqa: E402
@@ -62,23 +64,75 @@ def test_at_the_start_the_tubing_is_off_and_the_flow_is_off():
     assert r.m.poses["ball"][0][2] == pytest.approx(M.BALL_AT[2])
 
 
-def test_short_of_its_seat_the_model_leaves_the_tubing_to_physics():
+def pushed(depth0, push_n, seconds=1.0):
+    """The tubing on the nipple ``depth0`` on, pushed along it with ``push_n`` N, built up over 0.1 s as an arm's
+    joint springs build it, moving along the nipple under that and the model's force (240 Hz, its 40 g): (its depth
+    at the end, the model)."""
+    m = M.Oxygen()
+    m.log = m.trace = None
+    x, v = depth0, 0.0
+    for i in range(int(240 * seconds)):
+        push = push_n * min(1.0, i / 24.0)
+        acc = {}
+        pos, rot = tube_on(x)
+        m.update({"tubing": frame(pos, rot, vel=v * M.NIP_AXIS), "knob": frame(M.KNOB_AT, M.R_KNOB),
+                  "ball": frame(M.BALL_AT)}, acc)
+        if m.seated:
+            break
+        f = float(acc.get("tubing", [np.zeros(3)])[0] @ M.NIP_AXIS)
+        v += (push + f) / M.TUBE_MASS / 240.0
+        x += v / 240.0
+    return x, m
+
+
+def test_the_barbs_push_back_steps_up_at_each_barb():
+    assert barbfit.F_BARB == pytest.approx(4.41, abs=0.01)
+    d = np.linspace(0.0, 0.020, 401)
+    f = np.array([barbfit.push_back(x) for x in d])
+    assert (np.diff(f) >= -1e-12).all()  # never less further on
+    assert barbfit.push_back(0.002) == 0.0  # the first cone is narrower than the bore there
+    for k, crest in enumerate(barbfit.CRESTS):
+        assert barbfit.push_back(crest) == pytest.approx((k + 1) * barbfit.F_BARB)
+    assert barbfit.push_back(0.020) < M.PULL_OFF_N  # it goes on more easily than EN 13544-2's 30 N pulls it off
+    lo, hi = min(v[3] for v in barbfit.estimate_range().values()), max(v[3] for v in barbfit.estimate_range().values())
+    assert 8.0 < lo < hi < 28.0
+
+
+def test_a_push_weaker_than_the_barbs_doesnt_move_it_a_stronger_one_moves_it_on():
+    x, m = pushed(0.006, 3.0)  # over the first barb (4.4 N), pushed with 3 N
+    assert x == pytest.approx(0.006, abs=2e-4) and m.engaged and not m.seated
+    x, m = pushed(0.006, 6.0)  # 6 N: on up the second barb's cone, past where its push-back is 6 N (it has picked up
+    # speed), stopping short of its crest
+    assert barbfit.push_back(x) >= 6.0 and x < barbfit.CRESTS[1] and not m.seated
+    x, m = pushed(0.006, 15.0)  # 15 N: over all three, seated
+    assert m.seated and m.max_push > barbfit.push_back(0.009)
+
+
+def test_pulled_back_past_a_barb_it_holds_up_to_30_n():
+    x, m = pushed(0.010, -25.0)
+    assert x == pytest.approx(0.010, abs=2e-4) and m.engaged
+    x, m = pushed(0.010, -35.0, seconds=0.3)
+    assert x < 0.0  # pulled off
+
+
+def test_on_the_nipple_it_is_pulled_onto_its_axis():
     r = Rig()
-    r.tube, r.tube_vel = tube_on(0.011), 0.05 * M.X_AXIS  # pushed on at 5 cm/s, 1 mm short of the seat
+    r.tube = tube_on(0.006, off_y=0.001)  # 1 mm to the left of the axis
     r.step(1)
-    assert "tubing" not in r.acc and "tubing" not in r.m.poses
+    f, _ = r.acc["tubing"]
+    assert r.m.engaged and f[1] == pytest.approx(-2 * M.CENTRE_K * 0.001, rel=0.05)
 
 
 def test_past_the_last_barb_it_is_seated_and_held():
     r = Rig()
-    r.tube = tube_on(0.013)
+    r.tube = tube_on(0.016)
     r.step()
     assert r.m.seated
-    assert r.m.seated_depth == pytest.approx(0.013)
+    assert r.m.seated_depth == pytest.approx(0.016)
     r.tube = (r.tube[0] - np.array([0.03, 0.0, 0.01]), r.tube[1])  # pulled off: written back
     r.step(1)
     depth, radial, angle = M.on_nipple(*r.tube)
-    assert depth == pytest.approx(0.013) and radial < 1e-9 and angle < 1e-6
+    assert depth == pytest.approx(0.016) and radial < 1e-9 and angle < 1e-6
 
 
 def test_part_way_on_it_isnt_seated():
@@ -160,8 +214,11 @@ def test_real_sizes():
     assert M.FM_TOP - M.FM_BOT == pytest.approx(0.152)  # Ohio Medical 6700: 152 mm tall
     assert M.FM_D + M.SHROUD_D == pytest.approx(0.058)  # 58 mm deep
     assert M.FM_W == pytest.approx(0.056)  # 56 mm wide
-    assert M.BORE_R - M.NIP_R == pytest.approx(0.0014)
-    assert M.SEAT < M.FULL_ON == M.NIP_L
+    assert 2 * barbfit.CREST_R == pytest.approx(0.006)  # WHO: "6 mm (1/4 inch) barbed fitting"
+    assert 2 * M.BORE_R == pytest.approx(0.005)  # WHO: "interior diameter 5mm"
+    assert 2 * M.TUBE_R == pytest.approx(0.008)
+    assert M.BORE_R - M.NIP_R == pytest.approx(0.0007)  # the bore's clearance round the nipple's core
+    assert M.SEAT == pytest.approx(0.015) and M.SEAT < M.FULL_ON == M.NIP_L
     # the tubing's centre of mass rests on the packet, its mouth over the edge
     edge = M.PACKET_AT[0] + M.PACKET_SIZE[0] / 2
     assert M.MOUTH_START[0] - M.TUBE_COM < edge < M.MOUTH_START[0]
@@ -199,8 +256,13 @@ def test_the_demo_brings_the_tubing_onto_the_nipples_line_and_turns_the_knob_to_
     p, r, _, _ = right.target(ends["onto its tip"] - 1e-6)
     depth, radial, angle = M.on_nipple(*M.tube_held(p, r))
     assert depth == pytest.approx(0.003, abs=1e-4) and radial == pytest.approx(M.AIM_UP, abs=1e-4) and angle < 0.1
+    expect = ArmPlan(M.demo(expected=True)["right"], station.BASES["right"])
+    p, r, _, _ = expect.target(ends["push it on"] - 1e-6)
+    assert M.on_nipple(*M.tube_held(p, r))[0] == pytest.approx(M.FULL_ON, abs=1e-4)
+    # aimed further on by the arm's give under the last push (about 6 mm per newton)
     p, r, _, _ = right.target(ends["push it on"] - 1e-6)
-    assert M.on_nipple(*M.tube_held(p, r))[0] == pytest.approx(M.FULL_ON + M.PUSH_PAST, abs=1e-4)
+    give = M.on_nipple(*M.tube_held(p, r))[0] - M.FULL_ON
+    assert 0.006 * (barbfit.push_back(M.FULL_ON) + M.PUSH_MARGIN - 1.0) < give < 0.007 * 18.0
     _, r0, _, _ = left.target(ends["close on it"] - 1e-6)
     _, r1, _, _ = left.target(ends["hold it there"] - 1e-6)
     turned = math.degrees(M.knob_angle(r1 @ r0.T @ M.R_KNOB))

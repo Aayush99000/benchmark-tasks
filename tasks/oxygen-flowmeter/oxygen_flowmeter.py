@@ -4,10 +4,11 @@ panel and turned off. The end of a nasal cannula's oxygen tubing lies on the can
 patient's oxygen up: push the tubing's end fully onto the outlet nipple, then turn the knob until the middle of the
 float ball is on the 2 L/min line, and let go of both.
 
-Two models run here. The nipple's barbs: tubing pushed onto the nipple until its end is past the last barb is
-seated (held where it is); short of that it isn't held. The flowmeter: the knob opens the needle valve as it is
-turned anticlockwise, seen from the front; the flow follows the knob's angle and the float ball rides on the flow,
-its middle at the flow's line on the tube's scale.
+Two models run here. The nipple's barbs: tubing whose mouth is on the nipple is centred on it, and pushes back as
+it goes on, by what it takes to stretch it over each barb (``barbfit.py``: about 4, 9, then 13 N); a weaker push
+doesn't move it. Once its mouth is past the last barb it is seated (held where it is). The flowmeter: the knob opens
+the needle valve as it is turned anticlockwise, seen from the front; the flow follows the knob's angle and the float
+ball rides on the flow, its middle at the flow's line on the tube's scale.
 
 Run it:  inspect-robots run --embodiment yam_arena -E task=oxygen_flowmeter.py -E object_jitter=0 -E control_hz=20 \\
            --instruction "..." --scorer task_score ...
@@ -23,10 +24,14 @@ from pathlib import Path
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import barbfit  # noqa: E402
 import fittingkit  # noqa: E402
 from fittingkit import Hinge, add_hinge, body, box, cyl, prism12, ring  # noqa: E402
 from yam_arena import demo as _demo  # noqa: E402
+from yam_arena import ik  # noqa: E402
+from yam_arena.constants import SHOULDER, WRIST  # noqa: E402
 from yam_arena.demo import Waypoint, grip_rotation  # noqa: E402
+from yam_arena import station  # noqa: E402
 from yam_arena.task_file import TABLE_TOP  # noqa: E402
 from yam_arena.urdf import axis_angle_matrix  # noqa: E402
 
@@ -89,8 +94,11 @@ KNOB_GAP = 2.0 * MM  # between its back and the front face
 KNOB_X = -(KNOB_GAP + KNOB_L / 2)  # its middle, from the front face
 OUT_Z = 0.084  # the outlet's axis, above the table
 NUT_R, NUT_L = 9.5 * MM, 15.0 * MM  # the DISS outlet nut
-NIP_R, NIP_L = 2.0 * MM, 20.0 * MM  # the tubing nipple (its core; the barbs stand 1.2 mm proud of it)
-TIP_TAPER = 6.0 * MM  # its last 6 mm taper to its tip
+# The tubing nipple: a "6 mm (1/4 inch) barbed fitting" (WHO) on a DISS nut, 20 mm long: three barbs, each a cone
+# from 3.6 to 6.0 mm across over 4 mm, one every 5 mm from its tip, then a 4.6 mm shank to its hex base (barbfit.py).
+# It collides as its 3.6 mm core; the barbs' stretch of the tubing is the nipple model's (below).
+NIP_R, NIP_L = barbfit.TIP_R, 20.0 * MM
+SHANK_R = 2.3 * MM
 NIP_TIP = np.array([FX - NUT_L - NIP_L, 0.0, TOP + OUT_Z])  # the nipple's tip, world
 NIP_AXIS = X_AXIS  # into the flowmeter
 
@@ -146,10 +154,8 @@ def _flowmeter_shapes() -> tuple[list, list]:
         box((-SHROUD_D / 2, 0.0, SHROUD_TOP + 0.002), (SHROUD_D, SHROUD_W, 0.004), ALUMINIUM),  # its top cap
         box((-SHROUD_D / 2, 0.0, SHROUD_BOT - 0.002), (SHROUD_D, SHROUD_W, 0.004), ALUMINIUM),  # its base
         cyl((-NUT_L / 2, 0.0, OUT_Z), NUT_R, NUT_L, ALUMINIUM, axis="X"),  # the DISS outlet nut
-        # the nipple: its 4 mm core, tapering over its last 6 mm in three steps to 2.2 mm at the tip (a lead-in)
-        cyl((-NUT_L - (NIP_L - TIP_TAPER) / 2, 0.0, OUT_Z), NIP_R, NIP_L - TIP_TAPER, O2_GREEN, axis="X"),
-        *[cyl((-NUT_L - NIP_L + TIP_TAPER - (k + 0.5) * TIP_TAPER / 3, 0.0, OUT_Z), r, TIP_TAPER / 3, O2_GREEN,
-              axis="X") for k, r in enumerate((1.7 * MM, 1.4 * MM, 1.1 * MM))],
+        # the nipple's 3.6 mm core, its whole length
+        cyl((-NUT_L - NIP_L / 2, 0.0, OUT_Z), NIP_R, NIP_L, O2_GREEN, axis="X"),
         cyl((FM_D + 0.010, 0.0, 0.150), 10.0 * MM, 0.020, ALUMINIUM, axis="X"),  # the inlet probe, into the outlet
         box((FM_D + 0.025, 0.0, 0.150), (0.010, 0.070, 0.070), O2_GREEN),  # the oxygen wall outlet
         box((FM_D + 0.036, 0.0, 0.150), (0.012, 0.240, 0.300), PANEL),  # the headwall panel
@@ -161,8 +167,14 @@ def _flowmeter_shapes() -> tuple[list, list]:
         cyl((-KNOB_GAP / 2, 0.0, KNOB_Z), 4.0 * MM, KNOB_GAP, ALUMINIUM, axis="X"),  # the knob's stem
         box((FM_D + 0.019, 0.0, 0.150 + 0.026), (0.0005, 0.050, 0.006), WHITE),  # the outlet's label
     ]
-    # the nipple's barbs: three rings 1.2 mm proud, its hex base
-    seen += [cyl((-NUT_L - d, 0.0, OUT_Z), NIP_R + 1.2 * MM, 0.003, O2_GREEN, axis="X") for d in (0.006, 0.011, 0.016)]
+    # the nipple's barbs, each its cone in four 1 mm steps up to the 6 mm crest; its shank and hex base
+    tip_x = -NUT_L - NIP_L
+    for z0 in barbfit.BARB_AT:
+        for k in range(4):
+            r = barbfit.TIP_R + (k + 1) * (barbfit.CREST_R - barbfit.TIP_R) / 4
+            seen.append(cyl((tip_x + z0 + (k + 0.5) * MM, 0.0, OUT_Z), r, 1.0 * MM, O2_GREEN, axis="X"))
+    shank_from = barbfit.CRESTS[-1] + 1.0 * MM
+    seen.append(cyl((tip_x + (shank_from + NIP_L) / 2, 0.0, OUT_Z), SHANK_R, NIP_L - shank_from, O2_GREEN, axis="X"))
     seen.append(cyl((-NUT_L - 0.002, 0.0, OUT_Z), 6.0 * MM, 0.004, O2_GREEN, axis="X"))
     seen += _scale_marks()
     return solid, seen
@@ -235,14 +247,12 @@ BALL = body("ball", pos=tuple(BALL_AT), mass=0.005, friction=0.5, shapes=_BS + _
 fittingkit.no_gravity("ball")
 
 # -- the tubing's end, on the cannula's packet ----------------------------------------------------------------------
-# Oxygen supply tubing (about 7 mm across, a 4.8 mm bore): its last 15 cm, rigid. Its frame: z along it, the open end
-# (the mouth) at +z. It lies along x on the packet, its mouth towards the flowmeter, its last 55 mm over the
+# Oxygen tubing with a 5 mm bore (WHO: "Tubing (interior diameter 5mm)"), 8 mm across: its last 15 cm, rigid. Its
+# frame: z along it, the open end (the mouth) at +z. It lies along x on the packet, its mouth towards the flowmeter, its last 55 mm over the
 # packet's edge.
 TUBE_L = 0.150
-TUBE_R = 4.0 * MM  # [estimate: 8 mm across, a little thicker than real tubing, for a firm pinch]
-# WHY 1.4 mm round the nipple's core: with 1 mm, the tubing pitched 3.7 degrees in the pinch as it met the taper and
-# the bore bound on the core 7 mm on (run oxy2)
-BORE_R = 3.4 * MM  # the bore over its first 24 mm
+TUBE_R = barbfit.TUBE_R  # 8 mm across
+BORE_R = barbfit.BORE_R  # the 5 mm bore over its first 24 mm: 0.7 mm round the nipple's core, 0.5 mm under its crests
 BORE_D = 0.024
 MOUTH_CHAMFER = 3.0 * MM
 TUBE_MASS = 0.040  # WHY 40 g: real tubing is a few grams; a part much under 30 g squeezes out of the YAM's grip
@@ -258,7 +268,7 @@ TUBE_AT = MOUTH_START - (TUBE_L / 2) * X_AXIS
 
 def _tube_shapes() -> tuple[list, list]:
     z_mouth = TUBE_L / 2
-    # the bore, its last 3 mm chamfered out to 4.0 mm (the soft end gives as it meets the nipple)
+    # the bore, its last 3 mm flared out to 6.2 mm (real tubing's end is tapered to start it on the nipple)
     solid = ring(z_mouth - BORE_D, z_mouth - MOUTH_CHAMFER, BORE_R, TUBE_R, TUBING, segments=12)
     solid += ring(z_mouth - MOUTH_CHAMFER, z_mouth, BORE_R + 0.6 * MM, TUBE_R + 0.6 * MM, TUBING, segments=12)
     rest = TUBE_L - BORE_D
@@ -279,13 +289,21 @@ PACKET_BODY = body("packet", pos=tuple(PACKET_AT), friction=0.8, shapes=[
 OBJECTS = [FLOWMETER, KNOB, BALL, TUBE, PACKET_BODY]
 
 # -- the two models ---------------------------------------------------------------------------------------------------
-ON_RADIAL = 2.0 * MM  # the mouth within this of the nipple's axis,
-ON_DEG = 10.0  # the tubing within this of its line: it is on the nipple
-# WHY no barb force: a force resisting the push (6, 3, then 1.5 N) pivoted the tubing in the YAM's two-finger pinch
-# every time it came on, dropping its mouth 1.5 mm onto the nipple's core, where it jammed (runs oxy1 to oxy6); the
-# simulated pinch barely resists turning about the line between the fingertips. So the barbs are only the seat
-SEAT = 12.0 * MM  # past the last barb: seated
-FULL_ON = NIP_L  # the mouth against the nut
+# The mouth goes on the nipple within 1.5 mm of its axis (its flared end round the 3.6 mm tip), the tubing within 10
+# degrees of its line; pulled 3 mm or 15 degrees off it, or back off the tip, it comes off.
+ON_RADIAL, ON_DEG = 1.5 * MM, 10.0
+OFF_RADIAL, OFF_DEG = 3.0 * MM, 15.0
+SEAT = barbfit.CRESTS[-1] + 1.0 * MM  # 15 mm: the mouth past the last barb's crest, seated
+FULL_ON = NIP_L  # the mouth against the hex base
+# WHY 30 N: EN 13544-2 tests the tubing on its nipple with a 30 N pull (Annex A); pulled back once its mouth is past a
+# barb's crest, it takes up to that to come off
+PULL_OFF_N = 30.0
+# The stretched wall centres the tubing on the barbs: a spring at its mouth and where the nipple's tip is in it.
+# WHY 1000 N/m and 2 N s/m: stiffer, the 40 g tubing's own springing goes unstable at the 240 Hz substep [estimate]
+CENTRE_K, CENTRE_C, CENTRE_MAX = 1000.0, 2.0, 5.0  # N/m, N s/m, N
+# WHY an anchor: the push is measured a substep late, so while a push builds the tubing crept on (26 mm/s in the
+# offline test); held, the barbs also pull it back to where it stuck, this fraction of the way each substep
+ANCHOR_GAIN = 0.3
 SET_LPM, SET_TOL = 2.0, 0.25  # the prescribed flow and how close counts as on its line (half a line's spacing)
 OVER_LPM = 4.0  # over this at the end: far over the prescription
 CLEAR_M = 0.02  # both grippers this far from the tubing and the knob at the end
@@ -323,12 +341,23 @@ def seated_pose(depth: float, rot) -> tuple[np.ndarray, tuple]:
     return mouth - (TUBE_L / 2) * NIP_AXIS, quat_xyzw(r_on)
 
 
+G = np.array([0.0, 0.0, -9.81])
+
+
 class Oxygen:
     """Runs before every physics substep (240 Hz).
 
-    The nipple: once the tubing's mouth is on the nipple (within 2 mm of its axis, the tubing within 10 degrees of
-    its line, past the tip) and its mouth is 12 mm on,
-    past the last barb, it is seated and held where it is (its pose is written back every substep).
+    The nipple: once the tubing's mouth is on the nipple (within 1.5 mm of its axis, the tubing within 10 degrees of
+    its line, past the tip), it is on until pulled 3 mm or 15 degrees off its line or back off the tip. While on:
+    - the stretched wall centres it: springs at its mouth and where the nipple's tip is inside it pull both onto the
+      nipple's axis;
+    - the barbs hold it like friction: whatever pushes the tubing along the nipple (fingers, the other hand, the
+      table), the model pushes back as much, up to ``barbfit.push_back`` of how far on it is (about 4, 9, then 13 N
+      over the three barbs), so a weaker push doesn't move it and a stronger one moves it on against that. The push is
+      measured from the tubing's own motion: its mass times its change of speed along the nipple, less the model's
+      own force the substep before. Pulled back, it holds up to 30 N once past the first barb.
+    Once its mouth is 15 mm on, past the last barb, it is seated and held where it is (its pose is written back every
+    substep).
 
     The flowmeter: the knob's angle (unwrapped) sets the flow; the ball's pose is written every substep at the
     flow's line."""
@@ -346,6 +375,12 @@ class Oxygen:
 
     def clear(self) -> None:
         self._n = 0
+        self.engaged = False
+        self.push = 0.0  # N: the push along the nipple the tubing is getting (measured, smoothed)
+        self.hold = 0.0  # N: the barbs' force on it along the nipple this substep (+: further on)
+        self._v_prev = None
+        self._anchor = None
+        self.max_push = 0.0
         self.seated = False
         self.seated_depth = 0.0
         self.depth = -1.0
@@ -382,18 +417,65 @@ class Oxygen:
                 poses["tubing"] = (poses["tubing"][0] + self.origin, poses["tubing"][1])
             else:
                 depth, radial, angle = on_nipple(t.pos, t.rot, self.origin)
-                on = radial < ON_RADIAL and angle < ON_DEG and depth > 0.0
+                if self.engaged:
+                    on = depth > 0.0 and radial < OFF_RADIAL and angle < OFF_DEG
+                    if not on:
+                        self._note(f"{self._n / 240:7.2f}s off the nipple: {1000 * depth:5.1f} mm on, {1000 * radial:4.2f}"
+                                   f" mm off its axis, {angle:4.1f} deg")
+                else:
+                    on = depth > 0.0 and radial < ON_RADIAL and angle < ON_DEG
+                    if on:
+                        self._note(f"{self._n / 240:7.2f}s on the nipple: {1000 * radial:4.2f} mm off its axis, "
+                                   f"{angle:4.1f} deg")
+                if not on:
+                    self.engaged, self._v_prev, self._anchor, self.push, self.hold = False, None, None, 0.0, 0.0
+                self.engaged = on
                 self.depth = depth if on else -1.0
-                if on:
-                    self.max_depth = max(self.max_depth, depth)
                 if on and depth >= SEAT:
                     self.seated = True
                     self.seated_depth = min(depth, FULL_ON)
                     self._note(f"{self._n / 240:7.2f}s seated: {1000 * depth:5.1f} mm on, {1000 * radial:4.2f} mm off "
-                               f"its axis, {angle:4.1f} deg")
+                               f"its axis, {angle:4.1f} deg, pushed {self.max_push:4.1f} N at most")
+                elif on:
+                    self.max_depth = max(self.max_depth, depth)
+                    self._barbs(t, depth, acc)
         self.poses = poses
         if self._n % TRACE_EVERY == 0 and self.trace:
             self._write_trace()
+
+    def _barbs(self, t, depth: float, acc: dict) -> None:
+        """The barbs' forces on tubing on the nipple, ``depth`` (m) on: centring, and holding it along the nipple."""
+        axis, m, dt = NIP_AXIS, TUBE_MASS, self.dt
+        v = float(t.point_vel(t.com) @ axis)
+        if self._v_prev is not None:
+            # what pushed it along the nipple last substep, besides the barbs and gravity
+            self.push = m * (v - self._v_prev) / dt - self.hold - m * float(G @ axis)
+            self.max_push = max(self.max_push, self.push)
+        self._v_prev = v
+        if self._anchor is None:
+            self._anchor = depth
+        # the force that would hold it still: cancel the push, stop it in one substep, and take it back towards where
+        # it stuck
+        still = -(self.push + m * v / dt + ANCHOR_GAIN * m * (depth - self._anchor) / (dt * dt))
+        resist_on = barbfit.push_back(depth)
+        resist_off = PULL_OFF_N if depth > barbfit.CRESTS[0] else resist_on
+        self.hold = float(np.clip(still, -resist_on, resist_off))
+        if self.hold != still:  # the push beats the barbs: it slides, and sticks again wherever it stops
+            self._anchor = depth
+        fittingkit._wrench(acc, "tubing", t, self.hold * axis, t.com)
+        mouth = tube_mouth(t.pos, t.rot)
+        along = np.asarray(t.rot, float)[:, 2]
+        tip = NIP_TIP + self.origin
+        for p in (mouth, mouth - depth * along):  # its mouth, and where the nipple's tip is inside it
+            rel = p - tip
+            off = rel - (rel @ axis) * axis
+            vel = t.point_vel(p)
+            vel = vel - (vel @ axis) * axis
+            f = -CENTRE_K * off - CENTRE_C * vel
+            n = float(np.linalg.norm(f))
+            if n > CENTRE_MAX:
+                f *= CENTRE_MAX / n
+            fittingkit._wrench(acc, "tubing", t, f, p)
 
     def _write_trace(self) -> None:
         """Debug only (OXY_TRACE=<file>): every 0.1 s, the tubing's mouth, the knob, the flow and both TCPs."""
@@ -410,7 +492,8 @@ class Oxygen:
             m = 1000 * (tube_mouth(self.tube.pos, self.tube.rot) - self.origin)
             d, r, a = on_nipple(self.tube.pos, self.tube.rot, self.origin)
             mouth = (f"mouth ({m[0]:6.1f},{m[1]:6.1f},{m[2] - 1000 * TOP:6.1f}) on {1000 * d:6.1f} off "
-                     f"{1000 * r:5.2f} ang {a:5.1f} s{int(self.seated)}")
+                     f"{1000 * r:5.2f} ang {a:5.1f} e{int(self.engaged)} s{int(self.seated)} push {self.push:5.1f} "
+                     f"barbs {self.hold:6.1f} (max {barbfit.push_back(max(d, 0.0)):4.1f})")
         with open(self.trace, "a") as fh:
             fh.write(f"{self._n / 240:6.2f}s {mouth} knob {math.degrees(self.theta):6.1f} flow {self.flow:5.2f} |"
                      f"{tcps}\n")
@@ -477,8 +560,8 @@ def score(objects) -> float:
 
 # -- the scripted demo ------------------------------------------------------------------------------------------------
 # The right hand, pointing down, its fingers closing across the tubing, pinches it 38 mm behind its mouth where it
-# hangs over the packet's edge, lifts it, carries it level to the nipple's line and pushes it on to the nut; it lets
-# go and moves away. Then the left hand, level and pointing at the knob, rolled 90 degrees clockwise so the turn
+# hangs over the packet's edge, lifts it, carries it level to the nipple's line and pushes it on over the three barbs
+# to the nipple's base, pressing harder at each barb; it eases off, lets go and moves away. Then the left hand, level and pointing at the knob, rolled 90 degrees clockwise so the turn
 # stays within its wrist's reach, closes on the knob, turns it 36 degrees anticlockwise (2 L/min), lets go and moves
 # clear.
 class RotWaypoint(Waypoint):
@@ -522,13 +605,55 @@ TIP_BELOW = 4.0 * MM  # the fingertips this far below the tubing's middle
 PICK_TCP = MOUTH_START - GRIP_BACK * X_AXIS + np.array([0.0, 0.0, PAD_TIP - TIP_BELOW])
 _R_TT = R_PINCH.T @ R_TUBE_START  # the tubing in the right TCP's frame, as the fingers close on it
 _P_TT = R_PINCH.T @ (TUBE_AT - PICK_TCP)
-PUSH_PAST = 4.0 * MM  # the mouth aimed this far past the nut, so the arm presses it home on the nut
 # WHY 2 mm up: held, the tubing's mouth rode 1.9 mm below the plan (run oxy1: the hand 1 mm low, the tubing 0.7 mm
 # lower in the grip), and its bore jammed on the nipple's core 5 mm on
 # (run oxy2, aimed 2 mm up: the mouth 0.7 mm over the axis before it touched the nipple)
 # (runs oxy3 and oxy4, aimed 1.4 and 1.0 mm up: the mouth 0.4 to 0.7 mm over the axis, and 0.4 mm under it, before it
 # touched the nipple)
 AIM_UP = 1.4 * MM
+
+
+# The arm gives under the tubing's push-back: its joints are springs (yam_arena.constants: 80 N m/rad at the
+# shoulder, 10 at the wrist), so at the push pose the pinch moves about 6 mm back, 1 mm sideways and 0.6 mm down, and
+# the hand pitches 1.3 degrees, for each newton. The demo aims each push pose that much further on, for the push it
+# expects there: the barbs' push-back plus a margin, so the tubing goes on.
+JOINT_K = np.diag([SHOULDER["stiffness"]] * 3 + [WRIST["stiffness"]] * 3)
+PINCH = np.array([0.0, 0.0, PAD_TIP - TIP_BELOW])  # the pinch, in the TCP's frame: on the tubing's axis
+# WHY 3.5 N: aimed 1.5 N over, the hand pushed 13.0 to 13.2 N and stopped the tubing 0.3 mm short of the last crest
+# (run oxr1; the arm's joint friction and its give, larger than our linear estimate, took the rest)
+PUSH_MARGIN = 3.5  # N more than the barbs' push-back
+# (mm on, seconds): to each barb's crest and over it, then to the base
+PUSH_STEPS = ((4.5, 0.8), (7.0, 0.6), (9.5, 0.8), (12.0, 0.6), (14.5, 1.2), (17.0, 0.8), (20.0, 0.6))
+
+
+def pinch_compliance(q, base) -> np.ndarray:
+    """How far (m, rad) the right hand's pinch moves and turns per unit force (N) and torque (N m) on it there:
+    J K^-1 J^T, with the pinch's Jacobian at joints ``q`` and the joints' stiffness."""
+    def pose(qq):
+        p, r = ik.tcp_pose(qq, base)
+        return p + r @ PINCH, r
+
+    p0, r0 = pose(q)
+    jac, eps = np.zeros((6, 6)), 1e-6
+    for i in range(6):
+        dq = np.zeros(6)
+        dq[i] = eps
+        (pa, ra), (pb, rb) = pose(q + dq), pose(q - dq)
+        jac[:3, i] = (pa - pb) / (2 * eps)
+        w = ra @ rb.T
+        jac[3:, i] = np.array([w[2, 1] - w[1, 2], w[0, 2] - w[2, 0], w[1, 0] - w[0, 1]]) / (4 * eps)
+    return jac @ np.linalg.inv(JOINT_K) @ jac.T
+
+
+def aim_for_push(tcp, r, push: float, q_init, base) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """The right TCP's target (position, rotation) that ends it at ``tcp``, ``r`` while the tubing pushes back
+    ``push`` N along the nipple's axis on the pinch; and the joints there (for the next one's start)."""
+    q, _, _ = ik.solve(tcp, ik.matrix_to_quat_xyzw(r), q_init, base_pos=base, iters=200)
+    give = pinch_compliance(q, base) @ np.r_[-push * NIP_AXIS, 0.0, 0.0, 0.0]
+    turn = np.linalg.norm(give[3:])
+    r_aim = r if turn < 1e-9 else axis_angle_matrix(-give[3:] / turn, turn) @ r
+    pinch = np.asarray(tcp, float) + r @ PINCH - give[:3]
+    return pinch - r_aim @ PINCH, r_aim, q
 
 
 def tube_held(tcp, r=R_PINCH) -> tuple[np.ndarray, np.ndarray]:
@@ -566,11 +691,14 @@ KNOB_TIPS = FX - 5.0 * MM  # the fingertips 5 mm short of the face, the pads rou
 KNOB_TCP = np.array([KNOB_TIPS - PAD_TIP, 0.0, TOP + KNOB_Z])
 
 
-def demo():
+def demo(expected: bool = False):
+    """Both arms' waypoints. With ``expected``, the right hand's push poses are where it is expected to end up under
+    the tubing's push-back (for plan_check), not where it is aimed."""
     right, left = [], []
 
-    def both(dur, rpose, rf, lpose, lf, label):
-        right.append(RotWaypoint(dur, tuple(rpose[0]), rf, label, rpose[1]))
+    def both(dur, rpose, rf, lpose, lf, label, rexpect=None):
+        rp = rexpect if (expected and rexpect is not None) else rpose
+        right.append(RotWaypoint(dur, tuple(rp[0]), rf, label, rp[1]))
         left.append(RotWaypoint(dur, tuple(lpose[0]), lf, label, lpose[1]))
 
     up = lambda h: np.array([0.0, 0.0, h])  # noqa: E731
@@ -586,9 +714,17 @@ def demo():
     both(1.2, (tcp_for_mouth(line_up), R_PINCH), CLOSED, l_wait, CLOSED, "in line with it")
     both(1.2, (tcp_for_mouth(NIP_TIP + 0.003 * NIP_AXIS + up(AIM_UP)), R_PINCH), CLOSED, l_wait, CLOSED,
          "onto its tip")
-    pushed = (tcp_for_mouth(NIP_TIP + (FULL_ON + PUSH_PAST) * NIP_AXIS + up(AIM_UP)), R_PINCH)
-    both(2.0, pushed, CLOSED, l_wait, CLOSED, "push it on")
-    both(0.6, pushed, CLOSED, l_wait, CLOSED, "hold it on")
+    base = np.asarray(station.BASES["right"], float)
+    q = ik.solve(tcp_for_mouth(NIP_TIP + 0.003 * NIP_AXIS + up(AIM_UP)), ik.matrix_to_quat_xyzw(R_PINCH),
+                 None, base_pos=base, iters=300)[0]
+    for mm, dur in PUSH_STEPS:
+        at = (tcp_for_mouth(NIP_TIP + mm * MM * NIP_AXIS + up(AIM_UP)), R_PINCH)
+        *aim, q = aim_for_push(*at, barbfit.push_back(mm * MM) + PUSH_MARGIN, q, base)
+        both(dur, aim, CLOSED, l_wait, CLOSED, "push it on", rexpect=at)
+    pushed = (tcp_for_mouth(NIP_TIP + FULL_ON * NIP_AXIS + up(AIM_UP)), R_PINCH)
+    both(0.6, aim, CLOSED, l_wait, CLOSED, "hold it on", rexpect=pushed)
+    # WHY ease off before letting go: aimed 10 cm past where it is, the hand would spring on into the flowmeter
+    both(1.0, pushed, CLOSED, l_wait, CLOSED, "ease off")
     both(2.0, pushed, OPEN, l_wait, CLOSED, "let it go")
     # WHY back first: lifted straight up, its open fingers swept through the knob (plan_check)
     both(1.2, (pushed[0] - 0.04 * X_AXIS + up(0.01), R_PINCH), OPEN, l_wait, CLOSED, "back off the nipple")

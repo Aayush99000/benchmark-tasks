@@ -2,7 +2,8 @@
 does any part of either hand (palm, fingers, the last two links) run into the flowmeter, its knob, the packet or the
 tubing (other than where it is meant to hold them), how close do the two hands come, and where is the tubing's mouth
 as it goes onto the nipple. The tubing is taken to move rigidly with the right hand while it is held, and to stay
-seated where it was pushed once it is let go. No simulator.
+seated where it was pushed once it is let go. While it pushes the tubing on, the right hand is checked where it is
+expected to be under the barbs' push-back (``demo(expected=True)``), not where it is aimed. No simulator.
 
     python plan_check.py
 """
@@ -26,7 +27,7 @@ ARM = HAND + ["link_6", "link_5"]
 GRIP, LET_GO = "pinch it", "let it go"  # the right hand closes on the tubing, and opens off it
 # the labels in which a hand is meant to touch a part: the right fingers round the tubing, the left round the knob
 RIGHT_TOUCH = ("fingers either side of it", "pinch it", "lift it", "to the nipple", "in line with it", "onto its tip",
-               "push it on", "hold it on", "let it go", "back off the nipple")
+               "push it on", "hold it on", "ease off", "let it go", "back off the nipple")
 LEFT_TOUCH = ("fingers round the knob", "close on it", "settle the grip", "turn it to 2 L/min", "hold it there", "let go of the knob",
               "back off")
 
@@ -75,7 +76,7 @@ def gap(a, b) -> float:
 
 
 def run(verbose=True) -> dict:
-    d = M.demo()
+    d = M.demo(expected=True)
     plans = {a: ArmPlan(d[a], station.BASES[a]) for a in ("left", "right")}
     ends, t = {}, 0.0
     for w in d["right"]:
