@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Route map</title>
+<!-- Leaflet 1.9.4 (BSD-2-Clause, https://leafletjs.com), pinned by Subresource Integrity. -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<style>
+  html, body, #map { margin: 0; height: 100%; width: 100%; overflow: hidden; background: #ccc4b5; touch-action: none; }
+  #map { background: #ccc4b5; }
+  .disc { border-radius: 50%; box-sizing: border-box; }
+  .disc i { position: absolute; left: 50%; top: 50%; border-radius: 50%; background: #fff; transform: translate(-50%, -50%); }
+  .leaflet-popup-content-wrapper { border-radius: 2px; padding: 0; }
+  .leaflet-popup-content { margin: 0; }
+  .card b { display: block; background: #2666db; color: #fff; font: 600 13px sans-serif; padding: 2px 6px; box-sizing: border-box; }
+  .card span { display: block; font: 12px sans-serif; padding: 4px 6px; color: #333; }
+  #go { position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,.75); color: #fff; font: 22px sans-serif;
+        display: flex; align-items: center; justify-content: center; text-align: center; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<div id="go">Tap once to go full screen and load the start view.<br>(Reload the page to reset.)</div>
+<script>
+// The route-map page for the real trial. Map units are millimetres on the screen at the start view; the map is our
+// own synthetic street plan (no tiles, no network data), drawn identically in the simulated trial.
+var D = {"water":[[[-594.52,-1234.25],[-504.52,-694.25],[-435.48,-705.75],[-525.48,-1245.75]],[[-504.73,-704.34],[-554.73,-304.34],[-485.27,-295.66],[-435.27,-695.66]],[[-554.15,-292.32],[-464.15,107.68],[-395.85,92.32],[-485.85,-307.68]],[[-464.73,95.66],[-514.73,495.66],[-445.27,504.34],[-395.27,104.34]],[[-514.32,506.86],[-434.32,906.86],[-365.68,893.14],[-445.68,493.14]],[[-434.63,894.91],[-484.63,1234.91],[-415.37,1245.09],[-365.37,905.09]],[[-470.0,-665.0],[-452.5,-669.69],[-439.69,-682.5],[-435.0,-700.0],[-439.69,-717.5],[-452.5,-730.31],[-470.0,-735.0],[-487.5,-730.31],[-500.31,-717.5],[-505.0,-700.0],[-500.31,-682.5],[-487.5,-669.69]],[[-520.0,-265.0],[-502.5,-269.69],[-489.69,-282.5],[-485.0,-300.0],[-489.69,-317.5],[-502.5,-330.31],[-520.0,-335.0],[-537.5,-330.31],[-550.31,-317.5],[-555.0,-300.0],[-550.31,-282.5],[-537.5,-269.69]],[[-430.0,135.0],[-412.5,130.31],[-399.69,117.5],[-395.0,100.0],[-399.69,82.5],[-412.5,69.69],[-430.0,65.0],[-447.5,69.69],[-460.31,82.5],[-465.0,100.0],[-460.31,117.5],[-447.5,130.31]],[[-480.0,535.0],[-462.5,530.31],[-449.69,517.5],[-445.0,500.0],[-449.69,482.5],[-462.5,469.69],[-480.0,465.0],[-497.5,469.69],[-510.31,482.5],[-515.0,500.0],[-510.31,517.5],[-497.5,530.31]],[[-400.0,935.0],[-382.5,930.31],[-369.69,917.5],[-365.0,900.0],[-369.69,882.5],[-382.5,869.69],[-400.0,865.0],[-417.5,869.69],[-430.31,882.5],[-435.0,900.0],[-430.31,917.5],[-417.5,930.31]],[[-450.0,1275.0],[-432.5,1270.31],[-419.69,1257.5],[-415.0,1240.0],[-419.69,1222.5],[-432.5,1209.69],[-450.0,1205.0],[-467.5,1209.69],[-480.31,1222.5],[-485.0,1240.0],[-480.31,1257.5],[-467.5,1270.31]]],"parks":[[[5.0,-195.0],[5.0,-125.0],[70.0,-125.0],[70.0,-195.0]],[[-145.0,125.0],[-145.0,195.0],[-80.0,195.0],[-80.0,125.0]],[[80.0,525.0],[80.0,755.0],[295.0,755.0],[295.0,525.0]],[[155.0,-595.0],[155.0,-445.0],[295.0,-445.0],[295.0,-595.0]]],"street":[[[-750.0,-1235.5],[750.0,-1235.5],[750.0,-1244.5],[-750.0,-1244.5]],[[-750.0,-1155.5],[750.0,-1155.5],[750.0,-1164.5],[-750.0,-1164.5]],[[-750.0,-1075.5],[750.0,-1075.5],[750.0,-1084.5],[-750.0,-1084.5]],[[-750.0,-995.5],[750.0,-995.5],[750.0,-1004.5],[-750.0,-1004.5]],[[-750.0,-915.5],[750.0,-915.5],[750.0,-924.5],[-750.0,-924.5]],[[-750.0,-835.5],[750.0,-835.5],[750.0,-844.5],[-750.0,-844.5]],[[-750.0,-755.5],[750.0,-755.5],[750.0,-764.5],[-750.0,-764.5]],[[-750.0,-675.5],[750.0,-675.5],[750.0,-684.5],[-750.0,-684.5]],[[-750.0,-595.5],[750.0,-595.5],[750.0,-604.5],[-750.0,-604.5]],[[-750.0,-515.5],[750.0,-515.5],[750.0,-524.5],[-750.0,-524.5]],[[-750.0,-435.5],[750.0,-435.5],[750.0,-444.5],[-750.0,-444.5]],[[-750.0,-275.5],[750.0,-275.5],[750.0,-284.5],[-750.0,-284.5]],[[-750.0,-195.5],[750.0,-195.5],[750.0,-204.5],[-750.0,-204.5]],[[-750.0,-115.5],[750.0,-115.5],[750.0,-124.5],[-750.0,-124.5]],[[-750.0,-35.5],[750.0,-35.5],[750.0,-44.5],[-750.0,-44.5]],[[-750.0,44.5],[750.0,44.5],[750.0,35.5],[-750.0,35.5]],[[-750.0,124.5],[750.0,124.5],[750.0,115.5],[-750.0,115.5]],[[-750.0,204.5],[750.0,204.5],[750.0,195.5],[-750.0,195.5]],[[-750.0,284.5],[750.0,284.5],[750.0,275.5],[-750.0,275.5]],[[-750.0,364.5],[750.0,364.5],[750.0,355.5],[-750.0,355.5]],[[-750.0,524.5],[750.0,524.5],[750.0,515.5],[-750.0,515.5]],[[-750.0,604.5],[750.0,604.5],[750.0,595.5],[-750.0,595.5]],[[-750.0,684.5],[750.0,684.5],[750.0,675.5],[-750.0,675.5]],[[-750.0,764.5],[750.0,764.5],[750.0,755.5],[-750.0,755.5]],[[-750.0,844.5],[750.0,844.5],[750.0,835.5],[-750.0,835.5]],[[-750.0,924.5],[750.0,924.5],[750.0,915.5],[-750.0,915.5]],[[-750.0,1004.5],[750.0,1004.5],[750.0,995.5],[-750.0,995.5]],[[-750.0,1084.5],[750.0,1084.5],[750.0,1075.5],[-750.0,1075.5]],[[-750.0,1164.5],[750.0,1164.5],[750.0,1155.5],[-750.0,1155.5]],[[-750.0,1244.5],[750.0,1244.5],[750.0,1235.5],[-750.0,1235.5]],[[-754.5,-1240.0],[-754.5,1240.0],[-745.5,1240.0],[-745.5,-1240.0]],[[-679.5,-1240.0],[-679.5,1240.0],[-670.5,1240.0],[-670.5,-1240.0]],[[-604.5,-1240.0],[-604.5,1240.0],[-595.5,1240.0],[-595.5,-1240.0]],[[-529.5,-1240.0],[-529.5,1240.0],[-520.5,1240.0],[-520.5,-1240.0]],[[-454.5,-1240.0],[-454.5,1240.0],[-445.5,1240.0],[-445.5,-1240.0]],[[-379.5,-1240.0],[-379.5,1240.0],[-370.5,1240.0],[-370.5,-1240.0]],[[-229.5,-1240.0],[-229.5,1240.0],[-220.5,1240.0],[-220.5,-1240.0]],[[-154.5,-1240.0],[-154.5,1240.0],[-145.5,1240.0],[-145.5,-1240.0]],[[-79.5,-1240.0],[-79.5,1240.0],[-70.5,1240.0],[-70.5,-1240.0]],[[-4.5,-1240.0],[-4.5,1240.0],[4.5,1240.0],[4.5,-1240.0]],[[70.5,-1240.0],[70.5,1240.0],[79.5,1240.0],[79.5,-1240.0]],[[145.5,-1240.0],[145.5,1240.0],[154.5,1240.0],[154.5,-1240.0]],[[220.5,-1240.0],[220.5,1240.0],[229.5,1240.0],[229.5,-1240.0]],[[370.5,-1240.0],[370.5,1240.0],[379.5,1240.0],[379.5,-1240.0]],[[445.5,-1240.0],[445.5,1240.0],[454.5,1240.0],[454.5,-1240.0]],[[520.5,-1240.0],[520.5,1240.0],[529.5,1240.0],[529.5,-1240.0]],[[595.5,-1240.0],[595.5,1240.0],[604.5,1240.0],[604.5,-1240.0]],[[670.5,-1240.0],[670.5,1240.0],[679.5,1240.0],[679.5,-1240.0]],[[745.5,-1240.0],[745.5,1240.0],[754.5,1240.0],[754.5,-1240.0]]],"major":[[[-750.0,-352.0],[750.0,-352.0],[750.0,-368.0],[-750.0,-368.0]],[[-750.0,448.0],[750.0,448.0],[750.0,432.0],[-750.0,432.0]],[[-308.0,-1240.0],[-308.0,1240.0],[-292.0,1240.0],[-292.0,-1240.0]],[[292.0,-1240.0],[292.0,1240.0],[308.0,1240.0],[308.0,-1240.0]],[[-657.19,-1236.49],[552.81,1243.51],[567.19,1236.49],[-642.81,-1243.51]]],"route":[[-150.0,-280.0],[-150.0,-120.0],[-75.0,-120.0],[-75.0,40.0],[75.0,40.0],[75.0,200.0],[150.0,200.0],[150.0,320.0]],"pins":{"cafe":[37.0,-60.0],"museum":[-40.0,70.0],"pharmacy":[110.0,160.0]},"screen_w_mm":217.6,"route_w_mm":3.0,"icon_mm":7.0,"dot_mm":2.6,"card_w_mm":44.0,"card_h_mm":24.0,"card_bar_mm":6.0,"card_lift_mm":5.0,"zoom_out":-3,"zoom_in":2};
+var C = {"land": "#ccc4b5", "water": "#99c9e3", "park": "#adde9e", "street": "#ffffff", "major": "#fac985", "route": "#e01a1a", "start": "#1f9e3d", "end": "#292938", "pin": "#2666db", "dot": "#ffffff", "card": "#fcfcfc", "card_bar": "#2666db"};
+var map, z0;
+function mmToPx() { return window.innerWidth / D.screen_w_mm; }      // the page fills the 217.6 mm wide screen
+function discIcon(fill, mm, dotMm) {
+  var px = mm * mmToPx(), dot = dotMm * mmToPx();
+  return L.divIcon({className: '', iconSize: [px, px], iconAnchor: [px / 2, px / 2],
+    popupAnchor: [0, -(D.card_lift_mm * mmToPx() - 10)],
+    html: '<div class="disc" style="position:relative;width:' + px + 'px;height:' + px + 'px;background:' + fill +
+          '"><i style="width:' + dot + 'px;height:' + dot + 'px"></i></div>'});
+}
+function build() {
+  if (map) { map.remove(); }
+  z0 = Math.log2(mmToPx());                                           // 1 map unit = 1 mm on the screen at the start
+  map = L.map('map', {
+    crs: L.CRS.Simple, center: [0, 0], zoom: z0, minZoom: z0 + D.zoom_out, maxZoom: z0 + D.zoom_in,
+    zoomSnap: 0, zoomDelta: 1, inertia: false, bounceAtZoomLimits: false,
+    zoomAnimation: false, fadeAnimation: false, markerZoomAnimation: false,
+    touchZoom: true, dragging: true, doubleClickZoom: true, tapHold: false,
+    scrollWheelZoom: false, boxZoom: false, keyboard: false, zoomControl: false, attributionControl: false,
+    closePopupOnClick: true, preferCanvas: true
+  });
+  var flat = function (rings, fill) {
+    rings.forEach(function (r) { L.polygon(r, {stroke: false, fillColor: fill, fillOpacity: 1, interactive: false}).addTo(map); });
+  };
+  flat(D.water, C.water); flat(D.parks, C.park); flat(D.street, C.street); flat(D.major, C.major);
+  L.polyline(D.route, {color: C.route, opacity: 1, weight: D.route_w_mm * mmToPx(), lineCap: 'butt', lineJoin: 'round',
+                       interactive: false}).addTo(map);
+  L.marker(D.route[0], {icon: discIcon(C.start, D.icon_mm, D.dot_mm), interactive: false, keyboard: false}).addTo(map);
+  L.marker(D.route[D.route.length - 1], {icon: discIcon(C.end, D.icon_mm, D.dot_mm), interactive: false, keyboard: false}).addTo(map);
+  Object.keys(D.pins).forEach(function (name) {
+    var w = D.card_w_mm * mmToPx(), h = D.card_h_mm * mmToPx(), bar = D.card_bar_mm * mmToPx();
+    var html = '<div class="card" style="width:' + w + 'px;height:' + h + 'px"><b style="height:' + bar + 'px">' +
+               name.charAt(0).toUpperCase() + name.slice(1) + '</b><span>Open now</span></div>';
+    L.marker(D.pins[name], {icon: discIcon(C.pin, D.icon_mm, D.dot_mm), keyboard: false})
+      .bindPopup(html, {autoPan: false, closeButton: false, minWidth: w, maxWidth: w}).addTo(map);
+  });
+}
+document.getElementById('go').addEventListener('click', function () {
+  var el = document.documentElement;
+  var after = function () { document.getElementById('go').style.display = 'none'; setTimeout(build, 300); };
+  if (el.requestFullscreen) { el.requestFullscreen().then(after, after); } else { after(); }
+});
+build();
+</script>
+</body>
+</html>
