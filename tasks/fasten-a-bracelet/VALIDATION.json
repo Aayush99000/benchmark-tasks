@@ -1,0 +1,55 @@
+{
+  "status": "validated_submission",
+  "checked_utc": "2026-11-17T04:38:22.332952+00:00",
+  "scores": {
+    "demo": 1.0,
+    "dream": 0.0
+  },
+  "steps": {
+    "demo": 900,
+    "dream": 1000
+  },
+  "wall_seconds": {
+    "demo": 664.4300341609996,
+    "dream": 913.5740752030015
+  },
+  "runtime_sources_match": true,
+  "physics_sources_match": true,
+  "verified_runtime_files": [
+    "run.py",
+    "model.py",
+    "common.py",
+    "task.py",
+    "joint_tracking.py",
+    "dream_policy.py",
+    "review_views.py",
+    "demo-plan.json",
+    "bracelet_physics.py",
+    "bracelet_geometry.py",
+    "forms.py",
+    "demo_alignment.py"
+  ],
+  "source_sha256": {
+    "run.py": "b7334445922a4e9909e6dd558fc7d64bdbc8711aea5e21399da7d051cb8957d5",
+    "model.py": "0f4c84537795fd92314dc6443a46e3b1343fa4196b4a9dcaad7ad84f8298db40",
+    "common.py": "40368411cb1779e29c59d4c0760a22e24ea547a54610c67ef9cdfe9dd6a07b50",
+    "task.py": "0456468a90904451755288cef52eba90fab1372b083f2542f924bdf97ef6a612",
+    "joint_tracking.py": "f22bb7c34c8c4ba51859844f77fef8b29337b5b6353e7cc0b85cf0247866c453",
+    "dream_policy.py": "c6727b995f2ec372d6e50a4d675a9b3e1dd12c0748f648708454a30f4e453091",
+    "review_views.py": "27824ba5a2c25e1543fe9770dda9b40f175214a014ba62ef3fe2edba21d3e754",
+    "demo-plan.json": "a0e56bf5ab9c8070ed8a0972f985ce7c506f4018ec0da99f546218d0c0b8886e",
+    "bracelet_physics.py": "bcf9b3adecada142f19ef4e20a30d6aa0c79456177ea28f2bbeb669d0904b62e",
+    "bracelet_geometry.py": "90a4ed60b802fcfdb1e3f22a9fe876426113e205b985a16cdd68fb9df81a76ef",
+    "forms.py": "19a76c8e9be631e13b156cdecb177939ab720b85d3a6320c2b3663c3cb25291c",
+    "demo_alignment.py": "f37ce9650c75618f6708a679b9618b8e6ebd7512d0ca08e3d628fa48661f0c01"
+  },
+  "trace_sha256": {
+    "demo": "43d722bc8adfe91ea242916ed4f764b9b80c5f196554b51b16fe9f3db4548fae",
+    "dream": "9dc8d051851d11ecc23541606f2874a383fb84615ea964074318bb4df64afe40"
+  },
+  "visual_review_passed": true,
+  "media_uploaded": true,
+  "remaining_gates": [
+    "PR ingestion confirmation"
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "status": "complete",
+  "mode": "demo",
+  "steps": 900,
+  "requested_steps": 900,
+  "source_sha256": {
+    "planner.py": "cf5a17d495934590ad6b93ef1462f82be10c6a7e326881bb116167565305b05a",
+    "task.py": "0456468a90904451755288cef52eba90fab1372b083f2542f924bdf97ef6a612",
+    "run.py": "b7334445922a4e9909e6dd558fc7d64bdbc8711aea5e21399da7d051cb8957d5",
+    "rescore.py": "8d9931fd1e415fb53f5c1d27134a45dc97d8d13da4722edd66bea296b6e9aeab",
+    "demo_alignment.py": "f37ce9650c75618f6708a679b9618b8e6ebd7512d0ca08e3d628fa48661f0c01",
+    "LICENSE": "a71ddeb012ff1961bf252489309b565ffd0443632819aa9c88eef4377f9f9f7a",
+    "task.json": "00fe9580b31a3932c6251d3303e9e5de87aefe42e91948ae93da471e203984c4",
+    "make_plan.py": "61d90243db7cac48c35c2d1e8631961d254eb822a61ff31d2ce687bc94528f77",
+    "bracelet_geometry.py": "90a4ed60b802fcfdb1e3f22a9fe876426113e205b985a16cdd68fb9df81a76ef",
+    "model.py": "0f4c84537795fd92314dc6443a46e3b1343fa4196b4a9dcaad7ad84f8298db40",
+    "README.md": "dabfa30de28b27fd3040376a29e27f1f459373bb7484749b9bba3c5ee16500d5",
+    "forms.py": "19a76c8e9be631e13b156cdecb177939ab720b85d3a6320c2b3663c3cb25291c",
+    "replay_evidence.py": "22111606b0f18039ee1fe6ae8df40ca711fefde46103f54ded684029a23f17ad",
+    "common.py": "40368411cb1779e29c59d4c0760a22e24ea547a54610c67ef9cdfe9dd6a07b50",
+    "joint_tracking.py": "f22bb7c34c8c4ba51859844f77fef8b29337b5b6353e7cc0b85cf0247866c453",
+    "VALIDATION.json": "b19442ba1317251e3aae06ac54d59a7b9bf6ee72719528eb2751afa213adea78",
+    "dream_policy.py": "c6727b995f2ec372d6e50a4d675a9b3e1dd12c0748f648708454a30f4e453091",
+    "bracelet_physics.py": "bcf9b3adecada142f19ef4e20a30d6aa0c79456177ea28f2bbeb669d0904b62e",
+    "demo-plan.json": "a0e56bf5ab9c8070ed8a0972f985ce7c506f4018ec0da99f546218d0c0b8886e",
+    "ENVIRONMENT.json": "da43aa57dce48050c915a523290956402898f3c0318a2145fdb5e63bf5e55a63",
+    "CLASP.md": "f8aa6576a8db6fc7493badc098263e96a4cd23b6400d425b7a86ef785cd8de2e",
+    "review_views.py": "27824ba5a2c25e1543fe9770dda9b40f175214a014ba62ef3fe2edba21d3e754",
+    "trace_audit.py": "68b8c32960715898d8853027fd3bb0edd5e9f908666a2b0dfa83929f453b29ba"
+  },
+  "control_hz": 20,
+  "score": 1.0,
+  "cpu_preview": false,
+  "submission_evidence": true,
+  "wall_seconds": 664.4300341609996,
+  "initial_measurements": {
+    "clasp_closed": false,
+    "inserted_mm": 0.0,
+    "radial_error_mm": 0.005697394338327473,
+    "axis_error_deg": 0.04392446536967759,
+    "around_wrist": false,
+    "axial_offset_mm": 0.12874603271484375,
+    "released_seconds": 0.0,
+    "max_joint_gap_mm": 0.00374263350168503,
+    "failed": false
+  },
+  "measurements": {
+    "clasp_closed": true,
+    "inserted_mm": 2.9875518591424863,
+    "radial_error_mm": 0.47020474221546704,
+    "axis_error_deg": 0.3467878505058761,
+    "around_wrist": true,
+    "axial_offset_mm": 4.885196685791016,
+    "released_seconds": 5.4999999999999885,
+    "max_joint_gap_mm": 2.299766531414814,
+    "failed": false
+  },
+  "events": [
+    {
+      "event": "pin_spring_caught",
+      "time": 25.150000000000222,
+      "depth_m": 0.00300107351512503,
+      "radial_m": 0.0005413734194521776
+    }
+  ],
+  "requires_visual_review": true,
+  "dream_requests": 0,
+  "dream_sessions": {}
+}
