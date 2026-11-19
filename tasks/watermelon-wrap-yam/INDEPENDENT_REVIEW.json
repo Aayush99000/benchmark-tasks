@@ -1,0 +1,93 @@
+{
+  "review": "round10_watermelon_final",
+  "task": "watermelon-wrap-yam",
+  "verdict": "accept",
+  "acceptance_scope": "Independent reviewer acceptance of the explicitly disclosed simulated task package, scoring/setup, feasible scripted demonstration and completed Dream-1 test. This is not an official platform acceptance or physical calibration claim.",
+  "rationale": "Clear cumulative outcome scoring and reproducible equipment/setup are implemented; a current-source native demonstration attains1.0 within the limit; the same runtime revision has an actual authenticated Dream-1 episode with intact observations and recorded terminal outcome. No outstanding correctness or evidence blocker was found.",
+  "criteria": {
+    "importance_and_task_scope": "pass (prior review)",
+    "clear_reproducible_scoring": "pass",
+    "equipment_and_starting_setup": "pass",
+    "current_full_score_feasibility": "pass",
+    "genuine_Dream1_test": "pass",
+    "demo_model_runtime_correspondence": "pass"
+  },
+  "demonstration": {
+    "path": "evidence/v2_demo_001",
+    "score": 1.0,
+    "steps": 1335,
+    "limit": 3600,
+    "audit_independently_rerun": true,
+    "audit_passed": true,
+    "required_runtime_sources_matched": 14,
+    "coverage": 0.9989462592202318,
+    "patches": [
+      {
+        "passed": true,
+        "area_mm2": 1040.0,
+        "width_mm": 54.0
+      },
+      {
+        "passed": true,
+        "area_mm2": 904.0,
+        "width_mm": 62.0
+      }
+    ],
+    "payout_m": 0.425,
+    "robot_clearance_m": 0.15577556102169837,
+    "continuous_released_hold_s": 4.049999999999994,
+    "events": {
+      "both_edges_seen": 165,
+      "both_tucks_seen": 665,
+      "cut_completed": 1030
+    }
+  },
+  "Dream1": {
+    "policy": "dream",
+    "checkpoint": "dreamlabs/dream-1-beta",
+    "dry_run": false,
+    "seed": 0,
+    "derived_scene_reset_seed": 1415158438,
+    "control_hz": 20.0,
+    "instruction": "Use both arms to pull cling film from the dispenser, cover the watermelon half and tuck the film underneath, then slide the cutter across and release the wrapped fruit.",
+    "steps": 3600,
+    "max_steps": 3600,
+    "inference_requests": 75,
+    "status": "success",
+    "error": null,
+    "exit_code": 0,
+    "termination_reasons": [
+      "max_steps"
+    ],
+    "task_score": 0.0,
+    "outcome": "Completed episode; task not solved. No film grasp or payout beyond the initial75 mm; score0.0 throughout.",
+    "score_samples": 720,
+    "continuous_score_sample_interval_steps": 5,
+    "scene_valid_all_samples": true,
+    "action_guard_events": 2925,
+    "action_guard_note": "The standard evaluator recorded2925 modified delta-limit guard events. This is the observed guarded-policy test outcome, not evidence of robust policy capability."
+  },
+  "source_correspondence": {
+    "required_files_matching_demo_model_current_and_launch_hashes": 14,
+    "details": "RUNTIME_SOURCE_CHECKS.json confirms staged source equality; the original independent demo/model source audit remains in the development archive."
+  },
+  "visual_check": {
+    "videos": 3,
+    "frames_per_video": 3601,
+    "fps": 20,
+    "seconds_per_video": 180.05,
+    "dimensions": [
+      320,
+      176
+    ],
+    "frames_inspected": 15,
+    "result": "All sampled top/wrist observations are nonblack and show the correct task scene; arm motion is visible, film remains undrawn."
+  },
+  "limitations": [
+    "Single seed/epoch evaluates one model trial, not success rate.",
+    "Model failure does not invalidate the feasible benchmark and must not be described as task success.",
+    "Native demo geometry export contains30 of267 states with continuous score trace/video; full native geometry remains remote. Model raw observation arrays remain remote, while full EvalLog and all three recorded videos are exported.",
+    "Physical hardware calibration and real film behavior are not established; disclosed hybrid PBD/contact approximations remain in scope."
+  ],
+  "remaining_blockers": []
+}

@@ -1,0 +1,11 @@
+{
+  "source_sha256": "ca34717f64b78902383666403ebdb1fce502ec8e33fc9de765a5c8274d80e35e",
+  "binary_sha256": "cc5f711cf36cd30ac51a95d77701d6ead5907c80b605e5508403e5a2ef51bc2d",
+  "flags": [
+    "-O3",
+    "-std=c++17",
+    "-shared",
+    "-fPIC"
+  ],
+  "fast_math": false
+}

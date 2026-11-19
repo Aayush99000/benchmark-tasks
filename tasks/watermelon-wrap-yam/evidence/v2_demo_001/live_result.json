@@ -1,0 +1,33 @@
+{
+  "scoring_version": "2.0",
+  "tuck_patches": [
+    {
+      "passed": true,
+      "area_mm2": 1040.0,
+      "width_mm": 54.0
+    },
+    {
+      "passed": true,
+      "area_mm2": 904.0,
+      "width_mm": 62.0
+    }
+  ],
+  "score": 1.0,
+  "coverage": 0.9989462592202318,
+  "underside_tucks": [
+    true,
+    true
+  ],
+  "dispensed_m": 0.425,
+  "both_edges_grasped": true,
+  "cut": true,
+  "cut_fraction": 1.0,
+  "active_grasps": 0,
+  "released": true,
+  "robot_clearance_m": 0.15577556102169837,
+  "stable_seconds": 4.049999999999994,
+  "peak_edge_strain": 1.819765366997148,
+  "invalid": false,
+  "full_task_success": true,
+  "step": 1335
+}

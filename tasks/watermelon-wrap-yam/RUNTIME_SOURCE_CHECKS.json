@@ -1,0 +1,58 @@
+{
+  "arena_task.py": {
+    "staged_sha256": "768527f03dbff9195bc5da7c7851c9f7b7843b3db5315df67f0aa2f7d77085ea",
+    "accepted_sha256": "768527f03dbff9195bc5da7c7851c9f7b7843b3db5315df67f0aa2f7d77085ea"
+  },
+  "assets.py": {
+    "staged_sha256": "d5c22e0bc6883b95fb2376274460e4453c135eaf9eef439d17c27fb4e7b549b2",
+    "accepted_sha256": "d5c22e0bc6883b95fb2376274460e4453c135eaf9eef439d17c27fb4e7b549b2"
+  },
+  "build_contact_kernel.py": {
+    "staged_sha256": "002e582e3e15025d65c8916d26a111a4d5aa17dcafadd3660a43b264d381f140",
+    "accepted_sha256": "002e582e3e15025d65c8916d26a111a4d5aa17dcafadd3660a43b264d381f140"
+  },
+  "clearance.py": {
+    "staged_sha256": "4bcda56877b4ce50d57259172a277558498f571ebf1ca203c749b8992b92f2a8",
+    "accepted_sha256": "4bcda56877b4ce50d57259172a277558498f571ebf1ca203c749b8992b92f2a8"
+  },
+  "contact_fast.py": {
+    "staged_sha256": "08ae24c9fbf7b60d9b2148c32b8223e4f1550d8f7a184b293161283ee90ada5a",
+    "accepted_sha256": "08ae24c9fbf7b60d9b2148c32b8223e4f1550d8f7a184b293161283ee90ada5a"
+  },
+  "contact_kernel.cpp": {
+    "staged_sha256": "ca34717f64b78902383666403ebdb1fce502ec8e33fc9de765a5c8274d80e35e",
+    "accepted_sha256": "ca34717f64b78902383666403ebdb1fce502ec8e33fc9de765a5c8274d80e35e"
+  },
+  "contact_kernel_build.json": {
+    "staged_sha256": "61043a2cc341bf416e0992bcf0176c8aa59b9f5d1c3357e311fd5a90998ad304",
+    "accepted_sha256": "61043a2cc341bf416e0992bcf0176c8aa59b9f5d1c3357e311fd5a90998ad304"
+  },
+  "film.py": {
+    "staged_sha256": "f66e076b25e80a1ffe63c162b4ebfb7859ab0d48aa25b1c640c8d7f427b734d8",
+    "accepted_sha256": "f66e076b25e80a1ffe63c162b4ebfb7859ab0d48aa25b1c640c8d7f427b734d8"
+  },
+  "launch.py": {
+    "staged_sha256": "d9eb99aff88ea97300cc11fbba4cfa68eec1da63f4add6231132f8ebdd77fd63",
+    "accepted_sha256": "d9eb99aff88ea97300cc11fbba4cfa68eec1da63f4add6231132f8ebdd77fd63"
+  },
+  "prepare_runtime.py": {
+    "staged_sha256": "632ff3fc5873c550cffa7997346a054138496665490d316626e2fa0259a02cc5",
+    "accepted_sha256": "632ff3fc5873c550cffa7997346a054138496665490d316626e2fa0259a02cc5"
+  },
+  "run.py": {
+    "staged_sha256": "4c615588947e31c5ef7d3c0a8683022b9513e870c5a5e7dcf583ab915cf18d46",
+    "accepted_sha256": "4c615588947e31c5ef7d3c0a8683022b9513e870c5a5e7dcf583ab915cf18d46"
+  },
+  "scoring.py": {
+    "staged_sha256": "4c0e3d5425f711a95ba660a1d9b80e544cbf8f8bc207cc2f06c174d6e7334af2",
+    "accepted_sha256": "4c0e3d5425f711a95ba660a1d9b80e544cbf8f8bc207cc2f06c174d6e7334af2"
+  },
+  "station_setup.py": {
+    "staged_sha256": "ff8a1083c4edc965766ccf44016c63f27042a4099490e038ba4a43566cbebfa3",
+    "accepted_sha256": "ff8a1083c4edc965766ccf44016c63f27042a4099490e038ba4a43566cbebfa3"
+  },
+  "tuck_measurement.py": {
+    "staged_sha256": "6e4c98ee57a28b9ba7f60f474e2023f2c8c79d2a6e2830004164763f589a0b16",
+    "accepted_sha256": "6e4c98ee57a28b9ba7f60f474e2023f2c8c79d2a6e2830004164763f589a0b16"
+  }
+}

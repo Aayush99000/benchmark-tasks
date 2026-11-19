@@ -1,0 +1,1 @@
+{"continuous_score_trace": true, "complete_video": true, "geometry": "milestones plus final10 samples; full native geometry remains in original GPU run", "source": "$TASK_SOURCE_demo_001", "states_exported": 30, "states_original": 267}

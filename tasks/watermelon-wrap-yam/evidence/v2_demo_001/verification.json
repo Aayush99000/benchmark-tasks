@@ -1,0 +1,44 @@
+{
+  "full_score_verified": true,
+  "failures": [],
+  "source_audit": {
+    "verified": true,
+    "failures": [],
+    "matched_sources": [
+      "arena_task.py",
+      "assets.py",
+      "build_contact_kernel.py",
+      "clearance.py",
+      "contact_fast.py",
+      "contact_kernel.cpp",
+      "contact_kernel_build.json",
+      "film.py",
+      "launch.py",
+      "prepare_runtime.py",
+      "run.py",
+      "scoring.py",
+      "station_setup.py",
+      "tuck_measurement.py"
+    ],
+    "snapshot_files_checked": 22,
+    "audited_source_root": "$TASK_SOURCE"
+  },
+  "action_limit": 3600,
+  "score": 1.0,
+  "steps": 1335,
+  "measured_coverage": 0.9989462592202318,
+  "measured_tucks": [
+    true,
+    true
+  ],
+  "cutter_y_range_m": [
+    -0.21499395370483398,
+    0.2150000035762787
+  ],
+  "events": {
+    "both_edges_seen": 165,
+    "both_tucks_seen": 665,
+    "cut_completed": 1030
+  },
+  "scope": "Measured hybrid simulation only. Film uses reduced PBD and measured-pinch surrogates; no hardware calibration."
+}
