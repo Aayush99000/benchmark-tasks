@@ -1,0 +1,25 @@
+{
+  "title": "Jump-start a flat battery with sprung booster clamps in the safe order",
+  "category": "Societal relatability",
+  "keywords": [
+    "bimanual",
+    "cable",
+    "jump leads",
+    "booster clamp",
+    "spring clamp",
+    "battery post",
+    "safety order",
+    "automotive",
+    "deformable",
+    "cable pile"
+  ],
+  "instruction": "Hook the donor battery on the right up to the flat battery on the left with the red and black leads.",
+  "context": "Ability: find the four clamps in a loose heap of two 2 m leads and draw each lead out, open a real sprung booster clamp by squeezing its handles, seat it round an installed battery terminal and let the spring bite, four times, choosing the safe order unprompted. HSE INDG139: \"Many explosions happen when batteries are being connected or disconnected\"; the explosion \"produces a highly dangerous shower of fragments and corrosive chemicals\".",
+  "setup": "Two BCI 26-size 12 V batteries (208x173x197 mm), flat at x 42 cm, y +20, donor at y -20, + posts nearer the midline, each in an engine-bay mock-up: tray, hold-down bar, car terminal clamps and cables on the posts, inner wing and strut tower behind, fuse/air box at the inner end, donor wing edge outboard. Ground stud on the flat car's engine at x 42, y 46. Two 2 m leads in a loose heap in front, red over black, a 200 A sprung clamp on each end.",
+  "scoring": "0.25 per clamp attached at the end (held by its own spring, no gripper within 4 cm): red to flat + and donor + (either order), then black to donor -, then black to the engine stud. Order is judged on first contact (jaw within 3 mm of a post, held or not). 0 for out-of-order contact, red near a - post or the stud, black near a + post or the flat battery's -, or, while any clamp touches a post, red touching black jaws or bare car metal (hold-down, body, engine).",
+  "run_limit": "3,600 steps (3 minutes at 20 Hz)",
+  "reset_notes": "Unclip all four clamps, coil each lead loosely, tip the black lead and then the red one onto the table in front of the batteries so the loops overlap, red on top, with the clamps lying flat round the edge of the heap, jaws away from the robot (the reset is the same heap every time: match the setup photo), and fold the terminal covers back over the car cables. Real trials use dummy batteries (no cells) with SAE posts.",
+  "fidelity": "Leads: 2 m chains of 4 cm rigid segments with bending springs, no twist, chosen coil memory; heap written by code, settles 3 s. Bays: fixed full-size boxes and cylinders; batteries 40 cm apart, leads heaped in front, so routing between cars is not tested. Car terminal clamp: plain 25/23 mm collar on the post, no pinch bolt. Clamps: two rigid halves on a pin, linear spring (0.9 N m preload, chosen). Posts rigid, no electricity: order and touch rules replace the spark.",
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-QAT5XB"
+}
