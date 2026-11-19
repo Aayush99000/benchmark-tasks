@@ -16,5 +16,6 @@
   "run_limit": "1,800 steps (1.5 minutes at 20 Hz)",
   "reset_notes": "Loosen the knob all the way, set the seat back 8 mm forward of fitted and 3 degrees turned.",
   "fidelity": "Only the bowl's top 10 cm stands on the table, at its real size. The bracket is a model: a stiff spring against the bowl's front wall with static friction, driven by the knob through a self-locking screw (held still with no hand on it), drawn fixed under the seat. The seat's size and weight are those of Drive's 12014, the same front-lock kind (Invacare gives none for the 1391). The push stands in for someone leaning on the seat.",
-  "scores": "Dream-1 run: 0.0; demo: 1.0"
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-K4JU84"
 }
