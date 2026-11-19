@@ -17,5 +17,6 @@
   "run_limit": "1,200 steps (1 minute at 20 Hz)",
   "reset_notes": "Pull each latch's knob out 4.5 mm and fold its leg flat under the top; lay the stool at (31, 0).",
   "fidelity": "The stool is the buildable one in hardware/. In the sim its latches are a model on the legs' hinges, not simulated contacts: the push-back is the spring's catalogue force times the wedge's rise, matching the CAD's bolt travel within 0.01 mm, and each catches at 98 degrees; the bolt and wedge aren't drawn. An unlatched leg giving way under the 40 N push is a rule. Masses are the build's targets.",
-  "scores": "Dream-1 run: 0.0; demo: 1.0"
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-EE2XXW"
 }
