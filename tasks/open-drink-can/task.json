@@ -16,5 +16,5 @@
   "reset_notes": "Use a fresh closed can for every trial (chilled and not shaken, so it does not spray), its tab pointing away from the robot and its opening towards it; the holder keeps it from moving and catches drips.",
   "fidelity": "The can is fixed in place. The tab has a real tab's length, width, edge thickness and height off the lid (sources in the README); it and the panel are rigid plates on hinges, so the tab does not bend. The seal is a sprung catch the panel cams aside, not tearing metal: it gives way at a few newtons at the tail (estimated), less than a real end's 20 to 31 N. Tab and panel weigh 3 g each, heavier than real, for stable contacts. The lid is flat: no finger well or countersink groove.",
   "scores": "Dream-1 run: 0.0; demo: 1.0",
-  "media": "M-L478C9"
+  "media": "M-6D8CK5"
 }
