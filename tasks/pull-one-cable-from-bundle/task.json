@@ -1,0 +1,24 @@
+{
+  "title": "Pull one decommissioned cable out of a clipped bundle",
+  "category": "Impact on AI timelines",
+  "keywords": [
+    "bimanual",
+    "cable",
+    "deformable",
+    "cable tray",
+    "abandoned cable removal",
+    "data center",
+    "moves adds changes",
+    "distractors",
+    "colour identification"
+  ],
+  "instruction": "The blue cable in the white tray is decommissioned. Pull it out of the tray through the two black clips and lay it, with its plug, on the table completely outside the tray, then let go. The three grey cables are live: they must stay in the tray under both clips.",
+  "context": "Building and refreshing AI data centres means constant moves, adds and changes in cable trays. The US National Electrical Code (NFPA 70, 800.25; 645.5(G) in IT rooms) requires the accessible portion of abandoned communications cable (not terminated at equipment, not tagged for future use) to be removed; left in place it fills trays and blocks airflow. Tested: find the dead cable in a live bundle, draw it out through its clips without disturbing the others, and leave it lying on the table.",
+  "setup": "Positions in cm, origin on the table midway between the arm bases, x away from the robot, y to its left. Tray: white PLA, floor 8.8x40x0.3 centred x 30 y 0, walls 0.4 thick, 3 above the floor, inner faces x 26/34, open ends y ±20. Two black PLA clip bars 8 (x) x 2 (y) x 0.5 span the walls, underside 1 above the floor, at y +6 and -10. Four 6 mm round PVC cables (30 g) on the tray floor along y, at x 27.75 grey A, 29.25 blue, 30.75 grey B, 32.25 grey C. Left ends: greys y +18, blue +9. All leave the right end; each ends in a black 30x10x10 mm plug (8 g) centred at y -29.5 (A, B), -35.5 (blue), -41.5 (C).",
+  "scoring": "Score 0 if: at the end either gripper is within 4 cm of any cable or plug; any grey cable no longer passes under both clips or its plug is >3 cm from its mark; or any part of the blue cable or plug is not resting on the table, tray floor or a wall top (within 3 mm of contact; plug level or on end) or lies on a grey cable or plug, or it is moving. Otherwise 1.0 if all of it lies on the table outside the tray; 0.5 if it is out of both clips; else 0.",
+  "run_limit": "2,400 steps (2 minutes at 20 Hz)",
+  "reset_notes": "Lay the four cables straight along the tray in their rows (tape marks on the floor), under both clips, left ends at their marks; put each plug on its table mark beyond the tray's right end, long side along the cable, lying flat.",
+  "fidelity": "Cables: 2 cm rigid segments with bending springs, no twist or plasticity, friction 0.8; plugs rigid boxes. Tray and clips fixed rigid. Cables lie loose with 9 mm gaps and are not tied; in sim pulling the blue cable barely drags its neighbours (<5 mm). Real trials: grey plugs on tape marks; 'lying on the table' is judged from end photos: top (no blue over the tray or crossing a grey cable or plug) and side at table level (no gap under it).",
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-QGM5ZY"
+}
