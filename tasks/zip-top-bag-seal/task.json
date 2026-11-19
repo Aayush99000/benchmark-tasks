@@ -1,0 +1,22 @@
+{
+  "title": "Seal a filled zip-top bag: hold its mouth's corner and pinch the press-to-seal track shut, corner to corner",
+  "category": "Societal relatability",
+  "keywords": [
+    "household food storage",
+    "zip-top bag",
+    "press-to-seal track",
+    "pinch to seal",
+    "holding hand",
+    "kitchen",
+    "bimanual"
+  ],
+  "instruction": "Seal the bag.",
+  "context": "Sealing a zip-top bag is one of the most familiar kitchen jobs: leftovers, chopped vegetables, lunches and freezer portions go into press-to-seal bags in most households every day, and a bag left partly open lets food dry out, spoil or leak in the fridge or freezer. A press-to-seal track has no slider: it closes only where it is squeezed between finger and thumb. So one hand holds the mouth's corner while the other pinches the track shut along to the far corner, pressing the rib into its groove the whole way with a firm pinch; without the held corner, the pinching hand drags and slews the bag over the board. A home-assistance robot that stores food has to do exactly this.",
+  "setup": "Counter top is z = 0.7475 m (x away from the arms, y to the left). Objects, all real size: (1) Butcher block, fixed: end-grain maple (drawn with a wood texture), 12 x 18 x 1 3/4 in (305 x 457 x 45 mm), centred at x 0.3875, y 0.02 m, near edge x 0.235, with a juice groove round its top. (2) Zip-top bag, free: a 1-quart freezer bag, 177 x 188 mm outside (6 15/16 x 7 3/8 in), 0.1 mm LDPE films, lying on the block, mouth toward the arms, centreline y 0; 320 g in all. It is filled 30 mm deep with clean, food-safe silicone vegetable stand-ins (about 300 g, washable and reused for repeatable trials): carrot coins 17 mm across x 5 mm (1.5 g each), pepper pieces about 18 x 10 x 5 mm and celery pieces 20 x 8 x 6 mm (about 1 g each). The packed load moves with the bag; six of its top-layer carrot coins lie loose under the top film. Its press-to-seal track (polyethylene) runs along y across the full 177 mm width at x 0.205, 10 mm in from the mouth's edge and 30 mm out past the block's near edge: a blue rib profile on the top film (4 mm wide, 1.6 mm thick) lying 3 mm clear above the yellow groove profile on the bottom film (2.6 mm thick pressed home), as left open. (3) Vegetable ends, fixed, silicone stand-ins on the block's left side around x 0.48, y 0.175: a carrot top (cone 24 mm across, 30 mm long), a pepper stem (8 mm across, 12 mm long), a pepper core piece (30 x 20 x 12 mm) and a celery end (24 x 12 x 10 mm). (4) Prep bowl, fixed: 1.5-qt stainless steel bowl, 200 mm across the rim, 85 mm deep, holding more stand-in pieces, at x 0.645, y 0.20 on the counter. (5) Bag carton, fixed: printed paperboard carton of quart freezer bags, 190 x 75 x 95 mm, open at the top with a bag showing, at x 0.66, y -0.20 on the counter. No knife or other sharp tool is in the scene.",
+  "scoring": "The track is 16 cells of 11 mm. A cell closes only when one hand pinches it from above and below with at least 10 N on each pad (PhysX contact forces) for 0.15 s; a closed cell stays closed. 0.25: at least 4 cells closed. 0.5: at least 12. 0.75: all 16 closed, however the bag was moved on the block meanwhile. 1.0: also every finger pad at least 80 mm from the track, with the bag at rest (under 0.02 m/s and 0.2 rad/s), held 1 s. A spill (any loose carrot coin out of the bag) or the bag falling off the block, at any time, scores 0. Real trial: closed length by eye or feel, measured with a ruler.",
+  "run_limit": "1,600 control steps (80 seconds at 20 Hz)",
+  "reset_notes": "Fixed starting poses, no randomisation: block, bag (track open, all cells open, its six loose coins on the load under the top film), vegetable ends, bowl and carton as listed; arms at the ready pose. Wash the stand-ins between trials.",
+  "fidelity": "PhysX 240 Hz. The bag is one rigid body (load, film, track); film does not crease or stretch. Six loose coins lie under its collidable top film. Closing uses real PhysX contacts: a cell closes when one hand's two pads both press the track, each at least 10 N, forces opposed (a pinch), held 0.15 s; no position or jaw-gap trigger. The demo pinches about 15 N per pad. The rib's 3 mm travel is not simulated (pads pinch the profiles as they stand).",
+  "scores": "Dream-1 run: 0 after 177 steps (8.85 simulated seconds); termination: DreamServerError:request_refused. Scripted/teleoperated demo: 1 after 1095 steps.",
+  "media": "M-MXGXU3"
+}
