@@ -17,5 +17,6 @@
   "run_limit": "1,200 steps (1 minute at 20 Hz)",
   "reset_notes": "A new bar for every real trial, at 20-22 C, unwrapped just before the trial; wipe the gripper pads with a dry cloth after each trial.",
   "fidelity": "Pieces are rigid blocks at 10x real mass (solver stability), joined at each groove by a hinge along it, sprung so its share of the groove's strength (0.12 N m, draft until measured) bends it 1.5 degrees; the task breaks it past that bend. Twisting or in-plane bending doesn't break a groove; chocolate can't crack off a groove, crush or melt. Pieces drawn in two shades so grooves show. Plate is a flat disc; one friction.",
-  "scores": "Dream-1 run: 0.0; demo: 1.0"
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-YJVNXG"
 }
