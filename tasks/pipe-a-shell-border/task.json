@@ -1,0 +1,19 @@
+{
+  "title": "Pipe a shell border on a cake",
+  "category": "Societal relatability",
+  "keywords": [
+    "cake decorating",
+    "pressure control",
+    "bimanual",
+    "material deposition"
+  ],
+  "instruction": "Pipe a joined shell border along the L-shaped guide, around the corner. Keep it straight, leave distinct ridged shells with tapered tails, and set the dispenser down.",
+  "context": "Decorating a birthday cake is a familiar home activity. A shell border requires coordinating pressure and nozzle motion to form distinct, joined shapes.",
+  "setup": "A 180 × 140 × 50 mm crumb-coated cake on a 200 × 160 × 3 mm aluminium board. An edible guide runs 90 mm along one side, then 60 mm around a right-angle corner. A 20 ml plastic icing syringe has a 25 mm sliding piston and steel six-point star nozzle; it starts on a 50 × 40 × 15 mm rest. Use Wilton medium-consistency white Decorator Icing (SKU 191012026), tinted pink, at 20–22°C. Start with 17.0 ± 0.5 g remaining after air removal and off-cake priming. Use a fresh smooth coat each trial. README gives dimensions and preparation.",
+  "scoring": "Zero for a gouge over 1 mm, robot/icing contact, incomplete evidence, or icing at least 0.5 mm thick covering over 20 mm² outside the 18 mm-wide guide corridor (2 mm end allowance). Otherwise 0.25/0.5/0.75 for at least 35/70/110 mm of valid shells. Each head is 6–16 mm wide and 2.5–8 mm high, with a connected tail 4–22 mm after it, at least 1 mm wide and 0.5 mm high, no more than 3 mm high or 65% of head width/height. Head-to-tail length is at least 1.25 times head width; heads are at least 6 mm apart. The visible footprint midline must stay within 4 mm of the guide. Full credit requires at least 135 mm (80 mm on the first side, 50 mm on the second), nine valid shells, gaps at most 2 mm, a joined corner and two visible ridges per counted shell, separated by 1.5 mm and continuous for 2 mm. For the last second, the released dispenser is 5 mm from the robot and 20 mm from the border, moving at most 2 mm. Otherwise award the highest lower row. Use photos, video and a millimetre ruler; JUDGING.md explains the checks.",
+  "run_limit": "2,400 control steps (2 minutes at 20 Hz).",
+  "reset_notes": "Renew the cake’s smooth white coat and L-shaped marks. Stir icing gently, fill the syringe from the rear, tap out air and prime onto a waste plate until flow is continuous. Weigh the loaded dispenser against its empty mass: leave 17.0 ± 0.5 g icing after priming. Wipe outside the tip, place it on its rest, and reset both arms open. Never reuse a gouged surface.",
+  "fidelity": "A passive sliding piston compresses a finite reservoir. Pressure drives extrusion through a physical star nozzle and local icing spread on a 0.5 mm surface grid. Material and seal properties are engineering approximations. The model omits suspended strings and voids; unsupported finger/cream contact invalidates a trial. No preset shell meshes or target-aware spawning.",
+  "scores": "Dream-1: 0.0 after 2,400 actions; scripted demo: 1.0 in 1,648 actions. Both independently rescored from complete native records.",
+  "media": "M-2XDK8Z"
+}
