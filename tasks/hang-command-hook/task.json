@@ -16,5 +16,6 @@
   "run_limit": "1,800 steps (1.5 minutes at 20 Hz)",
   "fidelity": "The wall panel sits on a stiff spring (40,000 N/m) whose travel gives the press force. The bond is a joint switched on when the strip lies flat on the wall under 1 N; it then holds any load, so the firm 30 s press is scored directly and the load is checked in real trials. The strip bonds only flat, not edge-first. Hook 30 g (real about 8 g) for solver stability, made of boxes; liner already off; tacky strip friction 2.0.",
   "scores": "Dream-1 run: 0; demo: 1.0",
-  "reset_notes": "Each real trial uses a new strip on a new or cleaned hook; wipe the wall spot with isopropyl alcohol and let it dry. Clamp the wall to the table."
+  "reset_notes": "Each real trial uses a new strip on a new or cleaned hook; wipe the wall spot with isopropyl alcohol and let it dry. Clamp the wall to the table.",
+  "media": "M-F7ZMP5"
 }
