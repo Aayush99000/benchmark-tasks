@@ -1,0 +1,340 @@
+{
+ "note": "Copied from the RESULT.json files of the first Isaac qualification run (one scripted, one Dream-1 trial); see README.",
+ "scripted": {
+  "score": 1.0,
+  "executed_steps": 968,
+  "step_limit": 2400,
+  "elapsed_s": 308.87,
+  "termination_reason": "success",
+  "peak_interarm_contact_n": 0.0,
+  "scene_sha256": "1731f3e8d70d8757f024358bbc681cfaeb1feb09a2f427ee13587c4bc330a900",
+  "asset_sha256": "ebd6308ed781b91e3a7dc6de157f44919efc497e9af191d5b3af828fa7486098",
+  "model_sha256": "1589b5082a36668cad8b1c38f13ba24102d18dfffe4a90e45b4b8ddb05f51a45",
+  "grader_sha256": "1fc3a119a8862fe270621272c8cd5a3d12c2e3a7e22253e47200b6995908556b",
+  "inspect_robots": "1.0.0",
+  "yam_arena": "0.1.0",
+  "seed": 0,
+  "final_grade": {
+   "score": 1.0,
+   "note_let_go": true,
+   "note_in_drawer": true,
+   "note_compartment": 2,
+   "note_in_middle_compartment": true,
+   "note_flat": true,
+   "note_under_hold_down": true,
+   "other_notes_in_place": true,
+   "drawer_shut": true,
+   "grippers_clear": true,
+   "still_for_1s": true,
+   "note_top_above_stack_mm": 2.02,
+   "hold_down_tip_above_note_mm": -0.02,
+   "hold_down_deg": -19.97,
+   "drawer_open_mm": 0.0,
+   "stack_shift_mm": 0.04,
+   "gripper_to_drawer_mm": [
+    222.9,
+    52.1
+   ],
+   "note_ends_in_drawer_mm": [
+    138.2,
+    294.6
+   ],
+   "note_side_mm": [
+    -33.1,
+    33.9
+   ]
+  },
+  "reset_state": {
+   "drawer_open_mm": 310.0,
+   "hold_deg": [
+    -24.5,
+    -24.5,
+    -21.190000534057617,
+    -24.5,
+    -24.5
+   ],
+   "note_strips_mm": [
+    [
+     429.79998779296875,
+     -144.39999389648438,
+     106.9000015258789
+    ],
+    [
+     449.20001220703125,
+     -144.39999389648438,
+     108.69999694824219
+    ],
+    [
+     468.70001220703125,
+     -144.39999389648438,
+     109.9000015258789
+    ],
+    [
+     488.20001220703125,
+     -144.39999389648438,
+     110.30000305175781
+    ],
+    [
+     507.70001220703125,
+     -144.39999389648438,
+     110.19999694824219
+    ],
+    [
+     527.2000122070312,
+     -144.39999389648438,
+     110.0
+    ],
+    [
+     546.7000122070312,
+     -144.39999389648438,
+     110.0
+    ],
+    [
+     566.2000122070312,
+     -144.39999389648438,
+     110.0
+    ]
+   ],
+   "stack_mm": [
+    358.0,
+    0.0,
+    43.0
+   ],
+   "note_folds_deg": [
+    0.6100000143051147,
+    2.4200000762939453,
+    2.6700000762939453,
+    0.5,
+    -0.4699999988079071,
+    -0.20999999344348907,
+    0.0
+   ]
+  },
+  "peaks": {
+   "tab_n": 9.866,
+   "note_end_n": 4.918,
+   "drawer_n": 37.342,
+   "stack_n": 0.0,
+   "hold_deg": 30.605,
+   "note_fold_deg": 39.998
+  },
+  "phases": [
+   [
+    0,
+    "reach hold-down"
+   ],
+   [
+    118,
+    "lift hold-down"
+   ],
+   [
+    192,
+    "reach note"
+   ],
+   [
+    318,
+    "draw note off the case"
+   ],
+   [
+    400,
+    "carry note over the till"
+   ],
+   [
+    518,
+    "lay note under the hold-down"
+   ],
+   [
+    627,
+    "let go of note"
+   ],
+   [
+    671,
+    "let hold-down down"
+   ],
+   [
+    743,
+    "reach drawer front"
+   ],
+   [
+    855,
+    "push drawer shut"
+   ],
+   [
+    956,
+    "away"
+   ]
+  ],
+  "worst_ik_mm": 0.089,
+  "demo_events": [
+   {
+    "tick": 118,
+    "event": "hold-down tab grasp",
+    "attempt": 0.0,
+    "opening_mm": 15.9017,
+    "held": true,
+    "tab_from_gripper_mm": [
+     0.5228,
+     0.0025,
+     -5.1775
+    ]
+   },
+   {
+    "tick": 192,
+    "event": "hold-down raised",
+    "deg": 30.0928,
+    "commanded_deg": 45.369
+   },
+   {
+    "tick": 318,
+    "event": "note grasp",
+    "attempt": 0.0,
+    "opening_mm": 1.8716,
+    "held": true,
+    "end_strip_from_gripper_mm": [
+     2.6999,
+     -1.1727,
+     -1.6411
+    ]
+   },
+   {
+    "tick": 518,
+    "event": "note centred over the compartment",
+    "side_error_mm": -1.8255,
+    "shift_mm": 3.5089,
+    "skew_deg": -0.4166,
+    "turn_deg": -0.2075
+   },
+   {
+    "tick": 627,
+    "event": "note laid",
+    "far_end_in_drawer_mm": 295.2794,
+    "strip_heights_mm": [
+     94.542,
+     84.5402,
+     74.5776,
+     65.5842,
+     58.2349,
+     52.9011,
+     49.5604,
+     47.7347
+    ],
+    "side_mm": [
+     -0.1617,
+     -0.1177,
+     -0.0735,
+     -0.0235,
+     0.0357,
+     0.1052,
+     0.1837,
+     0.2685
+    ],
+    "turn_deg": 0.0932
+   },
+   {
+    "tick": 671,
+    "event": "note let go",
+    "strip_heights_mm": [
+     46.9995,
+     46.9995,
+     46.9996,
+     46.9996,
+     46.9997,
+     46.9997,
+     46.9997,
+     46.9997
+    ],
+    "far_end_in_drawer_mm": 294.3883
+   },
+   {
+    "tick": 743,
+    "event": "hold-down let down",
+    "deg": -19.9676,
+    "strip_heights_mm": [
+     46.995,
+     46.995,
+     46.9929,
+     46.9928,
+     47.0042,
+     47.0071,
+     47.0006,
+     47.0003
+    ]
+   },
+   {
+    "tick": 956,
+    "event": "drawer pushed",
+    "open_mm": 0.0,
+    "gripper_x": 0.4378,
+    "commanded_x": 0.4439
+   }
+  ],
+  "both_hands_loaded_ticks": [
+   310,
+   625
+  ],
+  "during_lay": {
+   "hold_down_deg_range": [
+    29.73,
+    29.75
+   ],
+   "left_tips_on_tab_n_min": 9.63
+  },
+  "drawer_open_mm_before_push": 290.37
+ },
+ "dream": {
+  "score": 0.0,
+  "executed_steps": 2400,
+  "step_limit": 2400,
+  "elapsed_s": 814.22,
+  "termination_reason": "max_steps",
+  "peak_interarm_contact_n": 0.0,
+  "scene_sha256": "1731f3e8d70d8757f024358bbc681cfaeb1feb09a2f427ee13587c4bc330a900",
+  "asset_sha256": "ebd6308ed781b91e3a7dc6de157f44919efc497e9af191d5b3af828fa7486098",
+  "model_sha256": "1589b5082a36668cad8b1c38f13ba24102d18dfffe4a90e45b4b8ddb05f51a45",
+  "grader_sha256": "1fc3a119a8862fe270621272c8cd5a3d12c2e3a7e22253e47200b6995908556b",
+  "inspect_robots": "1.0.0",
+  "yam_arena": "0.1.0",
+  "seed": 0,
+  "final_grade": {
+   "score": 0.0,
+   "note_let_go": true,
+   "note_in_drawer": false,
+   "note_compartment": 0,
+   "note_in_middle_compartment": false,
+   "note_flat": false,
+   "note_under_hold_down": false,
+   "other_notes_in_place": true,
+   "drawer_shut": false,
+   "grippers_clear": true,
+   "still_for_1s": true,
+   "note_top_above_stack_mm": 65.36,
+   "hold_down_tip_above_note_mm": null,
+   "hold_down_deg": -21.19,
+   "drawer_open_mm": 268.03,
+   "stack_shift_mm": 0.02,
+   "gripper_to_drawer_mm": [
+    68.0,
+    38.7
+   ],
+   "note_ends_in_drawer_mm": [
+    238.2,
+    394.0
+   ],
+   "note_side_mm": [
+    -177.6,
+    -111.2
+   ]
+  },
+  "peaks": {
+   "tab_n": 0.0,
+   "note_end_n": 0.0,
+   "drawer_n": 23.979,
+   "stack_n": 0.0,
+   "hold_deg": -21.192,
+   "note_fold_deg": 2.675
+  },
+  "action_requests": 99,
+  "closest_gripper_to_note_mm": 158,
+  "hold_down_max_deg": -21.19
+ }
+}
