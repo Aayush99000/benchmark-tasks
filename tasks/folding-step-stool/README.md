@@ -120,7 +120,8 @@ Earlier versions failed, and each failure changed the plan:
 ## Runtime and seeds
 - **Official runs (2026-11-21, this version):**
   - the scripted demo: 1.0, both legs locked at 98 degrees and holding under the check;
-  - the wrong way (`STOOL_SWING_PAST=-8`) and Dream-1: see `task.json`'s scores.
+  - the wrong way (`STOOL_SWING_PAST=-8`, each leg stopped at 92 degrees): 0, both legs folded under the check;
+  - Dream-1: 0.0 over the full 1,200 steps.
 - **Offline checks:** `python -m pytest -q test_folding_step_stool.py` (11 tests), which covers the angle, the locks,
   the check, the tiers, the Vive's sizes and the demo's reach.
 - **Seeds:** one fixed layout (`-E object_jitter=0`).
