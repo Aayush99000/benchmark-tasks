@@ -1,0 +1,361 @@
+{
+  "units": "metres",
+  "frame": "Camera body frame at original seated pose unless stated otherwise",
+  "shoe_parts": [
+    [
+      "shoe_core",
+      [
+        -0.001,
+        -0.024999999999999998,
+        -0.01
+      ],
+      [
+        0.018,
+        0.004,
+        0.02
+      ]
+    ],
+    [
+      "shoe_leading",
+      [
+        -0.0015,
+        -0.024999999999999998,
+        -0.022
+      ],
+      [
+        0.017,
+        0.004,
+        0.004
+      ]
+    ],
+    [
+      "shoe_latch_top",
+      [
+        0.009,
+        -0.024999999999999998,
+        -0.002
+      ],
+      [
+        0.002,
+        0.004,
+        0.004
+      ]
+    ],
+    [
+      "shoe_latch_bottom",
+      [
+        0.009,
+        -0.024999999999999998,
+        -0.017
+      ],
+      [
+        0.002,
+        0.004,
+        0.006
+      ]
+    ],
+    [
+      "shoe_bridge",
+      [
+        0,
+        -0.0205,
+        -0.005
+      ],
+      [
+        0.008,
+        0.005,
+        0.014
+      ]
+    ]
+  ],
+  "mount_parts_as_spawned": [
+    [
+      "channel_left",
+      [
+        -0.0122,
+        -0.024999999999999998,
+        -0.012
+      ],
+      [
+        0.004,
+        0.008,
+        0.028
+      ]
+    ],
+    [
+      "channel_back",
+      [
+        0,
+        -0.0282,
+        -0.012
+      ],
+      [
+        0.03,
+        0.002,
+        0.028
+      ]
+    ],
+    [
+      "channel_front_left",
+      [
+        -0.009,
+        -0.0223,
+        -0.012
+      ],
+      [
+        0.008,
+        0.001,
+        0.028
+      ]
+    ],
+    [
+      "channel_front_right",
+      [
+        0.009,
+        -0.0223,
+        -0.012
+      ],
+      [
+        0.008,
+        0.001,
+        0.028
+      ]
+    ],
+    [
+      "end_stop",
+      [
+        0,
+        -0.024999999999999998,
+        -0.0261
+      ],
+      [
+        0.03,
+        0.012,
+        0.004
+      ]
+    ],
+    [
+      "right_upper",
+      [
+        0.0122,
+        -0.025,
+        -0.002
+      ],
+      [
+        0.004,
+        0.008,
+        0.008
+      ]
+    ],
+    [
+      "right_lower",
+      [
+        0.0122,
+        -0.025,
+        -0.019
+      ],
+      [
+        0.004,
+        0.008,
+        0.014
+      ]
+    ]
+  ],
+  "leading_tip": {
+    "upper_z": -0.02,
+    "lower_z": -0.024,
+    "upper_x": [
+      -0.01,
+      0.007
+    ],
+    "lower_x": [
+      -0.008,
+      0.005
+    ],
+    "upper_y": [
+      -0.027,
+      -0.023
+    ],
+    "lower_y": [
+      -0.026,
+      -0.024
+    ]
+  },
+  "tooth_reference": [
+    0.0095,
+    -0.024999999999999998,
+    -0.009
+  ],
+  "plunger_local_tooth_vertices": [
+    [
+      -0.0015,
+      -0.0015,
+      -0.002
+    ],
+    [
+      0.0015,
+      -0.0015,
+      -0.002
+    ],
+    [
+      0.0015,
+      -0.0015,
+      0.002
+    ],
+    [
+      -0.0015,
+      0.0015,
+      -0.002
+    ],
+    [
+      0.0015,
+      0.0015,
+      -0.002
+    ],
+    [
+      0.0015,
+      0.0015,
+      0.002
+    ]
+  ],
+  "plunger_local_parts": [
+    {
+      "name": "tooth_stem",
+      "center": [
+        0.0055,
+        0,
+        0
+      ],
+      "size": [
+        0.008,
+        0.002,
+        0.002
+      ]
+    },
+    {
+      "name": "rear_return",
+      "center": [
+        0.008,
+        -0.008,
+        0
+      ],
+      "size": [
+        0.002,
+        0.018,
+        0.002
+      ]
+    },
+    {
+      "name": "rear_crossbar",
+      "center": [
+        -0.0126,
+        -0.016,
+        0
+      ],
+      "size": [
+        0.0432,
+        0.002,
+        0.002
+      ]
+    },
+    {
+      "name": "release_button",
+      "center": [
+        -0.0332,
+        -0.016,
+        0
+      ],
+      "size": [
+        0.004,
+        0.01,
+        0.01
+      ]
+    }
+  ],
+  "plunger_mass_kg": 0.004,
+  "joint": {
+    "axis": "mount local +X",
+    "travel": [
+      0,
+      0.005
+    ],
+    "stiffness_N_m": 150,
+    "damping_Ns_m": 0.15,
+    "target_m": -0.0002,
+    "max_force_N": 2
+  },
+  "release": {
+    "input": "Press left-side button in camera-frame +X",
+    "coupling": "Single rigid return yoke behind receiver backplate links button to opposite tooth",
+    "travel_m": 0.005,
+    "button_center_camera_frame_m": [
+      -0.0237,
+      -0.041,
+      -0.009
+    ]
+  },
+  "mouth": {
+    "lower_z_m": 0.002,
+    "upper_z_m": 0.006,
+    "bottom_inner_half_width_m": 0.0102,
+    "top_inner_half_width_m": 0.0122
+  },
+  "fasteners": {
+    "wrist_receiver": "Two screw heads on bracket feet at gripper X=+-17mm; permanent receiver attachment",
+    "camera_plate": "Two flush screw heads on rear shoe; permanent camera-to-plate attachment"
+  },
+  "release_cassette_parts_camera_frame": [
+    {
+      "name": "back",
+      "center": [
+        0.0005,
+        -0.048,
+        -0.009
+      ],
+      "size": [
+        0.049,
+        0.002,
+        0.02
+      ]
+    },
+    {
+      "name": "top",
+      "center": [
+        0.0005,
+        -0.039,
+        0.001
+      ],
+      "size": [
+        0.049,
+        0.02,
+        0.002
+      ]
+    },
+    {
+      "name": "bottom",
+      "center": [
+        0.0005,
+        -0.039,
+        -0.019
+      ],
+      "size": [
+        0.049,
+        0.02,
+        0.002
+      ]
+    },
+    {
+      "name": "right",
+      "center": [
+        0.026,
+        -0.039,
+        -0.009
+      ],
+      "size": [
+        0.002,
+        0.02,
+        0.02
+      ]
+    }
+  ]
+}

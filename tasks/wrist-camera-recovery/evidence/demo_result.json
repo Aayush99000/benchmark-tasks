@@ -1,0 +1,97 @@
+{
+  "completed": true,
+  "wall_seconds": 451.5728747760877,
+  "final": {
+    "cable_max_speed_m_s": 0.0022939855698496103,
+    "cable_min_z_m": 0.7508687376976013,
+    "step": 845,
+    "phase": "return to original working posture",
+    "attached": true,
+    "latch_step": 564,
+    "camera_pos": [
+      0.3033278286457062,
+      0.30418771505355835,
+      1.1089227199554443
+    ],
+    "target": [
+      0.30312403699495505,
+      0.3038512156899917,
+      1.1088053168733185
+    ],
+    "error_m": 0.0004105439590217889,
+    "angle_deg": 1.4842695642432628,
+    "right_clear": true,
+    "retained_seconds": 11.450000000000028,
+    "sensor_error_m": 2.108527263760802e-08,
+    "sensor_angle_rad": 1.0502370399182114e-07,
+    "image_std": 53.89744186401367,
+    "native_error_m": 0.0007560945483732754,
+    "native_angle_deg": 1.4842734393183556,
+    "returned": true,
+    "spring_displacement_m": 1.2789086677098688e-05,
+    "spring_local": [
+      1.2789086677098688e-05,
+      2.7384058604723593e-07,
+      -5.947304851598029e-07
+    ],
+    "entry_verified": true,
+    "insertion_travel_m": 0.03594175151152133,
+    "seated_samples": 4,
+    "local_offset": [
+      -0.00033592666505389434,
+      -3.924990357862382e-06,
+      0.00023597502504660032
+    ],
+    "assessment": {
+      "score": 1.0,
+      "aligned": true,
+      "latched": true,
+      "live_image": true,
+      "lift_time": 0.0,
+      "alignment_time": 15.650000000000087,
+      "release_time": 10.350000000000012,
+      "invalid": false
+    },
+    "frame_id": 1693,
+    "servo": {
+      "ik_position_error": 4.075036970009471e-05,
+      "ik_rotation_error": 0.00019106511468896522,
+      "q": [
+        0.574877917766571,
+        2.081791877746582,
+        1.6243722438812256,
+        -1.1053130626678467,
+        -1.0897799730300903,
+        -0.8717148303985596
+      ],
+      "qcmd": [
+        0.575936775528583,
+        2.076867467362478,
+        1.6232178032499747,
+        -1.106905527304549,
+        -1.1051130491738044,
+        -0.8623557572914342
+      ],
+      "tcp": [
+        0.2511339925569411,
+        0.03685977959802428,
+        0.8869444096093063
+      ],
+      "tcpgoal": [
+        0.2495686103654675,
+        0.037798141373073774,
+        0.8908113604125307
+      ],
+      "camera_goal": [
+        0.22822028298022615,
+        0.05012500053827655,
+        0.8862005980920451
+      ]
+    },
+    "raw_speed": 0.002497324231090442,
+    "gate_speed": 4.898548449606161e-06
+  },
+  "retention_pass": true,
+  "score": 1.0,
+  "scope": "Original native camera-to-gripper calibration is immutable. No READY-return requirement. Collision-driven spring plunger; no camera fixed joint; no Dream-1."
+}

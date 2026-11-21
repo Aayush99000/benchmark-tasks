@@ -1,0 +1,13 @@
+{
+  "score": 0.0,
+  "completed": true,
+  "control_steps": 1800,
+  "simulated_seconds": 90,
+  "sessions": 1,
+  "requests": 442,
+  "max_idle_gap_s": 2.205263431183994,
+  "wall_seconds": 1044.875624710694,
+  "rows_per_request": 4,
+  "model": "dreamlabs/dream-1-beta",
+  "recording": "model_run.mp4"
+}

@@ -1,0 +1,38 @@
+{
+  "wrist_adapter.py": {
+    "matches_demo": true,
+    "matches_model": true
+  },
+  "quick_release.py": {
+    "matches_demo": true,
+    "matches_model": true
+  },
+  "latch_geometry.py": {
+    "matches_demo": true,
+    "matches_model": true
+  },
+  "runtime_checks.py": {
+    "matches_demo": true,
+    "matches_model": true
+  },
+  "scorer.py": {
+    "matches_demo": true,
+    "matches_model": true
+  },
+  "camera_tether.py": {
+    "matches_demo": true,
+    "matches_model": true
+  },
+  "cable_usd.py": {
+    "matches_demo": true,
+    "matches_model": true
+  },
+  "native_camera_target.json": {
+    "matches_demo": true,
+    "matches_model": true
+  },
+  "scene.py": {
+    "matches_demo": true,
+    "matches_model": true
+  }
+}

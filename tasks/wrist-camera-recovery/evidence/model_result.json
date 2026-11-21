@@ -1,0 +1,53 @@
+{
+  "completed": true,
+  "wall_seconds": 1044.875624710694,
+  "final": {
+    "step": 1795,
+    "phase": "Dream-1 control",
+    "attached": false,
+    "latch_step": null,
+    "camera_pos": [
+      0.3617539405822754,
+      -0.18984226882457733,
+      0.76691734790802
+    ],
+    "target": [
+      -0.015303078932672073,
+      0.20904042226971065,
+      0.9300078401286798
+    ],
+    "error_m": 0.5726062398130968,
+    "angle_deg": 159.8873477606576,
+    "right_clear": true,
+    "retained_seconds": 0.0,
+    "sensor_error_m": 6.915365690246363e-09,
+    "sensor_angle_rad": 7.385879861996081e-08,
+    "image_std": 56.787601470947266,
+    "native_error_m": 0.5511306951309305,
+    "native_angle_deg": 159.88735091940612,
+    "returned": false,
+    "spring_displacement_m": 1.4191004298926002e-07,
+    "entry_verified": false,
+    "local_offset": [
+      -0.2569515324820456,
+      0.2284105753700962,
+      0.4579109355400062
+    ],
+    "assessment": {
+      "score": 0.0,
+      "aligned": false,
+      "latched": false,
+      "live_image": true,
+      "lift_time": 0.0,
+      "alignment_time": 0.0,
+      "release_time": 0.0,
+      "invalid": false
+    },
+    "frame_id": 3594,
+    "raw_speed": 0.001062301001871979,
+    "gate_speed": 0.009881827685509954
+  },
+  "retention_pass": false,
+  "score": 0.0,
+  "scope": "Dream-1 beta controls both arms; original optical target and scorer unchanged; 90-second trial."
+}
