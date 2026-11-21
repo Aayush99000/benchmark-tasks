@@ -1,0 +1,22 @@
+{
+  "title": "Move a toaster oven's rack down one rung: lift it past the anti-tip stop, draw it out, slide it in level",
+  "category": "Societal relatability",
+  "keywords": [
+    "toaster oven",
+    "oven rack",
+    "anti-tip stop",
+    "rung",
+    "tilt past a stop",
+    "insertion",
+    "two hands"
+  ],
+  "instruction": "Move the oven rack down one rung.",
+  "context": "Anyone who has baked or toasted has moved an oven rack. In a Cuisinart Chef's Convection Toaster Oven (TOB-260N1) the rack sits on side ledges at four positions; its manual says the upper positions have a stop, so the rack stops halfway out, and it comes out only by lifting the front. The rack is pulled to the stop, its front lifted so the side tabs ride over the stop, drawn clear of the ledges, taken down one position, slid in level onto the lower ledges and pushed home. Slid level it jams at the stop; set down early or crooked it rests on the wrong position. A shelf-height task has no stop and no change of rung; here the anti-tip stop and the rung change are the skill. Real size throughout; nothing is scaled.",
+  "setup": "Two YAM arms at the near edge of the table; positions are (x forward from the arm bases, y left) in cm, heights above the table. A toaster oven cavity 37.4 cm wide, 33 cm deep and 19 cm high, fixed on a 12 cm stand, with its open front (the door line) at x 60, y 0 and its floor 12 cm up. Each side wall has four ledges, 15 mm wide and 6 mm thick, with tops 4.0, 7.5, 11.0 and 14.5 cm above the cavity floor (positions 1 to 4), starting 2 cm inside the door line and running to the back wall. On the ledges of positions 3 and 4 a 4 mm high stop stands at their outer edge, its front face 10 cm inside the door line (6 mm long, 2.5 mm wide). The wire rack, 0.35 kg (assumed), is 36.8 cm wide and 30.5 cm deep, made of 5 mm square-section wires: two side rods, a front wire, a rear wire and four cross wires 6.25, 12.25, 18.25 and 24.25 cm behind the front wire, and a 10 x 2.8 x 5 mm tab outside each side rod, 25 cm behind the front wire, that rests against the stop. It starts on position 3, level, with its front wire 12 mm inside the door line. The hands pinch the first cross wire. Sources: manual https://content.abt.com/documents/166473/cuisinart-toaster-oven-TOB260N1NAS-owners-manual.pdf ; product https://www.bestbuy.com/product/cuisinart-chefs-convection-toaster-pizza-oven-stainless-steel/J7R2YV4T2L ; rack part https://www.cuisinart.com/wire-rack-for-chef%E2%80%99s-convection-toaster-oven/TOB-260WR.html",
+  "scoring": "By the end state, judged from the last frame. 0.25: the rack has come out past the stop (front wire at least 150 mm out of the door line). 0.5: it rests on position 2 (the second ledge from the bottom) inside the oven, both hands clear. 1.0: also level within 2 degrees, its front wire from 30 mm inside to 20 mm outside the door line, and held 1 s. A rack that falls below the lowest ledge scores 0. A rack set back on its original position, or left part way out, does not reach 1.0.",
+  "run_limit": "1500 steps (75 s at 20 Hz)",
+  "reset_notes": "Fixed start: the rack sits on position 3 (third ledge from the bottom), level and in. No randomisation.",
+  "fidelity": "True size, Cuisinart TOB-260N1: cavity, rack (14.5 x 12 in), four positions and the stop follow the manual and a retailer Q&A. Assumed: rack mass 0.35 kg (estimate 0.2 to 0.35), rung pitch 35 mm, stop 4 mm, tab. 5 mm square wires, no added rail; pinch on the first cross wire. 12 cm stand. No door or heat. Rigid; dry steel.",
+  "scores": "Demo 1.0 at the modelled 0.35 kg (also 0.45; 0.25 at 0.6). Dream-1 (one valid run, 1500 steps): 0. 0.25 out past the stop; 0.5 on position 2, hands clear; 1.0 level, front wire 30 mm in to 20 mm out of the door line, held 1 s; 0 if dropped.",
+  "media": "M-596C8G"
+}
