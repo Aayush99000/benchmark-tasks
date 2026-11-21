@@ -1,0 +1,23 @@
+{
+  "title": "Wrap a burger to go in a foil-laminated sheet: front and back over the bun, then both sides up",
+  "category": "Impact on jobs",
+  "keywords": [
+    "bimanual",
+    "fast food",
+    "wrapping",
+    "foil-laminated sheet",
+    "takeout",
+    "folding sheet",
+    "dead fold",
+    "counter worker"
+  ],
+  "instruction": "Wrap the burger in the sheet for takeout.",
+  "context": "Wrapping burgers and sandwiches for takeout is a core, all-day task of fast food and counter workers (O*NET 35-3023.00 Core: 'Wrap menu items such as sandwiches, hot entrees, and desserts for serving or for takeout'; 3.85 million workers, BLS OEWS May 2025). The sheet has no glue, only its creases hold it: the front and back edges are each lifted by their corners over the bun and creased, then each side is folded up against the bun to crown height, closing the ends.",
+  "setup": "Origin: counter top below the arm-base midpoint; x forward, y left (cm). White HDPE prep board 28 x 16 x 1.5 cm (28 cm along x) centred at x 28, y 0. Foil-laminated (dead-fold) burger wrap sheet, foil side up, printed with a 2.5 cm green and silver check, 37.5 cm front to back (x) by 25 cm left to right (y), centred on the board: it hangs 4.75 cm over the board's front and back edges and 4.5 cm over its left and right edges. Burger (sesame-bun cheeseburger display replica with lettuce, patty and cheese, 9 cm wide, 5 cm tall, 120 g, rigid) crown up at the sheet centre.",
+  "scoring": "Score 0 if: the burger moves over 3 cm or tips over 20 deg, the sheet tears, a gripper still holds it, or the grippers are not both open (gap 2 cm or more) and 3 cm clear of the sheet for the last 3 s. Otherwise, judged as the parcel stands for those 3 s: 0.25 if no part of the crown is visible from above; 0.5 if also the middle of the sheet's front edge and of its back edge is raised to the top of the bun (within 1.5 cm) and no bun is visible from front or back; 0.75 if also one side is folded up (the midpoint of that side edge 2.5 cm or more above the board); 1.0 if both sides are and no bun is visible from any side. Real trial: photos from above and four sides of the crown and bun zones marked on the replica (sim samples the same zones), ruler; video for release, and for the front edge, judged at its last visible frame as the back fold covers it.",
+  "run_limit": "3,600 steps (180 seconds at 20 Hz)",
+  "reset_notes": "New flat sheet foil side up, centred on the board; burger replica crown up at the sheet centre.",
+  "fidelity": "Burger rigid. Sheet: reduced position-based model, 1.25 cm nodes, stiff in tension, crumples under compression; bending springs with fold memory (a sharp bend keeps its crease, as dead-fold wrap does). A closing jaw grips the edge(s) between its fingertips. Collides with burger, board, counter, fingers; exerts no force on them. No sheet-on-sheet collision: later folds lie over earlier ones by fold order. Uncalibrated.",
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-WL3NPT"
+}
