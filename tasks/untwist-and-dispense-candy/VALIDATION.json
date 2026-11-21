@@ -1,0 +1,149 @@
+{
+  "scripted_demo": {
+    "task_score": 1.0,
+    "scorer_input": {
+      "task": "candy",
+      "schema_version": 3,
+      "actions": 600,
+      "duration_s": 30.0,
+      "whole_trial_reviewed": true,
+      "wrapped_setup": {
+        "initial_exposed_fraction": 0.12902441031138967,
+        "control_max_exposed_fraction": 0.13841599838971486,
+        "control_actions": 2400,
+        "control_observations": 2401,
+        "control_sustained_unwind_deg": 2.6567033449852033,
+        "control_fully_exited": false,
+        "initially_wrapped": true
+      },
+      "final": {
+        "candy_surface_exposed_fraction": 1.0,
+        "sustained_preopening_unwind_deg": 324.12283851789294,
+        "candy_on_table": true,
+        "candy_fully_exited": true,
+        "wrapper_clearance_lower_bound_m": 0.16892394196504382,
+        "released_hold_s": 3.25,
+        "candy_clear_at_finish": true,
+        "vertical_drop_before_landing_m": 0.10549455881118774,
+        "largest_attached_wrapper_area_mm2": 0.0
+      },
+      "violations": {
+        "candy_damage": false,
+        "food_floor_contact": false,
+        "food_tool_contamination": false,
+        "wrapper_torn": false,
+        "loose_candy_robot_contact": false
+      }
+    },
+    "trial_trace_sha256": "7037ec140ff6c71e52ff86efb6d51d90fa90ecc12de1d4a93bd897dbc8aaa051",
+    "control_trace_sha256": "cad0a6ded3c05604a6c6f902c8f9329f7468178f870849c8f2dd871b813a3f99",
+    "camera_sha256": {
+      "top_cam": "755ed31ba5aec9bf8c312146986aedb446914703231083ce818ac453b9d7b74a",
+      "left_cam": "70088f3a9fdfb39e6025f72fb40f14e7e08bbf9b372813b4cf897a9ab325fa34",
+      "right_cam": "87e5e1160227c954662a52f8974dd8987d43d4831dcd5b805d4231c81a723b9d",
+      "judging_front": "11baf82646df00593b012db74c526a3645e3ceaf5493ea2bfc9085c3e14c507c"
+    },
+    "scope": "Native simulation with one rigid, nonfracturing hard sweet. Physical fracture, sheet tear and hygiene require real-world validation.",
+    "contact_audit": {
+      "physics_samples": 7201,
+      "minimum_floor_clearance_m": 0.7579916434123568,
+      "minimum_unclean_surface_clearance_m": 0.0687760404399805,
+      "clearance_by_body_m": {
+        "1-base": 0.3500158447141533,
+        "2-link1": 0.3919979746946136,
+        "3-link2": 0.3674413584681291,
+        "4-link3": 0.1667943207410187,
+        "5-link4": 0.1379713324529343,
+        "6-link5": 0.13581505828359058,
+        "7-gripper": 0.0776572476786123,
+        "10-base": 0.3533429388192244,
+        "11-link1": 0.3959989058174615,
+        "12-link2": 0.33476473400180007,
+        "13-link3": 0.19703510294503937,
+        "14-link4": 0.13930165615763773,
+        "15-link5": 0.13225222347203516,
+        "16-gripper": 0.0687760404399805,
+        "stand_foot": 0.506055250528019,
+        "stand_mast": 0.5492362618741902,
+        "stand_arm": 0.9833769928521668,
+        "camera_housing": 0.9675771371636752
+      },
+      "integrity_model": "Single rigid sugar surrogate throughout. Real fracture force is unmeasured.",
+      "loose_from_step": 377,
+      "minimum_loose_candy_tip_clearance_m": 0.08490110584903433
+    },
+    "wrapped_setup": {
+      "initial_exposed_fraction": 0.12902441031138967,
+      "control_max_exposed_fraction": 0.13841599838971486,
+      "control_actions": 2400,
+      "control_observations": 2401,
+      "control_sustained_unwind_deg": 2.6567033449852033,
+      "control_fully_exited": false,
+      "initially_wrapped": true
+    }
+  },
+  "dream": {
+    "status": "complete",
+    "checkpoint": "dreamlabs/dream-1-beta",
+    "actions": 2400,
+    "control_hz": 20,
+    "simulated_seconds": 120.0,
+    "inference_requests": 288,
+    "successful_replies_with_retries": 1,
+    "task_score": 0.0,
+    "zero_reason": "No held 90-degree untwist before exit.",
+    "final_measurements": {
+      "candy_surface_exposed_fraction": 0.0,
+      "sustained_preopening_unwind_deg": 0.0,
+      "candy_on_table": true,
+      "candy_fully_exited": false,
+      "wrapper_clearance_lower_bound_m": 0.0,
+      "released_hold_s": 0.0,
+      "candy_clear_at_finish": false,
+      "vertical_drop_before_landing_m": 0.0
+    },
+    "wrapped_setup": {
+      "initial_exposed_fraction": 0.12902441031138967,
+      "control_max_exposed_fraction": 0.13501614841710174,
+      "control_actions": 2400,
+      "control_observations": 2401,
+      "control_sustained_unwind_deg": 0.4526752858657801,
+      "control_fully_exited": false,
+      "initially_wrapped": true
+    },
+    "trial_trace_sha256": "0149d648852aadeb24bb1d123b54c11f043c3df19496ba6c02cb98621606639c",
+    "control_trace_sha256": "f1a4509092a2a1d995ae2ce36090e511decc5d9d044039b6f6313065d5f4a346",
+    "camera_sha256": {
+      "top_cam": "d32261f437e759dadfabc4bdee4dd9647f88f42dadc38be44c47ae5c0aff77c2",
+      "left_cam": "150b2953325ab5ccdd6b7088beb558710f95aa8fdc38f7881f20530ff8d4843c",
+      "right_cam": "eea908fadd686c84f09735171c7a21b2f2a6486f84e7f50f7ad450f1ffcae352",
+      "judging_front": "30b4bf6704b1cd48c22527373b87dff1fe5168ccb93c3e3fc6e766497f680319"
+    },
+    "contact_audit": {
+      "physics_samples": 28801,
+      "minimum_floor_clearance_m": 0.7598921443358104,
+      "minimum_unclean_surface_clearance_m": 0.18039187652424932,
+      "clearance_by_body_m": {
+        "1-base": 0.356184299808253,
+        "2-link1": 0.4027895446677423,
+        "3-link2": 0.3887816746218732,
+        "4-link3": 0.31233204187726826,
+        "5-link4": 0.26287061544006085,
+        "6-link5": 0.24127084716466687,
+        "7-gripper": 0.18039187652424932,
+        "10-base": 0.3562179663628831,
+        "11-link1": 0.39629043659705765,
+        "12-link2": 0.38836626994075224,
+        "13-link3": 0.3370517893180816,
+        "14-link4": 0.2826111451825251,
+        "15-link5": 0.27363349833732625,
+        "16-gripper": 0.21167011819114231,
+        "stand_foot": 0.5115748790527993,
+        "stand_mast": 0.5547079213322228,
+        "stand_arm": 1.0679985654697384,
+        "camera_housing": 1.0524901696807263
+      },
+      "integrity_model": "Single rigid sugar surrogate throughout. Real fracture force is unmeasured."
+    }
+  }
+}
