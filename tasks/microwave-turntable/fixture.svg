@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="718" viewBox="0 0 1120 718" role="img" aria-labelledby="t d">
+  <title id="t">Unheated three-lobed turntable fixture</title>
+  <desc id="d">Dimensioned plan, drive cup viewed from above, underside lug template, seated section, and guarded cabinet. Dimensions in millimetres.</desc>
+  <rect width="1120" height="718" fill="white" />
+  <text x="24" y="37" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="26px" font-weight="bold">Unheated turntable fixture</text>
+  <text x="24" y="61" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="13px">Insignia NS-MW7BK5 reference   ·   Dimensions in mm   ·   Fabrication datums are specific to this fixture   ·   Deck surface z = 0</text>
+  <path d="M24 79H1096M555 86V690M24 390H1096" fill="none" stroke="#526773" stroke-width="1.2" />
+  <text x="24" y="108" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="18px" font-weight="bold">Cabinet and wheel track</text>
+  <g transform="translate(199 227) scale(.62)">
+    <rect x="-180" y="-150" width="440" height="300" fill="#e6ebeb" stroke="#445666" stroke-width="2" />
+    <rect x="180" y="-150" width="80" height="317" fill="#30353e" stroke="#1f2934" />
+    <rect x="-172" y="152" width="350" height="18" fill="#30353e" stroke="#1f2934" />
+    <rect x="150" y="170" width="20" height="35" rx="4" fill="#30353e" stroke="#1f2934" />
+    <circle cx="-172" cy="161" r="5" fill="#ad457d" />
+    <circle r="127" fill-opacity=".8" stroke-width="2" fill="#d9eff2" stroke="#276181" />
+    <circle r="124.5" fill="none" stroke="#526773" stroke-width="1.2" />
+    <circle r="79" stroke-width="6.8" fill="none" stroke="#a74079" />
+    <circle r="66" fill="none" stroke="#526773" stroke-width="1.2" />
+    <circle r="92" fill="none" stroke="#526773" stroke-width="1.2" />
+    <g fill="#eac78c" stroke="#755e47">
+      <rect x="-5" y="69" width="10" height="20" />
+      <rect transform="rotate(120)" x="-5" y="69" width="10" height="20" />
+      <rect transform="rotate(240)" x="-5" y="69" width="10" height="20" />
+    </g>
+    <path d="M-134 0H134M0-133V133" fill="none" stroke="#83959d" stroke-dasharray="4 4" stroke-width="1" />
+    <path d="M-180 -165H260M-180 -171v12M260 -171v12" fill="none" stroke="#526773" stroke-width="1.2" />
+  </g>
+  <text x="207" y="119" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="13px">440 wide</text>
+  <text x="376" y="164" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="15px">300 deep deck</text>
+  <text x="376" y="188" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="15px">Rear at x +150</text>
+  <text x="376" y="212" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="15px">Left at y +180</text>
+  <text x="376" y="251" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="15px">Ø254 tray</text>
+  <text x="376" y="275" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="15px">Ø158 wheel pitch</text>
+  <text x="376" y="299" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="15px">3 rollers at 120°</text>
+  <text x="24" y="369" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="15px">350 door · left hinge · 170° open stop</text>
+  <text x="576" y="108" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="18px" font-weight="bold">Drive cup and tray lugs</text>
+  <g transform="translate(698 209) scale(3.05)">
+    <polygon points="23.000,-0.000 22.631,-2.379 21.563,-4.583 19.914,-6.470 17.855,-7.950 15.588,-9.000 13.312,-9.672 11.193,-10.078 9.338,-10.371 7.785,-10.715 6.500,-11.258 5.387,-12.100 4.312,-13.272 3.131,-14.732 1.720,-16.365 0.000,-18.000 -2.043,-19.438 -4.353,-20.481 -6.812,-20.966 -9.255,-20.788 -11.500,-19.919 -13.375,-18.409 -14.751,-16.383 -15.561,-14.011 -15.812,-11.488 -15.588,-9.000 -15.032,-6.693 -14.324,-4.654 -13.650,-2.901 -13.172,-1.384 -13.000,-0.000 -13.172,1.384 -13.650,2.901 -14.324,4.654 -15.032,6.693 -15.588,9.000 -15.812,11.488 -15.561,14.011 -14.751,16.383 -13.375,18.409 -11.500,19.919 -9.255,20.788 -6.812,20.966 -4.353,20.481 -2.043,19.438 -0.000,18.000 1.720,16.365 3.131,14.732 4.312,13.272 5.387,12.100 6.500,11.258 7.785,10.715 9.338,10.371 11.193,10.078 13.312,9.672 15.588,9.000 17.855,7.950 19.914,6.470 21.563,4.583 22.631,2.379" fill="#d4b793" stroke="#755e47" stroke-width=".7" />
+    <polygon points="20.000,-0.000 19.647,-2.065 18.629,-3.960 17.061,-5.543 15.115,-6.729 12.990,-7.500 10.885,-7.909 8.963,-8.070 7.330,-8.141 6.022,-8.288 5.000,-8.660 4.167,-9.359 3.385,-10.419 2.508,-11.798 1.406,-13.381 0.000,-15.000 -1.729,-16.454 -3.730,-17.547 -5.885,-18.113 -8.035,-18.047 -10.000,-17.321 -11.612,-15.982 -12.744,-14.153 -13.331,-12.003 -13.385,-9.725 -12.990,-7.500 -12.292,-5.473 -11.471,-3.727 -10.716,-2.278 -10.189,-1.071 -10.000,-0.000 -10.189,1.071 -10.716,2.278 -11.471,3.727 -12.292,5.473 -12.990,7.500 -13.385,9.725 -13.331,12.003 -12.744,14.153 -11.612,15.982 -10.000,17.321 -8.035,18.047 -5.885,18.113 -3.730,17.547 -1.729,16.454 -0.000,15.000 1.406,13.381 2.508,11.798 3.385,10.419 4.167,9.359 5.000,8.660 6.022,8.288 7.330,8.141 8.963,8.070 10.885,7.909 12.990,7.500 15.115,6.729 17.061,5.543 18.629,3.960 19.647,2.065" fill="#f8ecdb" stroke="#755e47" stroke-width=".55" />
+    <path d="M-25 0H26M0-25V25" fill="none" stroke="#83959d" stroke-dasharray="4 4" stroke-width="1" />
+  </g>
+  <g transform="translate(955 209) scale(3.05)">
+    <circle r="23" fill="none" stroke="#83959d" stroke-dasharray="4 4" stroke-width="1" />
+    <polygon points="20.000,-0.000 19.647,-2.065 18.629,-3.960 17.061,-5.543 15.115,-6.729 12.990,-7.500 10.885,-7.909 8.963,-8.070 7.330,-8.141 6.022,-8.288 5.000,-8.660 4.167,-9.359 3.385,-10.419 2.508,-11.798 1.406,-13.381 0.000,-15.000 -1.729,-16.454 -3.730,-17.547 -5.885,-18.113 -8.035,-18.047 -10.000,-17.321 -11.612,-15.982 -12.744,-14.153 -13.331,-12.003 -13.385,-9.725 -12.990,-7.500 -12.292,-5.473 -11.471,-3.727 -10.716,-2.278 -10.189,-1.071 -10.000,-0.000 -10.189,1.071 -10.716,2.278 -11.471,3.727 -12.292,5.473 -12.990,7.500 -13.385,9.725 -13.331,12.003 -12.744,14.153 -11.612,15.982 -10.000,17.321 -8.035,18.047 -5.885,18.113 -3.730,17.547 -1.729,16.454 -0.000,15.000 1.406,13.381 2.508,11.798 3.385,10.419 4.167,9.359 5.000,8.660 6.022,8.288 7.330,8.141 8.963,8.070 10.885,7.909 12.990,7.500 15.115,6.729 17.061,5.543 18.629,3.960 19.647,2.065" fill="none" stroke="#bca78b" stroke-width=".55" stroke-dasharray="1 1" />
+    <polygon points="14.000,3.500 14.906,3.381 15.750,3.031 16.475,2.475 17.031,1.750 17.381,0.906 17.500,-0.000 17.381,-0.906 17.031,-1.750 16.475,-2.475 15.750,-3.031 14.906,-3.381 14.000,-3.500 9.000,-3.500 8.094,-3.381 7.250,-3.031 6.525,-2.475 5.969,-1.750 5.619,-0.906 5.500,0.000 5.619,0.906 5.969,1.750 6.525,2.475 7.250,3.031 8.094,3.381 9.000,3.500" fill="#a8d5d8" stroke="#376579" stroke-width=".6" />
+    <polygon points="14.000,3.500 14.906,3.381 15.750,3.031 16.475,2.475 17.031,1.750 17.381,0.906 17.500,-0.000 17.381,-0.906 17.031,-1.750 16.475,-2.475 15.750,-3.031 14.906,-3.381 14.000,-3.500 9.000,-3.500 8.094,-3.381 7.250,-3.031 6.525,-2.475 5.969,-1.750 5.619,-0.906 5.500,0.000 5.619,0.906 5.969,1.750 6.525,2.475 7.250,3.031 8.094,3.381 9.000,3.500" transform="rotate(120)" fill="#a8d5d8" stroke="#376579" stroke-width=".6" />
+    <polygon points="14.000,3.500 14.906,3.381 15.750,3.031 16.475,2.475 17.031,1.750 17.381,0.906 17.500,-0.000 17.381,-0.906 17.031,-1.750 16.475,-2.475 15.750,-3.031 14.906,-3.381 14.000,-3.500 9.000,-3.500 8.094,-3.381 7.250,-3.031 6.525,-2.475 5.969,-1.750 5.619,-0.906 5.500,0.000 5.619,0.906 5.969,1.750 6.525,2.475 7.250,3.031 8.094,3.381 9.000,3.500" transform="rotate(240)" fill="#a8d5d8" stroke="#376579" stroke-width=".6" />
+    <path d="M-24 0H25M0-24V24" fill="none" stroke="#83959d" stroke-dasharray="4 4" stroke-width="1" />
+  </g>
+  <text x="599" y="302" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="15px">Cup opening faces up</text>
+  <text x="856" y="302" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="15px">Tray underside, aligned</text>
+  <text x="576" y="329" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="13px">Inner radius 15 + 5 cos(3θ). Outer radius adds 3. Max radius 23.</text>
+  <text x="576" y="351" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="13px">Three 7-wide lugs at 120°. End centers at radii 9 and 14, end radius 3.5.</text>
+  <text x="576" y="373" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="13px">The lug flanks bear on the inside walls of the cup during rotation.</text>
+  <text x="24" y="424" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="18px" font-weight="bold">Seated section through one lobe and roller</text>
+  <g transform="translate(104 527) scale(1.60 -1.60)">
+    <rect x="-32" y="-6" width="25" height="6" fill="#d4dadd" />
+    <rect x="7" y="-6" width="99" height="6" fill="#d4dadd" />
+    <rect x="-21" y="-30" width="42" height="24" fill="#d1d8dc" stroke="#5f737b" stroke-width=".7" />
+    <path d="M-9.5-6h19v-6h-19zM-9.5-24h19v-6h-19z" fill="#809da5" />
+    <rect x="-3" y="-46" width="6" height="50" fill="#4d606a" />
+    <path d="M-6 -5h12v7h17v14h-3V7H-10v9h-3V2h7z" fill="#d4b793" stroke="#755e47" stroke-width=".7" />
+    <rect x="-22" y="20" width="136" height="8" fill="#d9eff2" stroke="#276181" />
+    <rect x="5.5" y="11" width="12" height="9" fill="#a8d5d8" stroke="#376579" stroke-width=".6" />
+    <circle cx="79" cy="10" r="10" fill="#eac78c" stroke="#796443" />
+    <circle cx="79" cy="10" r="1.5" fill="#3b4245" />
+    <rect x="-7" y="-55" width="14" height="20" fill="#97a6ae" stroke="#354951" />
+    <rect x="-3" y="-61" width="6" height="14" fill="#42535b" />
+    <rect x="-18" y="-86" width="77" height="25" rx="3" fill="#d1d8dc" stroke="#5f737b" />
+  </g>
+  <text x="293" y="457" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="15px">Tray z20–28 · center z24</text>
+  <text x="293" y="480" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="15px">Lug tip z11 · cup rim z16</text>
+  <text x="293" y="503" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="15px">Pocket floor z7 · overlap 5</text>
+  <text x="293" y="526" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="15px">Wheel Ø20 × 10 · axle z10</text>
+  <text x="293" y="555" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="15px">Ø14 deck opening</text>
+  <text x="293" y="580" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="15px">Ø6 spindle and 626 bearings</text>
+  <text x="293" y="605" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="15px">6-to-6 clamp, 20 long</text>
+  <text x="293" y="630" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="15px">12 V gearmotor, 6 rpm</text>
+  <text x="24" y="689" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="13px">Cup seat: Ø6.2 blind D bore, flat 2.15 from axis. See the printable STL pair.</text>
+  <text x="576" y="424" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="18px" font-weight="bold">Closed cabinet and external motor bay</text>
+  <rect x="589" y="459" width="294" height="166" rx="4" fill="#30353e" stroke="#1f2934" />
+  <rect x="596" y="466" width="229" height="142" rx="3" fill="#1b2229" stroke="#83959d" />
+  <rect x="616" y="495" width="155" height="78" rx="4" fill="#9aacaf" />
+  <rect x="806" y="477" width="12" height="119" rx="3" fill="#56616c" />
+  <rect x="836" y="466" width="40" height="142" rx="2" fill="#242932" />
+  <rect x="841" y="476" width="30" height="13" fill="#83c5d1" />
+  <g stroke="#919fa5" stroke-width="2">
+    <path d="M841 511h28m-28 9h28m-28 9h28m-28 12h28m-28 9h28m-28 9h28" />
+  </g>
+  <rect x="861" y="577" width="11" height="8" fill="#53a78e" />
+  <rect x="599" y="625" width="274" height="49" fill="#737e86" />
+  <text x="900" y="469" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="15px">440 W × 355 D × 258 H</text>
+  <text x="900" y="502" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="13px">Depth includes handle.</text>
+  <text x="900" y="528" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="13px">Roof z224 · feet z−34</text>
+  <text x="900" y="554" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="13px">Button on lower right</text>
+  <text x="900" y="608" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="13px">Deck z0</text>
+  <text x="900" y="661" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="13px">Counter z−115</text>
+  <text x="576" y="690" font-family="DejaVu Sans, sans-serif" fill="#1d2d39" font-size="13px">Clear roof aperture and two low elevation windows give the grading views.</text>
+</svg>

@@ -1,0 +1,418 @@
+{
+  "scripted": {
+    "policy": "scripted",
+    "miss_hub": false,
+    "interrupted": false,
+    "stop_after": null,
+    "door_cut_step": null,
+    "task_score": 1.0,
+    "steps": 1262,
+    "simulation_seconds": 63.1,
+    "wall_seconds": 19.524179527012166,
+    "seed": 0,
+    "termination": "success",
+    "score": 1.0,
+    "turn_deg": 360.4185115349373,
+    "tray_mug_travel_deg": [
+      360.4185115349373,
+      360.48948887472005
+    ],
+    "tray_mug_bearing_deg": [
+      90.86538417000521,
+      -72.46856417941989
+    ],
+    "best_loaded_turn_deg": 360.4185115349373,
+    "turn_resets": 0,
+    "ring_seated": true,
+    "ring_error_mm": 4.7457987801591095,
+    "ring_band_mm": [
+      9.92083358277357,
+      9.975041397537298
+    ],
+    "tray_seated": true,
+    "tray_error_mm": 1.6190086183740742,
+    "tray_band_mm": [
+      23.799464344086605,
+      23.98927829659162
+    ],
+    "mug_loaded": true,
+    "mug_radius_mm": 66.80672532522802,
+    "foot_band_mm": [
+      33.815440192021555,
+      33.86271614954725
+    ],
+    "lip_band_mm": [
+      94.81771000474188,
+      94.8604108696038
+    ],
+    "latch_gap_mm": 0.9828942535890189,
+    "grippers_clear": true,
+    "motor_on": true,
+    "video_readback": {
+      "first_lit_frame": 1026,
+      "last_lit_frame": 1262,
+      "first_complete_turn_frame": 1262,
+      "longest_visible_turn": {
+        "frames": [
+          1026,
+          1262
+        ],
+        "travel_deg": [
+          360.54,
+          360.35
+        ],
+        "both_past_quarter_frame": [
+          1093,
+          1150,
+          1207,
+          1262
+        ]
+      }
+    }
+  },
+  "idle": {
+    "policy": "scripted",
+    "miss_hub": false,
+    "interrupted": false,
+    "stop_after": "reset",
+    "door_cut_step": null,
+    "task_score": 0.0,
+    "steps": 20,
+    "simulation_seconds": 1.0,
+    "wall_seconds": 0.8581257649930194,
+    "seed": 0,
+    "termination": "placement_stop",
+    "score": 0.0,
+    "turn_deg": 0.0,
+    "tray_mug_travel_deg": [
+      0.0,
+      0.0
+    ],
+    "tray_mug_bearing_deg": null,
+    "best_loaded_turn_deg": 0.0,
+    "turn_resets": 0,
+    "ring_seated": false,
+    "ring_error_mm": 387.6403248368107,
+    "ring_band_mm": [
+      -28.000726990354988,
+      -28.00041815686411
+    ],
+    "tray_seated": false,
+    "tray_error_mm": 349.49390182140627,
+    "tray_band_mm": [
+      -22.001851262945525,
+      -22.00129607667011
+    ],
+    "mug_loaded": false,
+    "mug_radius_mm": 379.0568573985593,
+    "foot_band_mm": [
+      -109.00532908885529,
+      -109.00414180763046
+    ],
+    "lip_band_mm": [
+      -48.005271650948465,
+      -48.00419926790668
+    ],
+    "latch_gap_mm": 685.381952287121,
+    "grippers_clear": true,
+    "motor_on": false
+  },
+  "ring_only": {
+    "policy": "scripted",
+    "miss_hub": false,
+    "interrupted": false,
+    "stop_after": "ring",
+    "door_cut_step": null,
+    "task_score": 0.25,
+    "steps": 280,
+    "simulation_seconds": 14.0,
+    "wall_seconds": 4.056410424003843,
+    "seed": 0,
+    "termination": "placement_stop",
+    "score": 0.25,
+    "turn_deg": 0.0,
+    "tray_mug_travel_deg": [
+      0.0,
+      0.0
+    ],
+    "tray_mug_bearing_deg": null,
+    "best_loaded_turn_deg": 0.0,
+    "turn_resets": 0,
+    "ring_seated": true,
+    "ring_error_mm": 8.28791833240949,
+    "ring_band_mm": [
+      9.25735391276074,
+      12.405160812345423
+    ],
+    "tray_seated": false,
+    "tray_error_mm": 349.49389811411237,
+    "tray_band_mm": [
+      -22.00185126317314,
+      -22.00129607623466
+    ],
+    "mug_loaded": false,
+    "mug_radius_mm": 379.05686967427835,
+    "foot_band_mm": [
+      -109.00540794599296,
+      -109.00410234309494
+    ],
+    "lip_band_mm": [
+      -48.0053447851842,
+      -48.00416553095374
+    ],
+    "latch_gap_mm": 685.381952287121,
+    "grippers_clear": true,
+    "motor_on": false
+  },
+  "tray_only": {
+    "policy": "scripted",
+    "miss_hub": false,
+    "interrupted": false,
+    "stop_after": "tray",
+    "door_cut_step": null,
+    "task_score": 0.5,
+    "steps": 572,
+    "simulation_seconds": 28.6,
+    "wall_seconds": 8.030779758002609,
+    "seed": 0,
+    "termination": "placement_stop",
+    "score": 0.5,
+    "turn_deg": 0.0,
+    "tray_mug_travel_deg": [
+      0.0,
+      0.0
+    ],
+    "tray_mug_bearing_deg": null,
+    "best_loaded_turn_deg": 0.0,
+    "turn_resets": 0,
+    "ring_seated": true,
+    "ring_error_mm": 8.880967124010906,
+    "ring_band_mm": [
+      9.216189766976049,
+      12.377216400929678
+    ],
+    "tray_seated": true,
+    "tray_error_mm": 1.4714926091677933,
+    "tray_band_mm": [
+      22.07699213471729,
+      27.163665074014098
+    ],
+    "mug_loaded": false,
+    "mug_radius_mm": 379.0568599834298,
+    "foot_band_mm": [
+      -109.00532909217227,
+      -109.00414180415918
+    ],
+    "lip_band_mm": [
+      -48.005271653937115,
+      -48.00419926476398
+    ],
+    "latch_gap_mm": 685.381952287121,
+    "grippers_clear": true,
+    "motor_on": false
+  },
+  "mug_only": {
+    "policy": "scripted",
+    "miss_hub": false,
+    "interrupted": false,
+    "stop_after": "mug",
+    "door_cut_step": null,
+    "task_score": 0.75,
+    "steps": 817,
+    "simulation_seconds": 40.85,
+    "wall_seconds": 11.459673604986165,
+    "seed": 0,
+    "termination": "placement_stop",
+    "score": 0.75,
+    "turn_deg": 0.0,
+    "tray_mug_travel_deg": [
+      0.0,
+      0.0
+    ],
+    "tray_mug_bearing_deg": null,
+    "best_loaded_turn_deg": 0.0,
+    "turn_resets": 0,
+    "ring_seated": true,
+    "ring_error_mm": 7.191142144396404,
+    "ring_band_mm": [
+      9.231243636659004,
+      12.261479443472167
+    ],
+    "tray_seated": true,
+    "tray_error_mm": 2.1680204375724412,
+    "tray_band_mm": [
+      22.118992893908214,
+      26.93964116964838
+    ],
+    "mug_loaded": true,
+    "mug_radius_mm": 63.442531698677335,
+    "foot_band_mm": [
+      35.11202523074641,
+      36.28741635845617
+    ],
+    "lip_band_mm": [
+      96.15793622496628,
+      97.21957982418802
+    ],
+    "latch_gap_mm": 685.381952287121,
+    "grippers_clear": true,
+    "motor_on": false
+  },
+  "missed_hub": {
+    "policy": "scripted",
+    "miss_hub": true,
+    "interrupted": false,
+    "stop_after": null,
+    "door_cut_step": null,
+    "task_score": 0.25,
+    "steps": 1400,
+    "simulation_seconds": 70.0,
+    "wall_seconds": 21.20950759900734,
+    "seed": 0,
+    "termination": "max_steps",
+    "score": 0.25,
+    "turn_deg": 0.0,
+    "tray_mug_travel_deg": [
+      0.0,
+      0.0
+    ],
+    "tray_mug_bearing_deg": null,
+    "best_loaded_turn_deg": 0.0,
+    "turn_resets": 0,
+    "ring_seated": true,
+    "ring_error_mm": 4.759028189411414,
+    "ring_band_mm": [
+      9.931875785448078,
+      9.968103338974906
+    ],
+    "tray_seated": false,
+    "tray_error_mm": 16.863881076927044,
+    "tray_band_mm": [
+      23.835050625597294,
+      23.963867728400896
+    ],
+    "mug_loaded": false,
+    "mug_radius_mm": 65.42629381171893,
+    "foot_band_mm": [
+      33.85681564316883,
+      33.88882727491974
+    ],
+    "lip_band_mm": [
+      94.85835646231412,
+      94.88727019421817
+    ],
+    "latch_gap_mm": 0.9828942535885749,
+    "grippers_clear": true,
+    "motor_on": true
+  },
+  "interrupted": {
+    "policy": "scripted",
+    "miss_hub": false,
+    "interrupted": true,
+    "stop_after": null,
+    "door_cut_step": 1151,
+    "task_score": 0.75,
+    "steps": 1400,
+    "simulation_seconds": 70.0,
+    "wall_seconds": 21.16785811202135,
+    "seed": 0,
+    "termination": "max_steps",
+    "score": 0.75,
+    "turn_deg": 0.0,
+    "tray_mug_travel_deg": [
+      0.0,
+      0.0
+    ],
+    "tray_mug_bearing_deg": null,
+    "best_loaded_turn_deg": 181.1089314458033,
+    "turn_resets": 1,
+    "ring_seated": true,
+    "ring_error_mm": 5.335452642356336,
+    "ring_band_mm": [
+      9.936596666071026,
+      9.967412735718021
+    ],
+    "tray_seated": true,
+    "tray_error_mm": 2.3149092026836424,
+    "tray_band_mm": [
+      23.83057590914482,
+      23.97368640603716
+    ],
+    "mug_loaded": true,
+    "mug_radius_mm": 63.72178440061546,
+    "foot_band_mm": [
+      33.8407831954461,
+      33.877081402468704
+    ],
+    "lip_band_mm": [
+      94.84252910619735,
+      94.87531458350807
+    ],
+    "latch_gap_mm": 57.134125113496644,
+    "grippers_clear": true,
+    "motor_on": false,
+    "video_readback": {
+      "first_lit_frame": 1026,
+      "last_lit_frame": 1150,
+      "first_complete_turn_frame": null,
+      "longest_visible_turn": {
+        "frames": [
+          1026,
+          1150
+        ],
+        "travel_deg": [
+          182.91,
+          181.21
+        ],
+        "both_past_quarter_frame": [
+          1093,
+          1150,
+          null,
+          null
+        ]
+      }
+    }
+  },
+  "dream": {
+    "policy": "dreamlabs/dream-1-beta",
+    "inspect_robots_version": "1.0.0",
+    "evaluation_id": "adhoc_96c7472f",
+    "task_score": 0.0,
+    "steps": 1400,
+    "simulation_seconds": 70.0,
+    "wall_seconds": 26.71190985199064,
+    "seed": 0,
+    "termination": "max_steps",
+    "errored_trials": 0
+  },
+  "previous_submission": {
+    "dream_score": 0.0,
+    "dream_steps": 1400,
+    "media": "M-3EUS7Y",
+    "fixture": "original submission, superseded geometry and scoring"
+  },
+  "cycle_diagnostic": {
+    "open_door_start_travel_mm": 3.39,
+    "open_door_lamp": false,
+    "closed_start_travel_mm": 3.39,
+    "motor_on_seconds": 30.0,
+    "restarted_while_held": false,
+    "restarted_on_fresh_press": true,
+    "events": [
+      [
+        1026,
+        true
+      ],
+      [
+        1626,
+        false
+      ],
+      [
+        1774,
+        true
+      ]
+    ],
+    "steps": 1777,
+    "method": "simulated interlock and extended timer diagnostic, separate open-door probe and off-center placement control, seed 0"
+  }
+}

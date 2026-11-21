@@ -1,0 +1,20 @@
+{
+  "title": "Reinstall a microwave turntable after cleaning",
+  "category": "Societal relatability",
+  "keywords": [
+    "household maintenance",
+    "turntable installation",
+    "roller ring",
+    "three-lobed drive cup",
+    "loaded rotation"
+  ],
+  "instruction": "Reinstall the microwave turntable after cleaning. Place the roller ring in its track, seat the clear tray on the three-lobed drive cup, and place the orange mug off center. Withdraw the grippers, close the door and press the green Start button. Let the marked tray and mug make one continuous turn together.",
+  "context": "The tray can sit on its rollers even when its underside lugs miss the drive cup. A marked tray carrying an off-center mug through a full turn demonstrates that the installation works under load.",
+  "setup": "The retail reference is the black Insignia NS-MW7BK5, Best Buy SKU 6568217, with matched 254 mm glass tray, three-wheel ring and three-lobed drive cup. The scored rig is an independent 12 V replica, 440 W × 355 D × 258 H mm on an 81 mm plinth. It has a 350 mm left-hinged door open 170°, right keypad and green Start. On a 1,100 mm square counter, measure (x forward, y left) from the midpoint of two open YAM arms 610 mm apart. The drive is at (565, 0) mm, deck 115 mm above the counter. Start the Ø158 mm pitch nylon ring at (202, 136), axles 87 mm high, first wheel toward the robot. Set the Ø254 × 8 mm clear acrylic tray (about 480 g) at (226, −85), mid-edge 93 mm high, one lug and blue stripe toward +x. Each part rests on three Ø24 mm silicone-topped posts. The empty Ø62 × 70 mm, 190 g orange mug stands at (365, −322), handle toward (+x, −y). The roof reticles, floor ticks, sill, latch circle, lamp, and elevation scales are visible grading references.",
+  "scoring": "Highest cumulative final placement with all four fingertip pad centers on the operator side of the yellow sill. 0 if hands or ring fail. 0.25 requires the ring center within 12 mm of axis and magenta centerline entirely 5–15 mm above deck. 0.50 adds tray center dot within 6 mm and dark mid-edge entirely 20–28 mm high. 0.75 adds mug dot 35–78 mm from axis, mint lower band 30–38 mm and cream lip 90–101 mm high throughout each centerline. 1.00 requires these placements to persist with the lamp lit and the door dot inside or on its 10 mm radius circle. Blue tray stripe and yellow mug dot each pass 90°, 180°, 270°, 360° CCW from their own starts and both finish at 360–368° on one frame. Restart on a failed condition, unreadable mark, <4° progress in 0.50 s, >4° retreat from peak, ≥90° interframe jump or >8° relative travel difference. Bearings are read from the overhead image.",
+  "run_limit": "1,400 actions at 20 Hz (70 simulated seconds).",
+  "reset_notes": "Seed 0. With adapter disconnected, restore the first cup lobe toward +x, wheel toward the door, tray lugs down, mug upright and door open. Leave Start released and reconnect the guarded fixture.",
+  "fidelity": "The Insignia NS-MW7BK5 defines the cabinet, 254 mm tray and three-lobed coupling. The replica uses an acrylic tray, printed cup and lugs, a three-wheel ring and clear grading windows. Keep the retail oven unplugged. Close the separate fixture guard and press green Start to run the 12 V motor. Opening the guard or reaching 30 s cuts power. Wait for the lamp to go dark and the tray to stop before reaching in. The README links the build guide and YAM URDF and mesh licenses.",
+  "scores": "Dream-1 0.00 after 1,400 actions (step limit). Scripted demo 1.00 in 1,262 actions. Both runs used the revised fixture and seed 0.",
+  "media": "M-MEPDNQ"
+}
