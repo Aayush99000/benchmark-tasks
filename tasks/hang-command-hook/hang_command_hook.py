@@ -47,7 +47,7 @@ from dataclasses import dataclass, field
 import numpy as np
 from yam_arena import demo as yam_demo
 from yam_arena import ik, station
-from yam_arena.constants import FINGER_OPEN, PAD_TIP_PAST_TCP, READY, SHOULDER, WRIST
+from yam_arena.constants import FINGER_CLOSED, FINGER_OPEN, PAD_TIP_PAST_TCP, READY, SHOULDER, WRIST
 from yam_arena.demo import Waypoint
 from yam_arena.task_file import TABLE_TOP, Box, ObjectState
 from yam_arena.urdf import axis_angle_matrix
@@ -94,6 +94,11 @@ TOUCH_MM = 0.6  # three of the strip's four corners this close to the wall's fac
 TACK_N = 1.0
 FIRM_N = 10.0  # "firmly": no published figure; a firm thumb press is 10-30 N [estimate]
 PRESS_S = 30.0
+# A step of the press counts only if the force goes through the hook: nothing but the hook may push on the panel. WHY:
+# the gauge feels a push anywhere on the panel, so a hand pressing beside a lightly tacked hook would otherwise count
+# (robocurve review of TK-EWQ42S, 2026-11-20). The panel's contacts are read from the simulator each step; whatever
+# touches it other than the hook must push with less than OTHER_MAX_N.
+OTHER_MAX_N = 0.5
 
 # Where the hook starts: standing in a 5 mm deep slot in a small block, plate upright, strip towards the wall.
 SLOT_DEPTH, SLOT_GAP = 5.0 * MM, 5.5 * MM
@@ -289,6 +294,10 @@ def _spawn(prim_path: str, cfg, translation=None, orientation=None, **kwargs):
         PhysxSchema.PhysxRigidBodyAPI.Apply(prim).CreateMaxDepenetrationVelocityAttr(1.0)
         for i, shape in enumerate(link.shapes):
             _author_shape(stage, f"{path}/{shape.kind}_{i}", shape, collider)
+        if (spec.name, link.name) == (WALL_NAME, "panel"):
+            # WHY: the task reads the panel's contacts to tell a press through the hook from one beside it
+            PhysxSchema.PhysxContactReportAPI.Apply(prim).CreateThresholdAttr(0.0)
+            _PANEL_AT[0] = path
         bodies[link.name] = Sdf.Path(path)
 
     base_prim = stage.GetPrimAtPath(bodies[spec.base.name])
@@ -399,7 +408,10 @@ def _torch(x):
 
 
 def _numpy(x) -> np.ndarray:
-    return _torch(x).detach().cpu().numpy().astype(np.float64)
+    x = _torch(x)
+    if hasattr(x, "detach"):  # a torch tensor
+        return x.detach().cpu().numpy().astype(np.float64)
+    return np.asarray(x.numpy() if hasattr(x, "numpy") else x, dtype=np.float64)  # a warp array (the contact views)
 
 
 def _joint_ids(asset, spec: Mechanism) -> list[int]:
@@ -443,6 +455,10 @@ def _rest(environment, spec: Mechanism) -> None:
 
 
 # -- the wall as a mechanism, and the holder ----------------------------------------------------------------------------
+WALL_NAME = "wall"
+_PANEL_AT = [""]  # the panel's prim path, once spawned
+
+
 def _wall() -> Mechanism:
     """Mechanism frame: origin on the table under the middle of the wall's face, x into the wall."""
     foot = Shape("box", (0.045, 0.0, 0.01), (0.09, WALL_W, 0.02), WOOD)
@@ -458,7 +474,7 @@ def _wall() -> Mechanism:
     links = [Link("panel", 0.75, panel)]
     joints = [Joint("panel_give", "prismatic", "panel", (0.0, 0.0, 0.02 + WALL_H / 2), "X", 0.0, WALL_TRAVEL,
                     stiffness=WALL_K, damping=50.0, target=0.0)]
-    return mechanism("wall", (WALL_X, WALL_Y, TOP), base, links, joints, MATERIALS, color=GREY)
+    return mechanism(WALL_NAME, (WALL_X, WALL_Y, TOP), base, links, joints, MATERIALS, color=GREY)
 
 
 WALL = _wall()
@@ -562,10 +578,12 @@ def _spawn_hook(prim_path: str, cfg, translation=None, orientation=None, **kwarg
     # WHY: by default bodies joined by a joint don't collide; the strip has to meet the wall before it bonds
     joint.CreateCollisionEnabledAttr(True)
     _BOND_AT[0] = f"{parent}/{BOND_JOINT}"
+    _HOOK_AT[0] = prim_path
     return prim
 
 
 _BOND_AT = [""]
+_HOOK_AT = [""]
 
 
 def _hook_spawner():
@@ -657,11 +675,43 @@ def corner_gaps_mm(objects) -> np.ndarray:
     return -((corners - p) @ r[:, 0]) * 1000
 
 
+class _PanelContacts:
+    """The panel's contact forces from the simulator: in all, and from the hook alone. The difference is what anything
+    else (a finger, a wrist, the other arm) pushes on the panel with."""
+
+    def __init__(self) -> None:
+        self.view, self.failed = None, False
+
+    def other_n(self, env) -> float:
+        """The force (N) on the panel from everything but the hook, at the last physics step; inf if it can't be
+        read, so that a press can't count unseen."""
+        if self.failed or not (_PANEL_AT[0] and _HOOK_AT[0]):
+            return math.inf
+        try:
+            if self.view is None:
+                from isaaclab_physx.physics import PhysxManager
+
+                self.view = PhysxManager.get_physics_sim_view().create_rigid_contact_view(
+                    [_PANEL_AT[0]], filter_patterns=[[_HOOK_AT[0]]], max_contact_data_count=256)
+            dt = env.unwrapped.physics_dt
+            net = _numpy(self.view.get_net_contact_forces(dt=dt)).reshape(-1)[:3]
+            hook = _numpy(self.view.get_contact_force_matrix(dt=dt)).reshape(-1)[:3]
+            return float(np.linalg.norm(net - hook))
+        except Exception as error:  # noqa: BLE001
+            print(f"hang_command_hook: can't read the panel's contacts ({error!r}); no press will count")
+            self.failed = True
+            return math.inf
+
+
+_CONTACTS = _PanelContacts()
+
+
 @dataclass(frozen=True)
 class BondState:
     bonded: bool = False
-    firm_s: float = 0.0  # seconds pressed with at least FIRM_N since it bonded
-    force_n: float = 0.0
+    firm_s: float = 0.0  # seconds pressed with at least FIRM_N through the hook, since it bonded
+    force_n: float = 0.0  # the panel's spring force
+    other_n: float = 0.0  # the force on the panel from anything but the hook
 
 
 class _Bond:
@@ -675,6 +725,7 @@ class _Bond:
 
     def update(self, env, objects) -> BondState:
         force = wall_force(objects)
+        other = float(objects.get("panel_other_n", 0.0))
         if not self.bonded:
             touching = int(np.sum(corner_gaps_mm(objects) <= TOUCH_MM))
             if touching >= 3 and force >= TACK_N:
@@ -682,9 +733,9 @@ class _Bond:
                 h = objects[HOOK.name]
                 _set_bond((r.T @ (np.asarray(h.pos, float) - p), r.T @ _rot(h.quat_xyzw)))
                 self.bonded = True
-        elif force >= FIRM_N:
+        elif force >= FIRM_N and other < OTHER_MAX_N:
             self.firm_steps += 1
-        return BondState(self.bonded, self.firm_steps * env.unwrapped.step_dt, force)
+        return BondState(self.bonded, self.firm_steps * env.unwrapped.step_dt, force, other)
 
 
 def _set_bond(rel) -> None:
@@ -736,6 +787,7 @@ def _patch_scene(scene) -> None:
             out[HOOK.name] = _body_state(env, HOOK.name)
         out.update(_gripper_states(env))
         if WALL.name in out and HOOK.name in out:
+            out["panel_other_n"] = _CONTACTS.other_n(env)
             out["bond"] = _BOND.update(env, out)
         return out
 
@@ -951,7 +1003,8 @@ def _debug(objects, g) -> None:
         return "?" if pads is None else "(%.0f,%.0f,%.0f)" % tuple(np.asarray(pads.tips, float) * 1000)
 
     with open(path, "a") as f:
-        f.write(f"grade={g} bonded={bond.bonded} force_n={bond.force_n:.2f} firm_s={bond.firm_s:.2f} "
+        f.write(f"grade={g} bonded={bond.bonded} force_n={bond.force_n:.2f} other_n={bond.other_n:.2f} "
+                f"firm_s={bond.firm_s:.2f} "
                 f"gaps_mm={[round(float(v), 2) for v in corner_gaps_mm(objects)]} dy_mm={s.dy_mm:.2f} "
                 f"dz_mm={s.dz_mm:.2f} tilt_deg={s.tilt_deg:.2f} hands_off={hands_off(objects)} "
                 f"hook=({h.pos[0] * 1000:.1f},{h.pos[1] * 1000:.1f},{h.pos[2] * 1000:.1f}) "
@@ -1047,7 +1100,9 @@ def _w(duration, tcp, finger, label, force=(0.0, 0.0, 0.0)) -> Waypoint:
 
 def _plan(mode: str = "demo"):
     """The demo, or a wrong way: HOOK_DEMO=brief (pressed 5 s, not 30), HOOK_DEMO=off (stuck 12 mm to the right of the
-    cross)."""
+    cross), HOOK_DEMO=beside (tacked on the mark, let go, then the wall pressed 45 mm beside the hook for 34 s)."""
+    if mode == "beside":
+        return _plan_beside()
     start = np.asarray(HOOK_START, float)
     target = MARK + (np.array([0.0, -0.012, 0.0]) if mode == "off" else 0.0)
     pre = target + np.array([-0.010, 0.0, 0.0])
@@ -1069,6 +1124,35 @@ def _plan(mode: str = "demo"):
         _w(1.0, tcp_for(touch), PINCH, "ease off"),
         _w(0.6, tcp_for(touch), FINGER_OPEN, "let go"),
         _w(1.2, tcp_for(touch) - 0.06 * GRIP[:, 2], FINGER_OPEN, "back the fingers away"),
+        Waypoint(1.5, PARK_LEFT, FINGER_OPEN, "clear", 0.0),
+        Waypoint(6.0, PARK_LEFT, FINGER_OPEN, "stay", 0.0),
+    ]
+
+
+BESIDE = MARK + np.array([0.0, -0.045, 0.0])  # on the wall, 45 mm to the robot's right of the cross
+LIGHT_N = 3.0  # the beside probe's light push on the hook: enough to bond (TACK_N), well under firm (FIRM_N)
+
+
+def _plan_beside():
+    """A wrong way: the strip tacked on the mark with a light touch, the hook let go, then the closed fingertips pressed
+    against the bare wall 45 mm beside it with 15 N for 34 s. The wall's gauge feels the press, but it isn't through
+    the hook."""
+    steps = _plan("demo")
+    touch_at = [w.label for w in steps].index("straight in until the strip touches")
+    tip_in = np.array([TIP_CLEAR + 0.0005, 0.0, 0.0])  # the fingertips aimed 0.5 mm into the wall
+    press = PRESS_N * np.array([-1.0, 0.0, 0.0])
+    touch = tcp_for(MARK + np.array([0.0005, 0.0, 0.0]))
+    return steps[:touch_at + 1] + [
+        _w(1.0, touch, PINCH, "tack it on with a light push", WEIGHT + LIGHT_N * np.array([-1.0, 0.0, 0.0])),
+        _w(0.6, touch, FINGER_OPEN, "let go"),
+        _w(1.2, touch - 0.06 * GRIP[:, 2], FINGER_OPEN, "back the fingers away"),
+        _w(0.8, touch - 0.06 * GRIP[:, 2], FINGER_CLOSED, "close the fingers"),
+        _w(1.5, tcp_for(BESIDE + tip_in) - 0.03 * GRIP[:, 2], FINGER_CLOSED, "to 3 cm in front of the wall beside it"),
+        _w(1.5, tcp_for(BESIDE + tip_in), FINGER_CLOSED, "fingertips onto the bare wall"),
+        _w(2.0, tcp_for(BESIDE + tip_in), FINGER_CLOSED, "press the wall firmly", press),
+        _w(PRESS_S + 4.0, tcp_for(BESIDE + tip_in), FINGER_CLOSED, "keep pressing the wall", press),
+        _w(1.0, tcp_for(BESIDE + tip_in), FINGER_CLOSED, "ease off"),
+        _w(1.2, tcp_for(BESIDE + tip_in) - 0.06 * GRIP[:, 2], FINGER_CLOSED, "back away"),
         Waypoint(1.5, PARK_LEFT, FINGER_OPEN, "clear", 0.0),
         Waypoint(6.0, PARK_LEFT, FINGER_OPEN, "stay", 0.0),
     ]

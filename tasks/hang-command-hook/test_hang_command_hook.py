@@ -41,8 +41,9 @@ def hook_at(dy_mm=0.0, dz_mm=0.0, tilt_deg=0.0, gap_mm=0.0, push_n=0.0) -> Objec
     return ObjectState(pos=p, quat_xyzw=quat_about_x(tilt_deg), lin_vel=Z3, ang_vel=Z3, low=p, high=p)
 
 
-def scene(bond=M.BondState(), push_n=0.0, **hook) -> dict:
-    return {"wall": wall(push_n), "hook": hook_at(push_n=push_n, **hook), "bond": bond, **AWAY}
+def scene(bond=M.BondState(), push_n=0.0, other_n=0.0, **hook) -> dict:
+    return {"wall": wall(push_n), "hook": hook_at(push_n=push_n, **hook), "bond": bond, "panel_other_n": other_n,
+            **AWAY}
 
 
 STUCK = M.BondState(bonded=True, firm_s=M.PRESS_S, force_n=0.0)
@@ -122,6 +123,39 @@ def test_the_press_counts_only_firm_seconds(monkeypatch):
     assert out[-1].firm_s == pytest.approx(4 * 0.05)
 
 
+def test_a_press_beside_the_hook_does_not_count(monkeypatch):
+    # the gauge feels 15 N, but 14 N of it comes from a finger on the bare wall
+    seq = [scene(gap_mm=0.0, push_n=2.0)] + [scene(gap_mm=0.0, push_n=15.0, other_n=14.0)] * 5
+    out, _ = run_bond(monkeypatch, seq)
+    assert out[0].bonded and out[-1].firm_s == 0.0 and out[-1].other_n == pytest.approx(14.0)
+
+
+def test_a_finger_resting_on_the_wall_while_pressing_the_hook_does_not_count(monkeypatch):
+    seq = [scene(gap_mm=0.0, push_n=2.0)] + [scene(gap_mm=0.0, push_n=15.0, other_n=M.OTHER_MAX_N)] * 3
+    out, _ = run_bond(monkeypatch, seq)
+    assert out[-1].firm_s == 0.0
+
+
+def test_unreadable_contacts_never_count(monkeypatch):
+    seq = [scene(gap_mm=0.0, push_n=2.0)] + [scene(gap_mm=0.0, push_n=15.0, other_n=math.inf)] * 3
+    out, _ = run_bond(monkeypatch, seq)
+    assert out[-1].firm_s == 0.0
+
+
+def test_the_contact_reader_without_a_simulator_reports_inf():
+    assert M._PanelContacts().other_n(FakeEnv) == math.inf
+
+
+def test_arrays_without_detach_are_read():
+    # The simulator's contact views return warp arrays, which have .numpy() but no .detach() (first official run,
+    # 2026-11-20: every press was dropped as unreadable until this was handled).
+    class WarpLike:
+        def numpy(self):
+            return np.array([[1.0, 2.0, 3.0]], dtype=np.float32)
+
+    assert M._numpy(WarpLike()).tolist() == [[1.0, 2.0, 3.0]]
+
+
 # -- scoring -----------------------------------------------------------------------------------------------------------
 
 def test_not_stuck_scores_0():
@@ -161,7 +195,7 @@ def test_the_tilt_is_measured_in_the_walls_plane():
 
 # -- the demo ----------------------------------------------------------------------------------------------------------
 
-@pytest.mark.parametrize("mode", ["demo", "brief", "off"])
+@pytest.mark.parametrize("mode", ["demo", "brief", "off", "beside"])
 def test_the_demo_is_within_reach(mode, monkeypatch):
     monkeypatch.setenv("HOOK_DEMO", mode)
     d = M.demo()
@@ -195,3 +229,14 @@ def test_the_press_lasts_long_enough_and_the_brief_one_does_not(monkeypatch):
 
 def test_the_demo_finishes_within_the_run_limit():
     assert sum(w.duration for w in M.demo()["left"]) * 20 < 1800
+
+
+def test_the_beside_probe_presses_the_bare_wall_long_enough(monkeypatch):
+    monkeypatch.setenv("HOOK_DEMO", "beside")
+    steps = M.demo()["left"]
+    labels = [w.label for w in steps]
+    assert "straight in until the strip touches" in labels and "press firmly" not in labels  # never pressed through it
+    assert {w.label: w.duration for w in steps}["keep pressing the wall"] >= M.PRESS_S
+    assert abs(M.BESIDE[1] - M.MARK[1]) - M.PLATE_W / 2 > 0.02  # the press is well clear of the hook
+    assert M.TACK_N < M.LIGHT_N < M.FIRM_N  # the hook is tacked on hard enough to bond, never firmly
+    assert sum(w.duration for w in steps) * 20 < 1800

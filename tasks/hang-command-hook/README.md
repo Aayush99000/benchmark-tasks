@@ -38,8 +38,12 @@ or too briefly lets go under its load. A photo of the wall shows where the hook 
 - **The hook** is one free body of four boxes (strip, plate, arm, lip). The strip's foam is tacky: friction 2.0.
 - **The bond.** When three of the strip's four corners lie within 0.6 mm of the wall's face and the wall is pushed
   with at least 1 N, the strip bonds: a joint between the hook and the panel, set up with the hook unjoined, is
-  switched on at their poses of that moment. From then on the hook can't slide or turn on the wall. The task then
-  counts the seconds the wall is pushed with at least 10 N.
+  switched on at their poses of that moment. From then on the hook can't slide or turn on the wall.
+- **The press goes through the hook.** The panel reports its contacts to the task each step: the force on it in all,
+  and the part that comes from the hook. A second of pressing counts only while the gauge reads at least 10 N and
+  everything else together (fingers, wrist, the other arm) pushes on the panel with less than 0.5 N, so a hand
+  pressing the wall beside a lightly tacked hook, or a finger resting on the wall while the hook is pressed, doesn't
+  count. If the contacts can't be read, no second counts.
 
 What we simplified:
 - The bond is all or nothing: once made it holds whatever load, where a real strip that was pressed too little gives
@@ -65,13 +69,14 @@ Both grippers start open at the ready pose. One fixed layout: `-E object_jitter=
 clamped to the table and the hook stands in its slot with a fresh strip on it, liner just pulled off.
 
 ## Scoring
-**Stuck:** the strip bonded to the wall, as above. The hook's place is its plate's middle (the strip's middle) on the
+**Stuck:** the strip bonded to the wall, as above. **Pressed:** seconds with the gauge at 10 N or more and nothing but
+the hook touching the wall, as above. The hook's place is its plate's middle (the strip's middle) on the
 wall against the cross's centre; its tilt is the plate's turn from upright in the wall's plane. **Hands clear:** no
 point along either gripper's finger pads, or of its fingertips, within 1 cm of the hook.
 
 | Score | When |
 |---|---|
-| 1.0 | stuck within 5 mm of the cross and 3 degrees of level, pressed with at least 10 N for 30 s in all, both hands clear (this ends the trial) |
+| 1.0 | stuck within 5 mm of the cross and 3 degrees of level, pressed through the hook with at least 10 N for 30 s in all, both hands clear (this ends the trial) |
 | 0.75 | stuck on the mark and level, but pressed firmly for less than 30 s, or a hand still on it |
 | 0.5 | stuck within 15 mm of the cross and 8 degrees of level |
 | 0.25 | stuck anywhere else on the wall |
@@ -80,8 +85,10 @@ point along either gripper's finger pads, or of its fingertips, within 1 cm of t
 In a real trial:
 - **Place:** a ruler from the cross's visible stroke ends to the plate's edges (the horizontal stroke shows 8.5 mm
   either side of a centred hook), and a small level or a phone level app on the plate's edge.
-- **Press:** a 60 fps video of the press, timed, with a bathroom-scale or force gauge behind the wall for the force;
-  or simply time it.
+- **Press (a force gauge is required, not timing alone):** the panel stands with its back against a push-pull force
+  gauge (or on a digital kitchen scale under its foot, read in newtons), logging at 10 Hz or more, and a 60 fps video
+  is taken of the press, started together. A second counts only when the gauge reads at least 10 N (1.02 kgf) and the
+  video shows nothing but the hook touching the wall; add up those seconds.
 - **Load (the real check of the press):** after 1 hour, hang the rated 1.36 kg on the hook for 5 minutes; a full-credit
   hook holds it.
 
@@ -108,11 +115,13 @@ for log in ~/yam-eval/hang-command-hook-dream/*.json; do inspect-robots video "$
 
 The task file needs nothing beyond the official simulator: it builds the wall (an articulation), the hook (a body of
 several shapes) and the bond itself, by hooking `yam_arena` when it is imported. Environment variables, all optional:
-- `HOOK_DEBUG=<file>`: one line per control step: whether the hook is stuck, the press force, the firm seconds so far,
-  the strip's four corner gaps to the wall, the hook's offset from the cross and its tilt, and whether the hands are
-  clear.
+- `HOOK_DEBUG=<file>`: one line per control step: whether the hook is stuck, the press force, the force on the panel
+  from anything but the hook, the firm seconds so far, the strip's four corner gaps to the wall, the hook's offset from
+  the cross and its tilt, and whether the hands are clear.
 - `HOOK_DEMO=brief`: a wrong way for checking the score: pressed for 5 s instead of 30.
 - `HOOK_DEMO=off`: a wrong way: stuck 12 mm to the right of the cross.
+- `HOOK_DEMO=beside`: a wrong way: tacked on the mark with a light touch and let go, then the bare wall pressed with the
+  closed fingertips 45 mm beside the hook, with 15 N for 34 s.
 - `HOOK_VIDEO=<folder>`: record the top camera at its full 640 x 360 render to `<folder>/top_cam.mp4`, and its first
   frame to `setup.png`.
 
@@ -129,16 +138,26 @@ The arm's joints are soft position servos (several mm of give per newton at thes
 the wall by the arm's compliance times the press force, computed from the arm's Jacobian and joint gains.
 
 ## Runtime and seeds
-- Official runs (2026-11-20, this version, task file SHA-256 `b6bd9bb6...11aa13`):
+- Official runs of this version (2026-11-20, task file SHA-256 `40fbb2fd...750323`):
   - the scripted demo 1.0, ending on success at step 1013 (50.7 s): the strip bonded at step 233 with three corners
-    within 0.25 mm of the wall under 1.1 N, its middle 0.29 mm right of and 0.50 mm below the cross, 0.6 degrees off
-    level; pressed at about 13.7 N, 35 s of it at 10 N or more; after the hand let go the hook stayed where it bonded;
-  - a wrong way, `HOOK_DEMO=brief` (pressed 5 s): 0.75, stuck on the mark with 6.05 s of firm pressing;
-  - a wrong way, `HOOK_DEMO=off` (aimed 12 mm right of the cross): 0.5, stuck 11.0 mm off;
-  - Dream-1 (1,800 steps, the full run limit): 0. It picked the hook out of its slot with the right hand by step 506
-    and carried it towards the cross, but let go at step 680 with the strip still 22 mm from the wall and the hook
-    tipped 21 degrees; the hook fell on its side on the table and was not picked up again. The strip never bonded.
-- Runtime, measured 2026-11-20 on one L40S shared with other simulations: 15 minutes for the demo trial (1,013
+    within 0.24 mm of the wall under 1.06 N, its middle 0.29 mm right of and 0.50 mm below the cross, 0.6 degrees off
+    level; pressed at a mean 13.7 N, 35.05 s of it at 10 N or more, with 0.00 N on the panel from anything but the hook
+    throughout; after the hand let go the hook stayed where it bonded;
+  - a wrong way, `HOOK_DEMO=beside`: 0.75. The strip bonded on the mark at step 235 (0.25 mm from the cross, under
+    1.67 N), then the fingertips pressed the bare wall beside it: the gauge read 10 N or more for 34.85 s (mean 12.9 N),
+    all of it from the fingers (10.1 to 13.0 N), so none of it counted (0 s pressed);
+  - a wrong way, `HOOK_DEMO=brief` (pressed 5 s): 0.75, stuck on the mark with 6.05 s pressed;
+  - a wrong way, `HOOK_DEMO=off` (aimed 12 mm right of the cross): 0.5, stuck 11.0 mm off, 35.05 s pressed.
+  - The brief and off runs used the file a few minutes before this one (SHA-256 `38548c1c...149bd9`), which differs
+    only in the beside probe's plan (its light push was added after its first run, which pushed too lightly to bond).
+  - In every run the panel read up to 6.2 N from something other than the hook during the first 11 steps only, as it
+    settled on its spring with nothing near it, and 0.00 N from then on except where the fingers pressed it.
+- Dream-1 (1,800 steps, the full run limit), run on the previous version (SHA-256 `b6bd9bb6...11aa13`, which counted a
+  press anywhere on the panel): 0. It picked the hook out of its slot with the right hand by step 506 and carried it
+  towards the cross, but let go at step 680 with the strip still 22 mm from the wall and the hook tipped 21 degrees; the
+  hook fell on its side on the table and was not picked up again. The strip never bonded, so this version, which only
+  narrows what counts as pressing, scores that trial the same.
+- Runtime, measured 2026-11-20 on one L40S shared with other simulations: 15 to 19 minutes for the demo trial (1,013
   steps), with the videos.
 - The scoring and reach checks run without the simulator: `python -m pytest -q test_hang_command_hook.py`.
 - One fixed layout: `-E object_jitter=0`, so the seed doesn't change the start.
