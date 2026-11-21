@@ -207,27 +207,38 @@ def _gripper_states(env) -> dict:
 
 @dataclass(frozen=True)
 class CopyRecord:
-    """This trial's Copy presses: ``presses`` is how many, ``good`` whether any was made with the lid shut and the card
-    face down and aligned at the corner; ``max_lid`` is how far the lid has been opened (rad)."""
+    """This trial's Copy presses. ``presses`` counts every press of either button and ``color`` the Color Copy presses.
+    ``good`` means the first press was Black Copy, made with the lid shut and the card face down, square at the corner:
+    the one copy asked for. ``max_lid`` is how far the lid has been opened (rad)."""
 
     presses: int = 0
     good: bool = False
     max_lid: float = 0.0
+    color: int = 0
+
+    def asked_for_copy(self) -> bool:
+        """Exactly one copy made, and it is the black-and-white copy of the card's face asked for."""
+        return self.presses == 1 and self.good
+
+    def wrong_copy(self) -> bool:
+        """Any copy other than that one: a Color Copy press, a Black Copy press with the card not in place or the lid
+        open, or a second copy of any kind."""
+        return self.presses > 0 and not self.asked_for_copy()
 
 
-_REC = {"presses": 0, "good": False, "max_lid": 0.0, "down": {"black_copy": False, "color_copy": False}}
+_REC = {"presses": 0, "good": False, "max_lid": 0.0, "color": 0, "down": {"black_copy": False, "color_copy": False}}
 
 
 def _clear_record() -> None:
-    _REC.update(presses=0, good=False, max_lid=0.0, down={"black_copy": False, "color_copy": False})
+    _REC.update(presses=0, good=False, max_lid=0.0, color=0, down={"black_copy": False, "color_copy": False})
 
 
 mech.on_reset(_clear_record)
 
 
 def _record(states) -> CopyRecord:
-    """Look at the buttons after a step: a button that has just gone down is a press; note whether the copy it makes
-    is good."""
+    """Look at the buttons after a step: a button that has just gone down is a press. Only a first press, of Black
+    Copy, with the copy good, makes the record good; every press is counted."""
     printer = states.get("printer")
     if printer is not None and "card" in states:
         joints = printer.joints
@@ -236,10 +247,12 @@ def _record(states) -> CopyRecord:
             down = float(joints.get(key, 0.0)) <= -PRESSED
             if down and not _REC["down"][key]:
                 _REC["presses"] += 1
-                if copy_is_good(states):
+                if key == "color_copy":
+                    _REC["color"] += 1
+                elif _REC["presses"] == 1 and copy_is_good(states):
                     _REC["good"] = True
             _REC["down"][key] = down
-    return CopyRecord(_REC["presses"], _REC["good"], _REC["max_lid"])
+    return CopyRecord(_REC["presses"], _REC["good"], _REC["max_lid"], _REC["color"])
 
 
 def _patch_scene(scene) -> None:
@@ -353,18 +366,19 @@ def hands_off(objects) -> bool:
 
 
 def grade(objects) -> float:
-    """1.0: a good copy made (a Copy press with the lid shut and the card face down, square at the corner), the card
-    still there under the shut lid, both hands 2 cm off it, everything still. 0.75: the card face down at the corner
-    and the lid shut, but no good copy yet, or a hand still near the card. 0.5: the card face down inside the scan
-    area. 0.25: the lid opened past 60 degrees and the card on the glass face up. 0: anything else, and any copy
-    pressed before a good one is possible (a wasted or wrong copy) when no good copy follows."""
+    """1.0: exactly one copy made, a Black Copy press with the lid shut and the card face down, square at the corner;
+    the card still there under the shut lid, both hands 2 cm off it, everything still. 0.75: the card face down at the
+    corner and the lid shut, but no copy yet, or a hand still near the card. 0.5: the card face down inside the scan
+    area. 0.25: the lid opened past 60 degrees and the card on the glass face up. 0: anything else, and any wrong or
+    extra copy, whatever follows it: a Color Copy press, a Black Copy press with the card not in place or the lid open,
+    or a second copy of any kind."""
     card = objects["card"]
     record = objects.get("copy_record") or CopyRecord()
-    if record.presses and not record.good:
+    if record.wrong_copy():
         return 0.0
     placed = face_down(card) and aligned(card) and lid_shut(objects)
     if placed:
-        if record.good and hands_off(objects) and card.resting():
+        if record.asked_for_copy() and hands_off(objects) and card.resting():
             return 1.0
         return 0.75
     if face_down(card) and on_glass(card):
@@ -401,6 +415,7 @@ def _debug(objects, g) -> None:
                 f"front_mm={(c[:, 0].min() - GX0) * 1000:.1f} right_mm={(c[:, 1].min() - GY0) * 1000:.1f} "
                 f"square={squareness_deg(card):.1f} on_glass={on_glass(card)} lid_deg={math.degrees(j['lid']):.1f} "
                 f"black={j['black_copy'] * 1000:.2f} color={j['color_copy'] * 1000:.2f} presses={rec.presses} "
+                f"color_presses={rec.color} "
                 f"good={rec.good} hands_off={hands_off(objects)} L={tips('left_gripper')} R={tips('right_gripper')} "
                 f"Rends={ends('right_gripper')}\n")
 
@@ -567,8 +582,9 @@ def _left(variant: str, lift_at: float, lower_at: float):
     down = [Waypoint(0.23, on_lid(d), FINGER_CLOSED, f"lid down {d:g} degrees", LEFT_LEVEL)
             for d in list(steps[::-1][1:]) + [0.0]]
     press_top = TOP + PANEL_Z + BUTTON_PROUD
-    over_button = down_tcp(*BLACK_XY, press_top + 0.04)
-    pressed = down_tcp(*BLACK_XY, press_top - 0.0022)
+    button = COLOR_XY if variant == "color" else BLACK_XY  # COPY_DEMO=color: a probe pressing Color Copy instead
+    over_button = down_tcp(*button, press_top + 0.04)
+    pressed = down_tcp(*button, press_top - 0.0022)
     start = _pt(LIFT_TCP0[0] - 0.015, LIFT_Y, LIFT_TCP0[2])
     plan = [
         # WHY from above the printer: started close in front of it, the arm's IK took a branch with its wrist roll at
@@ -588,8 +604,14 @@ def _left(variant: str, lift_at: float, lower_at: float):
         Waypoint(0.8, _pt(LIFT_TCP0[0] - 0.03, LIFT_Y, LIFT_TCP0[2] - 0.008), FINGER_CLOSED, "out from under", LEFT_LEVEL),
         Waypoint(0.8, _pt(LIFT_TCP0[0] - 0.03, LIFT_Y, TOP + 0.24), FINGER_CLOSED, "straight up, clear of the lid", LEFT_LEVEL),
         Waypoint(1.0, _pt(0.26, 0.15, TOP + 0.30), FINGER_CLOSED, "over the control panel", LEFT_LEVEL),
-        Waypoint(1.5, over_button, FINGER_CLOSED, "over Black Copy", DOWN),
+        Waypoint(1.5, over_button, FINGER_CLOSED, "over the Copy button", DOWN),
         Waypoint(0.6, pressed, FINGER_CLOSED, "press it", DOWN),
+        *([  # COPY_DEMO=twice: a probe making two copies. WHY quick: a good first copy ends the trial once it has held
+            # for 1 s, so a second press 1.6 s later never happened (official sim, 2026-11-21).
+            Waypoint(0.05, pressed, FINGER_CLOSED, "hold", DOWN),
+            Waypoint(0.3, _pt(pressed[0], pressed[1], pressed[2] + 0.015), FINGER_CLOSED, "let it up", DOWN),
+            Waypoint(0.3, pressed, FINGER_CLOSED, "press it again", DOWN),
+        ] if variant == "twice" else []),
         Waypoint(0.4, pressed, FINGER_CLOSED, "hold", DOWN),
         Waypoint(0.6, over_button, FINGER_CLOSED, "let it up", DOWN),
         Waypoint(1.5, PARK_LEFT, FINGER_CLOSED, "clear", DOWN),
@@ -608,7 +630,8 @@ def _ends_of(plan, label: str) -> float:
 
 
 def demo():
-    """COPY_DEMO=faceup lays the card face up and copies it (a probe of the wasted-copy rule).
+    """Probes: COPY_DEMO=faceup lays the card face up and copies it; COPY_DEMO=color makes the copy with Color Copy;
+    COPY_DEMO=twice presses Black Copy twice. Each is a wrong or extra copy and scores 0.
 
     The left hand's waits come from the right hand's plan: it starts lifting the lid once the card is out to the side,
     and lowers it once the right hand has slid the card into the corner and lifted off it."""

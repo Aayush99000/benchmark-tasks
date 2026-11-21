@@ -153,24 +153,59 @@ def test_the_card_still_on_the_lid_or_on_the_table_is_nothing():
     assert M.grade(objects(c=card(0.15, -0.3, z=M.TOP + M.CARD[2] / 2))) == 0.0
 
 
+def test_a_color_copy_scores_nothing():
+    """The instruction asks for a black-and-white copy: Color Copy is a wrong copy even with the card placed perfectly,
+    and nothing after it earns credit."""
+    color = M.CopyRecord(presses=1, good=False, max_lid=math.radians(65), color=1)
+    assert color.wrong_copy() and not color.asked_for_copy()
+    assert M.grade(objects(record=color)) == 0.0
+    then_black = M.CopyRecord(presses=2, good=False, max_lid=math.radians(65), color=1)
+    assert M.grade(objects(record=then_black)) == 0.0
+
+
+def test_a_second_copy_scores_nothing():
+    """One copy is asked for: a good Black Copy followed by any second press is an extra copy and scores 0."""
+    twice = M.CopyRecord(presses=2, good=True, max_lid=math.radians(65))
+    assert twice.wrong_copy() and not twice.asked_for_copy()
+    assert M.grade(objects(record=twice)) == 0.0
+    assert not M.success(objects(record=twice))
+
+
 def test_the_press_record():
     M._clear_record()
     shut = objects()
     open_lid = objects(lid_deg=65.0)
-    up = {**shut, "printer": printer(0.0, black=-0.002)}
+    black = {**shut, "printer": printer(0.0, black=-0.002)}
+    color = {**shut, "printer": printer(0.0, color=-0.002)}
     assert M._record(open_lid).max_lid == pytest.approx(math.radians(65))
-    r = M._record(up)
-    assert r.presses == 1 and r.good
-    assert M._record(up).presses == 1  # held down: still one press
+    r = M._record(black)
+    assert r.presses == 1 and r.good and r.color == 0 and r.asked_for_copy()
+    assert M._record(black).presses == 1  # held down: still one press
     M._record(shut)
-    assert M._record({**open_lid, "printer": printer(65.0, color=-0.002)}).presses == 2  # a second, wasted, press
-    assert M._record(shut).good  # the good one stands
+    r = M._record(black)  # the same button again: a second copy
+    assert r.presses == 2 and r.wrong_copy()
     M._clear_record()
     assert M._record(shut) == M.CopyRecord()
+    r = M._record(color)  # Color Copy with the card placed perfectly
+    assert r.presses == 1 and r.color == 1 and not r.good and r.wrong_copy()
+    M._record(shut)
+    r = M._record(black)  # Black Copy afterwards doesn't undo it
+    assert r.presses == 2 and not r.good and r.wrong_copy()
+    M._clear_record()
     bad = {**objects(c=card(q=(0, 0, 0, 1.0))), "printer": printer(0.0, black=-0.002)}
     r = M._record(bad)
     assert r.presses == 1 and not r.good
     M._clear_record()
+
+
+@pytest.mark.parametrize("variant,presses", [("", 1), ("color", 1), ("twice", 2)])
+def test_the_probes_press_the_buttons_they_say(monkeypatch, variant, presses):
+    monkeypatch.setenv("COPY_DEMO", variant)
+    left = M.demo()["left"]
+    assert sum(w.label.startswith("press it") for w in left) == presses
+    press = next(w for w in left if w.label == "press it")
+    target = M.COLOR_XY if variant == "color" else M.BLACK_XY
+    assert press.pos[:2] == pytest.approx(target)
 
 
 # -- the printer and the demo -------------------------------------------------------------------------------------------

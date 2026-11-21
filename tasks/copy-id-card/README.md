@@ -64,24 +64,32 @@ Both grippers start open at the ready pose. One fixed layout: `-E object_jitter=
 with paper loaded, the lid shut, the card placed as in the setup photo.
 
 ## Scoring
-Every press of either Copy button records what it would copy at that moment. A good copy needs all of these:
+Every press of either Copy button is recorded. The copy asked for is a **Black Copy** press made when all of these
+hold:
 - the lid shut, within 2 degrees;
 - the card face down, within 10 degrees, lying on the glass with all four corners inside the scan area;
 - its front and right edges within 4 mm of the guides, and square to them within 3 degrees.
 
 The card can lie either way round, long side along or across.
 
+**One copy only.** Full credit needs exactly one press in the whole trial, and it must be that Black Copy. **A wrong or
+extra copy scores 0**, whatever happens after it:
+- any Color Copy press (a colour copy wasn't asked for, and spends colour ink);
+- a Black Copy press with the card out of place or the lid open (a wasted sheet);
+- a second press of either button (an extra sheet).
+
 **Hands off** means no point along either gripper's finger pads, and neither fingertip's end, within 2 cm of the card.
 
 | Score | When |
 |---|---|
-| 1.0 | a good copy made, and the card still placed so, both hands off, everything still; held for 1 s, which ends the trial |
-| 0.75 | the card placed so under the shut lid, but no good copy yet, or a hand still near the card |
-| 0.5 | the card face down inside the scan area, not aligned, or the lid not shut |
-| 0.25 | the lid opened past 60 degrees and the card on the glass face up |
-| 0 | anything else, including any Copy press when no good copy is ever made (a wasted or wrong copy) |
+| 1.0 | exactly one copy made, the Black Copy asked for, and the card still placed so, both hands off, everything still; held for 1 s, which ends the trial |
+| 0.75 | the card placed so under the shut lid, but no copy yet, or a hand still near the card |
+| 0.5 | the card face down inside the scan area, not aligned, or the lid not shut; no copy yet |
+| 0.25 | the lid opened past 60 degrees and the card on the glass face up; no copy yet |
+| 0 | anything else, and any wrong or extra copy (a Color Copy press, a Black Copy press with the card out of place or the lid open, or a second copy) |
 
-In a real trial, the printed sheet shows whether the copy was good, and a ruler on the glass gives the edges.
+In a real trial, the printer's output tray shows how many sheets came out and whether each is black-and-white and
+good; a ruler on the glass gives the edges.
 
 ## Run a trial
 On a machine with the official simulator (the Robocurve Brev launchable, or `yam-isaac-lab-arena`'s `setup.sh`), with
@@ -101,6 +109,10 @@ inspect-robots run "${COMMON[@]}" --policy yam_scripted --log-dir ~/yam-eval/cop
 
 # A wrong way: the card laid face up (not turned over), then copied
 COPY_DEMO=faceup inspect-robots run "${COMMON[@]}" --policy yam_scripted --log-dir ~/yam-eval/copy-id-card-faceup
+
+# Two more wrong ways: the copy made with Color Copy, and Black Copy pressed twice
+COPY_DEMO=color inspect-robots run "${COMMON[@]}" --policy yam_scripted --log-dir ~/yam-eval/copy-id-card-color
+COPY_DEMO=twice inspect-robots run "${COMMON[@]}" --policy yam_scripted --log-dir ~/yam-eval/copy-id-card-twice
 
 # One MP4 per camera, next to each run's frames
 for log in ~/yam-eval/copy-id-card-dream/*.json; do inspect-robots video "$log"; done
@@ -140,6 +152,15 @@ simulator.
   - The wrong way (`COPY_DEMO=faceup`: the card laid face up, slid to the corner, lid shut, Black Copy) scored 0: a
     wasted copy of the card's back. Two earlier demo versions pressed Copy with the card 12.1 and 10.7 mm from the right
     guide, and scored 0 the same way.
-- **Offline checks:** the scoring and reach checks run without the simulator: `python -m pytest -q test_copy_id_card.py`.
+- **Official runs (2026-11-21, after the review: one copy only, and only Black Copy):**
+  - The scripted demo, unchanged, scored 1.0 again, ending on success at step 691 with exactly one press, of Black Copy.
+  - `COPY_DEMO=color` (the same, but the copy made with Color Copy) scored 0: one press, of Color Copy, with the card
+    placed perfectly.
+  - `COPY_DEMO=twice` (the same, but Black Copy pressed a second time 0.6 s after the first, before the good copy's
+    1 s hold could end the trial) scored 0: the second press registered at step 686.
+  - An earlier `twice` probe pressed again 1.6 s later and scored 1.0, because the trial had already ended on the
+    first, good copy. Once success has held for 1 s the trial ends, so a press after that can't happen.
+- **Offline checks:** the scoring and reach checks run without the simulator: `python -m pytest -q test_copy_id_card.py`
+  (27 tests, including a Color Copy press and a second press, each scoring 0).
 - **Seeds:** one fixed layout (`-E object_jitter=0`), so the seed doesn't change the start.
 - **`tools/check_reach.py`:** the offline reach scan used to place the printer.
