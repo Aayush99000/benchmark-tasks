@@ -18,5 +18,5 @@
   "reset_notes": "Fold both legs flat (press each leg's latch button on its inside), lay the stool upside down, mat face down, centred at (30, 0) with its long side along y.",
   "fidelity": "The stool is the Vive LVA2068BLK at its listed size and mass; tube, hinge and latch sizes, the latch's push-back and the mass split are estimates. The latch is a model on each leg's hinge, not simulated contacts: it catches at 98 degrees and holds; short of it, its spring pushes back. The 5 N check folding an unlocked leg is a rule. Vive's last step, turning the stool over onto its feet, is left out.",
   "scores": "Dream-1 run: 0.0 (1,200 steps); demo: 1.0 (scripted); legs stopped short of their locks (wrong way): 0",
-  "media": ""
+  "media": "M-PENDAW"
 }
