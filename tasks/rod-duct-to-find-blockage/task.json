@@ -1,0 +1,26 @@
+{
+  "title": "Push a fish tape through a conduit to the far box and draw its tip out",
+  "category": "Impact on jobs",
+  "keywords": [
+    "bimanual",
+    "cable",
+    "fish tape",
+    "electrician",
+    "conduit",
+    "EMT",
+    "wire pulling",
+    "two-hand feed",
+    "regrasping",
+    "tool use",
+    "pushing a flexible tape"
+  ],
+  "instruction": "Push the fish tape through the conduit into the far box, then pull its tip past the red line and let go.",
+  "context": "Electricians (O*NET 47-2111.00, 821,000 employed; core task: \"pull insulated wires or cables through the conduit to complete circuits between boxes\") start every pull by pushing a fish tape through the run in short strokes until its tip comes out at the far box, where the wire is fastened to it. Scored: that push, through one bend, and drawing the tip out at the box. A short run; longer runs repeat the same strokes.",
+  "setup": "Station table; cm from the midpoint between the arm bases (x forward, y left). Conduit: 3/4-inch EMT (2.34 cm outside, 2.09 cm bore), fixed, lying on the table: open near mouth with a black bushing at x 35, y 0, facing +y; straight 27 cm along -y; one 90-degree bend of 12.7 cm centreline radius towards the robot; 2 cm on along -x into the knockout of a 4-inch square steel box (10.2 cm inside, 3.8 cm deep, cover off; inside x 10.1-20.3, y -34.6 to -44.8). Two steel straps on the straight. Red line on the table 3 cm beyond the box's back wall, across the tape's exit line (x 7, y -47 to -33). Fish tape: yellow 4.8 mm round fibreglass, 1.40 m, 45 g, 12 mm brass tip; tip D cm inside the near mouth, D drawn uniformly in 3-20 at every reset (seeded); straight out along +y to y +33, one 180-degree bend of 13 cm radius away from the robot to x 61, then straight back along -y.",
+  "scoring": "End state. Score 0 unless the tape runs through the whole conduit (some of it in the bore within 3 cm of each mouth) and both grippers are at least 3 cm from every point of the tape. Then: 1.0 if the brass tip lies on the table (centre at most 2 cm above it) past the red line; 0.5 if the tip is out of the far mouth (more than 5 mm past it) (in the box or beyond) but not past the line; 0.25 if the tip is through the bend but not out; else 0.",
+  "run_limit": "2,400 steps (2 minutes at 20 Hz)",
+  "reset_notes": "Pull the tape back out of the box and the conduit. Draw D uniformly in 3-20 cm (seeded per episode), push the tip D cm into the near mouth, and lay the rest of the tape out of the mouth (in simulation: straight along +y, one 13 cm radius bend away from the robot, then straight back; a real fibreglass tape will not stay in that bend, so in a real trial lay it straight out of the mouth along +y to the table's edge and let the rest hang straight down off that edge). Real rebuild: wrap a 1 cm band of coloured tape on the fish tape, its near edge 47 cm from the tip, for the 0.25 tier; deburr the conduit end and the box knockout. The conduit and box do not move.",
+  "fidelity": "Tape: 2 cm rigid segments with bending springs (no twist, stretch or plasticity), tip a rigid box, a 1.4 m length lying loose instead of a reel; friction 0.25 on the tape and 0.15 in the bore, chosen, not measured. Conduit: a 12-sided collider inside a round visual tube, bend in 40 straight pieces. A short 49 cm run with one bend; longer runs repeat the same strokes.",
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-GQLSTB"
+}
