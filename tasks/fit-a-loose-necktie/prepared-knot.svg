@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="680" viewBox="0 0 1000 680">
+<rect width="1000" height="680" fill="#fff"/><style>text{font-family:Arial,sans-serif;fill:#202b35}.h{font-size:26px;font-weight:bold}.b{font-size:18px}.s{font-size:16px}.tie{stroke:#9d2948;stroke-width:28;fill:none;stroke-linejoin:round}.n{stroke:#782238;stroke-width:15;fill:none}.guide{stroke:#77848e;stroke-width:2;fill:none;stroke-dasharray:5 5}</style>
+<text x="34" y="44" class="h">Reset: pre-wrapped, with the wide blade outside the front loop</text>
+<text x="34" y="78" class="b">Simple (Oriental) knot: prepare the wrap, then stop before the final threading step.</text>
+<rect x="35" y="106" width="440" height="390" rx="10" fill="#f4f6f7"/>
+<text x="55" y="138" class="b">Front — starting arrangement</text>
+<ellipse cx="260" cy="205" rx="68" ry="57" fill="#ddd8d0" stroke="#808080"/>
+<path d="M218 254 Q179 198 207 160 M303 254 Q338 198 312 160" class="tie"/>
+<path d="M265 286 L265 404" class="n"/>
+<path d="M275 260 Q204 225 174 258 L174 455" class="tie"/>
+<ellipse cx="260" cy="283" rx="45" ry="27" fill="#9d2948"/>
+<ellipse cx="260" cy="273" rx="29" ry="13" fill="#f4f6f7" stroke="#782238" stroke-width="7"/>
+<path d="M304 275 L380 255 M171 409 L84 390 M268 378 L366 390" class="guide"/>
+<text x="323" y="243" class="s">Open front loop</text><text x="55" y="372" class="s">Free wide blade</text><text x="318" y="414" class="s">Narrow blade</text>
+<rect x="500" y="106" width="465" height="390" rx="10" fill="#f4f6f7"/>
+<text x="521" y="138" class="b">Side — required movement</text>
+<rect x="738" y="247" width="22" height="80" fill="#9d2948"/><rect x="800" y="247" width="22" height="80" fill="#9d2948"/>
+<path d="M708 281 L661 281 L661 426" class="tie"/>
+<path d="M649 415 C592 240 644 179 731 193 C787 200 779 216 780 268 L780 399" fill="none" stroke="#27658b" stroke-width="4" stroke-dasharray="8 5"/>
+<path d="M770 385 L780 405 L790 385" fill="none" stroke="#27658b" stroke-width="4"/>
+<text x="524" y="462" class="s">Lift the free tip, feed it down through the loop,</text><text x="524" y="482" class="s">then draw it through before tightening.</text>
+<text x="35" y="536" class="b">1. Wide blade behind the narrow blade; bring it across the front.</text>
+<text x="35" y="566" class="b">2. Bring the wide blade up through the neck opening. Leave the front loop open.</text>
+<text x="35" y="596" class="b">3. Leave 330 mm of free wide blade hanging beside the loop; do not thread it.</text>
+<text x="35" y="637" class="s">Schematic, not to scale. Use the README dimensions and setup image for the fixed trial layout.</text>
+</svg>

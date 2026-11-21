@@ -1,0 +1,109 @@
+{
+  "status": "complete",
+  "mode": "demo",
+  "steps": 1150,
+  "requested_steps": 1150,
+  "source_sha256": {
+    "task.py": "f3410d72490d30e836a8c5a2d54a9e82931e09400832799a8bd4624148ab99e8",
+    "run.py": "0d4f837c09e2b76ce317cb27e180da67850a5ac83c1c1fb554fca569598c53dc",
+    "material.py": "1db55d4338a69fb02beeeb7107623cf1225c31f8074bc80e40cda19951a5479c",
+    "rescore.py": "b07942b7ec699682d7e7285713a47fcbd02b76c8ee655f5253b57279a69dad8b",
+    "LICENSE": "a71ddeb012ff1961bf252489309b565ffd0443632819aa9c88eef4377f9f9f7a",
+    "task.json": "fad23a2ab6877d40dee6ee8379b8956d1ade6db440add64086c63019046198e7",
+    "test_material.py": "1aa43be059fdda2f26bbbc02b4bebd7631ee09db2907076f7b9599df21386c70",
+    "make_plan.py": "b44d4d73b34db83e92cc8743082ebc8ef64f6c257e59270c9368daaacb9f005f",
+    "ribbon_thread.py": "ec2573fb958d73045684cd7da1bea173182ce734f1668352e93c2b50792afde3",
+    "README.md": "0f5f4b51dda4a9f4c7abf91ee78e8720e1dcfd34cac9ebc158905cce640d8c57",
+    "render_tie.py": "0bf7ce662055e5d3134afe162e81e6484d8e8a6beda06184bdb97d4b07f1058f",
+    "joint_tracking.py": "f22bb7c34c8c4ba51859844f77fef8b29337b5b6353e7cc0b85cf0247866c453",
+    "VALIDATION.json": "07243306b358dd4cd31147656e1effdf7939c2ee3637fa884ce9f7ba66533a9b",
+    "dream_policy.py": "1e5bfc64f3f610f274715ad605b14f6c898ccf37c9588bd48b4e289c263afbad",
+    "JUDGING.md": "c4230c52f4082d62f7238167db8c0e3bff85cc10ca539b74b7bd9c7fa09b7c2b",
+    "demo-plan.json": "46a5d4c0ece5e83570d383ec313720a438991d5ead688c1f4f365e241e6971b0",
+    "ENVIRONMENT.json": "93999d49cea369b1703e17f361ed39bce8447d04a4d97299d85a6e041e6b7e71",
+    "review_views.py": "fe43ee4786cf39d9be76e56a849a548cf630e4c7dbaf5aa8a25662350b4811c9",
+    "prepared-knot.svg": "1c7a01bb72e801b33169c29a789c72075f76e24f9489ba4adc1d9cea9baa66ec"
+  },
+  "control_hz": 20,
+  "score": 1.0,
+  "wall_seconds": 846.4180697339762,
+  "initial_measurements": {
+    "threaded": false,
+    "threading_entered": false,
+    "threading_exited": false,
+    "threading_max_stretch": 1.0829006817260103,
+    "knot_width_mm": 74.0,
+    "knot_height_mm": 56.99999999999999,
+    "knot_top_below_collar_mm": 81.49999999999987,
+    "knot_offset_mm": 25.0,
+    "wide_tip_below_collar_mm": 380.2372552477826,
+    "narrow_tip_above_wide_mm": 156.1996789545148,
+    "narrow_lateral_offset_mm": 0.0,
+    "wide_twist_deg": 0.0,
+    "released_s": 0.0,
+    "failed": false,
+    "sliding_work_j": 0.0,
+    "drawn_mm": 0.0,
+    "neckband_length_mm": 604.462423706732,
+    "material_length_m": 1.26
+  },
+  "measurements": {
+    "threaded": true,
+    "threading_entered": true,
+    "threading_exited": true,
+    "threading_max_stretch": 1.1458696884186175,
+    "knot_width_mm": 52.0,
+    "knot_height_mm": 52.0,
+    "knot_top_below_collar_mm": 4.415590443355845,
+    "knot_offset_mm": 1.436782326701823,
+    "wide_tip_below_collar_mm": 357.82852803672347,
+    "narrow_tip_above_wide_mm": 73.19013551389497,
+    "narrow_lateral_offset_mm": 0.0,
+    "wide_twist_deg": 1.2152545778853487,
+    "released_s": 7.549999999999981,
+    "failed": false,
+    "sliding_work_j": 5.529327043572715,
+    "drawn_mm": 71.32872474092633,
+    "neckband_length_mm": 461.77719792052744,
+    "material_length_m": 1.2600000000000002
+  },
+  "events": [
+    {
+      "event": "grasp",
+      "side": "left",
+      "part": "wide"
+    },
+    {
+      "event": "grasp",
+      "side": "right",
+      "part": "knot"
+    },
+    {
+      "event": "wide_blade_passed_through_front_loop",
+      "free_length_m": 0.2300842128524413
+    },
+    {
+      "event": "release",
+      "side": "left",
+      "part": "wide"
+    },
+    {
+      "event": "grasp",
+      "side": "left",
+      "part": "narrow"
+    },
+    {
+      "event": "release",
+      "side": "right",
+      "part": "knot"
+    },
+    {
+      "event": "release",
+      "side": "left",
+      "part": "narrow"
+    }
+  ],
+  "requires_visual_review": true,
+  "dream_requests": 0,
+  "dream_sessions": {}
+}
