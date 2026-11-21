@@ -1,0 +1,22 @@
+{
+  "title": "Put a pair of clogs away in a tip-out shoe cabinet: door tipped open, each clog in toe first, door shut",
+  "category": "Societal relatability",
+  "keywords": [
+    "bimanual",
+    "shoe cabinet",
+    "tip-out door",
+    "hinged door",
+    "reorientation",
+    "household",
+    "everyday"
+  ],
+  "instruction": "Put both clogs away in the shoe cabinet: tip its door open by the top lip, stand each clog in the bin toe first, then tip the door shut.",
+  "context": "Putting shoes away in a hallway shoe cabinet is an everyday chore. A tip-out cabinet's door tips forward to open a bin that is shallow at the bottom and deep at the top, so a shoe stood in toe first sinks below the lip, while one put in heel first or lying flat stands proud and the door won't shut. One flip-down cabinet manual's fix for a door that won't close: \"Ensure no shoes are blocking the door mechanism.\" Done by: nearly everyone.",
+  "setup": "Positions in cm from the midpoint between the arm bases, x forward, y left, heights above the table. A white tip-out shoe cabinet (IKEA TRONES class: 52.1 wide, 18.1 deep, 39.1 tall, a 2 cm tray on top), fixed, front towards the arms, front face at x 45, centred on y 0, door shut. Its whole front is one door hinged along its bottom edge, with a lip 2 cm proud along its top edge; it tips out to 40 degrees, opening a bin 47 cm wide, 7 cm deep at the bottom and 15 cm deep at the top. Two red foam clogs (Crocs Classic Clog class, men's US 9: 29 x 10 x 9.5 cm, 198 g each, toe 6.5 cm thick, heel 9.5 cm, heel cup open on top), lying sole down, toes towards the arms, middles at (25, 33) and (25, -33), just either side of the cabinet.",
+  "scoring": "A clog is in when every corner of it is inside the bin: behind the door, in front of the bin's back at that height, between its sides, above its floor and no more than 5 mm above its lip (taken in the door's frame, so at any door angle). 1.0: both clogs in, the door within 2 degrees of shut, both grippers 3 cm clear of the cabinet, the clogs still (moved under 1 mm and turned under 1 degree over 0.3 s), held 1 s. 0.75: both in, the door within 15 degrees of shut, or shut with a gripper near. 0.5: both in, the door open more than 15 degrees. 0.25: one in. 0.0: neither in.",
+  "run_limit": "1,200 steps (1 minute at 20 Hz)",
+  "reset_notes": "Shut the door, take both clogs out, and lay them sole down either side of the cabinet at the marks, toes towards the arms. For real trials fix the cabinet to the table (IKEA says to fix it to a wall).",
+  "fidelity": "Clogs are rigid bodies of six boxes (sole, toe box, middle, open three-wall heel cup) at estimated sizes; real foam gives. The bin's back is an 8-step staircase, 7-15 cm deep (bottom depth estimated); the door tips 0-40 degrees on a hinge (angle and 0.7 kg estimated), with no catch. The cabinet's plastic slides at 0.35/0.30. Clog stillness is judged from position, as the sim reported stale speeds.",
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": ""
+}
