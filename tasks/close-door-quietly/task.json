@@ -1,0 +1,23 @@
+{
+  "title": "Shut a bedroom door without the latch clicking: hold the knob turned while it closes, then let it back slowly",
+  "category": "Societal relatability",
+  "keywords": [
+    "door",
+    "doorknob",
+    "latch",
+    "held control",
+    "controlled release",
+    "quiet",
+    "household",
+    "real size"
+  ],
+  "instruction": "Shut the door all the way so it latches, without making a sound.",
+  "context": "Closing a door silently, so as not to wake someone, is one of the most familiar things people do at home: turn the knob and hold it so the latch bolt stays in, push the door against its stop, then let the knob turn back slowly so the bolt slides into the strike instead of clicking over it (wikiHow, Shut a Door Quietly). Pushed shut the ordinary way, the bolt rides over the strike's lip and snaps in: the click.",
+  "setup": "Positions in cm from the midpoint between the arm bases, x forward, y left, heights above the floor. A true-size 24 x 80 in prehung interior door stands on the floor beyond the table's right edge: a white hollow-core slab 61 x 203 cm, 3.5 cm thick (9 kg, as a 20 lb hollow-core slab), hinged on a vertical axis at x -25, y -75, its centre plane at y -75 when shut, opening towards the robot (+y), so it shuts by being pushed away. It starts ajar 6 degrees, its latch edge 6.4 cm off the frame. A Kwikset Tylo passage knob (brass, 6.7 cm across, its face 6.6 cm off the door) on the robot's side, 2-3/8 in back from the latch edge, 91.4 cm above the floor (15 cm above the table top). Turning it either way draws a 13 mm latch bolt into the door's edge; let go, it springs out. The pine frame: latch jamb 3.5 mm beyond the shut latch edge, 4-9/16 in (11.6 cm) deep, running away from the robot; a brass strike plate with a hole for the bolt and a 45 degree lip on the robot's side of it; a stop moulding on the far side; hinge jamb and head.",
+  "scoring": "From the door's hinge angle, the knob's turn and the bolt's push-in each control step. Click: the bolt pushed in more than 1.5 mm beyond what the knob holds (only the strike's lip can do that). Snap: the bolt coming out faster than 30 mm/s with the door shut. 0 if a gripper comes within 15 mm of the bolt or strike, the latch edge meets the stop faster than 0.3 m/s (a slam), or the door ends more than 3 mm off the stop. 0.25 shut but not latched (bolt more than 5 mm in). 0.5 latched with a click. 0.75 latched without a click, but the bolt snapped or the door met the stop faster than 0.1 m/s. 1.0 latched, no click, no snap, gentle, knob back within 5 degrees of rest, door still, both grippers 3 cm off the knob, held 1 s. Real trial: pull test for the latch; a dry-erase stripe on the bolt's face towards the strike, wiped if it scraped; 60 fps video for the knob's and door's speeds.",
+  "run_limit": "1,200 steps (60 seconds at 20 Hz)",
+  "reset_notes": "Open the door to 6 degrees (latch edge 6.4 cm off the frame, tape); knob at rest. Wipe and redraw the dry-erase stripe on the bolt before each real trial.",
+  "fidelity": "Rigid bodies. The bolt is square-ended and the strike's lip a 45 degree ramp (on real latches the slant is on the bolt). A cam on the knob's spindle pushes the bolt's yoke in, as a tubular latch's retractor does. The door's stop is its hinge's limit. Spring rates, the knob's 45 degree turn and the 13 mm throw are estimates until measured on the real set. No sound: the click is read from the bolt's motion.",
+  "scores": "Dream-1 run: 0.0 (1,200 steps; both arms lifted and hovered near their bases and never reached the door, which stayed ajar); demo: 1.0 (success at step 294 of 1,200)",
+  "media": ""
+}
