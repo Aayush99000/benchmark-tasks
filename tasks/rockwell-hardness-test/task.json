@@ -1,0 +1,24 @@
+{
+  "title": "Take a Rockwell C reading on a manual tester: creep the block up until the long pointer stops at C, load and unload by the handle, lower the block",
+  "category": "Other",
+  "keywords": [
+    "bimanual",
+    "materials testing",
+    "hardness",
+    "Rockwell",
+    "handwheel",
+    "creep to a set point",
+    "no overshoot",
+    "lever",
+    "dwell",
+    "lab procedure"
+  ],
+  "instruction": "Take one Rockwell C reading on the test block lying on the tester's anvil: turn the handwheel to raise the block onto the indenter until the long pointer has made three turns and stands at C, push the load handle back and hold the full load 5 seconds, pull the handle forward, then lower the block.",
+  "context": "Rockwell testing is the most common hardness test in metals, heat-treatment and incoming-inspection labs, and in materials teaching labs. The steps follow the maker's manual for this class of dial tester: raise the specimen slowly onto the indenter with no impact until the short pointer reaches the red dot and the long pointer, after three turns, points to C; the long pointer may deviate at most 5 divisions, and if it goes further it must not be turned back: the spot is changed and the test restarted. Then push the main-load handle back (the load goes on over 4-6 s), hold the total load 5 s, pull the handle forward, read the dial, and lower the stage. Spots stay 3 mm apart and 3 mm from the edge.",
+  "setup": "Positions in cm from the midpoint between the arm bases, x forward, y left, heights above the table. A manual dial Rockwell tester (the HR-150A layout, e.g. Insize ISH-R150: grey cast body 16 cm wide, 52 cm deep, 70 cm tall, 60 kg) stands centred at y 0, its indenter axis at x 36, its column at the back. A steel HRC test block (64 mm across, 10 mm thick, 0.25 kg) lies on the 60 mm flat anvil, its top 20 cm up and 1.2 mm below the diamond indenter's point; the indenter meets it 6 mm from its centre. The anvil rides on the elevating screw, 4 mm a turn, turned clockwise from above by a horizontal three-spoke handwheel just below it (spokes 15 cm up, each ending in an upright knob 22 mm across and 36 mm tall that spins freely, 8 cm from the wheel's centre). The dial (9 cm across) faces the robot on the head's front, centred 33 cm up: a long pointer turning once per 0.2 mm of indenter travel (100 divisions of 0.002 mm), C at the top, and a short pointer moving from a black dot to a red dot over the long pointer's three turns. The main-load handle (a 10 cm rod with a 24 mm knob) pivots on the tester's right side 30 cm up, resting tilted 20 degrees forward; it travels to 40 degrees back.",
+  "scoring": "Judged from the handwheel's and handle's angles, the block's pose and the grippers' positions; the indenter's travel is the block's rise past first contact, read from the handwheel through the screw. A test counts at a fresh spot only (at least 3 mm from earlier contact spots and from the block's edge) with the block flat on the anvil. 0.25: the preliminary load set: the long pointer within 5 divisions of C after its three turns (0.01 mm), never more than 5 divisions past C on that approach. 0.5: then the handle pushed back past 30 degrees with the preliminary load still set and the load fully applied (5 s), the handwheel not turned under load (at most 1 division). 0.75: then held 3-7 s at full load and the handle pulled forward to within 15 degrees of its rest: a valid reading on the dial. 1.0: then the block lowered at least 0.5 mm clear of the indenter, still flat on the anvil, the handle forward and both grippers at least 4 cm from every handwheel knob and the handle's knob, held 1 s. An overshoot past 5 divisions, or the handle pushed without the preliminary load set, spoils that test (0); a later test at a fresh spot can still score.",
+  "run_limit": "2,400 steps (2 minutes at 20 Hz)",
+  "reset_notes": "Lower the anvil, turn the block so an untested area is under the indenter (or use a new block), and set the handle forward. The block's certified value is on its certificate; a used area is not reused.",
+  "fidelity": "Rigid parts. The minor and main loads are rules: the indenter's travel is computed from the handwheel angle through the screw's 4 mm pitch (its collider stops 1.7 mm short of its point, so the block never touches it), and the main load's depth from the block's certified HRC with a fixed elastic part. The oil dashpot is a fixed 5 s ramp. The dial ring is fixed with C at the top: its fine set (at most 5 divisions) is left out. Weights and the handwheel's growing resistance are not modeled.",
+  "scores": "Demo: 1.0 in the official sim (step 1,413; preliminary load 1.1 divisions short of C, full load held 5.0 s, block lowered). Probes: 8 divisions past C 0; handle released too soon 0.5. Dream-1 run: 0 (ran the full 2,400 steps without setting the preliminary load)"
+}
