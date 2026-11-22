@@ -8,7 +8,16 @@ The door is a mechanism with three joints, each 0 at rest:
 
 The knob drives the bolt in: turned ``KNOB_FULL`` or more it holds the bolt fully in. The bolt can also be pushed in
 further than the knob holds it by the strike plate's lip as the door swings shut: that is the click a quiet close
-avoids. So a scrape is read from the joints alone: the bolt is in further than the knob accounts for.
+avoids.
+
+The bolt is hidden inside the door, so a real trial can't see it. Each sound is therefore judged two ways, and either
+one counts:
+- by sight, from the knob and the door's edge, which a real trial reads off 60 fps video: a click is the knob turned
+  less than ``KNOB_HELD`` while the latch edge closes through the last ``HOLD_FROM`` before the stop (where the lip
+  can reach the bolt); a snap is the knob going back towards rest faster than ``RELEASE_MAX`` with the door shut;
+- by the bolt itself, standing in for the real trial's close microphone (the bolt's motion is what makes the sound):
+  a click is the bolt in more than ``SCRAPE`` beyond what the knob holds; a snap is the bolt coming out faster than
+  ``SNAP`` with the door shut.
 
 Every control step, ``DoorRecord.step`` adds the joints and the grippers' pad points to the trial's record. ``grade``
 turns the record and the final state into the score:
@@ -16,9 +25,8 @@ turns the record and the final state into the score:
 - 0: a gripper went to the latch (pushing the bolt in by hand), or the door slammed (latch edge above ``SLAM`` m/s
   when it met the stop), or the door is not shut at the end (latch edge more than ``SHUT`` m off the stop);
 - 0.25: shut but not latched (the bolt isn't out in the strike's hole);
-- 0.5: latched, but the bolt scraped over the strike (the click);
-- 0.75: latched with no scrape, but the bolt snapped out (faster than ``SNAP`` m/s) or the door met the stop faster
-  than ``GENTLE`` m/s;
+- 0.5: latched, with a click (either way above);
+- 0.75: latched with no click, but a snap (either way above), or the door met the stop faster than ``GENTLE`` m/s;
 - 1.0: latched, no scrape, no snap, met the stop gently, the knob back at rest, the door still and both grippers at
   least ``CLEAR`` m from the knob. ``score`` never gives more than 0.75: 1.0 only comes from ``success`` holding 1 s.
 
@@ -65,6 +73,13 @@ SCRAPE = 0.0015  # bolt pushed in 1.5 mm more than the knob holds it: the strike
 # (2026-11-22): the demo's 2 s release peaks at 10 mm/s; turning the knob back in one step (the wrist's fastest)
 # peaks at 49 mm/s; letting go of a turned knob is faster still.
 SNAP = 0.03
+# The visible checks. KNOB_HELD: the strike's lip pushes a free bolt up to 10.7 mm in (test_close_door_quietly.py's
+# plan-view check), which the cam holds from 36 deg; the official-sim demo held the knob at about 40 deg (bolt 11.9 mm
+# in, 2026-11-22). HOLD_FROM: the lip touches a free bolt from 3.2 deg open, the latch edge 34 mm off the stop.
+# RELEASE_MAX: at its steepest the cam lets the bolt out 19 mm a radian, so 90 deg/s is the bolt's 30 mm/s (SNAP).
+KNOB_HELD = math.radians(36)
+HOLD_FROM = 0.035
+RELEASE_MAX = math.radians(90)
 GENTLE = 0.10  # latch edge meeting the stop slower than this (m/s) is quiet [to set]
 SLAM = 0.30  # faster than this is a slam [to set]
 KNOB_REST = math.radians(5)  # knob within 5 deg of rest
@@ -133,7 +148,9 @@ class DoorRecord:
 
     steps: int = 0
     prev: tuple | None = None
-    scraped: bool = False
+    scraped: bool = False  # the bolt pushed in beyond the knob's hold (the microphone's click)
+    unheld: bool = False  # the knob short of KNOB_HELD as the edge closed through the last HOLD_FROM (the video's click)
+    release_speed: float = 0.0  # fastest the knob went back towards rest while the door was shut (rad/s)
     hand_at_latch: bool = False
     snap_speed: float = 0.0  # fastest the bolt came out while the door was shut (m/s)
     close_speed: float = 0.0  # latch edge speed on the step it reached the stop, fastest so far (m/s)
@@ -150,12 +167,17 @@ class DoorRecord:
         if hand_at_latch(pads, door):
             self._event("hand_at_latch")
         if self.prev is not None and dt > 0:
-            p_door, _, p_bolt = self.prev
-            self.edge_speed = abs(edge_gap(p_door) - edge_gap(door)) / dt
-            if edge_gap(p_door) > SHUT >= edge_gap(door):
-                self.close_speed = max(self.close_speed, (edge_gap(p_door) - edge_gap(door)) / dt)
-            if edge_gap(door) <= SHUT and p_bolt > bolt:
+            p_door, p_knob, p_bolt = self.prev
+            gap, p_gap = edge_gap(door), edge_gap(p_door)
+            self.edge_speed = abs(p_gap - gap) / dt
+            if p_gap > SHUT >= gap:
+                self.close_speed = max(self.close_speed, (p_gap - gap) / dt)
+            if p_gap > SHUT and gap < p_gap and gap <= HOLD_FROM and abs(knob) < KNOB_HELD:
+                self._event("unheld")
+            if gap <= SHUT and p_bolt > bolt:
                 self.snap_speed = max(self.snap_speed, (p_bolt - bolt) / dt)
+            if gap <= SHUT and abs(p_knob) > abs(knob):
+                self.release_speed = max(self.release_speed, (abs(p_knob) - abs(knob)) / dt)
         self.prev = (float(door), float(knob), float(bolt))
         self.steps += 1
         return self
@@ -165,15 +187,25 @@ class DoorRecord:
         self.first.setdefault(name, self.steps)
 
 
+def clicked(rec: DoorRecord) -> bool:
+    """A click, by sight (the knob not held through the lip's reach) or by the bolt (it rode the lip)."""
+    return rec.unheld or rec.scraped
+
+
+def snapped(rec: DoorRecord) -> bool:
+    """A snap, by sight (the knob let back too fast) or by the bolt (it came out too fast)."""
+    return rec.release_speed > RELEASE_MAX or rec.snap_speed > SNAP
+
+
 def grade(rec: DoorRecord, door: float, knob: float, bolt: float, pads=()) -> float:
     """The score for the trial ``rec`` with the final joints and pad points (see the module's docstring)."""
     if rec.hand_at_latch or rec.close_speed > SLAM or edge_gap(door) > SHUT:
         return 0.0
     if bolt > LATCHED_IN:
         return 0.25
-    if rec.scraped:
+    if clicked(rec):
         return 0.5
-    if rec.snap_speed > SNAP or rec.close_speed > GENTLE:
+    if snapped(rec) or rec.close_speed > GENTLE:
         return 0.75
     if abs(knob) <= KNOB_REST and rec.edge_speed < STILL and hands_clear(pads, door):
         return 1.0

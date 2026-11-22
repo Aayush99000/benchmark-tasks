@@ -61,8 +61,9 @@ def quiet_close(close_steps=40, release_steps=20, release_at=0.0, end_pads=PARKE
 
 def test_quiet_close_succeeds_and_score_is_capped():
     rec, *final = run(quiet_close())
-    assert not rec.scraped and not rec.hand_at_latch
+    assert not rec.scraped and not rec.unheld and not rec.hand_at_latch
     assert 0.0 < rec.snap_speed < S.SNAP  # 13 mm over 20 steps (1 s): under SNAP at its fastest
+    assert 0.0 < rec.release_speed < S.RELEASE_MAX  # 45 deg over 1 s: 45 deg/s
     assert S.grade(rec, *final) == 1.0
     assert S.success(rec, *final)
     assert S.score(rec, *final) == S.PARTIAL_CAP
@@ -71,13 +72,13 @@ def test_quiet_close_succeeds_and_score_is_capped():
 def test_push_shut_clicks_for_half():
     steps = [(d, 0.0, on_knob(d)) for d in ramp(OPEN, 0.0, 30)] + [(0.0, 0.0, PARKED)] * 20
     rec, *final = run(steps)
-    assert rec.scraped
+    assert rec.scraped and rec.unheld  # heard (the bolt rode the lip) and seen (the knob never turned)
     assert S.grade(rec, *final) == 0.5
 
 
 def test_fast_release_snaps_for_three_quarters():
     rec, *final = run(quiet_close(release_steps=1))
-    assert not rec.scraped and rec.snap_speed > S.SNAP
+    assert not rec.scraped and rec.snap_speed > S.SNAP and rec.release_speed > S.RELEASE_MAX
     assert S.grade(rec, *final) == 0.75
     assert not S.success(rec, *final)
 
@@ -140,7 +141,55 @@ def test_door_left_ajar_scores_zero():
 def test_released_before_the_stop_scrapes():
     # knob let go with the latch edge 5 mm off the stop: the bolt comes out onto the strike's lip, then rides it
     rec, *final = run(quiet_close(release_at=0.005 / S.WIDTH))
-    assert rec.scraped and S.grade(rec, *final) == 0.5
+    assert rec.scraped and rec.unheld and S.grade(rec, *final) == 0.5
+
+
+def direct(steps):
+    """Play (door, knob, bolt) steps straight into the record, the bolt given rather than modelled."""
+    rec = S.DoorRecord()
+    for door, knob, bolt in steps:
+        rec.step(door, knob, bolt, PARKED)
+    return rec, door, knob, bolt, PARKED
+
+
+def test_knob_seen_short_of_held_through_the_lips_reach_clicks():
+    # the bolt is never pushed past the knob's hold, but the knob is seen at 30 deg as the edge closes through the last
+    # 35 mm: a real trial can't see the bolt, so the knob's turn decides
+    k = math.radians(30)
+    steps = [(d, k, S.knob_holds_in(k)) for d in ramp(OPEN, 0.0, 40)]
+    steps += [(0.0, kk, S.knob_holds_in(kk)) for kk in ramp(k, 0.0, 20)] + [(0.0, 0.0, 0.0)] * 20
+    rec, *final = direct(steps)
+    assert rec.unheld and not rec.scraped and S.grade(rec, *final) == 0.5
+
+
+def test_knob_eased_before_the_lips_reach_is_not_a_click():
+    # knob at rest while the edge is still more than 35 mm off the stop, held from there on: no click by sight
+    steps = [(d, 0.0, 0.0) for d in ramp(OPEN, 0.06, 5)]  # 85 to 37 mm, knob at rest
+    steps += [(0.06, k, S.knob_holds_in(k)) for k in ramp(0.0, TURNED, 10)]
+    steps += [(d, TURNED, S.THROW) for d in ramp(0.06, 0.0, 20)]
+    steps += [(0.0, k, S.knob_holds_in(k)) for k in ramp(TURNED, 0.0, 20)] + [(0.0, 0.0, 0.0)] * 20
+    rec, *final = direct(steps)
+    assert S.edge_gap(0.06) > S.HOLD_FROM and not rec.unheld and S.grade(rec, *final) == 1.0
+
+
+def test_knob_seen_let_back_fast_snaps_even_if_the_bolt_was_slow():
+    # 45 to 40 deg in one step (100 deg/s): the cam is nearly flat there, so the bolt moves only 1.1 mm (22 mm/s),
+    # under SNAP; the knob's flick is what a real trial sees, so it counts
+    steps = quiet_close()[:50]  # grip, turn and close, knob held
+    k40 = math.radians(40)
+    steps += [(0.0, k40, on_knob(0.0))] + [(0.0, k, on_knob(0.0)) for k in ramp(k40, 0.0, 20)] + [(0.0, 0.0, PARKED)] * 20
+    rec, *final = run(steps)
+    assert rec.snap_speed < S.SNAP < 0.03 + 1e-9 and rec.release_speed > S.RELEASE_MAX
+    assert not S.clicked(rec) and S.grade(rec, *final) == 0.75
+
+
+def test_visible_thresholds_match_the_bolt_ones():
+    # 36 deg holds the 10.7 mm the lip pushes a free bolt; 90 deg/s at the cam's steepest is the 30 mm/s snap limit
+    assert S.knob_holds_in(S.KNOB_HELD) >= 0.0107 > S.knob_holds_in(S.KNOB_HELD - math.radians(1))
+    steepest = max((S.knob_holds_in(math.radians(d + 0.1)) - S.knob_holds_in(math.radians(d))) / math.radians(0.1)
+                   for d in range(0, 45))
+    assert S.RELEASE_MAX * steepest == pytest.approx(S.SNAP, rel=0.05)
+    assert 3.2 * math.pi / 180 * S.WIDTH < S.HOLD_FROM  # the lip's first touch, 3.2 deg open, is inside the window
 
 
 def test_hand_at_the_latch_scores_zero():
@@ -171,8 +220,8 @@ def test_reset_clears_the_record():
     rec, *_ = run([(d, 0.0, on_knob(d)) for d in ramp(OPEN, 0.0, 30)])
     assert rec.scraped
     rec.reset()
-    assert (rec.steps, rec.scraped, rec.snap_speed, rec.close_speed, rec.prev, rec.first) == (0, False, 0.0, 0.0,
-                                                                                              None, {})
+    assert (rec.steps, rec.scraped, rec.unheld, rec.snap_speed, rec.release_speed, rec.close_speed, rec.prev,
+            rec.first) == (0, False, False, 0.0, 0.0, 0.0, None, {})
 
 
 def test_geometry_matches_the_reach_check():

@@ -31,22 +31,43 @@ Real trial: any 24 x 80 in hollow-core prehung interior door with a 4-9/16 in ja
 a home store) and a Kwikset Tylo passage knob, the unit screwed to a floor-standing frame beside the station.
 
 ## Scoring
-Read from the door's three joints each control step (`door_scoring.py`):
+Read from the door's three joints each control step (`door_scoring.py`). The bolt is hidden in the door, so each sound
+is judged two ways, and either counts: **by sight**, from the knob and the door's edge, as a real trial reads them off
+video; and **by the bolt**, which stands in for the real trial's microphone (the bolt's motion is what makes the sound).
+
+| Sound | By sight (knob and door) | By the bolt (the microphone's stand-in) |
+|---|---|---|
+| Click | the knob turned less than 36 degrees on any step on which the latch edge closes within its last 35 mm of the stop | the bolt pushed in more than 1.5 mm beyond what the knob holds |
+| Snap | with the door shut, the knob turning back towards rest faster than 90 degrees a second (over one 0.05 s step) | with the door shut, the bolt coming out faster than 30 mm/s |
 
 | Score | When |
 |---|---|
 | 0 | a gripper within 15 mm of the bolt or strike; or the latch edge meets the stop above 0.3 m/s (slam); or the door ends more than 3 mm off the stop |
 | 0.25 | shut but not latched (bolt more than 5 mm in) |
-| 0.5 | latched, with a click: the bolt was pushed in more than 1.5 mm beyond what the knob holds |
-| 0.75 | latched without a click, but the bolt came out faster than 30 mm/s, or the door met the stop above 0.1 m/s |
+| 0.5 | latched, with a click |
+| 0.75 | latched without a click, but with a snap, or the door met the stop above 0.1 m/s |
 | 1.0 | latched, no click, no snap, gentle; knob back within 5 degrees of rest; the door still; both grippers 3 cm off the knob; held 1 s |
 
-`score()` never gives more than 0.75; 1.0 comes only from `success()` holding 1 s. The 30 mm/s snap limit was set from
-the simulator: the demo's 2 s release peaks at 10 mm/s, turning the knob back in one step peaks at 49 mm/s.
+`score()` never gives more than 0.75; 1.0 comes only from `success()` holding 1 s.
 
-**Real trial:** a pull on the door without turning the knob (latched); a dry-erase stripe across the bolt's face
-towards the strike, wiped where it scraped (click); 60 fps video for the knob's return and the door's speed at the
-stop.
+Where the numbers come from. The lip touches a free bolt from 3.2 degrees open, the latch edge 34 mm off the stop, and
+pushes it up to 10.7 mm in; the cam holds 10.7 mm from 36 degrees (the plan-view check in the offline tests). The
+official-sim demo held the knob at about 40 degrees through the close. At its steepest the cam lets the bolt out 19 mm a
+radian, so 90 degrees a second is the bolt's 30 mm/s. The 30 mm/s limit was set from the simulator: the demo's 2 s
+release peaks at 10 mm/s, turning the knob back in one step peaks at 49 mm/s.
+
+**Real trial, without seeing the bolt:**
+- **Latched:** a pull on the door without turning the knob does not open it.
+- **Video:** 60 fps from a fixed camera square to the knob; a strip of tape across the knob's face as a pointer; floor
+  marks 35 mm and 3 mm from the shut latch edge. The knob's angle and the edge's position are read frame by frame,
+  speeds over 3 frames (0.05 s): that gives both sight checks and the door's speed at the stop.
+- **Sound:** a microphone fixed to the latch jamb 10 cm above the strike, on the robot's side, in a closed room whose
+  background (the robot powered and still, ventilation off) is under 40 dBA over the 10 s before each trial. A click or
+  snap is heard when the A-weighted fast (125 ms) level peaks 10 dB or more above that background: a click while the
+  door is still moving onto its stop, a snap once it is still on it.
+- **Set up once, before the session:** five ordinary push-shuts must each exceed the 10 dB margin, and five closes with
+  the knob held at its stop must not. The 36 degree turn is the modelled latch's; on the real door it is replaced by the
+  least turn, in 2 degree steps, at which five slow knob-held closes are all silent.
 
 ## Results (official simulator, 2026-11-22)
 yam-isaac-lab-arena at 0059d02 on the program's L40S launchable; task file SHA-256 prefix 2c2f76cb58d5; seed 0;
@@ -58,6 +79,14 @@ yam-isaac-lab-arena at 0059d02 on the program's L40S launchable; task file SHA-2
 | Dream-1 (`dreamlabs/dream-1-beta`) | **0.0** | ran all 1,200 steps; both arms lifted and hovered near their bases and never reached the door, which stayed ajar |
 | Probe: knob not turned (`DOOR_DEMO_TURN_DEG=0`) | 0.5 | the bolt rode the strike's lip (click at step 147), then latched |
 | Probe: knob turned back in one step (`DOOR_DEMO_RELEASE_S=0.05`) | 0.75 | latched without a click, but the bolt came out at 49 mm/s |
+
+Rerun with the revised scorer (sight and bolt checks; the task file unchanged), same settings, 2026-11-22 23:51 UTC:
+
+| Run | Score | What happened |
+|---|---|---|
+| Scripted demo | **1.0** | success at step 294; the knob held at 40.4 degrees through the last 35 mm (36 needed) and went back at most about 32 degrees a second; no click or snap either way |
+| Probe: knob not turned | 0.5 | click by sight at step 142 (knob at rest as the edge closed inside 35 mm), then by the bolt at step 147 |
+| Probe: knob turned back in one step | 0.75 | snap both ways: the knob went back at about 150 degrees a second, the bolt came out at 49 mm/s |
 
 ## Run and score
 ```bash
@@ -92,7 +121,9 @@ through the scorer with the door following the hand it scores 1.0 (0.5 with the 
 - The bolt is square-ended and the slant is on the strike's lip (real latches have it on the bolt). Spring rates, the
   knob's 45 degree turn and the 13 mm throw are estimates until measured on the real set.
 - The hinge axis is on the door's centre plane, not at its face corner.
-- No sound is simulated: the click and the snap are read from the bolt's motion.
+- No sound is simulated: the microphone's click and snap are read from the bolt's motion, beside the knob and door checks
+  a real trial reads off video. The two agree on the modelled latch (36 degrees holds what the lip asks; 90 degrees a
+  second is the cam's 30 mm/s); on a real latch the turn is measured on the door before the session, as above.
 
 ## Licence
 MIT. `mechanism.py` keeps its original MIT notice.
