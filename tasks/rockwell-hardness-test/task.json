@@ -1,5 +1,5 @@
 {
-  "title": "Take a Rockwell C reading on a manual tester: creep the block up until the long pointer stops at C, load and unload by the handle, lower the block",
+  "title": "Take a Rockwell C reading on a manual tester: creep the block up to C without overshoot, load by the handle, lower it",
   "category": "Other",
   "keywords": [
     "bimanual",
