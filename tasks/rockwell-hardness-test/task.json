@@ -20,5 +20,6 @@
   "run_limit": "2,400 steps (2 minutes at 20 Hz)",
   "reset_notes": "Lower the anvil, turn the block so an untested area is under the indenter (or use a new block), and set the handle forward. The block's certified value is on its certificate; a used area is not reused.",
   "fidelity": "Rigid parts. The minor and main loads are rules: the indenter's travel is computed from the handwheel angle through the screw's 4 mm pitch (its collider stops 1.7 mm short of its point, so the block never touches it), and the main load's depth from the block's certified HRC with a fixed elastic part. The oil dashpot is a fixed 5 s ramp. The dial ring is fixed with C at the top: its fine set (at most 5 divisions) is left out. Weights and the handwheel's growing resistance are not modeled.",
-  "scores": "Demo: 1.0 in the official sim (step 1,413; preliminary load 1.1 divisions short of C, full load held 5.0 s, block lowered). Probes: 8 divisions past C 0; handle released too soon 0.5. Dream-1 run: 0 (ran the full 2,400 steps without setting the preliminary load)"
+  "scores": "Demo: 1.0 in the official sim (step 1,413; preliminary load 1.1 divisions short of C, full load held 5.0 s, block lowered). Probes: 8 divisions past C 0; handle released too soon 0.5. Dream-1 run: 0 (ran the full 2,400 steps without setting the preliminary load)",
+  "media": "M-F5GUU6"
 }
