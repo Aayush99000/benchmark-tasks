@@ -1,0 +1,21 @@
+{
+  "title": "Dental hygienist assistant: rinse, clear the mouth and return both tools",
+  "category": "Impact on jobs",
+  "keywords": [
+    "dental assistance",
+    "real-size typodont mouth",
+    "bulb syringe rinse",
+    "saliva ejector",
+    "bimanual coordination",
+    "water collecting at the throat sill"
+  ],
+  "instruction": "Rinse the blue gel off the three marked lower teeth while keeping the mouth clear with the saliva ejector, then put both tools back in their holders.",
+  "context": "Rinsing polishing-paste residue off the teeth while the mouth is kept clear by suction is a routine step of a cleaning, done by dental hygienists and assistants (613,900 US jobs, BLS 2025). The blue gel dots stand in for paste residue. The squeeze-bulb syringe is used as an operator-controlled spray suited to a gripper, standing in for the chairside 3-in-1 air-water syringe, whose thumb button a gripper cannot press. The difficulty is the real-size mouth: two tools in a 45 mm opening, and water running back toward the throat.",
+  "setup": "Positions in m from the midpoint between the arm bases, heights above the table. Phantom head on a printed stand (a 160x130x4 mm plate and a 70x130x40 mm block under the back of the head): Kilgore/Nissin 200-type 28-tooth typodont in a PETG shell (STL and mounting in hardware/ and the README), crown toward the robot, reclined so the lower occlusal plane is 35 deg to the table; lower incisal point at (0.28, 0, 0.060); jaws 45 mm apart at the incisors, held by a TPU mouth prop between the right molars; TPU lips (opening 45x64 mm) and tongue; throat sill 8.5 mm high, 64 mm behind the lower incisors. Blue gel dots, 4 mm, on the occlusal surfaces of the lower left second premolar, first and second molars. 2 oz PVC bulb syringe (Medline DYND70280, 52 mm bulb, 45 mm nozzle) with 20 mL water, upright in a ring stand at (0.36, -0.20). Saliva ejector (6.5 mm, bent L, 95 mm leg) in a 14x80 mm handle, level in a cradle at (0.36, 0.24), 0.11 high, bent leg toward the head, on a 12 V vacuum pump with trap. Throat cup (30 mL, 32 mm across, 45 mm high) on the table at (0.21, 0.10), on the drain from behind the sill; towel under the head.",
+  "scoring": "Pocket scale (0.01 g), phone photo and video. Weigh the throat cup and the towel before and after; once both tools are out of the mouth, wipe the mouth with pre-weighed gauze and weigh it. 0 if the throat cup gained over 0.2 g, the towel over 0.5 g, the gauze over 0.3 g (to be calibrated on the real rig with a hand-performed rinse), or a tool is still in the mouth at the end. Otherwise 0.25 for each blue dot rinsed off completely (photo; a dye stain left on the tooth with no gel counts as removed), up to 0.75. 1.0 when all three dots are off and both tools sit in their own holders (within 1 cm, upright within 10 deg), with both grippers 3 cm or more from both tools and both holders, for 1 s.",
+  "run_limit": "1,600 steps (80 seconds at 20 Hz)",
+  "reset_notes": "Refill the bulb with 20.0 g of water (squeeze, draw from a cup, weigh). Dry the mouth, towel and throat cup; empty and weigh the trap. Put a fresh 4 mm blue gel dot on each target tooth (water-based lubricant gel with blue food dye, 0.02 g). Bulb upright in its ring, ejector level in its cradle.",
+  "fidelity": "Rigid typodont and shell; the tongue's collider sits 1.5 mm inside its surface (soft TPU). The bulb is rigid with soft contacts; it gives 1.0 mL per mm the finger gap closes past its deepest squeeze. Water is a reduced model, not CFD: a 0.5 m/s ballistic stream; water collects on the floor of the mouth against the throat sill, either side of the tongue (1.24 mL a side, then the throat); the ejector draws 4 mL/s there. A dot needs 0.4 mL within 3.5 mm.",
+  "scores": "Dream-1 run: 0.0; demo: 1.0",
+  "media": "M-QQPW65"
+}
