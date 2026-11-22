@@ -17,5 +17,5 @@
   "reset_notes": "Back each terminal screw out a turn and down again onto an empty clamp, finger-tight; lift the comb out and lay it on its posts, tooth cap on; lay the screwdriver in its stand. Nothing is consumed.",
   "fidelity": "Thread as code: turning the driver with its bit on a head turns the screw (0.8 mm/turn) and puts a counter-torque on the driver, 0.15 N m running, rising past the tooth to the 2.0 N m preset; 15 degrees more against it is the click. The jaw clamps at about 10 N. Breakers modelled 85 x 18 x 73 mm (maker 91 x 18 x 78.5); tooth, cap and driver sizes estimated until measured. Heads have no collider; bit-on-head read in code.",
   "scores": "Dream-1 run: 0.0 (10,000 steps; the right hand went to the screwdriver on its stand but never lifted it, and the comb and screws were never touched); demo: 1.0 (scripted, success at step 6,257 of 10,000)",
-  "media": ""
+  "media": "M-EE5TD8"
 }
