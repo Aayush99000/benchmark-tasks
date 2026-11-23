@@ -21,5 +21,5 @@
   "reset_notes": "Lower the anvil, turn the block so an untested area is under the indenter (or use a new block), and set the handle forward. The block's certified value is on its certificate; a used area is not reused.",
   "fidelity": "Rigid parts. The block meets the indenter's point; the anvil's spring presses it there, 98 N at the three-turn travel. The screw's raising torque for that force (0.22 N m at C; screw size and friction estimated) is held on the wheel while it turns up. The dial reads the travel computed from the wheel through the 4 mm pitch. The 1471 N main load and its depth are rules (the block's certified HRC); the dashpot is a fixed 5 s ramp; the dial's fine-set ring is left out.",
   "scores": "Demo: 1.0 in the official sim (step 1,388; preliminary load 0.3 divisions past C, full load held 4.9 s, block lowered). Probes: 8 divisions past C 0; handle released too soon 0.5. Dream-1 run: 0 (full 2,400 steps; never turned the handwheel)",
-  "media": ""
+  "media": "M-UB77VP"
 }
