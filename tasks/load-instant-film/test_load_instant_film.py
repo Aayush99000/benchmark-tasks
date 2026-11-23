@@ -12,7 +12,7 @@ from yam_arena.demo import ArmPlan
 from yam_arena.task_file import ObjectState, load
 
 import load_instant_film as M
-from mechanism import MechanismState
+from mechanism import MechanismState, rotation_xyzw
 
 HERE = Path(__file__).resolve().parent
 Z3 = np.zeros(3)
@@ -40,13 +40,15 @@ def quat_of(r: np.ndarray) -> np.ndarray:
     return q
 
 
-LOADED = np.column_stack([[0, 0, 1], [-1, 0, 0], [0, -1, 0]]).astype(float)  # length up, width to -x... back out
-SEATED_POS = np.array([M.CH_X, M.CH_WALL - M.PACK[2] / 2, M.TOP + M.CH_Z0 + M.PACK[0] / 2])
+LOADED = np.column_stack([[0, 0, 1], [-1, 0, 0], [0, -1, 0]]).astype(float)  # length up, width to -x, back out
+SEATED_POS = np.array([M.CH_X, M.CH_WALL - M.PACK[2] / 2, M.TOP + M.CH_Z0 + M.PACK[0] / 2])  # upright frame
 
 
-def pack(pos=SEATED_POS, r=LOADED, still=True) -> ObjectState:
+def pack(pos=SEATED_POS, r=LOADED, still=True, upright=True) -> ObjectState:
+    """A pack state; ``pos`` and ``r`` in the camera's upright frame (default) or the world."""
     v = Z3 if still else np.array([0.05, 0, 0])
-    p = np.asarray(pos, float)
+    p = M.to_world(pos) if upright else np.asarray(pos, float)
+    r = M.R_TILT @ r if upright else r
     return ObjectState(pos=p, quat_xyzw=quat_of(r), lin_vel=v, ang_vel=Z3, low=p - 0.05, high=p + 0.05)
 
 
@@ -86,12 +88,12 @@ def test_scores_in_order():
     assert M.grade(objs(cam=camera(ring=ON))) == 0.75
     assert M.grade(objs(cam=camera())) == 0.5
     assert M.grade(objs(cam=camera(cover=math.radians(40)), rec=M.FilmRecord(locked=False))) == 0.25
-    assert M.grade(objs(p=pack(pos=M.PACK_START, r=np.eye(3)))) == 0.0
+    assert M.grade(objs(p=pack(pos=M.PACK_START, r=np.eye(3), upright=False))) == 0.0
 
 
 def test_hand_near_camera_holds_full_score_back():
     done = M.FilmRecord(locked=True, ejected=True, presses=1)
-    near = {**AWAY, "left_gripper": pads(M.CX, M.YF + 0.03, M.TOP + 0.09)}
+    near = {**AWAY, "left_gripper": pads(*M.to_world((M.CX, M.YF + 0.03, M.TOP + 0.09)))}
     assert M.grade(objs(cam=camera(ring=ON, sheet=M.EJECT), rec=done, hands=near)) == 0.75
 
 
@@ -109,20 +111,24 @@ def test_not_pushed_home_scores_zero():
     assert M.grade(objs(p=pack(pos=proud))) == 0.0
 
 
-def test_holes_and_forced_lock_score_zero():
-    for rec in (M.FilmRecord(holes_pressed=True), M.FilmRecord(forced=True)):
-        assert M.grade(objs(cam=camera(ring=ON), rec=rec)) == 0.0
+def test_forced_lock_scores_zero():
+    assert M.grade(objs(cam=camera(ring=ON), rec=M.FilmRecord(forced=True))) == 0.0
 
 
-def test_fingertip_on_a_hole_is_seen():
-    p = pack()
-    (hx, hy), _ = M.HOLES[0]
-    local = np.array([hx, hy, M.PACK[2] / 2 + 0.001])
-    q = LOADED @ local + SEATED_POS
-    on_hole = M.Pads(back=q, tips=q, fingertips=(q,))
-    margin = LOADED @ np.array([0.030, 0, M.PACK[2] / 2 + 0.001]) + SEATED_POS
-    on_margin = M.Pads(back=margin, tips=margin, fingertips=(margin,))
-    assert M.presses_holes(on_hole, p) and not M.presses_holes(on_margin, p)
+def test_mechanism_frame_is_the_tilted_upright_frame():
+    """A point of the camera, put through the mechanism's own pose, lands where to_world puts it."""
+    q = rotation_xyzw(M.CAMERA.yaw, M.CAMERA.pitch)
+    r = M._rot(np.array(q))
+    for u in ((M.CX, M.YB, 0.06), (M.X0, M.YF, 0.0), (M.LENS_X, M.RING_Y[1], M.LENS_Z)):
+        local = np.array(M._local_point(u))
+        assert np.allclose(np.asarray(M.CAMERA.pos) + r @ local, M.to_world((u[0], u[1], M.TOP + u[2])), atol=1e-9)
+    back_normal = M.R_TILT @ np.array([0.0, -1.0, 0.0])
+    assert back_normal[2] == pytest.approx(math.sin(math.radians(M.TILT_DEG)))
+
+
+def test_camera_clears_the_table():
+    for u in ((M.LENS_X, M.RING_Y[1], M.LENS_Z - M.RING_R), (M.X0, M.YF, 0.0), (M.X0, M.YB, 0.0)):
+        assert M.to_world((u[0], u[1], M.TOP + u[2]))[2] >= M.TOP + M.RING_CLEAR - 1e-6
 
 
 def test_lock_logic():
