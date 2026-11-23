@@ -19,6 +19,15 @@ is the block's rise past first contact, read from the handwheel through the elev
 load's depth comes from the block's certified hardness. The robot still turns the real handwheel and works the real
 handle.
 
+The preliminary load is mechanical (revision, 2026-11-23). The block's top meets the indenter's point in PhysX and is
+pressed against it by the anvil's spring, whose rate puts the 98.07 N preliminary force on the block at the three-turn
+travel. The handwheel feels that force back through the elevating screw: ``wheel_torque`` is a square-thread screw's
+raising torque for the force at that travel, held against the wheel while it turns clockwise (scaled down near rest:
+it is set once per control step from the wheel's speed). So the wheel turns
+freely until the block meets the point, then stiffens to about 0.22 N m (2.7 N at a knob) at the set point. The
+screw's lowering torque is left out: set once per control step on a wheel this light, a torque against a backward
+jitter pushed the wheel forward past C once the hand let go (official sim, 2026-11-23).
+
 Grades (``score`` stops at 0.75; 1.0 only comes from ``success`` holding 1 s):
 - 0.25: the preliminary force set at a fresh spot: the long pointer within 5 divisions of C after its three turns, and
   never more than 5 divisions past it on that approach;
@@ -46,6 +55,16 @@ PITCH = 0.004  # elevating screw rise per handwheel turn (m) [estimate: measure 
 START_GAP = 0.0012  # block top below the indenter's point at the start (m)
 TRAVEL_STOP = PRE_TRAVEL + 0.001  # the screw's upper stop in the sim, 1 mm past the preliminary force
 LOWERED = -0.0005  # block top at least 0.5 mm below the point counts as lowered
+
+# The preliminary load's path (revision 2026-11-23). PRELOAD_N is the standard's (ISO 6508 / ASTM E18: 10 kgf); the
+# screw's size and friction are estimates until measured on the tester (a spring scale on a knob, read at C).
+PRELOAD_N = 98.07
+ANVIL_RATE = PRELOAD_N / (300 * 0.002e-3)  # N/m: the anvil's spring, 98.07 N at the three-turn travel
+SCREW_D = 0.020  # the elevating screw's mean diameter (m) [estimate]
+SCREW_MU = 0.15  # its thread friction, oiled steel [estimate]
+THREAD_HALF = math.radians(15.0)  # trapezoidal thread's flank half-angle
+SPEED_FULL = 0.02  # rad/s clockwise: the screw's full raising torque from this speed up (the demo creeps at 0.022),
+# scaled down to 0 at rest, so a torque set at one control step can't throw a wheel that has just stopped back
 
 BLOCK_HRC = 62.0  # the test block's certified value [estimate: from the block's certificate]
 ELASTIC = 0.030e-3  # extra depth under the total force that springs back when it comes off [estimate]
@@ -75,6 +94,27 @@ def travel(wheel: float) -> float:
 def wheel_for(rise: float) -> float:
     """The handwheel angle (rad) that gives a block rise ``rise`` (m)."""
     return (rise + START_GAP) * 2 * math.pi / PITCH
+
+
+def preliminary_force(rise: float) -> float:
+    """The force (N) between the block and the indenter's point at a travel ``rise`` past first contact."""
+    return ANVIL_RATE * min(max(rise, 0.0), TRAVEL_STOP)
+
+
+def screw_angles() -> tuple[float, float]:
+    """The elevating screw's lead angle and its thread's friction angle (rad)."""
+    return math.atan(PITCH / (math.pi * SCREW_D)), math.atan(SCREW_MU / math.cos(THREAD_HALF))
+
+
+def wheel_torque(rise: float, speed_cw: float) -> float:
+    """The torque (N m) the elevating screw puts on the handwheel against a clockwise (raising) turn at ``speed_cw``
+    rad/s and a travel ``rise``: a square thread's raising torque, F r tan(friction angle + lead angle), from
+    SPEED_FULL up, scaled down to 0 at rest; 0 turning back (see the module docstring)."""
+    f = preliminary_force(rise)
+    if f <= 0.0 or speed_cw <= 0.0:
+        return 0.0
+    lead, friction = screw_angles()
+    return f * SCREW_D / 2 * math.tan(friction + lead) * min(1.0, speed_cw / SPEED_FULL)
 
 
 def divisions_from_c(rise: float) -> float:

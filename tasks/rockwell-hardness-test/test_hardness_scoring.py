@@ -142,3 +142,37 @@ def test_pointers():
     assert depth == pytest.approx((100 - S.BLOCK_HRC) * 0.002e-3)
     a = S.long_pointer(S.PRE_TRAVEL, depth)  # 38 divisions back from C: HRC 62
     assert (math.cos(a), math.sin(a)) == pytest.approx((math.cos(-0.38 * 2 * math.pi), math.sin(-0.38 * 2 * math.pi)))
+
+
+# -- the preliminary load's path (revision 2026-11-23) ---------------------------------------------------------------
+def test_the_anvil_spring_gives_the_preliminary_force_at_three_turns():
+    assert S.preliminary_force(S.PRE_TRAVEL) == pytest.approx(98.07)
+    assert S.preliminary_force(0.0) == 0.0 and S.preliminary_force(-0.001) == 0.0  # not yet touching
+    assert S.preliminary_force(S.PRE_TRAVEL / 2) == pytest.approx(98.07 / 2)  # it builds with the travel
+
+
+def test_the_wheel_turns_freely_until_the_block_meets_the_point():
+    assert S.wheel_torque(-0.0005, 1.0) == 0.0
+    assert S.wheel_torque(S.PRE_TRAVEL, 0.0) == 0.0  # standing still: the screw holds itself
+
+
+def test_the_wheel_stiffens_as_the_preliminary_load_builds():
+    torques = [S.wheel_torque(r, 1.0) for r in (0.1 * S.PRE_TRAVEL, 0.5 * S.PRE_TRAVEL, S.PRE_TRAVEL)]
+    assert torques[0] < torques[1] < torques[2]
+    # at the set point: about 0.22 N m, 2.7 N on a knob 8 cm out
+    assert torques[2] == pytest.approx(0.217, abs=0.002)
+    assert torques[2] / 0.080 == pytest.approx(2.71, abs=0.03)
+
+
+def test_only_raising_is_resisted_and_the_screw_is_self_locking():
+    assert S.wheel_torque(S.PRE_TRAVEL, -1.0) == 0.0  # turning back: left out (it kicked the light wheel forward)
+    lead, friction = S.screw_angles()
+    assert friction > lead  # the load alone can't turn the wheel back
+
+
+def test_a_creep_gets_the_full_torque_and_a_wheel_nearly_at_rest_almost_none():
+    # the demo's creep: half a degree in 0.4 s is 0.022 rad/s
+    assert math.radians(0.5) / 0.4 > S.SPEED_FULL
+    full = S.wheel_torque(S.PRE_TRAVEL, 1.0)
+    assert S.wheel_torque(S.PRE_TRAVEL, math.radians(0.5) / 0.4) == full
+    assert S.wheel_torque(S.PRE_TRAVEL, S.SPEED_FULL / 10) == pytest.approx(full / 10)

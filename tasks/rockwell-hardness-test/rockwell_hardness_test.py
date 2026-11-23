@@ -50,7 +50,7 @@ ANVIL_R, ANVIL_TOP = 0.030, TOP + 0.200
 BLOCK_H = 0.010
 BLOCK_TOP = ANVIL_TOP + BLOCK_H
 TIP_Z = BLOCK_TOP + S.START_GAP  # the indenter's point
-TIP_CLEAR = 0.0017  # the indenter's collider stops this far short of its point: the block never touches it
+TIP_CLEAR = 0.0  # the indenter's collider reaches its point: the block meets it and is pressed against it
 NOSE_LO = TOP + 0.228
 HEAD_LO, HEAD_HI, HEAD_FRONT = TOP + 0.255, TOP + 0.700, AX - 0.045
 COLUMN_FRONT = AX + 0.165  # throat depth 6.5 in (ISH-R150 work surface depth)
@@ -91,10 +91,18 @@ def handle_knob(theta: float) -> np.ndarray:
 
 
 def _base_shapes() -> tuple:
+    # Division dots round the dial every 5 divisions (18 degrees), larger every 10, so a camera can judge the long
+    # pointer's distance from C: the manual's tolerance is 5 divisions.
+    # (on the face's front, which is 4 mm in front of DIAL_C; the long pointer turns 1 mm in front of them)
+    dots = tuple(_cyl(DIAL_C + (-0.0045, (DIAL_R - 0.005) * math.sin(math.radians(18 * k)),
+                                (DIAL_R - 0.005) * math.cos(math.radians(18 * k))),
+                      0.0020 if k % 2 == 0 else 0.0012, 0.001, BLACK, axis="X", material="cast")
+                 for k in range(1, 20))
     marks = (
-        _box(DIAL_C + (-0.002, -0.003, DIAL_R - 0.009), DIAL_C + (0.0, 0.003, DIAL_R - 0.001), BLACK),  # C, at the top
-        _box(SHORT_C + (-0.002, -0.0025, -0.0025), SHORT_C + (0.0, 0.0025, 0.0025), BLACK),  # short dial: black dot
-        _box(SHORT_C + (-0.002, -0.0125, -0.0025), SHORT_C + (0.0, -0.0075, 0.0025), RED),  # red dot, a quarter turn on
+        *dots,
+        _box(DIAL_C + (-0.005, -0.003, DIAL_R - 0.009), DIAL_C + (-0.004, 0.003, DIAL_R - 0.001), BLACK),  # C, at the top
+        _box(SHORT_C + (-0.005, -0.0025, -0.0025), SHORT_C + (-0.004, 0.0025, 0.0025), BLACK),  # short dial: black dot
+        _box(SHORT_C + (-0.005, -0.0125, -0.0025), SHORT_C + (-0.004, -0.0075, 0.0025), RED),  # red dot, a quarter turn on
     )
     return (
         _box((BASE_FRONT, -HALF_W, TOP), (BACK, HALF_W, BASE_TOP), GREY),  # base casting
@@ -135,13 +143,16 @@ SHORT = Link("short_pointer", 0.002, (
 
 JOINTS = (
     # The wheel's joint turns about +z (anticlockwise from above): the scorer's clockwise angle is its negative.
+    # Damping 0.2 N m s/rad: under 0.01 N m at the demo's creep, but it stops a torque left on the wheel from spinning it.
     Joint("wheel", "revolute", "wheel", (AX, 0.0, WHEEL_Z), "Z", -S.wheel_for(S.TRAVEL_STOP),
-          -S.wheel_for(-0.0048), damping=0.02, friction=0.05),
+          -S.wheel_for(-0.0048), damping=0.2, friction=0.05),
     *(Joint(f"knob{i}", "revolute", f"knob{i}", (*knob_xy(p), WHEEL_Z), "Z", -6.2, 6.2, damping=0.0005,
             parent="wheel") for i, p in enumerate(KNOB_ANG0)),
-    # The anvil follows the screw: its spring target is set from the wheel before every control step.
+    # The anvil follows the screw: its spring target is set from the wheel before every control step. Once the block
+    # meets the indenter's point the spring is what presses it there: its rate puts the 98.07 N preliminary force on the
+    # block at the three-turn travel (S.ANVIL_RATE).
     Joint("anvil", "prismatic", "anvil", (AX, 0.0, ANVIL_TOP), "Z", -0.0050, S.TRAVEL_STOP + S.START_GAP + 0.0005,
-          stiffness=2.0e5, damping=2.0e3),
+          stiffness=S.ANVIL_RATE, damping=2.0e3),
     Joint("handle", "revolute", "handle", tuple(PIVOT), "Y", S.HANDLE_FORWARD, S.HANDLE_BACK, damping=0.5,
           friction=0.2, start=S.HANDLE_FORWARD),
     Joint("handle_knob", "revolute", "handle_knob", (PIVOT[0], HANDLE_KNOB_Y, PIVOT[2] + HANDLE_L), "Y", -1.5, 1.5,
@@ -206,9 +217,14 @@ RECORD = S.HardnessRecord()
 _LAST = {"t": None}
 
 
+_WHEEL = {"cw": None, "torque": 0.0, "stale": True}  # the wheel's last angle, the torque held on it, and whether a
+# torque from before a reset may still be held (the next step writes one either way)
+
+
 def _clear_record() -> None:
     RECORD.reset()
     _LAST["t"] = None
+    _WHEEL["cw"], _WHEEL["torque"], _WHEEL["stale"] = None, 0.0, True
 
 
 mech.on_reset(_clear_record)
@@ -225,11 +241,32 @@ def update_record(states, t: float | None) -> S.HardnessRecord:
     return RECORD
 
 
+def _twist_wheel(environment, torque_z: float) -> None:
+    """Hold ``torque_z`` (N m about the world's +z: anticlockwise from above) on the handwheel at every physics step
+    until changed."""
+    import torch
+
+    asset = environment.unwrapped.scene[TESTER.name]
+    body = list(asset.body_names).index("wheel")
+    t = torch.tensor([[[0.0, 0.0, float(torque_z)]]], device=asset.device)
+    asset.permanent_wrench_composer.set_forces_and_torques_index(forces=torch.zeros_like(t), torques=t,
+                                                                 body_ids=[body], is_global=True)
+
+
 def couple(environment) -> None:
-    """Before each control step: the anvil to where the screw puts it, the pointers to what the dial would show."""
+    """Before each control step: the anvil to where the screw puts it, the screw's torque against the wheel's turn,
+    and the pointers to what the dial would show."""
     j = mech.joint_positions(environment, TESTER)
     w = -float(j["wheel"])
     rise = S.travel(w)
+    asset = environment.unwrapped.scene[TESTER.name]
+    speed_cw = -float(mech._numpy(asset.data.joint_vel)[0][list(asset.joint_names).index("wheel")])
+    _WHEEL["cw"] = w
+    torque = S.wheel_torque(rise, speed_cw)
+    if torque or _WHEEL["torque"] or _WHEEL["stale"]:
+        # against the raising turn: clockwise from above is the joint's negative, so it is held anticlockwise (+z)
+        _twist_wheel(environment, torque)
+        _WHEEL["torque"], _WHEEL["stale"] = torque, False
     mech.set_targets(environment, TESTER, {
         "anvil": w * S.PITCH / (2 * math.pi),
         "long_pointer": S.long_pointer(rise, RECORD.depth()),
@@ -301,6 +338,7 @@ def _debug(objects, g) -> None:
     a = rec.attempts[-1] if rec.attempts else None
     with open(path, "a") as f:
         f.write(f"t={rec.t:.2f} grade={g} wheel_deg={math.degrees(w):.2f} rise_um={S.travel(w) * 1e6:.1f} "
+                f"wheel_torque={_WHEEL['torque']:.3f} anvil_um={objects['tester'].joints.get('anvil', 0.0) * 1e6:.1f} "
                 f"div_from_c={S.divisions_from_c(S.travel(w)):.1f} handle_deg={math.degrees(h):.1f} seated={on} "
                 f"clear={clear} attempt={a}\n")
 
@@ -346,10 +384,16 @@ WHEEL_GRIP = _frame((1.0, 0.0, 0.0), (0.0, 0.0, 1.0))
 HANDLE_GRIP = _frame((0.0, 1.0, 0.0), (0.0, 0.0, 1.0))
 BACK_OFF = 0.06
 PARK = {"left": (0.18, 0.26, TOP + 0.15), "right": (0.18, -0.26, TOP + 0.15)}
-# In the official sim the left hand stops the handwheel 1.6 degrees short of its last waypoint (9 divisions; run
-# rockwell-demo1, 2026-11-22), so the demo aims that much further. ROCKWELL_DEMO_TRIM_DEG overrides it (the offline
+# While the left hand raises the block, the right hand holds its wrist camera 17 cm from the dial, looking at it 20 deg
+# from the right and 20 deg down: the dial is about 100 px across in the policy's 320 x 176 image, against about 20 in
+# the top camera (tools/scan_dial_view.py: 37 deg of joint margin).
+DIAL_VIEW = dict(dist=0.17, yaw=math.radians(20.0), pitch=math.radians(20.0), roll=0.0)
+# In the official sim the left hand leaves the handwheel short of its last waypoint: 1.6 degrees with a free wheel
+# (9 divisions; run rockwell-demo1, 2026-11-22), 2.5 degrees against the screw's torque (aimed 4.4 past, it settled
+# 2.5 short, 10.9 divisions past C; the overshoot probe the same: rockwell-rev runs, 2026-11-23 00:57). So the demo
+# aims 2.5 degrees past the set point. ROCKWELL_DEMO_TRIM_DEG overrides it (the offline
 # replay, whose hand reaches its IK pose exactly, uses 0).
-SETTLE_TRIM_DEG = 1.6
+SETTLE_TRIM_DEG = 2.5
 SET_CW = S.wheel_for(S.PRE_TRAVEL) + math.radians(float(os.environ.get("ROCKWELL_DEMO_TRIM_DEG", SETTLE_TRIM_DEG)))
 # Probe settings (the submitted demo uses the defaults): ROCKWELL_DEMO_OVERSHOOT_DIV raises the block that many
 # divisions past C before the load; ROCKWELL_DEMO_HOLD_S changes how long the full load is held.
@@ -460,14 +504,37 @@ def _handle() -> list:
     return out
 
 
+def dial_view_pose(dist: float, yaw: float, pitch: float, roll: float) -> tuple[np.ndarray, np.ndarray]:
+    """The right TCP's position and rotation that put its wrist camera ``dist`` from the dial's centre, looking at it
+    from ``yaw`` right of straight on and ``pitch`` down, rolled ``roll`` about the line of sight."""
+    from yam_arena import station
+    from yam_arena.constants import TCP_OFFSET
+    from yam_arena.urdf import quat_xyzw_to_matrix
+
+    cam = station.wrist_camera("right")
+    cam_rot = quat_xyzw_to_matrix(np.array(cam.rot_xyzw))  # opengl: it looks along its -z, up is its +y
+    look = np.array([math.cos(pitch) * math.cos(yaw), math.cos(pitch) * math.sin(yaw), -math.sin(pitch)])
+    z = -look
+    up = np.array([0.0, 0.0, 1.0]) - z[2] * z
+    up /= np.linalg.norm(up)
+    side = np.cross(up, z)
+    up = math.cos(roll) * up + math.sin(roll) * side
+    r_grip = np.column_stack([np.cross(up, z), up, z]) @ cam_rot.T
+    grip = DIAL_C - dist * look - r_grip @ np.array(cam.pos)
+    return grip + r_grip @ np.array(TCP_OFFSET), r_grip
+
+
 def _right() -> list:
-    """The right hand works the handle, then lowers the block. Lowering is the mirror image of the left hand's
-    raising strokes; the left hand pulling the knob back from the front-left lost it in the official sim (the knob
-    slid out of the open end of its fingers, 2026-11-22 runs rockwell-demo1/2)."""
+    """The right hand watches the dial while the left raises the block, then works the handle, then lowers the block.
+    Lowering is the mirror image of the left hand's raising strokes; the left hand pulling the knob back from the
+    front-left lost it in the official sim (the knob slid out of the open end of its fingers, 2026-11-22 runs
+    rockwell-demo1/2)."""
     down = yam_demo.grip_rotation(0.0)
     t_raise = sum(w.duration for w in raise_strokes(SET_CW + OVERSHOOT)) + 1.5
-    return [Waypoint(1.0, PARK["right"], FINGER_OPEN, "out of the way", down),
-            Waypoint(t_raise - 1.0, PARK["right"], FINGER_OPEN, "wait for the preliminary load", down),
+    view_p, view_r = dial_view_pose(**DIAL_VIEW)
+    return [Waypoint(2.0, _pt(view_p), FINGER_OPEN, "the wrist camera on the dial", view_r),
+            Waypoint(t_raise - 3.5, _pt(view_p), FINGER_OPEN, "watch the dial: the preliminary load", view_r),
+            Waypoint(1.5, PARK["right"], FINGER_OPEN, "out of the way", down),
             *_handle(),
             *lower_strokes(SET_CW + OVERSHOOT),
             Waypoint(1.5, PARK["right"], FINGER_OPEN, "park", down),

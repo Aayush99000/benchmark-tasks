@@ -125,8 +125,8 @@ def test_the_demo_replays_to_full_score(untrimmed):
 
 
 def test_the_trim_is_within_the_window_of_a_short_settle():
-    # The default aims 1.6 degrees (about 9 divisions) past C: it lands inside the window only if the hand stops
-    # about that much short, as it does in the official sim.
+    # The default aims 2.5 degrees (about 14 divisions) past C: it lands inside the window only if the hand stops
+    # about that much short against the screw's torque, as it does in the official sim.
     assert T.SET_CW - S.wheel_for(S.PRE_TRAVEL) == pytest.approx(math.radians(T.SETTLE_TRIM_DEG))
 
 
@@ -155,3 +155,20 @@ def test_probes(monkeypatch, env, expect):
 
 def test_fingers():
     assert FINGER_CLOSED > FINGER_OPEN  # the replay reads "closed" from the normalised grip below 0.5
+
+
+def test_the_block_meets_the_indenters_point():
+    # revision 2026-11-23: the indenter's collider reaches its point, and the anvil's spring presses the block on it
+    assert T.TIP_CLEAR == 0.0
+    anvil = next(j for j in T.JOINTS if j.name == "anvil")
+    assert anvil.stiffness * S.PRE_TRAVEL == pytest.approx(S.PRELOAD_N)
+
+
+def test_the_right_wrist_camera_sees_the_dial_close_and_square():
+    p, r = T.dial_view_pose(**T.DIAL_VIEW)
+    q, pe, re = ik.solve(p, ik.matrix_to_quat_xyzw(r), None, base_pos=station.BASES["right"], iters=300)
+    assert pe < 0.002 and math.degrees(re) < 2.0
+    cam = station.wrist_camera("right")
+    dial_px = cam.lens.fx * 320 / 640 * 2 * T.DIAL_R / T.DIAL_VIEW["dist"]
+    assert dial_px > 90  # the policy's 320 x 176 image: the 5-division tolerance is 18 degrees of pointer, 14 px at its tip
+    assert p[2] - T.GRIP_Z > 0.12  # well above the left hand on the handwheel

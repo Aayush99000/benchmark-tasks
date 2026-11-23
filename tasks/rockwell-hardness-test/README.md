@@ -31,18 +31,40 @@ measured on the bought tester.
   centre, 15 cm above the table `[estimate: fit a standard three-spoke handwheel with revolving handles if the
   tester's own wheel has none]`. Clockwise from above raises the anvil, as the manual says.
 - **Indenter and dial:** 120 degree diamond cone; the block starts 1.2 mm below its point. Dial 9 cm across, facing the
-  robot: the long pointer turns once per 0.2 mm (100 divisions of 0.002 mm), C at the top; the short pointer goes from
-  a black dot to a red dot over three turns.
+  robot: the long pointer turns once per 0.2 mm (100 divisions of 0.002 mm), C at the top, a dot every 5 divisions
+  round the face (larger every 10); the short pointer goes from a black dot to a red dot over three turns.
+- **The preliminary load:** the block's top meets the indenter's point and the anvil's spring presses it there, 98.07 N
+  (the standard's 10 kgf) at the three-turn travel. The handwheel feels that force back through the screw: free until
+  contact, then stiffening to about 0.22 N m at C (2.7 N at a knob), from a square thread's raising torque with a 20 mm
+  screw at friction 0.15 `[estimate: measure the pull at a knob with a spring scale]`. It is held against the wheel
+  while it turns up, scaled down near rest (it is set once per control step), so the wheel stays where it is let go.
+  The screw's smaller lowering torque is left out: set once per control step on a wheel this light, it kicked the wheel
+  forward past C when the hand let go (official sim, 2026-11-23).
 - **Main-load handle:** on the right side, pivot 30 cm up, 10 cm rod with a 24 mm knob; rests 20 degrees forward,
   travels to 40 degrees back. Pushed back past 30 degrees it releases the 1471 N total load, applied over 5 s (the
   manual's 4-6 s dashpot time).
 - **Block:** a standard HRC test block, 64 mm across, 10 mm thick, certified value 62 HRC `[estimate: the block's
   certificate]`, flat on the anvil with the indenter 6 mm from its centre.
 
+## Getting a tester
+A manual dial Rockwell tester is a lab instrument, not a household one. These are the cheapest routes we found
+(listings checked 2026-11-23; prices move):
+
+| Route | Price | Notes |
+|---|---|---|
+| Used benchtop tester (Wilson and similar manual dial models) | about $550-750 asking on eBay; one hobbyist reports a used Wilson 1JR with anvils, indenters and blocks for under $400 locally | same procedure: handwheel, preliminary load on the dial, load handle; condition and calibration vary |
+| New HR-150A-type manual tester | from about $1,165 on eBay (most listings $1,300-2,000); a factory lists a sample at $595 before shipping | the layout this task models |
+| An existing tester | no cost | metals heat-treat shops, incoming-inspection rooms and university materials-testing teaching labs keep one; book time on it |
+
+Plus a certified HRC test block (the reading's check). Before trials, measure on the tester: the pull at a handwheel
+knob with a spring scale as the long pointer reaches C (this sets the screw's torque in the simulation, now an
+estimate of 2.7 N), the screw's rise per turn, and the dial's size.
+
 ## Scoring
 Read every control step from the handwheel's and handle's angles, the block's pose and the grippers' positions
 (`hardness_scoring.py`). The indenter's travel is the block's rise past first contact, from the handwheel angle
-through the screw.
+through the screw (the block touches the point in PhysX, but a contact can't be read to 0.002 mm, so the dial and the
+score use the screw's travel).
 
 | Score | When |
 |---|---|
@@ -69,14 +91,38 @@ inspect-robots run --embodiment yam_arena --policy yam_scripted \
 Swap `--policy dream` for the Dream-1 run. Set `ROCKWELL_DEBUG=<file>` to log the handwheel, the travel in divisions
 from C, the handle and the current test every step. Probes: `ROCKWELL_DEMO_OVERSHOOT_DIV=8` raises the block 8
 divisions past C before the load (expected 0); `ROCKWELL_DEMO_HOLD_S=5.0` leaves the handle back too briefly for a
-dwell (expected 0.5). The demo aims the handwheel 1.6 degrees past its set point because the left hand stops about
-that much short in the official sim; `ROCKWELL_DEMO_TRIM_DEG` overrides it (0.18 degrees per division).
+dwell (expected 0.5). The demo aims the handwheel 2.5 degrees past its set point because against the screw's torque
+the left hand settles about that much short in the official sim; `ROCKWELL_DEMO_TRIM_DEG` overrides it (0.18 degrees
+per division).
 
-The left hand raises the block; the right hand works the handle and then lowers the block. Lowering with the left hand
+The left hand raises the block while the right hand holds its wrist camera on the dial (17 cm off, 20 degrees right
+and down); then the right hand works the handle and lowers the block. Lowering with the left hand
 failed in the official sim: pulling the knob back from the front-left, the knob slid out of the open end of its
 fingers. The right hand's lowering strokes are the mirror image of the left hand's raising strokes.
 
-## Results (official simulator, 2026-11-22)
+## Seeing the dial
+A policy has to stop within 5 divisions by watching the dial. In the top camera the dial is about 20 pixels across: the
+pointers show, but not to the division. Held 17 cm off, the right wrist camera sees it about 95 pixels across in the
+policy's 320 x 176 image (`tools/scan_dial_view.py` found the pose, 37 degrees from any joint limit;
+`test_rockwell_hardness_test.py` checks it). In the revised demo's frames at 24 s, with the long pointer near C, the
+long and short pointers, the C mark, the red dot and the division dots are all distinct; the 5-division tolerance is 18
+degrees of pointer, about 14 pixels at its tip. A policy can use either hand's camera this way; the demo uses the right.
+
+## Results (official simulator, revised task file, 2026-11-23)
+Same settings as below; task file SHA-256 prefix 887ef08fbb0e.
+
+| Run | Score | What happened |
+|---|---|---|
+| Demo | **1.0** at 69.4 s | preliminary load set 0.3 divisions past C (the wheel's torque peaked at 0.22 N m on the way); full load from 39.0 s, held 4.9 s; block lowered |
+| Overshoot probe (8 divisions) | **0** | stopped 8.4 divisions past C: the test is spoiled |
+| Short-hold probe (5.0 s) | **0.5** | load fully applied, taken off at once |
+| Dream-1 (dreamlabs/dream-1-beta) | **0** | ran the full 2,400 steps; the right hand went to the tester's right side by the load handle and the left hovered to its left; neither turned the handwheel |
+
+On the way: with the lowering torque in, the wheel was kicked 11 divisions past C when the hand let go, then 28
+degrees back (0); with the raising torque unscaled near rest, the wheel slid back 3 degrees on release (0); aimed 4.4
+degrees past, it settled 11 divisions past (0). Each is fixed above.
+
+## Results (official simulator, submitted file, 2026-11-22)
 One fixed layout (`object_jitter=0`), seed 0, 20 Hz, 320 x 176 cameras, on the shared L40S.
 
 | Run | Score | What happened |
@@ -90,15 +136,14 @@ Earlier runs, kept for the record: without the trim the hand stopped 8.8 divisio
 without the preliminary load (0); with the trim but the left hand lowering, 0.75 (the knob slipped out after 17
 degrees). The probes ran on the file before the hold was lengthened from 8.65 s to 9.9 s; neither depends on it.
 
-The dial is about 20 pixels across in the top camera: its pointers show, but not to the division. Stopping within 5
-divisions is judged from state, not from what a policy can read in the images.
 
 ## Offline checks (no simulator)
 ```bash
 PYTHONPATH=<yam-isaac-lab-arena checkout>:. python -m pytest -q test_hardness_scoring.py test_rockwell_hardness_test.py
 ```
 Needs pytest and NumPy. The scorer's cases (the 5-division window, overshoot, spot spacing, dwell band, wheel turned
-under load, stage order) are unit-tested. The scripted demo's plan solves to under 2 mm and 2 degrees of IK error on
+under load, stage order) are unit-tested, and so are the preliminary force and the wheel's torque (free before contact,
+0.22 N m at C, none turning back or at rest). The scripted demo's plan solves to under 2 mm and 2 degrees of IK error on
 both arms, and replayed through the scorer (without the settle trim) with the handwheel following whichever hand
 holds a knob and the handle the right hand's, it scores 1.0 with the load set within one division of C; the two
 probes score 0 and 0.5.
