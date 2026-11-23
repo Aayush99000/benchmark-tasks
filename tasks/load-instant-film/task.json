@@ -18,5 +18,6 @@
   "run_limit": "2,400 steps (2 minutes at 20 Hz)",
   "reset_notes": "Camera with no pack, back cover shut and locked, lens ring at OFF, film cover inside. The pack flat on the table, back up, as in the setup photo. In a real trial use a fresh pack each time; a spent pack (holes taped over) can stand in for practice runs.",
   "fidelity": "Camera fixed on a stand, leaning 30 degrees so its back faces up, as a hand holds it to load; cover, lock, ring, shutter and film cover on joints. Locked, the cover is held shut; with the tab 2 mm down it springs 20 degrees ajar; shut with the tab up, it relocks. A shutter press on a ready camera drives the film cover 4.5 cm out. The pack is one rigid box, holes drawn; the chamber has 3 mm play. Sizes but the body's and pack's are estimates.",
-  "scores": "Demo: 1.0 in the official sim (success at step 1,135). Probes: pack in yellow end down 0; ring left OFF 0.5. Dream-1 run: 0.0 (ran the full 2,400 steps without touching the lock, cover or pack)"
+  "scores": "Demo: 1.0 in the official sim (success at step 1,135). Probes: pack in yellow end down 0; ring left OFF 0.5. Dream-1 run: 0.0 (ran the full 2,400 steps without touching the lock, cover or pack)",
+  "media": "M-D42RJB"
 }
